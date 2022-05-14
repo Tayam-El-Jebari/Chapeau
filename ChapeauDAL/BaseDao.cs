@@ -16,7 +16,7 @@ namespace ChapeauDAL
             conn = new SqlConnection(ConfigurationManager.ConnectionStrings["ChapeauDatabase"].ConnectionString);
             adapter = new SqlDataAdapter();
         }
-
+         
         protected SqlConnection OpenConnection()
         {
             try
