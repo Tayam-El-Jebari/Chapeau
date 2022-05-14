@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    class Order
+    public class Order
     {
+        public int OrderId { get; set; }
+        public string menuItemId { get; set; }
+        public float reservationId { get; set; }
+        public int tableId { get; set; }
+        public string comments { get; set; }
+        public bool isFinished { get; set; }
     }
 }
