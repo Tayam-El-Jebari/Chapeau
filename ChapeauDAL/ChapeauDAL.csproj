@@ -10,4 +10,8 @@
     <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ChapeauModel\ChapeauModel.csproj" />
+  </ItemGroup>
+
 </Project>
