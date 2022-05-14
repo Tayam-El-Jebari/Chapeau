@@ -38,7 +38,7 @@ namespace ChapeauUI
             this.testView.HideSelection = false;
             this.testView.Location = new System.Drawing.Point(74, 54);
             this.testView.Name = "testView";
-            this.testView.Size = new System.Drawing.Size(628, 335);
+            this.testView.Size = new System.Drawing.Size(627, 335);
             this.testView.TabIndex = 0;
             this.testView.UseCompatibleStateImageBehavior = false;
             // 

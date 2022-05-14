@@ -19,19 +19,25 @@ namespace ChapeauUI
         public ChapeauUI()
         {
             InitializeComponent();
-
-            
+            ShowMenu();
+        }
+        public void ShowMenu()
+        {
             MenuItemService menuItemService = new MenuItemService(); ;
             List<MenuItem> menuList = menuItemService.GetMenuItems(); ;
 
-          
-            testView.Items.Clear();
 
-           
+            testView.Items.Clear();
+            testView.View = View.Details;
+            testView.Columns.Add("Id", 80);
+            testView.Columns.Add("Product name", 150);
+            testView.Columns.Add("Price", 100);
+            testView.Columns.Add("Description", 80);
+
+
             foreach (MenuItem m in menuList)
             {
                 ListViewItem liMenu = new ListViewItem(m.MenuItemId.ToString());
-                liMenu.SubItems.Add(m.MenuItemId.ToString());
                 liMenu.SubItems.Add(m.ProductName);
                 liMenu.SubItems.Add(m.Price.ToString());
                 liMenu.SubItems.Add(m.Description);
