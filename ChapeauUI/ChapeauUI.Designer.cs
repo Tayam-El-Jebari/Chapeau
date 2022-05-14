@@ -34,6 +34,7 @@ namespace ChapeauUI
             // 
             // testView
             // 
+            this.testView.GridLines = true;
             this.testView.HideSelection = false;
             this.testView.Location = new System.Drawing.Point(74, 54);
             this.testView.Name = "testView";
