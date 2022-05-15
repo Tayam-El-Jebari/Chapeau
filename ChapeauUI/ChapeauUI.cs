@@ -19,7 +19,7 @@ namespace ChapeauUI
         public ChapeauUI()
         {
             InitializeComponent();
-            ShowMenu();
+            ShowBills();
         }
         public void ShowMenu()
         {
@@ -41,6 +41,31 @@ namespace ChapeauUI
                 liMenu.SubItems.Add(m.ProductName);
                 liMenu.SubItems.Add(m.Price.ToString());
                 liMenu.SubItems.Add(m.Description);
+
+                testView.Items.Add(liMenu);
+            }
+        }
+        public void ShowBills()
+        {
+            BillService billService = new BillService(); ;
+            List<Bill> billList = billService.GetBills(); ;
+
+
+            testView.Items.Clear();
+            testView.View = View.Details;
+            testView.Columns.Add("Id", 80);
+            testView.Columns.Add("Product name", 150);
+            testView.Columns.Add("Price", 100);
+            testView.Columns.Add("Description", 80);
+
+
+            foreach (Bill b in billList)
+            {
+                ListViewItem liMenu = new ListViewItem(b.BillID.ToString());
+                liMenu.SubItems.Add(b.TableID.ToString());
+                liMenu.SubItems.Add(b.StaffID.ToString());
+                liMenu.SubItems.Add(b.TotalPriceInclVAT.ToString());
+                //liMenu.SubItems.Add(m.Description);
 
                 testView.Items.Add(liMenu);
             }
