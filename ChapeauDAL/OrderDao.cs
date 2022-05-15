@@ -13,7 +13,7 @@ namespace ChapeauDAL
     {
         public List<Order> GetActiveOrders()
         {
-            string query = "SELECT * FROM [Order] WHERE isFinished = 0";
+            string query = "SELECT order_id, m.productName, m.[description], o.table_Id, o.comments, o.isFinished FROM [Order] AS o JOIN MenuItem AS m ON o.menuItem_ID = m.menuItem_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -26,16 +26,27 @@ namespace ChapeauDAL
                 Order order = new Order()
                 {
                     OrderId = (int)dr["order_Id"],
-                    menuItemId = (int)dr["menuitem_Id"],
-                    reservationId = (int)dr["reservation_Id"],
-                    tableId = (int)dr["menuitem_Id"],
-                    comments = (string)dr["comments"],
-                    isFinished = (bool)dr["isFinished"]
+                    ProductName = (string)dr["productName"],
+                    ProductDescription = (string)dr["description"],
+                    TableId = (int)dr["table_Id"],
+                    Comments = ConvertFromDR<string>(dr["comments"]),
+                    IsFinished = (bool)dr["isFinished"]
                 };
 
                 activeOrders.Add(order);
             }
             return activeOrders;
+        }
+        private T ConvertFromDR<T>(object obj)
+        {
+            if (obj == DBNull.Value)
+            {
+                return default(T);
+            }
+            else
+            {
+                return (T)obj;
+            }
         }
     }
 }

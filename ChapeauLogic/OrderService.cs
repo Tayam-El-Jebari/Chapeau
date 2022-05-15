@@ -5,7 +5,7 @@ using ChapeauModel;
 
 namespace ChapeauLogic
 {
-    class OrderService
+    public class OrderService
     {
 
         OrderDao orderDao;

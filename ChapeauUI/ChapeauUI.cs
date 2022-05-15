@@ -19,15 +19,15 @@ namespace ChapeauUI
         public ChapeauUI()
         {
             InitializeComponent();
-            ShowBills();
+            testView.Items.Clear();
+            ShowOrders();
         }
-        public void ShowMenu()
+        private void ShowMenu()
         {
             MenuItemService menuItemService = new MenuItemService(); ;
             List<MenuItem> menuList = menuItemService.GetMenuItems(); ;
 
 
-            testView.Items.Clear();
             testView.View = View.Details;
             testView.Columns.Add("Id", 80);
             testView.Columns.Add("Product name", 150);
@@ -45,13 +45,12 @@ namespace ChapeauUI
                 testView.Items.Add(liMenu);
             }
         }
-        public void ShowBills()
+        private void ShowBills()
         {
             BillService billService = new BillService(); ;
             List<Bill> billList = billService.GetBills(); ;
 
 
-            testView.Items.Clear();
             testView.View = View.Details;
             testView.Columns.Add("BillID", 50);
             testView.Columns.Add("TableID", 50);
@@ -81,6 +80,33 @@ namespace ChapeauUI
                 testView.Items.Add(liMenu);
             }
         }
+        private void ShowOrders()
+        {
+            OrderService orderService = new OrderService(); ;
+            List<Order> activeOrders = orderService.GetActiveOrders();
+
+
+            testView.View = View.Details;
+            testView.Columns.Add("Order Id", 40);
+            testView.Columns.Add("product name", 80);
+            testView.Columns.Add("product description", 150);
+            testView.Columns.Add("table Id", 40);
+            testView.Columns.Add("Order comments", 150);
+
+
+
+            foreach (Order order in activeOrders)
+            {
+                ListViewItem liMenu = new ListViewItem(order.OrderId.ToString());
+                liMenu.SubItems.Add(order.ProductName.ToString());
+                liMenu.SubItems.Add(order.ProductDescription.ToString());
+                liMenu.SubItems.Add(order.TableId.ToString());
+                liMenu.SubItems.Add(order.Comments);
+
+                testView.Items.Add(liMenu);
+            }
+        }
+
 
     }
 }
