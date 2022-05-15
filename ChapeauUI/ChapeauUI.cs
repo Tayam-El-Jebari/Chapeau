@@ -19,7 +19,7 @@ namespace ChapeauUI
         public ChapeauUI()
         {
             InitializeComponent();
-            ShowMenu();
+            ShowBills();
         }
         public void ShowMenu()
         {
@@ -41,6 +41,42 @@ namespace ChapeauUI
                 liMenu.SubItems.Add(m.ProductName);
                 liMenu.SubItems.Add(m.Price.ToString());
                 liMenu.SubItems.Add(m.Description);
+
+                testView.Items.Add(liMenu);
+            }
+        }
+        public void ShowBills()
+        {
+            BillService billService = new BillService(); ;
+            List<Bill> billList = billService.GetBills(); ;
+
+
+            testView.Items.Clear();
+            testView.View = View.Details;
+            testView.Columns.Add("BillID", 50);
+            testView.Columns.Add("TableID", 50);
+            testView.Columns.Add("StaffID", 50);
+            testView.Columns.Add("TotalPriceInclVAT", 50);
+            testView.Columns.Add("TotalPriceExclVAT", 50);
+            testView.Columns.Add("Tip", 50);
+            testView.Columns.Add("IsPaid", 50);
+            testView.Columns.Add("Discount", 50);
+            testView.Columns.Add("Date", 50);
+            testView.Columns.Add("Comments", 50);
+
+
+            foreach (Bill b in billList)
+            {
+                ListViewItem liMenu = new ListViewItem(b.BillID.ToString());
+                liMenu.SubItems.Add(b.TableID.ToString());
+                liMenu.SubItems.Add(b.StaffID.ToString());
+                liMenu.SubItems.Add(b.TotalPriceInclVAT.ToString());
+                liMenu.SubItems.Add(b.TotalPriceExclVAT.ToString());
+                liMenu.SubItems.Add(b.Tip.ToString());
+                liMenu.SubItems.Add(b.IsPaid.ToString());
+                liMenu.SubItems.Add(b.Discount.ToString());
+                liMenu.SubItems.Add(b.Date.ToString());
+                liMenu.SubItems.Add(b.Comments.ToString());
 
                 testView.Items.Add(liMenu);
             }

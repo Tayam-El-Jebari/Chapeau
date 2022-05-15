@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ChapeauDAL;
+using ChapeauModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,24 @@ using System.Threading.Tasks;
 
 namespace ChapeauLogic
 {
-    class BillService
+    public class BillService
     {
+        BillDao billdb;
+
+        public BillService()
+        {
+            billdb = new BillDao();
+        }
+
+        public List<Bill> GetBills()
+        {
+            List<Bill> bills = billdb.GetAllBills();
+            return bills;
+        }
+
+        public void AddBill(Bill bill)
+        {
+            billdb.AddBill(bill);
+        }
     }
 }
