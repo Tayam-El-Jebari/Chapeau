@@ -24,6 +24,7 @@ namespace ChapeauUI
         }
         private void ShowMenu()
         {
+            testView.Clear();
             MenuItemService menuItemService = new MenuItemService(); ;
             List<MenuItem> menuList = menuItemService.GetMenuItems(); ;
 
@@ -47,6 +48,7 @@ namespace ChapeauUI
         }
         private void ShowBills()
         {
+            testView.Clear();
             BillService billService = new BillService(); ;
             List<Bill> billList = billService.GetBills(); ;
 
@@ -82,6 +84,7 @@ namespace ChapeauUI
         }
         private void ShowOrders()
         {
+            testView.Clear();
             OrderService orderService = new OrderService(); ;
             List<Order> activeOrders = orderService.GetActiveOrders();
 
@@ -109,6 +112,7 @@ namespace ChapeauUI
 
         private void ShowStaff()
         {
+            testView.Clear();
             StaffService staffService = new StaffService(); ;
             List<Staff> staffMembers = staffService.GetStaffs();
 
@@ -136,6 +140,26 @@ namespace ChapeauUI
 
                 testView.Items.Add(liMenu);
             }
+        }
+
+        private void billButton_Click(object sender, EventArgs e)
+        {
+            ShowBills();
+        }
+
+        private void menuButton_Click(object sender, EventArgs e)
+        {
+            ShowMenu();
+        }
+
+        private void orderBtn_Click(object sender, EventArgs e)
+        {
+            ShowOrders();
+        }
+
+        private void staffBtn_Click(object sender, EventArgs e)
+        {
+            ShowStaff();
         }
     }
 }
