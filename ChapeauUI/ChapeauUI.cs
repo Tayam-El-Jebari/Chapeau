@@ -107,6 +107,35 @@ namespace ChapeauUI
             }
         }
 
+        private void ShowStaff()
+        {
+            StaffService staffService = new StaffService(); ;
+            List<Staff> staffMembers = staffService.GetStaffs();
 
+
+            testView.View = View.Details;
+            testView.Columns.Add("Staff Id", 40);
+            testView.Columns.Add("Fristname", 80);
+            testView.Columns.Add("Lastname", 150);
+            testView.Columns.Add("Phonenumber", 40);
+            testView.Columns.Add("Email adress", 150);
+            testView.Columns.Add("Salt", 40);
+            testView.Columns.Add("Password", 40);
+
+
+
+            foreach (Staff staff in staffMembers)
+            {
+                ListViewItem liMenu = new ListViewItem(staff.Staff_ID.ToString());
+                liMenu.SubItems.Add(staff.firstName);
+                liMenu.SubItems.Add(staff.lastName);
+                liMenu.SubItems.Add(staff.phoneNumber.ToString());
+                liMenu.SubItems.Add(staff.emailAdress);
+                liMenu.SubItems.Add(staff.salt);
+                liMenu.SubItems.Add(staff.passWord);
+
+                testView.Items.Add(liMenu);
+            }
+        }
     }
 }
