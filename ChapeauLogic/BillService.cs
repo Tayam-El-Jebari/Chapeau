@@ -22,5 +22,10 @@ namespace ChapeauLogic
             List<Bill> bills = billdb.GetAllBills();
             return bills;
         }
+
+        public void AddBill(Bill bill)
+        {
+            billdb.AddBill(bill);
+        }
     }
 }

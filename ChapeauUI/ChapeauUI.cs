@@ -53,10 +53,16 @@ namespace ChapeauUI
 
             testView.Items.Clear();
             testView.View = View.Details;
-            testView.Columns.Add("Id", 80);
-            testView.Columns.Add("Product name", 150);
-            testView.Columns.Add("Price", 100);
-            testView.Columns.Add("Description", 80);
+            testView.Columns.Add("BillID", 50);
+            testView.Columns.Add("TableID", 50);
+            testView.Columns.Add("StaffID", 50);
+            testView.Columns.Add("TotalPriceInclVAT", 50);
+            testView.Columns.Add("TotalPriceExclVAT", 50);
+            testView.Columns.Add("Tip", 50);
+            testView.Columns.Add("IsPaid", 50);
+            testView.Columns.Add("Discount", 50);
+            testView.Columns.Add("Date", 50);
+            testView.Columns.Add("Comments", 50);
 
 
             foreach (Bill b in billList)
@@ -65,7 +71,12 @@ namespace ChapeauUI
                 liMenu.SubItems.Add(b.TableID.ToString());
                 liMenu.SubItems.Add(b.StaffID.ToString());
                 liMenu.SubItems.Add(b.TotalPriceInclVAT.ToString());
-                //liMenu.SubItems.Add(m.Description);
+                liMenu.SubItems.Add(b.TotalPriceExclVAT.ToString());
+                liMenu.SubItems.Add(b.Tip.ToString());
+                liMenu.SubItems.Add(b.IsPaid.ToString());
+                liMenu.SubItems.Add(b.Discount.ToString());
+                liMenu.SubItems.Add(b.Date.ToString());
+                liMenu.SubItems.Add(b.Comments.ToString());
 
                 testView.Items.Add(liMenu);
             }
