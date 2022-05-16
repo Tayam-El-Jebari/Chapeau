@@ -29,30 +29,69 @@ namespace ChapeauUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelOrders = new System.Windows.Forms.Panel();
+            this.itemAddedOrderPnl = new System.Windows.Forms.Panel();
+            this.itemList = new System.Windows.Forms.ListView();
+            this.viewOrders = new System.Windows.Forms.Button();
+            this.menu = new System.Windows.Forms.FlowLayoutPanel();
             this.lunchDinnerLabel = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.clearAllButton = new System.Windows.Forms.Button();
+            this.buttonCreateOrder = new System.Windows.Forms.Button();
+            this.buttonRemoveItem = new System.Windows.Forms.Button();
+            this.panelOrders.SuspendLayout();
+            this.itemAddedOrderPnl.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // panelOrders
             // 
-            this.button1.Font = new System.Drawing.Font("Cabin", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.Location = new System.Drawing.Point(274, 179);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(355, 87);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.panelOrders.Controls.Add(this.itemAddedOrderPnl);
+            this.panelOrders.Controls.Add(this.viewOrders);
+            this.panelOrders.Controls.Add(this.menu);
+            this.panelOrders.Controls.Add(this.lunchDinnerLabel);
+            this.panelOrders.Location = new System.Drawing.Point(-2, -2);
+            this.panelOrders.Name = "panelOrders";
+            this.panelOrders.Size = new System.Drawing.Size(681, 1440);
+            this.panelOrders.TabIndex = 1;
+            this.panelOrders.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrders_Paint);
             // 
-            // panel1
+            // itemAddedOrderPnl
             // 
-            this.panel1.Controls.Add(this.lunchDinnerLabel);
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Location = new System.Drawing.Point(-2, -2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(681, 1440);
-            this.panel1.TabIndex = 1;
+            this.itemAddedOrderPnl.AutoScroll = true;
+            this.itemAddedOrderPnl.Controls.Add(this.buttonRemoveItem);
+            this.itemAddedOrderPnl.Controls.Add(this.buttonCreateOrder);
+            this.itemAddedOrderPnl.Controls.Add(this.clearAllButton);
+            this.itemAddedOrderPnl.Controls.Add(this.itemList);
+            this.itemAddedOrderPnl.Location = new System.Drawing.Point(1, 129);
+            this.itemAddedOrderPnl.Name = "itemAddedOrderPnl";
+            this.itemAddedOrderPnl.Size = new System.Drawing.Size(678, 712);
+            this.itemAddedOrderPnl.TabIndex = 4;
+            // 
+            // itemList
+            // 
+            this.itemList.FullRowSelect = true;
+            this.itemList.HideSelection = false;
+            this.itemList.Location = new System.Drawing.Point(-1, 0);
+            this.itemList.Name = "itemList";
+            this.itemList.Size = new System.Drawing.Size(657, 493);
+            this.itemList.TabIndex = 0;
+            this.itemList.UseCompatibleStateImageBehavior = false;
+            // 
+            // viewOrders
+            // 
+            this.viewOrders.Location = new System.Drawing.Point(540, 5);
+            this.viewOrders.Name = "viewOrders";
+            this.viewOrders.Size = new System.Drawing.Size(126, 104);
+            this.viewOrders.TabIndex = 3;
+            this.viewOrders.Text = "View Orders";
+            this.viewOrders.UseVisualStyleBackColor = true;
+            this.viewOrders.Click += new System.EventHandler(this.viewOrders_Click);
+            // 
+            // menu
+            // 
+            this.menu.Location = new System.Drawing.Point(0, 115);
+            this.menu.Name = "menu";
+            this.menu.Size = new System.Drawing.Size(671, 1325);
+            this.menu.TabIndex = 2;
             // 
             // lunchDinnerLabel
             // 
@@ -64,7 +103,35 @@ namespace ChapeauUI
             this.lunchDinnerLabel.Size = new System.Drawing.Size(520, 81);
             this.lunchDinnerLabel.TabIndex = 1;
             this.lunchDinnerLabel.Text = "LUNCH 11:00 - 16:00";
-            this.lunchDinnerLabel.Paint += new System.Windows.Forms.PaintEventHandler(this.lunchDinnerLabel_Paint);
+            // 
+            // clearAllButton
+            // 
+            this.clearAllButton.Location = new System.Drawing.Point(516, 645);
+            this.clearAllButton.Name = "clearAllButton";
+            this.clearAllButton.Size = new System.Drawing.Size(140, 55);
+            this.clearAllButton.TabIndex = 1;
+            this.clearAllButton.Text = "Clear all";
+            this.clearAllButton.UseVisualStyleBackColor = true;
+            this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
+            // 
+            // buttonCreateOrder
+            // 
+            this.buttonCreateOrder.Location = new System.Drawing.Point(3, 645);
+            this.buttonCreateOrder.Name = "buttonCreateOrder";
+            this.buttonCreateOrder.Size = new System.Drawing.Size(140, 55);
+            this.buttonCreateOrder.TabIndex = 2;
+            this.buttonCreateOrder.Text = "Create Order";
+            this.buttonCreateOrder.UseVisualStyleBackColor = true;
+            // 
+            // buttonRemoveItem
+            // 
+            this.buttonRemoveItem.Location = new System.Drawing.Point(191, 525);
+            this.buttonRemoveItem.Name = "buttonRemoveItem";
+            this.buttonRemoveItem.Size = new System.Drawing.Size(243, 71);
+            this.buttonRemoveItem.TabIndex = 3;
+            this.buttonRemoveItem.Text = "Remove Item";
+            this.buttonRemoveItem.UseVisualStyleBackColor = true;
+            this.buttonRemoveItem.Click += new System.EventHandler(this.buttonRemoveItem_Click);
             // 
             // OrderUI
             // 
@@ -74,19 +141,24 @@ namespace ChapeauUI
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(702, 1055);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelOrders);
             this.Name = "OrderUI";
             this.Text = "OrderUI";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.OrderUI_Paint);
-            this.panel1.ResumeLayout(false);
+            this.panelOrders.ResumeLayout(false);
+            this.itemAddedOrderPnl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelOrders;
         private System.Windows.Forms.Label lunchDinnerLabel;
+        private System.Windows.Forms.FlowLayoutPanel menu;
+        private System.Windows.Forms.Button viewOrders;
+        private System.Windows.Forms.Panel itemAddedOrderPnl;
+        private System.Windows.Forms.ListView itemList;
+        private System.Windows.Forms.Button buttonRemoveItem;
+        private System.Windows.Forms.Button buttonCreateOrder;
+        private System.Windows.Forms.Button clearAllButton;
     }
 }

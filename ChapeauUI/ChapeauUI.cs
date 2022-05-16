@@ -41,7 +41,6 @@ namespace ChapeauUI
                 liMenu.SubItems.Add(m.ProductName);
                 liMenu.SubItems.Add(m.Price.ToString());
                 liMenu.SubItems.Add(m.Description);
-
                 testView.Items.Add(liMenu);
             }
         }

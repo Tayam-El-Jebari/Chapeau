@@ -1,67 +1,80 @@
-﻿using Microsoft.VisualBasic;
-using ChapeauLogic;
+﻿using ChapeauLogic;
 using ChapeauModel;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
 
 namespace ChapeauUI
 {
     public partial class OrderUI : Form
     {
-        MenuItem item;
-
+        private List<MenuItem> menuList;
         public OrderUI()
         {
-            try
+            Button menuItemButton;
+            InitializeComponent();
+            itemAddedOrderPnl.Hide();
+            MenuItemService menuItemService = new MenuItemService();
+            menuList = menuItemService.GetMenuItems();
+            itemList.View = View.Details;
+            itemList.Columns.Add("Item Id", 80);
+            itemList.Columns.Add("Item Name", 80);
+
+            foreach (MenuItem menuItem in menuList)
             {
-                Button menuItemButton;
-
-                InitializeComponent();
-                MenuItemService menuItemService = new MenuItemService();
-                List<MenuItem> menuList = menuItemService.GetMenuItems();
-
-
-
-                int x = 10;
-                int y = 50;
-                foreach (MenuItem menuItem in menuList)
+                menuItemButton = new Button();
+                menuItemButton.Width = menu.Width - 10;
+                menuItemButton.Height = 62;
+                menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
+                menuItemButton.Text = $"{menuItem.MenuItemId}    {menuItem.ProductName}";
+                menuItemButton.Font = new Font("Cabin", 14);
+                menuItemButton.Visible = true;
+                menu.Controls.Add(menuItemButton);
+            }
+        }
+        void BtnOrderAdd_Click(Object sender, EventArgs e)
+        {
+            for (int i = 0; i < menu.Controls.Count; i++)
+            {
+                if (menu.Controls[i] == sender)
                 {
-                    item = menuItem;
-                    menuItemButton = new Button();
-                    menuItemButton.Location = new Point(x, y);
-                    menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
-                    menuItemButton.Text = menuItem.ProductName;
-                    y += 40;
-                    menuItemButton.Visible = true;
-                    Controls.Add(menuItemButton);
+                    ListViewItem liMenu = new ListViewItem(menuList[i].MenuItemId.ToString());
+                    liMenu.SubItems.Add(menuList[i].ProductName);
+                    itemList.Items.Add(liMenu);
                 }
             }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        }
-            void BtnOrderAdd_Click(Object sender,EventArgs e)
-        {
-            MessageBox.Show(item.ProductName);
         }
 
-        private void lunchDinnerLabel_Paint(object sender, PaintEventArgs e)
-        {
-        }
 
-        private void OrderUI_Paint(object sender, PaintEventArgs e)
+        private void panelOrders_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(new Pen(Color.FromArgb(39, 39, 39), 10), 14, 20, 498, 81);
+        }
 
+        private void viewOrders_Click(object sender, EventArgs e)
+        {
+            if (itemAddedOrderPnl.Visible)
+            {
+                itemAddedOrderPnl.Hide();
+            }
+            else
+            {
+                itemAddedOrderPnl.Show();
+            }
+        }
+
+        private void clearAllButton_Click(object sender, EventArgs e)
+        {
+            itemList.Items.Clear();
+        }
+
+        private void buttonRemoveItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in itemList.SelectedItems)
+            {
+                itemList.Items.Remove(item);
+            }
         }
     }
 }
