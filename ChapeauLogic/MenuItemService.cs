@@ -7,6 +7,7 @@ namespace ChapeauLogic
 {
     public class MenuItemService
     {
+
         MenuItemDao menuItemdb;
 
         public MenuItemService()

@@ -20,19 +20,27 @@ namespace ChapeauDAL
         public List<MenuItem> ReadTables(DataTable dataTable)
         {
             List<MenuItem> menuItems = new List<MenuItem>();
-
-            foreach (DataRow dr in dataTable.Rows)
+            try
             {
-                MenuItem menuItem = new MenuItem()
+                foreach (DataRow dr in dataTable.Rows)
                 {
-                    MenuItemId = (int)dr["menuItem_ID"],
-                    ProductName = (string)dr["productName"],
-                    Price = (double)dr["price"],
-                    Description = (string)dr["description"]
-                };
-                menuItems.Add(menuItem);
+                    MenuItem menuItem = new MenuItem()
+                    {
+                        MenuItemId = (int)dr["menuItem_ID"],
+                        ProductName = (string)dr["productName"],
+                        Price = (double)dr["price"],
+                        Description = (string)dr["description"]
+                    };
+                    menuItems.Add(menuItem);
+                }
+                return menuItems;
+
             }
-            return menuItems;
+            catch
+            {
+                throw new Exception("No data found in menuitems");
+            }
+
         }
     }
 }

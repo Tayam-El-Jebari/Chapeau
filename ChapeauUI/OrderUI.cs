@@ -20,29 +20,48 @@ namespace ChapeauUI
 
         public OrderUI()
         {
-            Button menuItemButton;
-
-            InitializeComponent();
-            MenuItemService menuItemService = new MenuItemService(); ;
-            List<MenuItem> menuList = menuItemService.GetMenuItems(); ;
-            int x = 10;
-            int y = 50;
-            foreach(MenuItem menuItem in menuList)
+            try
             {
-                item = menuItem;
-                menuItemButton = new Button();
-                menuItemButton.Location = new Point(x, y);
-                menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
-                menuItemButton.Text = menuItem.ProductName;
-                y += 40;
-                menuItemButton.Visible = true;
-                Controls.Add(menuItemButton);
+                Button menuItemButton;
+
+                InitializeComponent();
+                MenuItemService menuItemService = new MenuItemService();
+                List<MenuItem> menuList = menuItemService.GetMenuItems();
+
+
+
+                int x = 10;
+                int y = 50;
+                foreach (MenuItem menuItem in menuList)
+                {
+                    item = menuItem;
+                    menuItemButton = new Button();
+                    menuItemButton.Location = new Point(x, y);
+                    menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
+                    menuItemButton.Text = menuItem.ProductName;
+                    y += 40;
+                    menuItemButton.Visible = true;
+                    Controls.Add(menuItemButton);
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
             }
         }
-
-        void BtnOrderAdd_Click(Object sender,EventArgs e)
+            void BtnOrderAdd_Click(Object sender,EventArgs e)
         {
             MessageBox.Show(item.ProductName);
+        }
+
+        private void lunchDinnerLabel_Paint(object sender, PaintEventArgs e)
+        {
+        }
+
+        private void OrderUI_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.FromArgb(39, 39, 39), 10), 14, 20, 498, 81);
+
         }
     }
 }
