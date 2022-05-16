@@ -22,6 +22,11 @@ namespace ChapeauLogic
             List<Staff> staffs = staffDb.GetAllStaffs();
             return staffs;
         }
+
+        public string GetSaltByStaffID(int staffID)
+        {
+            return staffDb.GetAllSaltByID(staffID);
+        }
     }
 }
 
