@@ -101,7 +101,7 @@ namespace ChapeauUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(702, 450);
             this.Controls.Add(this.tableBtn);
             this.Controls.Add(this.staffBtn);
             this.Controls.Add(this.orderBtn);

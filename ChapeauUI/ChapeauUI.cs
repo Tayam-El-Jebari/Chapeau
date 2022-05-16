@@ -19,7 +19,6 @@ namespace ChapeauUI
         public ChapeauUI()
         {
             InitializeComponent();
-            testView.Items.Clear();
             ShowOrders();
         }
         private void ShowMenu()
