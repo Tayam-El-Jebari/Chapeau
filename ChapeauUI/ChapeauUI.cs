@@ -123,8 +123,6 @@ namespace ChapeauUI
             testView.Columns.Add("Lastname", 150);
             testView.Columns.Add("Phonenumber", 40);
             testView.Columns.Add("Email adress", 150);
-            testView.Columns.Add("Salt", 40);
-            testView.Columns.Add("Password", 40);
 
 
 
@@ -137,6 +135,33 @@ namespace ChapeauUI
                 liMenu.SubItems.Add(staff.emailAdress);
                 liMenu.SubItems.Add(staff.salt);
                 liMenu.SubItems.Add(staff.passWord);
+
+                testView.Items.Add(liMenu);
+            }
+        }
+        private void ShowTables()
+        {
+            testView.Clear();
+            TableService tableService = new TableService(); ;
+            List<Table> tables = tableService.GetTables();
+
+
+            testView.View = View.Details;
+            testView.Columns.Add("Table", 60);
+            testView.Columns.Add("Is occupied?", 80);
+            testView.Columns.Add("Is table reserved?", 180);
+            testView.Columns.Add("Amount of Seats", 150);
+            testView.Columns.Add("Waiter ID", 40);
+            testView.Columns.Add("Description", 150);
+
+            foreach (Table table in tables)
+            {
+                ListViewItem liMenu = new ListViewItem(table.TableID.ToString());
+                liMenu.SubItems.Add(table.IsOccupied.ToString()) ;
+                liMenu.SubItems.Add(table.IsReserverd.ToString());
+                liMenu.SubItems.Add(table.AmountOfSeats.ToString());
+                liMenu.SubItems.Add(table.WaiterID.ToString());
+                liMenu.SubItems.Add(table.Description);
 
                 testView.Items.Add(liMenu);
             }
@@ -160,6 +185,11 @@ namespace ChapeauUI
         private void staffBtn_Click(object sender, EventArgs e)
         {
             ShowStaff();
+        }
+
+        private void tableBtn_Click(object sender, EventArgs e)
+        {
+            ShowTables();
         }
     }
 }

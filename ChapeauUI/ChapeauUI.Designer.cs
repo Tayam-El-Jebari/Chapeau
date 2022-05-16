@@ -34,6 +34,7 @@ namespace ChapeauUI
             this.menuButton = new System.Windows.Forms.Button();
             this.orderBtn = new System.Windows.Forms.Button();
             this.staffBtn = new System.Windows.Forms.Button();
+            this.tableBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // testView
@@ -86,11 +87,22 @@ namespace ChapeauUI
             this.staffBtn.UseVisualStyleBackColor = true;
             this.staffBtn.Click += new System.EventHandler(this.staffBtn_Click);
             // 
+            // tableBtn
+            // 
+            this.tableBtn.Location = new System.Drawing.Point(477, 19);
+            this.tableBtn.Name = "tableBtn";
+            this.tableBtn.Size = new System.Drawing.Size(94, 29);
+            this.tableBtn.TabIndex = 5;
+            this.tableBtn.Text = "Tables";
+            this.tableBtn.UseVisualStyleBackColor = true;
+            this.tableBtn.Click += new System.EventHandler(this.tableBtn_Click);
+            // 
             // ChapeauUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tableBtn);
             this.Controls.Add(this.staffBtn);
             this.Controls.Add(this.orderBtn);
             this.Controls.Add(this.menuButton);
@@ -109,6 +121,7 @@ namespace ChapeauUI
         private System.Windows.Forms.Button menuButton;
         private System.Windows.Forms.Button orderBtn;
         private System.Windows.Forms.Button staffBtn;
+        private System.Windows.Forms.Button tableBtn;
     }
 }
 
