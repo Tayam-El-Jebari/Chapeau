@@ -20,8 +20,8 @@ namespace ChapeauDAL
         public List<MenuItem> ReadTables(DataTable dataTable)
         {
             List<MenuItem> menuItems = new List<MenuItem>();
-            //try
-            //{
+            try
+            {
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     MenuItem menuItem = new MenuItem()
@@ -35,11 +35,11 @@ namespace ChapeauDAL
                 }
                 return menuItems;
 
-            //}
-            //catch
-            //{
-            //    throw new Exception("No data found in menuitems");
-            //}
+            }
+            catch
+            {
+                throw new Exception("No data found in menuitems");
+            }
 
         }
     }

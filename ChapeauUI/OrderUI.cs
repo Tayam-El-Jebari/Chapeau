@@ -17,9 +17,26 @@ namespace ChapeauUI
             itemAddedOrderPnl.Hide();
             MenuItemService menuItemService = new MenuItemService();
             menuList = menuItemService.GetMenuItems();
-            itemList.View = View.Details;
-            itemList.Columns.Add("Item Id", 80);
-            itemList.Columns.Add("Item Name", 80);
+            itemGridView.ColumnCount = 3;
+            itemGridView.Columns[0].Name = "product ID";
+            itemGridView.Columns[1].Name = "Product Name";
+            itemGridView.Columns[2].Name = "amount added";
+            itemGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                HeaderText = "Add",
+                Text = "+",
+                Name = "btnAddOrderItems",
+                UseColumnTextForButtonValue = true
+            });
+            itemGridView.Columns.Add(
+                new DataGridViewButtonColumn
+                {
+                    HeaderText = "Remove",
+                    Text = "-",
+                    Name = "btnAddOrderItems",
+                    UseColumnTextForButtonValue = true
+                });
+
 
             foreach (MenuItem menuItem in menuList)
             {
@@ -27,6 +44,7 @@ namespace ChapeauUI
                 menuItemButton.Width = menu.Width - 10;
                 menuItemButton.Height = 62;
                 menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
+                menuItemButton.Click += new EventHandler(BtnOrderAdd_MouseDown);
                 menuItemButton.Text = $"{menuItem.MenuItemId}    {menuItem.ProductName}";
                 menuItemButton.Font = new Font("Cabin", 14);
                 menuItemButton.Visible = true;
@@ -39,13 +57,28 @@ namespace ChapeauUI
             {
                 if (menu.Controls[i] == sender)
                 {
-                    ListViewItem liMenu = new ListViewItem(menuList[i].MenuItemId.ToString());
-                    liMenu.SubItems.Add(menuList[i].ProductName);
-                    itemList.Items.Add(liMenu);
+                    foreach (DataGridViewRow row in itemGridView.Rows)
+                    {
+                        if(Convert.ToInt32(row.Cells[0].Value) == menuList[i].MenuItemId)
+                        {
+                            row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
+                            return;
+                        }
+                    }
+                    itemGridView.Rows.Add(new string[] { menuList[i].MenuItemId.ToString(), menuList[i].ProductName, "1"});
                 }
             }
         }
-
+        public void BtnOrderAdd_MouseDown(object sender, EventArgs e)
+        {
+            for (int i = 0; i < menu.Controls.Count; i++)
+            {
+                if (menu.Controls[i] == sender)
+                {
+                    MessageBox.Show(menuList[i].Description);
+                }
+            }
+        }
 
         private void panelOrders_Paint(object sender, PaintEventArgs e)
         {
@@ -66,14 +99,27 @@ namespace ChapeauUI
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            itemList.Items.Clear();
+            
         }
 
         private void buttonRemoveItem_Click(object sender, EventArgs e)
         {
-            foreach (ListViewItem item in itemList.SelectedItems)
+
+        }
+
+        private void itemGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 3)
             {
-                itemList.Items.Remove(item);
+                itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
+            }
+            else if (e.ColumnIndex == 4)
+            {
+                itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
+                if (Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) == 0)
+                {
+                    itemGridView.Rows.Remove(itemGridView.Rows[e.RowIndex]);
+                }
             }
         }
     }
