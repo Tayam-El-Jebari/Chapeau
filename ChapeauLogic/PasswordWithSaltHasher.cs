@@ -38,5 +38,19 @@ namespace ChapeauLogic
 
             return new HashWithSaltResult(Convert.ToBase64String(hashBytes), Convert.ToBase64String(saltBytes));
         }
+
+        public HashWithSaltResult StringHasher(string hash, string salt)
+        {
+            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
+            byte[] saltBytes = Encoding.ASCII.GetBytes(salt);
+            int timesToHash = 99999;
+            HashWithSaltResult hashWithSalt = pwHasher.HashWithSalt(hash, saltBytes, SHA512.Create());
+
+            for (int i = 0; i < timesToHash; i++)
+            {
+                hashWithSalt = pwHasher.HashWithSalt(hashWithSalt.Hash, saltBytes, SHA512.Create());
+            }
+            return hashWithSalt;
+        }
     }
 }

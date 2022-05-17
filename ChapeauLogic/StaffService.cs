@@ -27,6 +27,16 @@ namespace ChapeauLogic
         {
             return staffDb.GetAllSaltByID(staffID);
         }
+
+        public Staff CheckPassword(int staffID, string hashedPassword)
+        {
+            return staffDb.CheckPassword(staffID, hashedPassword);
+        }
+
+        public void AddNewStaffMember(string firstname, string lastname, int phonenumber, string email, HashWithSaltResult hashedPassword)
+        {
+            staffDb.AddNewStaffMember(firstname, lastname, phonenumber, email, hashedPassword);
+        }
     }
 }
 

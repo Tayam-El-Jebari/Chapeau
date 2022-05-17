@@ -24,29 +24,32 @@ namespace ChapeauUI
         {
             try
             {
+                OwnerForm ownerForm = new OwnerForm();
+                ownerForm.Show();
+                PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                 StaffService staffService = new StaffService();
                 int staffID = int.Parse(IDnummerTextBox.Text);
                 string salt = staffService.GetSaltByStaffID(staffID);
                 string passwordInput = passwordTextBox.Text;
-                string hashedPassword = StringHasher(passwordInput, salt).Hash.ToString();
+                string hashedPassword = pwHasher.StringHasher("password", "asdfecf").Hash;
+
+                //string hashedPassword = pwHasher.StringHasher(passwordInput, salt).Hash;
+                //byte[] saltBytes = Encoding.ASCII.GetBytes(salt);
+                //HashWithSaltResult hashedPassword = pwHasher.HashWithSalt("password", saltBytes, SHA512.Create());
+                Staff loggedInStaffMemeber = staffService.CheckPassword(staffID, hashedPassword);
+                if(loggedInStaffMemeber != null)
+                {
+                    MessageBox.Show("Logged in");
+                }
+                else
+                {
+                    MessageBox.Show("not logged in " + hashedPassword + "salt: " + salt);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while logging in: " + ex.Message);
             }
-        }
-        private HashWithSaltResult StringHasher(string hash, string salt)
-        {
-            PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
-            byte[] saltBytes = Encoding.ASCII.GetBytes(salt);
-            int timesToHash = 100;
-            HashWithSaltResult hashWithSalt = pwHasher.HashWithSalt(hash, saltBytes, SHA512.Create());
-
-            for (int i = 0; i < timesToHash; i++)
-            {
-                hashWithSalt = pwHasher.HashWithSalt(hashWithSalt.Hash, saltBytes, SHA512.Create());
-            }
-            return hashWithSalt;
         }
     }
 }
