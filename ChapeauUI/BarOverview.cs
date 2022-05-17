@@ -21,9 +21,9 @@ namespace ChapeauUI
 
         private void barListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(Order == drink)
+
             OrderService orderService = new OrderService();
-            List<Order> ordersList = orderService.GetActiveOrders();
+            List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
 
             barListView.Clear();
             barListView.View = View.Details;
@@ -32,7 +32,7 @@ namespace ChapeauUI
             barListView.Columns.Add("Order", 100); //productname
             barListView.Columns.Add("Description", 100);
             barListView.Columns.Add("Is Finished", 100);//true/false
-            foreach(Order order in ordersList)
+            foreach(Order order in ordersDrinkList)
             {
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
                 li.SubItems.Add(order.ProductName);
@@ -40,8 +40,18 @@ namespace ChapeauUI
                 li.SubItems.Add(order.IsFinished.ToString());
                 barListView.Items.Add(li);
             }
+            ColorListView(barListView);
         }
-
+        private void ColorListView(ListView listview)
+        {
+            for (int i = 0; i < listview.Items.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    listview.Items[i].BackColor = Color.LightBlue;
+                }
+            }
+        }
         private void finishedDrinkButton_Click(object sender, EventArgs e)
         {
 

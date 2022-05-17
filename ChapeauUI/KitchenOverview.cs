@@ -22,7 +22,7 @@ namespace ChapeauUI
         private void kitchenListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             OrderService orderService = new OrderService();
-            List<Order> ordersList = orderService.GetActiveOrders();
+            List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
 
             kitchenListView.Clear();
             kitchenListView.View = View.Details;
@@ -31,7 +31,7 @@ namespace ChapeauUI
             kitchenListView.Columns.Add("Order", 100); //productname
             kitchenListView.Columns.Add("Description", 100);
             kitchenListView.Columns.Add("Is Finished", 100);//true/false
-            foreach (Order order in ordersList)
+            foreach (Order order in ordersFoodList)
             {
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
                 li.SubItems.Add(order.ProductName);
@@ -39,8 +39,19 @@ namespace ChapeauUI
                 li.SubItems.Add(order.IsFinished.ToString());
                 kitchenListView.Items.Add(li);
             }
-        }
+            ColorListView(kitchenListView);
 
+        }
+        private void ColorListView(ListView listview)
+        {
+            for (int i = 0; i < listview.Items.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    listview.Items[i].BackColor = Color.LightBlue;
+                }
+            }
+        }
         private void finishedFoodButton_Click(object sender, EventArgs e)
         {
 

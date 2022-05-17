@@ -19,6 +19,14 @@ namespace ChapeauLogic
         {
             return orderDao.GetActiveOrders();
         }
+        public List<Order> GetActiveDrinkOrders()
+        {
+            return orderDao.GetActiveDrinkOrders();
+        }
+        public List<Order> GetActiveFoodOrders()
+        {
+            return orderDao.GetActiveFoodOrders();
+        }
     }
 }
 
