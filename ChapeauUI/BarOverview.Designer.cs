@@ -60,7 +60,7 @@ namespace ChapeauUI
             this.finishedDrinkButton.Name = "finishedDrinkButton";
             this.finishedDrinkButton.Size = new System.Drawing.Size(776, 29);
             this.finishedDrinkButton.TabIndex = 3;
-            this.finishedDrinkButton.Text = "Drink is ready";
+            this.finishedDrinkButton.Text = "Drink is ready to be served";
             this.finishedDrinkButton.UseVisualStyleBackColor = true;
             this.finishedDrinkButton.Click += new System.EventHandler(this.finishedDrinkButton_Click);
             // 

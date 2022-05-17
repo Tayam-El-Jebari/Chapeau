@@ -60,7 +60,7 @@ namespace ChapeauUI
             this.finishedFoodButton.Name = "finishedFoodButton";
             this.finishedFoodButton.Size = new System.Drawing.Size(776, 29);
             this.finishedFoodButton.TabIndex = 2;
-            this.finishedFoodButton.Text = "Food is ready";
+            this.finishedFoodButton.Text = "Food is ready to be served\r\n";
             this.finishedFoodButton.UseVisualStyleBackColor = true;
             this.finishedFoodButton.Click += new System.EventHandler(this.finishedFoodButton_Click);
             // 
@@ -74,7 +74,6 @@ namespace ChapeauUI
             this.Controls.Add(this.label1);
             this.Name = "KitchenOverview";
             this.Text = "KitchenOverview";
-            this.Load += new System.EventHandler(this.KitchenOverview_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

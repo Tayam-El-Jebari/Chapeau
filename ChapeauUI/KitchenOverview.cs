@@ -63,9 +63,6 @@ namespace ChapeauUI
             orderService.GetUpdateStateIsFinished(order.IsFinished);
         }
 
-        private void KitchenOverview_Load(object sender, EventArgs e)
-        {
 
-        }
     }
 }
