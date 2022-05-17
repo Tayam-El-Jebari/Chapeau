@@ -56,5 +56,29 @@ namespace ChapeauDAL
             }
             return bills;
         }
+
+        public List<OrderItem> GetMenuItems(int orderId)
+        {
+            List<OrderItem> orderItem = new List<OrderItem>();
+            string query = "SELECT m.menuItem_ID, m.productName, m.price, oi.amount FROM [MenuItem] AS m" +
+		    "JOIN [Order_item] AS oi ON m.menuItem_ID = oi.menuItem_ID" +
+		    "JOIN [Order] AS o ON o.reservation_Id = 202";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@order_id", orderId);
+            
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                OrderItem orderItem = new OrderItem()
+                {
+                    MenuItemId = (int)dr["menuItem_ID"],
+                    ProductName = (string)dr["productName"],
+                    Price = (double)dr["price"],
+                    Amount = (int)dr["amount"]
+                };
+
+                orderItems.Add(order);
+            }
+            return orderItems;
+        }
     }
 }

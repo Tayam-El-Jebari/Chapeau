@@ -27,5 +27,12 @@ namespace ChapeauLogic
         {
             billdb.AddBill(bill);
         }
+
+        public void CalculateVAT()
+        {
+            Bill bill = bill.db
+            float VAT = (price + VATPercentage) / (100 + VATPercentage);
+
+        }
     }
 }
