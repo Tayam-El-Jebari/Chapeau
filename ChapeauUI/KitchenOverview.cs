@@ -56,12 +56,16 @@ namespace ChapeauUI
         }
         private void finishedFoodButton_Click(object sender, EventArgs e)
         {
-            //click 2 minutes groen op listview en daarna verdwijnt hij
-            // melding naar de bediening
+
             Order order = (Order)kitchenListView.SelectedItems[0].Tag;
-            order.IsFinished = true;//specificeren op dat rijtje
-            /*naam tablat van bediening*/
-            MessageBox.Show("dish can be served");//nog welke dish can be served
+            order.IsFinished = true;
+            OrderService orderService = new OrderService();
+            orderService.GetUpdateStateIsFinished(order.IsFinished);
+        }
+
+        private void KitchenOverview_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

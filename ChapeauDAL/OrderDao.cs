@@ -19,13 +19,13 @@ namespace ChapeauDAL
         }
         public List<Order> GetActiveDrinkOrders()
         {
-            string query = "SELECT order_id, m.productName, m.[description], o.table_Id, o.comments, o.isFinished FROM [Order] AS o JOIN MenuItem AS m ON o.menuItem_ID = m.menuItem_ID WHERE m.menuItem_ID IN(SELECT menuItem_Id FROM[Drink_Item]) ";
+            string query = "SELECT  o.order_id, m.productName, oi.amount, m.[description], o.table_Id, oi.comments, o.isFinished FROM[Order] AS o, [Order_Item] AS oi, MenuItem AS m WHERE m.menuItem_ID IN(SELECT menuItem_Id FROM[Drink_Item] WHERE  o.isFinished = 'FALSE')";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<Order> GetActiveFoodOrders()
         {
-            string query = "SELECT order_id, m.productName, m.[description], o.table_Id, o.comments, o.isFinished FROM [Order] AS o JOIN MenuItem AS m ON o.menuItem_ID = m.menuItem_ID WHERE m.menuItem_ID IN(SELECT menuItem_Id FROM[Dinner_Item][Lunch_Item])";
+            string query = "SELECT o.order_id, m.productName, oi.amount, m.[description], o.table_Id, oi.comments, o.isFinished FROM[Order] AS o, [Order_Item] AS oi, MenuItem AS m WHERE m.menuItem_ID IN(SELECT menuItem_Id FROM[Dinner_Item][Lunch_Item] WHERE  o.isFinished = 'FALSE')";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -60,5 +60,13 @@ namespace ChapeauDAL
                 return (T)obj;
             }
         }
+        public void UpdateStateIsFinished(bool isFinished)
+        {
+            string query = $"UPDATE Order SET IsFinished=@IsFinished WHERE IsFinished='{isFinished}'";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@IsFinished", isFinished);
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
     }
 }
