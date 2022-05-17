@@ -30,12 +30,14 @@ namespace ChapeauUI
             kitchenListView.Columns.Add("Order ID", 100);
             kitchenListView.Columns.Add("Order", 100); //productname
             kitchenListView.Columns.Add("Description", 100);
+            kitchenListView.Columns.Add("Comments", 100);
             kitchenListView.Columns.Add("Is Finished", 100);//true/false
             foreach (Order order in ordersFoodList)
             {
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
                 li.SubItems.Add(order.ProductName);
                 li.SubItems.Add(order.ProductDescription);
+                li.SubItems.Add(order.Comments);
                 li.SubItems.Add(order.IsFinished.ToString());
                 kitchenListView.Items.Add(li);
             }
@@ -54,7 +56,12 @@ namespace ChapeauUI
         }
         private void finishedFoodButton_Click(object sender, EventArgs e)
         {
-
+            //click 2 minutes groen op listview en daarna verdwijnt hij
+            // melding naar de bediening
+            Order order = (Order)kitchenListView.SelectedItems[0].Tag;
+            order.IsFinished = true;//specificeren op dat rijtje
+            /*naam tablat van bediening*/
+            MessageBox.Show("dish can be served");//nog welke dish can be served
         }
     }
 }
