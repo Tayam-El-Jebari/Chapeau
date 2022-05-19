@@ -22,7 +22,7 @@ namespace ChapeauUI
         private void kitchenListView_SelectedIndexChanged(object sender, EventArgs e)
         {
             OrderService orderService = new OrderService();
-            List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
+            List<OrderItem> ordersFoodList = orderService.GetActiveFoodOrders();
 
             kitchenListView.Clear();
             kitchenListView.View = View.Details;
@@ -32,11 +32,11 @@ namespace ChapeauUI
             kitchenListView.Columns.Add("Description", 100);
             kitchenListView.Columns.Add("Comments", 100);
             kitchenListView.Columns.Add("Is Finished", 100);//true/false
-            foreach (Order order in ordersFoodList)
+            foreach (OrderItem order in ordersFoodList)
             {
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                li.SubItems.Add(order.ProductName);
-                li.SubItems.Add(order.ProductDescription);
+                /*li.SubItems.Add(order.ProductName);
+                li.SubItems.Add(order.ProductDescription);*/
                 li.SubItems.Add(order.Comments);
                 li.SubItems.Add(order.IsFinished.ToString());
                 kitchenListView.Items.Add(li);

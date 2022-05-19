@@ -24,7 +24,7 @@ namespace ChapeauUI
             ListView list = new ListView();
 
             OrderService orderService = new OrderService();
-            List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
+            List<OrderItem> ordersDrinkList = orderService.GetActiveDrinkOrders();
 
             barListView.Clear();
             barListView.View = View.Details;
@@ -34,15 +34,15 @@ namespace ChapeauUI
             barListView.Columns.Add("Description", 100);
             barListView.Columns.Add("Comments", 100);
             barListView.Columns.Add("Is Finished", 100);//true/false
-            foreach(Order order in ordersDrinkList)
+            foreach(OrderItem order in ordersDrinkList)
             {
                 barListView = new ListView();
                 barListView.Width = list.Width - 10;
                 list.Height = list.Width - 10;
                 list.Controls.Add(barListView);
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                li.SubItems.Add(order.ProductName);
-                li.SubItems.Add(order.ProductDescription);
+                /*li.SubItems.Add(order.ProductName);
+                li.SubItems.Add(order.ProductDescription);*/
                 li.SubItems.Add(order.Comments);
                 li.SubItems.Add(order.IsFinished.ToString());
                 barListView.Items.Add(li);
