@@ -21,6 +21,7 @@ namespace ChapeauUI
 
         private void barListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ListView list = new ListView();
 
             OrderService orderService = new OrderService();
             List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -35,6 +36,10 @@ namespace ChapeauUI
             barListView.Columns.Add("Is Finished", 100);//true/false
             foreach(Order order in ordersDrinkList)
             {
+                barListView = new ListView();
+                barListView.Width = list.Width - 10;
+                list.Height = list.Width - 10;
+                list.Controls.Add(barListView);
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
                 li.SubItems.Add(order.ProductName);
                 li.SubItems.Add(order.ProductDescription);
