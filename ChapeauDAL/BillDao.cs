@@ -15,7 +15,7 @@ namespace ChapeauDAL
         {
             string query = "SELECT bill_Id, table_Id, staff_ID, totalPriceInclVAT, totalPriceExclVAT, tip, isPaid, discount, currentDate, comments FROM [Bill]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadBillTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public void AddBill(Bill bill)
         {
@@ -33,7 +33,7 @@ namespace ChapeauDAL
             sqlParameters[9] = new SqlParameter("@comments", bill.Comments);
             ExecuteEditQuery(query, sqlParameters);
         }
-        public List<Bill> ReadTables(DataTable dataTable)
+        public List<Bill> ReadBillTables(DataTable dataTable)
         {
             List<Bill> bills = new List<Bill>();
 
@@ -57,15 +57,22 @@ namespace ChapeauDAL
             return bills;
         }
 
-        public List<OrderItem> GetMenuItems(int orderId)
+        public List<OrderItem> GetOrderItems(int orderId)
         {
             List<OrderItem> orderItem = new List<OrderItem>();
             string query = "SELECT m.menuItem_ID, m.productName, m.price, oi.amount FROM [MenuItem] AS m" +
-		    "JOIN [Order_item] AS oi ON m.menuItem_ID = oi.menuItem_ID" +
-		    "JOIN [Order] AS o ON o.reservation_Id = 202";
+            "JOIN [Order_item] AS oi ON m.menuItem_ID = oi.menuItem_ID" +
+            "JOIN[Order] AS o ON o.order_id = oi.order_id" +
+            "WHERE o.reservation_Id = 202";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@order_id", orderId);
-            
+
+            return ReadOrderItemsTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public List<OrderItem> ReadOrderItemsTables(DataTable dataTable)
+        {
+            List<OrderItem> orderItems = new List<OrderItem>();
+
             foreach (DataRow dr in dataTable.Rows)
             {
                 OrderItem orderItem = new OrderItem()
@@ -76,7 +83,7 @@ namespace ChapeauDAL
                     Amount = (int)dr["amount"]
                 };
 
-                orderItems.Add(order);
+                orderItems.Add(orderItem);
             }
             return orderItems;
         }
