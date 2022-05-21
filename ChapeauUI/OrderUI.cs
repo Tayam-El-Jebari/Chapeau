@@ -13,7 +13,7 @@ namespace ChapeauUI
         private const int AppetizerCode = 0;
         private const int MainCourseCode = 1;
         private const int DessertCode = 2;
-        public OrderUI(Table table, Reservation)
+        public OrderUI()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -159,7 +159,24 @@ namespace ChapeauUI
             DialogResult confirmation = confirm.DialogResult;
             if (confirmation == DialogResult.Yes)
             {
-                // stuur alle items naar db
+                List<OrderItem> itemsForOrder = new List<OrderItem>();
+                for(int i = 0; i < itemGridView.Rows.Count - 1; i++)
+                {
+                    itemsForOrder.Add(new OrderItem
+                    {
+                        MenuItemID = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value),
+                        Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
+                    });
+                    MessageBox.Show($"{itemsForOrder[0].MenuItemID}");
+                }
+                //temporarily creating new reservation in order to test system, will be removed
+                Reservation reservation = new Reservation
+                {
+                    ReservationId = 202,
+                    TableId = 4
+                };
+                OrderService orderService = new OrderService();
+                orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text);
             }
 
         }

@@ -6,21 +6,15 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    class Reservation
+    public class Reservation
     {
+        public int ReservationId;
+        public string CustomerFullName;
+        public DateTime ReservationTime;
+        public int TableId;
+        public string Comments;
+        public int PhoneNumber;
+        public string EmailAddress;
 
-
-
-
- //       [reservation_id] int NOT NULL IDENTITY(200,1) PRIMARY KEY,
- //[customerFullName] varchar(45) NULL,
- //[isPresent] BIT NOT NULL,
- //[reservationTime]
- //       DATETIME NULL,
- //[table_ID] int NOT NULL,
- //[comments]
- //       TEXT NULL,
- //[phoneNumber] INT NULL,
- //[emailAdress] varchar(99) NULL,
     }
 }
