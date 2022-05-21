@@ -35,10 +35,10 @@ namespace ChapeauUI
             this.labelCommentsTitle = new System.Windows.Forms.Label();
             this.itemGridView = new System.Windows.Forms.DataGridView();
             this.clearAllButton = new System.Windows.Forms.Button();
+            this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.viewOrders = new System.Windows.Forms.Button();
             this.menu = new System.Windows.Forms.FlowLayoutPanel();
             this.lunchDinnerLabel = new System.Windows.Forms.Label();
-            this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.panelOrders.SuspendLayout();
             this.itemAddedOrderPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemGridView)).BeginInit();
@@ -70,6 +70,7 @@ namespace ChapeauUI
             this.itemAddedOrderPnl.Name = "itemAddedOrderPnl";
             this.itemAddedOrderPnl.Size = new System.Drawing.Size(678, 940);
             this.itemAddedOrderPnl.TabIndex = 4;
+            this.itemAddedOrderPnl.Visible = false;
             this.itemAddedOrderPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.itemAddedOrderPnl_Paint);
             // 
             // commentsTextBox
@@ -114,6 +115,16 @@ namespace ChapeauUI
             this.clearAllButton.UseVisualStyleBackColor = true;
             this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
             // 
+            // buttonCreateOrder
+            // 
+            this.buttonCreateOrder.Location = new System.Drawing.Point(31, 825);
+            this.buttonCreateOrder.Name = "buttonCreateOrder";
+            this.buttonCreateOrder.Size = new System.Drawing.Size(202, 97);
+            this.buttonCreateOrder.TabIndex = 8;
+            this.buttonCreateOrder.Text = "Create order";
+            this.buttonCreateOrder.UseVisualStyleBackColor = true;
+            this.buttonCreateOrder.Click += new System.EventHandler(this.buttonCreateOrder_Click);
+            // 
             // viewOrders
             // 
             this.viewOrders.Location = new System.Drawing.Point(540, 5);
@@ -143,16 +154,6 @@ namespace ChapeauUI
             this.lunchDinnerLabel.Size = new System.Drawing.Size(520, 81);
             this.lunchDinnerLabel.TabIndex = 1;
             this.lunchDinnerLabel.Text = "LUNCH 11:00 - 16:00";
-            // 
-            // buttonCreateOrder
-            // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(31, 825);
-            this.buttonCreateOrder.Name = "buttonCreateOrder";
-            this.buttonCreateOrder.Size = new System.Drawing.Size(202, 97);
-            this.buttonCreateOrder.TabIndex = 8;
-            this.buttonCreateOrder.Text = "Create order";
-            this.buttonCreateOrder.UseVisualStyleBackColor = true;
-            this.buttonCreateOrder.Click += new System.EventHandler(this.buttonCreateOrder_Click);
             // 
             // OrderUI
             // 

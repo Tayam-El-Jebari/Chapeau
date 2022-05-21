@@ -13,34 +13,17 @@ namespace ChapeauUI
         private const int AppetizerCode = 0;
         private const int MainCourseCode = 1;
         private const int DessertCode = 2;
-        public OrderUI()
+        public OrderUI(Table table, Reservation)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
-            itemAddedOrderPnl.Hide();
+            CreateUIComponents();
+            FillGridView();
+        }
+        private void FillGridView()
+        {
             MenuItemService menuItemService = new MenuItemService();
             menuList = menuItemService.GetMenuItems(DessertCode);
-            itemGridView.ColumnCount = 3;
-            itemGridView.Columns[0].Name = "product ID";
-            itemGridView.Columns[1].Name = "Product Name";
-            itemGridView.Columns[2].Name = "amount added";
-            itemGridView.Columns.Add(new DataGridViewButtonColumn
-            {
-                HeaderText = "Add",
-                Text = "+",
-                Name = "btnAddOrderItems",
-                UseColumnTextForButtonValue = true
-            });
-            itemGridView.Columns.Add(
-                new DataGridViewButtonColumn
-                {
-                    HeaderText = "Remove",
-                    Text = "-",
-                    Name = "btnAddOrderItems",
-                    UseColumnTextForButtonValue = true
-                });
-
-
             foreach (MenuItem menuItem in menuList)
             {
                 Button menuItemButton = new Button()
@@ -60,11 +43,32 @@ namespace ChapeauUI
                     Text = $"?",
                     Font = new Font("Cabin", 9),
                     Visible = true,
-            };
+                };
                 menuItemButton.Click += new EventHandler(BtnOrderAdd_MouseDown);
                 menu.Controls.Add(menuItemButton);
-
             }
+        }
+        private void CreateUIComponents()
+        {
+            itemGridView.ColumnCount = 3;
+            itemGridView.Columns[0].Name = "Menu Nr";
+            itemGridView.Columns[1].Name = "Product Name";
+            itemGridView.Columns[2].Name = "amount added";
+            itemGridView.Columns.Add(new DataGridViewButtonColumn
+            {
+                HeaderText = "Add",
+                Text = "+",
+                Name = "btnAddOrderItems",
+                UseColumnTextForButtonValue = true
+            });
+            itemGridView.Columns.Add(
+                new DataGridViewButtonColumn
+                {
+                    HeaderText = "Remove",
+                    Text = "-",
+                    Name = "btnAddOrderItems",
+                    UseColumnTextForButtonValue = true
+                });
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
         {
