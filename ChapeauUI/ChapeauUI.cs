@@ -23,26 +23,26 @@ namespace ChapeauUI
         }
         private void ShowMenu()
         {
-            testView.Clear();
-            MenuItemService menuItemService = new MenuItemService(); ;
-            List<MenuItem> menuList = menuItemService.GetMenuItems(); ;
+            //testView.Clear();
+            //MenuItemService menuItemService = new MenuItemService(); ;
+            //List<MenuItem> menuList = menuItemService.GetMenuItems(); ;
 
 
-            testView.View = View.Details;
-            testView.Columns.Add("Id", 80);
-            testView.Columns.Add("Product name", 150);
-            testView.Columns.Add("Price", 100);
-            testView.Columns.Add("Description", 80);
+            //testView.View = View.Details;
+            //testView.Columns.Add("Id", 80);
+            //testView.Columns.Add("Product name", 150);
+            //testView.Columns.Add("Price", 100);
+            //testView.Columns.Add("Description", 80);
 
 
-            foreach (MenuItem m in menuList)
-            {
-                ListViewItem liMenu = new ListViewItem(m.MenuItemId.ToString());
-                liMenu.SubItems.Add(m.ProductName);
-                liMenu.SubItems.Add(m.Price.ToString());
-                liMenu.SubItems.Add(m.Description);
-                testView.Items.Add(liMenu);
-            }
+            //foreach (MenuItem m in menuList)
+            //{
+            //    ListViewItem liMenu = new ListViewItem(m.MenuItemId.ToString());
+            //    liMenu.SubItems.Add(m.ProductName);
+            //    liMenu.SubItems.Add(m.Price.ToString());
+            //    liMenu.SubItems.Add(m.Description);
+            //    testView.Items.Add(liMenu);
+            //}
         }
         private void ShowBills()
         {

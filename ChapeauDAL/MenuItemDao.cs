@@ -11,10 +11,14 @@ namespace ChapeauDAL
 {
     public class MenuItemDao : BaseDao
     {
-        public List<MenuItem> GetAllMenuItems()
+        public List<MenuItem> GetAllMenuItems(int threeCourseMealCode)
         {
-            string query = "SELECT menuItem_ID, productName, price, description FROM [MenuItem]";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+            string query = "SELECT menuItem_ID, productName, price, description FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode";
+            SqlParameter[] sqlParameters = new SqlParameter[1]
+            {
+                new SqlParameter("@threeCourseMealCode", threeCourseMealCode)
+            };
+
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<MenuItem> ReadTables(DataTable dataTable)

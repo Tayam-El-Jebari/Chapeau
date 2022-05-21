@@ -31,13 +31,14 @@ namespace ChapeauUI
         {
             this.panelOrders = new System.Windows.Forms.Panel();
             this.itemAddedOrderPnl = new System.Windows.Forms.Panel();
+            this.commentsTextBox = new System.Windows.Forms.RichTextBox();
+            this.labelCommentsTitle = new System.Windows.Forms.Label();
             this.itemGridView = new System.Windows.Forms.DataGridView();
-            this.buttonRemoveItem = new System.Windows.Forms.Button();
-            this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.clearAllButton = new System.Windows.Forms.Button();
             this.viewOrders = new System.Windows.Forms.Button();
             this.menu = new System.Windows.Forms.FlowLayoutPanel();
             this.lunchDinnerLabel = new System.Windows.Forms.Label();
+            this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.panelOrders.SuspendLayout();
             this.itemAddedOrderPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemGridView)).BeginInit();
@@ -45,6 +46,7 @@ namespace ChapeauUI
             // 
             // panelOrders
             // 
+            this.panelOrders.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
             this.panelOrders.Controls.Add(this.itemAddedOrderPnl);
             this.panelOrders.Controls.Add(this.viewOrders);
             this.panelOrders.Controls.Add(this.menu);
@@ -58,50 +60,55 @@ namespace ChapeauUI
             // itemAddedOrderPnl
             // 
             this.itemAddedOrderPnl.AutoScroll = true;
+            this.itemAddedOrderPnl.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.itemAddedOrderPnl.Controls.Add(this.commentsTextBox);
+            this.itemAddedOrderPnl.Controls.Add(this.labelCommentsTitle);
             this.itemAddedOrderPnl.Controls.Add(this.itemGridView);
-            this.itemAddedOrderPnl.Controls.Add(this.buttonRemoveItem);
-            this.itemAddedOrderPnl.Controls.Add(this.buttonCreateOrder);
             this.itemAddedOrderPnl.Controls.Add(this.clearAllButton);
-            this.itemAddedOrderPnl.Location = new System.Drawing.Point(1, 129);
+            this.itemAddedOrderPnl.Controls.Add(this.buttonCreateOrder);
+            this.itemAddedOrderPnl.Location = new System.Drawing.Point(1, 115);
             this.itemAddedOrderPnl.Name = "itemAddedOrderPnl";
-            this.itemAddedOrderPnl.Size = new System.Drawing.Size(678, 712);
+            this.itemAddedOrderPnl.Size = new System.Drawing.Size(678, 940);
             this.itemAddedOrderPnl.TabIndex = 4;
+            this.itemAddedOrderPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.itemAddedOrderPnl_Paint);
+            // 
+            // commentsTextBox
+            // 
+            this.commentsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.commentsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.commentsTextBox.Location = new System.Drawing.Point(31, 588);
+            this.commentsTextBox.Name = "commentsTextBox";
+            this.commentsTextBox.Size = new System.Drawing.Size(627, 209);
+            this.commentsTextBox.TabIndex = 7;
+            this.commentsTextBox.Text = "";
+            // 
+            // labelCommentsTitle
+            // 
+            this.labelCommentsTitle.AutoSize = true;
+            this.labelCommentsTitle.BackColor = System.Drawing.Color.Transparent;
+            this.labelCommentsTitle.Font = new System.Drawing.Font("Cabin", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCommentsTitle.Location = new System.Drawing.Point(10, 539);
+            this.labelCommentsTitle.Name = "labelCommentsTitle";
+            this.labelCommentsTitle.Size = new System.Drawing.Size(140, 37);
+            this.labelCommentsTitle.TabIndex = 5;
+            this.labelCommentsTitle.Text = "Comments:";
             // 
             // itemGridView
             // 
             this.itemGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.itemGridView.Location = new System.Drawing.Point(-1, 3);
+            this.itemGridView.Location = new System.Drawing.Point(-1, 6);
             this.itemGridView.Name = "itemGridView";
             this.itemGridView.RowHeadersWidth = 51;
             this.itemGridView.RowTemplate.Height = 29;
-            this.itemGridView.Size = new System.Drawing.Size(679, 523);
+            this.itemGridView.Size = new System.Drawing.Size(679, 532);
             this.itemGridView.TabIndex = 4;
             this.itemGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemGridView_CellClick);
             // 
-            // buttonRemoveItem
-            // 
-            this.buttonRemoveItem.Location = new System.Drawing.Point(194, 551);
-            this.buttonRemoveItem.Name = "buttonRemoveItem";
-            this.buttonRemoveItem.Size = new System.Drawing.Size(243, 71);
-            this.buttonRemoveItem.TabIndex = 3;
-            this.buttonRemoveItem.Text = "Remove Item";
-            this.buttonRemoveItem.UseVisualStyleBackColor = true;
-            this.buttonRemoveItem.Click += new System.EventHandler(this.buttonRemoveItem_Click);
-            // 
-            // buttonCreateOrder
-            // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(3, 645);
-            this.buttonCreateOrder.Name = "buttonCreateOrder";
-            this.buttonCreateOrder.Size = new System.Drawing.Size(140, 55);
-            this.buttonCreateOrder.TabIndex = 2;
-            this.buttonCreateOrder.Text = "Create Order";
-            this.buttonCreateOrder.UseVisualStyleBackColor = true;
-            // 
             // clearAllButton
             // 
-            this.clearAllButton.Location = new System.Drawing.Point(516, 645);
+            this.clearAllButton.Location = new System.Drawing.Point(463, 825);
             this.clearAllButton.Name = "clearAllButton";
-            this.clearAllButton.Size = new System.Drawing.Size(140, 55);
+            this.clearAllButton.Size = new System.Drawing.Size(202, 97);
             this.clearAllButton.TabIndex = 1;
             this.clearAllButton.Text = "Clear all";
             this.clearAllButton.UseVisualStyleBackColor = true;
@@ -119,9 +126,11 @@ namespace ChapeauUI
             // 
             // menu
             // 
+            this.menu.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menu.Location = new System.Drawing.Point(0, 115);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(671, 1325);
+            this.menu.Size = new System.Drawing.Size(681, 1440);
             this.menu.TabIndex = 2;
             // 
             // lunchDinnerLabel
@@ -134,6 +143,16 @@ namespace ChapeauUI
             this.lunchDinnerLabel.Size = new System.Drawing.Size(520, 81);
             this.lunchDinnerLabel.TabIndex = 1;
             this.lunchDinnerLabel.Text = "LUNCH 11:00 - 16:00";
+            // 
+            // buttonCreateOrder
+            // 
+            this.buttonCreateOrder.Location = new System.Drawing.Point(31, 825);
+            this.buttonCreateOrder.Name = "buttonCreateOrder";
+            this.buttonCreateOrder.Size = new System.Drawing.Size(202, 97);
+            this.buttonCreateOrder.TabIndex = 8;
+            this.buttonCreateOrder.Text = "Create order";
+            this.buttonCreateOrder.UseVisualStyleBackColor = true;
+            this.buttonCreateOrder.Click += new System.EventHandler(this.buttonCreateOrder_Click);
             // 
             // OrderUI
             // 
@@ -148,6 +167,7 @@ namespace ChapeauUI
             this.Text = "OrderUI";
             this.panelOrders.ResumeLayout(false);
             this.itemAddedOrderPnl.ResumeLayout(false);
+            this.itemAddedOrderPnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemGridView)).EndInit();
             this.ResumeLayout(false);
 
@@ -159,9 +179,10 @@ namespace ChapeauUI
         private System.Windows.Forms.FlowLayoutPanel menu;
         private System.Windows.Forms.Button viewOrders;
         private System.Windows.Forms.Panel itemAddedOrderPnl;
-        private System.Windows.Forms.Button buttonRemoveItem;
-        private System.Windows.Forms.Button buttonCreateOrder;
-        private System.Windows.Forms.Button clearAllButton;
+        private System.Windows.Forms.RichTextBox commentsTextBox;
+        private System.Windows.Forms.Label labelCommentsTitle;
         private System.Windows.Forms.DataGridView itemGridView;
+        private System.Windows.Forms.Button clearAllButton;
+        private System.Windows.Forms.Button buttonCreateOrder;
     }
 }

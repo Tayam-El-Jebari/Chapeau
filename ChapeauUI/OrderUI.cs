@@ -10,13 +10,16 @@ namespace ChapeauUI
     public partial class OrderUI : Form
     {
         private List<MenuItem> menuList;
+        private const int AppetizerCode = 0;
+        private const int MainCourseCode = 1;
+        private const int DessertCode = 2;
         public OrderUI()
         {
-            Button menuItemButton;
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             itemAddedOrderPnl.Hide();
             MenuItemService menuItemService = new MenuItemService();
-            menuList = menuItemService.GetMenuItems();
+            menuList = menuItemService.GetMenuItems(DessertCode);
             itemGridView.ColumnCount = 3;
             itemGridView.Columns[0].Name = "product ID";
             itemGridView.Columns[1].Name = "Product Name";
@@ -40,15 +43,27 @@ namespace ChapeauUI
 
             foreach (MenuItem menuItem in menuList)
             {
-                menuItemButton = new Button();
-                menuItemButton.Width = menu.Width - 10;
-                menuItemButton.Height = 62;
+                Button menuItemButton = new Button()
+                {
+                    Width = menu.Width / 10 * 7,
+                    Height = 62,
+                    Text = $"{menuItem.MenuItemId}      {menuItem.ProductName}",
+                    Font = new Font("Cabin", 14),
+                    Visible = true,
+                };
                 menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
-                menuItemButton.Click += new EventHandler(BtnOrderAdd_MouseDown);
-                menuItemButton.Text = $"{menuItem.MenuItemId}    {menuItem.ProductName}";
-                menuItemButton.Font = new Font("Cabin", 14);
-                menuItemButton.Visible = true;
                 menu.Controls.Add(menuItemButton);
+                menuItemButton = new Button()
+                {
+                    Width = 44,
+                    Height = 44,
+                    Text = $"?",
+                    Font = new Font("Cabin", 9),
+                    Visible = true,
+            };
+                menuItemButton.Click += new EventHandler(BtnOrderAdd_MouseDown);
+                menu.Controls.Add(menuItemButton);
+
             }
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
@@ -59,13 +74,13 @@ namespace ChapeauUI
                 {
                     foreach (DataGridViewRow row in itemGridView.Rows)
                     {
-                        if(Convert.ToInt32(row.Cells[0].Value) == menuList[i].MenuItemId)
+                        if(Convert.ToInt32(row.Cells[0].Value) == menuList[i / 2].MenuItemId)
                         {
                             row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
                             return;
                         }
                     }
-                    itemGridView.Rows.Add(new string[] { menuList[i].MenuItemId.ToString(), menuList[i].ProductName, "1"});
+                    itemGridView.Rows.Add(new string[] { menuList[i / 2].MenuItemId.ToString(), menuList[i / 2].ProductName, "1"});
                 }
             }
         }
@@ -75,7 +90,7 @@ namespace ChapeauUI
             {
                 if (menu.Controls[i] == sender)
                 {
-                    MessageBox.Show(menuList[i].Description);
+                    MessageBox.Show(menuList[i / 2].Description);
                 }
             }
         }
@@ -89,38 +104,60 @@ namespace ChapeauUI
         {
             if (itemAddedOrderPnl.Visible)
             {
+                viewOrders.Text = "View orders";
                 itemAddedOrderPnl.Hide();
             }
             else
             {
+                viewOrders.Text = "Close orders";
                 itemAddedOrderPnl.Show();
             }
         }
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            
-        }
-
-        private void buttonRemoveItem_Click(object sender, EventArgs e)
-        {
-
+            itemGridView.Rows.Clear();
         }
 
         private void itemGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 3)
+            if (e.RowIndex >= 0)
             {
-                itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
-            }
-            else if (e.ColumnIndex == 4)
-            {
-                itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
-                if (Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) == 0)
+                if (itemGridView.Rows[e.RowIndex].Cells[2].Value != null)
                 {
-                    itemGridView.Rows.Remove(itemGridView.Rows[e.RowIndex]);
+                    if (e.ColumnIndex == 3)
+                    {
+                        itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
+                    }
+                    else if (e.ColumnIndex == 4)
+                    {
+                        itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
+                        if (Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) == 0)
+                        {
+                            itemGridView.Rows.Remove(itemGridView.Rows[e.RowIndex]);
+                        }
+                    }
                 }
             }
+
+
+        }
+
+        private void itemAddedOrderPnl_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawRectangle(new Pen(Color.FromArgb(39, 39, 39), 10), 13, 578, 652, 224);
+        }
+
+        private void buttonCreateOrder_Click(object sender, EventArgs e)
+        {
+            ConfirmOrderUI confirm = new ConfirmOrderUI();
+            confirm.ShowDialog();
+            DialogResult confirmation = confirm.DialogResult;
+            if (confirmation == DialogResult.Yes)
+            {
+                // stuur alle items naar db
+            }
+
         }
     }
 }
