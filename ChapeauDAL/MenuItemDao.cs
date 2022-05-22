@@ -11,12 +11,20 @@ namespace ChapeauDAL
 {
     public class MenuItemDao : BaseDao
     {
-        public List<MenuItem> GetAllMenuItems(int threeCourseMealCode)
+        public List<MenuItem> GetAllMenuItems(ThreeCourseMeal threeCourseMealCode, bool isLunch)
         {
-            string query = "SELECT menuItem_ID, productName, price, description FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode";
+            string query;
+            if(threeCourseMealCode == ThreeCourseMeal.Drinks)
+            query = "SELECT menuItem_ID, productName, price, [description] FROM [MenuItem] WHERE menuItem_ID IN (select menuItem_Id FROM Drink_Item)";
+            else if (isLunch)
+            query = "SELECT menuItem_ID, productName, price, description FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode AND menuItem_ID IN (select * FROM Lunch_Item)";
+            else
+            query = "SELECT menuItem_ID, productName, price, description FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode AND menuItem_ID IN (select * FROM Dinner_Item)";
+
+
             SqlParameter[] sqlParameters = new SqlParameter[1]
             {
-                new SqlParameter("@threeCourseMealCode", threeCourseMealCode)
+                new SqlParameter("@threeCourseMealCode", (int)threeCourseMealCode)
             };
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));

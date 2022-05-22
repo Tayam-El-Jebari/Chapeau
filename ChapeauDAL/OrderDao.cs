@@ -50,7 +50,7 @@ namespace ChapeauDAL
         }
         public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments)
         {
-            string query = "INSERT INTO [Order](order_id, reservation_Id, table_Id, isFinished, timePlaced, comments) VALUES (8, @reservationId, @tableId, 0, @currentTime, @comments);";
+            string query = "INSERT INTO [Order](reservation_Id, table_Id, isFinished, timePlaced, comments) VALUES (@reservationId, @tableId, 0, @currentTime, @comments);";
             SqlParameter[] sqlParameters = new SqlParameter[4]
             {
                 new SqlParameter("@reservationId", reservation.ReservationId),
@@ -61,7 +61,7 @@ namespace ChapeauDAL
             ExecuteEditQuery(query, sqlParameters);
             foreach (OrderItem orderItem in orderedItem)
             {
-                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES(@orderId, @menuItemId, @amount);";
+                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount);";
                 sqlParameters = new SqlParameter[3]
                 {
                      new SqlParameter("@orderId", 7),

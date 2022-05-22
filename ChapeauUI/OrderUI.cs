@@ -10,9 +10,8 @@ namespace ChapeauUI
     public partial class OrderUI : Form
     {
         private List<MenuItem> menuList;
-        private const int AppetizerCode = 0;
-        private const int MainCourseCode = 1;
-        private const int DessertCode = 2;
+        private ThreeCourseMeal threeCourseMeal;
+        private bool selectLunchMenu;
         public OrderUI()
         {
             InitializeComponent();
@@ -23,7 +22,8 @@ namespace ChapeauUI
         private void FillGridView()
         {
             MenuItemService menuItemService = new MenuItemService();
-            menuList = menuItemService.GetMenuItems(DessertCode);
+            menuList = menuItemService.GetMenuItems(threeCourseMeal, selectLunchMenu);
+
             foreach (MenuItem menuItem in menuList)
             {
                 Button menuItemButton = new Button()
@@ -143,10 +143,7 @@ namespace ChapeauUI
                     }
                 }
             }
-
-
         }
-
         private void itemAddedOrderPnl_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawRectangle(new Pen(Color.FromArgb(39, 39, 39), 10), 13, 578, 652, 224);
@@ -177,8 +174,51 @@ namespace ChapeauUI
                 };
                 OrderService orderService = new OrderService();
                 orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text);
+                itemGridView.Rows.Clear();
             }
 
+        }
+
+        private void buttonLunch_Click(object sender, EventArgs e)
+        {
+            selectLunchMenu = true;
+            labelTitleItems.Text = "LUNCH 11:00 - 16:00";
+            PanelChooseMenu.Hide();
+        }
+
+        private void buttonDinner_Click(object sender, EventArgs e)
+        {
+            selectLunchMenu = false;
+            labelTitleItems.Text = "DINNER 17:00 - 21:00";
+            PanelChooseMenu.Hide();
+        }
+
+        private void buttonAppetizer_Click(object sender, EventArgs e)
+        {
+            threeCourseMeal = ThreeCourseMeal.Appatizer;
+            FillGridView();
+            panelSelectMenu.Hide();
+        }
+
+        private void buttonMainCourse_Click(object sender, EventArgs e)
+        {
+            threeCourseMeal = ThreeCourseMeal.MainCourse;
+            FillGridView();
+            panelSelectMenu.Hide();
+        }
+
+        private void buttonDesserts_Click(object sender, EventArgs e)
+        {
+            threeCourseMeal = ThreeCourseMeal.Desserts;
+            FillGridView();
+            panelSelectMenu.Hide();
+        }
+
+        private void buttonDrinks_Click(object sender, EventArgs e)
+        {
+            threeCourseMeal = ThreeCourseMeal.Drinks;
+            FillGridView();
+            panelSelectMenu.Hide();
         }
     }
 }
