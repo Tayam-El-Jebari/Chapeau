@@ -57,15 +57,16 @@ namespace ChapeauDAL
             return bills;
         }
 
-        public List<OrderItem> GetOrderItems(int orderId)
+        public List<OrderItem> GetOrderItems(int reservationId)
         {
             List<OrderItem> orderItem = new List<OrderItem>();
             string query = "SELECT m.menuItem_ID, m.productName, m.price, oi.amount FROM [MenuItem] AS m" +
             "JOIN [Order_item] AS oi ON m.menuItem_ID = oi.menuItem_ID" +
             "JOIN[Order] AS o ON o.order_id = oi.order_id" +
-            "WHERE o.reservation_Id = 202";
+            "WHERE o.reservation_Id = @reservationId" +
+            "ORDER BY oi.menuItem_ID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@order_id", orderId);
+            sqlParameters[0] = new SqlParameter("@reservationId", reservationId);
 
             return ReadOrderItemsTables(ExecuteSelectQuery(query, sqlParameters));
         }

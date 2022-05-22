@@ -28,11 +28,26 @@ namespace ChapeauLogic
             billdb.AddBill(bill);
         }
 
-        public void CalculateVAT()
+        public Bill CalculateVAT(List<OrderItem> bill)
         {
-            Bill bill = bill.db
+            Bill bill;
             float VAT = (price + VATPercentage) / (100 + VATPercentage);
 
+        }
+        public List<OrderItem> CompleteBill(int reservationId)
+        {
+            List<OrderItem> orderItems = billdb.GetOrderItems(reservationId);
+            
+            for (int i = 0; i < orderItems.Count; i++)
+            {
+                if (orderItems[i].MenuItemId == orderItems[i + 1].MenuItemId)
+                {
+                    orderItems[i + 1].Amount += orderItems[i].Amount;
+                    orderItems.Remove(orderItems[i]);
+                }
+            }
+
+            return orderItems;
         }
     }
 }
