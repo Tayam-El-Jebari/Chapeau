@@ -30,8 +30,9 @@ namespace ChapeauLogic
 
         public Bill CalculateVAT(List<OrderItem> bill)
         {
-            Bill bill;
-            float VAT = (price + VATPercentage) / (100 + VATPercentage);
+            float VAT;
+                        
+            //VAT = (price + VATPercentage) / (100 + VATPercentage);
 
         }
         public List<OrderItem> CompleteBill(int reservationId)
@@ -49,5 +50,6 @@ namespace ChapeauLogic
 
             return orderItems;
         }
+    }
     }
 }
