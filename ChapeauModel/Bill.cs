@@ -11,7 +11,7 @@ namespace ChapeauModel
         public int BillID { get; set; }
         public int TableID { get; set; }
         public int StaffID { get; set; }
-        public List<MenuItem> menuItems { get; set; }
+        public List<OrderItem> MenuItems { get; set; }
         public decimal TotalPriceInclVAT { get; set; }
         public decimal TotalPriceExclVAT { get; set; }
         public decimal Tip { get; set; }
