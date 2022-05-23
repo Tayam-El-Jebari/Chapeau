@@ -57,9 +57,12 @@ namespace ChapeauDAL
             return bills;
         }
 
+        public List<bool> GetAlcoholicDrinks(int reservationId)
+        {
+
+        }
         public List<OrderItem> GetOrderItems(int reservationId)
         {
-            List<OrderItem> orderItem = new List<OrderItem>();
             string query = "SELECT m.menuItem_ID, m.productName, m.price, oi.amount FROM [MenuItem] AS m" +
             "JOIN [Order_item] AS oi ON m.menuItem_ID = oi.menuItem_ID" +
             "JOIN[Order] AS o ON o.order_id = oi.order_id" +

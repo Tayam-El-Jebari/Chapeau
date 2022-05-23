@@ -28,9 +28,14 @@ namespace ChapeauLogic
             billdb.AddBill(bill);
         }
 
-        public Bill CalculateVAT(List<OrderItem> bill)
+        public Bill CalculateVAT(List<OrderItem> orderitem)
         {
             float VAT;
+            foreach (OrderItem item in orderitem)
+            {
+                item.MenuItemId
+
+            }
                         
             //VAT = (price + VATPercentage) / (100 + VATPercentage);
 
@@ -47,7 +52,6 @@ namespace ChapeauLogic
                     orderItems.Remove(orderItems[i]);
                 }
             }
-
             return orderItems;
         }
     }
