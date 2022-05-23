@@ -10,6 +10,7 @@ namespace ChapeauUI
     public partial class OrderUI : Form
     {
         private List<MenuItem> menuList;
+        private List<MenuItem> menuLists;
         private ThreeCourseMeal threeCourseMeal;
         private bool selectLunchMenu;
         public OrderUI()
@@ -151,7 +152,7 @@ namespace ChapeauUI
 
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-            ConfirmOrderUI confirm = new ConfirmOrderUI();
+            ConfirmOrderUI confirm = new ConfirmOrderUI(MessageBoxButtons.YesNo);
             confirm.ShowDialog();
             DialogResult confirmation = confirm.DialogResult;
             if (confirmation == DialogResult.Yes)

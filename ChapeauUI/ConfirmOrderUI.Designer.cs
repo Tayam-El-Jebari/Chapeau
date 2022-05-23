@@ -29,9 +29,24 @@ namespace ChapeauUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.ReturnButton = new System.Windows.Forms.Button();
             this.ConfirmButton = new System.Windows.Forms.Button();
             this.DenyButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // ReturnButton
+            // 
+            this.ReturnButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            this.ReturnButton.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ReturnButton.ForeColor = System.Drawing.Color.White;
+            this.ReturnButton.Location = new System.Drawing.Point(71, 209);
+            this.ReturnButton.Name = "ReturnButton";
+            this.ReturnButton.Padding = new System.Windows.Forms.Padding(5);
+            this.ReturnButton.Size = new System.Drawing.Size(511, 82);
+            this.ReturnButton.TabIndex = 2;
+            this.ReturnButton.Text = "RETURN";
+            this.ReturnButton.UseVisualStyleBackColor = false;
+            this.ReturnButton.Visible = false;
             // 
             // ConfirmButton
             // 
@@ -45,6 +60,7 @@ namespace ChapeauUI
             this.ConfirmButton.TabIndex = 0;
             this.ConfirmButton.Text = "YES";
             this.ConfirmButton.UseVisualStyleBackColor = false;
+            this.ConfirmButton.Click += new System.EventHandler(this.ConfirmButton_Click);
             // 
             // DenyButton
             // 
@@ -68,6 +84,7 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.confirm_order;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(653, 323);
+            this.Controls.Add(this.ReturnButton);
             this.Controls.Add(this.DenyButton);
             this.Controls.Add(this.ConfirmButton);
             this.DoubleBuffered = true;
@@ -82,6 +99,7 @@ namespace ChapeauUI
 
         #endregion
 
+        private System.Windows.Forms.Button ReturnButton;
         private System.Windows.Forms.Button ConfirmButton;
         private System.Windows.Forms.Button DenyButton;
     }
