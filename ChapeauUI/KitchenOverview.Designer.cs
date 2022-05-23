@@ -49,7 +49,7 @@ namespace ChapeauUI
             this.kitchenListView.HideSelection = false;
             this.kitchenListView.Location = new System.Drawing.Point(12, 78);
             this.kitchenListView.Name = "kitchenListView";
-            this.kitchenListView.Size = new System.Drawing.Size(776, 329);
+            this.kitchenListView.Size = new System.Drawing.Size(577, 282);
             this.kitchenListView.TabIndex = 1;
             this.kitchenListView.UseCompatibleStateImageBehavior = false;
             this.kitchenListView.SelectedIndexChanged += new System.EventHandler(this.kitchenListView_SelectedIndexChanged);

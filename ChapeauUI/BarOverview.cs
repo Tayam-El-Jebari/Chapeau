@@ -36,16 +36,14 @@ namespace ChapeauUI
             barListView.Columns.Add("Is Finished", 100);//true/false
             foreach(OrderItem order in ordersDrinkList)
             {
-                barListView = new ListView();
-                barListView.Width = list.Width - 10;
-                list.Height = list.Width - 10;
-                list.Controls.Add(barListView);
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                /*li.SubItems.Add(order.ProductName);
-                li.SubItems.Add(order.ProductDescription);*/
                 li.SubItems.Add(order.Comments);
                 li.SubItems.Add(order.IsFinished.ToString());
                 barListView.Items.Add(li);
+                barListView = new ListView();
+                barListView.Width = list.Width - 10;
+                list.Height = list.Height - 10;
+                list.Controls.Add(barListView);
             }
             ColorListView(barListView);
         }
