@@ -19,13 +19,13 @@ namespace ChapeauDAL
         }
         public List<OrderItem> GetActiveDrinkOrders()
         {
-            string query = "SELECT  o.order_id, m.productName, oi.amount, m.[description], o.table_Id, o.comments, o.isFinished FROM[Order] AS o, [Order_Item] AS oi, MenuItem AS m WHERE m.menuItem_ID IN(SELECT menuItem_Id FROM[Drink_Item] WHERE  o.isFinished = 'FALSE')";
+            string query = "select [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order].isFinished FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order] WHERE isFinished = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item); ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<OrderItem> GetActiveFoodOrders()
         {
-            string query = "SELECT o.order_id, o.reservation_Id, m.productName, oi.amount, m.[description], o.table_Id, o.comments, o.isFinished, o.timePlaced FROM[Order] AS o, [Order_Item] AS oi, MenuItem AS m WHERE m.menuItem_ID IN(SELECT menuItem_Id FROM[Dinner_Item][Lunch_Item] WHERE  o.isFinished = 'FALSE')";
+            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order].isFinished FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order] WHERE isFinished = 0) AND[order_Item].menuItem_ID NOT IN(select menuItem_ID FROM Drink_Item); ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -38,19 +38,14 @@ namespace ChapeauDAL
                 OrderItem orderItem = new OrderItem()
                 {
                     OrderId = (int)dr["order_Id"],
-                    ReservationId = (int)dr["reservation_Id"],
                     ProductName =  (string)dr["productName"],
                     Amount = (int)dr["amount"],
-                    Description = (string)dr["description"],
-                    TableId = (int)dr["table_Id"],
-                    Comments = ConvertFromDR<string>(dr["comments"]),
+                    Description = Convert.ToString(dr["description"]),
+                    Comments = Convert.ToString(dr["comments"]),
                     IsFinished = (bool)dr["isFinished"],
                     TimePlaced = (DateTime)dr["timePlaced"]
                 };
-                /*Order order = new Order()
-                {
 
-                };*/
 
                 activeOrders.Add(orderItem);
             }

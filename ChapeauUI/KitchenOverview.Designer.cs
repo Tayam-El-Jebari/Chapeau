@@ -46,9 +46,12 @@ namespace ChapeauUI
             // 
             // kitchenListView
             // 
+            this.kitchenListView.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.kitchenListView.FullRowSelect = true;
             this.kitchenListView.HideSelection = false;
             this.kitchenListView.Location = new System.Drawing.Point(12, 78);
             this.kitchenListView.Name = "kitchenListView";
+            this.kitchenListView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.kitchenListView.Size = new System.Drawing.Size(577, 282);
             this.kitchenListView.TabIndex = 1;
             this.kitchenListView.UseCompatibleStateImageBehavior = false;

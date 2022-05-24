@@ -17,9 +17,9 @@ namespace ChapeauUI
         public BarOverview()
         {
             InitializeComponent();
+            Bar();
         }
-
-        private void barListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void Bar()
         {
             ListView list = new ListView();
 
@@ -31,21 +31,32 @@ namespace ChapeauUI
             barListView.FullRowSelect = true;
             barListView.Columns.Add("Order ID", 100);
             barListView.Columns.Add("Order", 100); //productname
+            barListView.Columns.Add("Amount of order", 100);
             barListView.Columns.Add("Description", 100);
             barListView.Columns.Add("Comments", 100);
             barListView.Columns.Add("Is Finished", 100);//true/false
-            foreach(OrderItem order in ordersDrinkList)
+            barListView.Columns.Add("Time of ordering", 100);
+            foreach (OrderItem order in ordersDrinkList)
             {
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                li.SubItems.Add(order.ProductName);
+                li.SubItems.Add(order.Amount.ToString());
+                li.SubItems.Add(order.Description);
                 li.SubItems.Add(order.Comments);
                 li.SubItems.Add(order.IsFinished.ToString());
+                li.SubItems.Add(order.TimePlaced.ToString());
                 barListView.Items.Add(li);
-                barListView = new ListView();
+
+                /*barListView = new ListView();
                 barListView.Width = list.Width - 10;
                 list.Height = list.Height - 10;
-                list.Controls.Add(barListView);
+                list.Controls.Add(barListView);*/
             }
             ColorListView(barListView);
+        }
+        private void barListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
         private void ColorListView(ListView listview)
         {

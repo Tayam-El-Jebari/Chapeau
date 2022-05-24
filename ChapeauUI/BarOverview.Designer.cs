@@ -49,7 +49,7 @@ namespace ChapeauUI
             this.barListView.HideSelection = false;
             this.barListView.Location = new System.Drawing.Point(12, 78);
             this.barListView.Name = "barListView";
-            this.barListView.Size = new System.Drawing.Size(160, 80);
+            this.barListView.Size = new System.Drawing.Size(577, 282);
             this.barListView.TabIndex = 2;
             this.barListView.UseCompatibleStateImageBehavior = false;
             this.barListView.SelectedIndexChanged += new System.EventHandler(this.barListView_SelectedIndexChanged);
