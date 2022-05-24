@@ -40,7 +40,7 @@ namespace ChapeauLogic
             List<OrderItem> highVatItems = SortList(billdb.GetHighVAT(reservationId));
             
 
-            foreach (OrderItem hvItem in lowVatItems)
+            foreach (OrderItem hvItem in highVatItems)
             {
                 VAT += (hvItem.Price + HighVat) / (100 + HighVat);
                 bill.MenuItems.Add(hvItem);
@@ -52,8 +52,17 @@ namespace ChapeauLogic
                 bill.MenuItems.Add(lvItem);
                 TotalPrice += lvItem.Price;
             }
+            foreach (OrderItem lvItem in lowVatItems)
+            {
+                highVatItems.Add(lvItem);
+            }
 
+            bill.TotalPriceInclVAT = TotalPrice;
+            bill.TotalPriceExclVAT = TotalPrice - VAT;
+            bill.TotalVAT = VAT;
+            bill.MenuItems = highVatItems;
 
+            return bill;
         }
         public int BillID { get; set; }
         public int TableID { get; set; }

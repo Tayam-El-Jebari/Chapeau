@@ -12,11 +12,12 @@ namespace ChapeauModel
         public int TableID { get; set; }
         public int StaffID { get; set; }
         public List<OrderItem> MenuItems { get; set; }
-        public decimal TotalPriceInclVAT { get; set; }
-        public decimal TotalPriceExclVAT { get; set; }
-        public decimal Tip { get; set; }
+        public double TotalPriceInclVAT { get; set; }
+        public double TotalPriceExclVAT { get; set; }
+        public double TotalVAT { get; set; }
+        public double Tip { get; set; }
         public bool IsPaid { get; set; }
-        public decimal Discount { get; set; }
+        public double Discount { get; set; }
         public DateTime Date { get; set; }
         public string Comments { get; set; }
     }
