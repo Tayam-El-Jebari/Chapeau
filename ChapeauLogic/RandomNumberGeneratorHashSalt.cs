@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauLogic
 {
-    class RandomNumberGeneratorHashSalt
+    public class RandomNumberGeneratorHashSalt
     {
         public string GenerateRandomCryptographicKey(int keyLength)
         {

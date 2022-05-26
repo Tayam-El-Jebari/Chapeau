@@ -31,13 +31,13 @@ namespace ChapeauUI
                 string lastname = lastnameTextBox.Text;
                 int phonenumber = int.Parse(phonenumberTextBox.Text);
                 string email = emailTextBox.Text;
-                int salt = random.Next(1, 1000);
+                RandomNumberGeneratorHashSalt rng = new RandomNumberGeneratorHashSalt();
+                byte[] saltBytes = rng.GeneratRandomCryptographicBytes(64);
+                string salt = Convert.ToBase64String(saltBytes);
 
-                HashWithSaltResult hashedPasswordwithSalt = pwHasher.StringHasher("password", "asdfecf");
+                HashWithSaltResult hashedPasswordwithSalt = pwHasher.StringHasher(passwordTextBox.Text, salt);
 
-                //HashWithSaltResult hashedPasswordwithSalt = pwHasher.StringHasher(passwordTextBox.Text, salt.ToString());
-                staffService.AddNewStaffMember(firstame, lastname, phonenumber, email, hashedPasswordwithSalt);
-                MessageBox.Show("not logged in " + hashedPasswordwithSalt.Hash + "salt: " + hashedPasswordwithSalt.Salt + "password " + passwordTextBox.Text);
+                staffService.AddNewStaffMember(firstame, lastname, phonenumber, email, hashedPasswordwithSalt.Hash, salt);
             }
             catch(Exception ex)
             {

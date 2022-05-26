@@ -24,26 +24,32 @@ namespace ChapeauUI
         {
             try
             {
-                OwnerForm ownerForm = new OwnerForm();
-                ownerForm.Show();
                 PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                 StaffService staffService = new StaffService();
                 int staffID = int.Parse(IDnummerTextBox.Text);
                 string salt = staffService.GetSaltByStaffID(staffID);
                 string passwordInput = passwordTextBox.Text;
-                string hashedPassword = pwHasher.StringHasher("password", "asdfecf").Hash;
+                string hashedPassword = pwHasher.StringHasher(passwordTextBox.Text, salt).Hash;
 
-                //string hashedPassword = pwHasher.StringHasher(passwordInput, salt).Hash;
-                //byte[] saltBytes = Encoding.ASCII.GetBytes(salt);
-                //HashWithSaltResult hashedPassword = pwHasher.HashWithSalt("password", saltBytes, SHA512.Create());
                 Staff loggedInStaffMemeber = staffService.CheckPassword(staffID, hashedPassword);
-                if(loggedInStaffMemeber != null)
+                if(staffService.CheckIfBartender(staffID))
                 {
-                    MessageBox.Show("Logged in");
+                    MessageBox.Show("Logged in"); 
                 }
-                else
+                else if(staffService.CheckIfChef(staffID))
                 {
-                    MessageBox.Show("not logged in " + hashedPassword + "salt: " + salt);
+                    
+                }
+                else if (staffService.CheckIfOwner(staffID))
+                {
+                    this.Hide();
+                    OwnerForm ownerForm = new OwnerForm();
+                    ownerForm.Show();
+                    
+                }
+                else if (staffService.CheckIfWaiter(staffID))
+                {
+
                 }
             }
             catch (Exception ex)
