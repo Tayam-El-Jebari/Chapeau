@@ -9,8 +9,7 @@ namespace ChapeauModel
     public class Bill
     {
         public int BillID { get; set; }
-        public int TableID { get; set; }
-        public int StaffID { get; set; }
+        public Table Table { get; set; }
         public List<OrderItem> MenuItems { get; set; }
         public double TotalPriceInclVAT { get; set; }
         public double TotalPriceExclVAT { get; set; }
