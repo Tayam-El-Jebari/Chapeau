@@ -10,7 +10,7 @@ namespace ChapeauLogic
 {
     public class StaffService
     {
-        StaffDao staffDb;
+        private StaffDao staffDb;
 
         public StaffService()
         {

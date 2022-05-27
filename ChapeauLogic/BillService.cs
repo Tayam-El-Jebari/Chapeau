@@ -13,7 +13,7 @@ namespace ChapeauLogic
         const double HighVat = 21;
         const int LowVat = 6;
 
-        BillDao billdb;
+        private BillDao billdb;
 
         public BillService()
         {
@@ -64,17 +64,6 @@ namespace ChapeauLogic
 
             return bill;
         }
-        public int BillID { get; set; }
-        public int TableID { get; set; }
-        public int StaffID { get; set; }
-        public List<OrderItem> MenuItems { get; set; }
-        public decimal TotalPriceInclVAT { get; set; }
-        public decimal TotalPriceExclVAT { get; set; }
-        public decimal Tip { get; set; }
-        public bool IsPaid { get; set; }
-        public decimal Discount { get; set; }
-        public DateTime Date { get; set; }
-        public string Comments { get; set; }
 
         public List<OrderItem> SortList(List<OrderItem> orderItems)
         {
