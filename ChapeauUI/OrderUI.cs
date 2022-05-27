@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace ChapeauUI
 {
     public partial class OrderUI : Form
     {
         private List<MenuItem> menuList;
-        private List<MenuItem> menuLists;
         private ThreeCourseMeal threeCourseMeal;
         private bool selectLunchMenu;
         public OrderUI()
@@ -18,32 +18,39 @@ namespace ChapeauUI
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             CreateUIComponents();
-            FillGridView();
         }
         private void FillGridView()
         {
             MenuItemService menuItemService = new MenuItemService();
             menuList = menuItemService.GetMenuItems(threeCourseMeal, selectLunchMenu);
-
             foreach (MenuItem menuItem in menuList)
             {
                 Button menuItemButton = new Button()
                 {
-                    Width = menu.Width / 10 * 7,
+                    Width = menu.Width - 60,
                     Height = 62,
                     Text = $"{menuItem.MenuItemId}      {menuItem.ProductName}",
                     Font = new Font("Cabin", 14),
-                    Visible = true,
-                };
+                    ForeColor = Color.FromArgb(24, 24, 24),
+                    FlatStyle = FlatStyle.Flat,
+                    BackColor = Color.Transparent,
+            };
+                if(menuItem.stock != 0)
                 menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
+                else
+                {
+                    menuItemButton.BackColor = Color.LightGray;
+                }
                 menu.Controls.Add(menuItemButton);
                 menuItemButton = new Button()
                 {
                     Width = 44,
                     Height = 44,
-                    Text = $"?",
+                    Text = "?",
                     Font = new Font("Cabin", 9),
-                    Visible = true,
+                    ForeColor = Color.FromArgb(24, 24, 24),
+                    FlatStyle = FlatStyle.Flat,
+                    BackColor = Color.Transparent
                 };
                 menuItemButton.Click += new EventHandler(BtnOrderAdd_MouseDown);
                 menu.Controls.Add(menuItemButton);
@@ -60,7 +67,8 @@ namespace ChapeauUI
                 HeaderText = "Add",
                 Text = "+",
                 Name = "btnAddOrderItems",
-                UseColumnTextForButtonValue = true
+                UseColumnTextForButtonValue = true,
+                FlatStyle = FlatStyle.Flat,
             });
             itemGridView.Columns.Add(
                 new DataGridViewButtonColumn
@@ -68,7 +76,9 @@ namespace ChapeauUI
                     HeaderText = "Remove",
                     Text = "-",
                     Name = "btnAddOrderItems",
-                    UseColumnTextForButtonValue = true
+                    UseColumnTextForButtonValue = true,
+                    FlatStyle = FlatStyle.Flat
+
                 });
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
@@ -77,6 +87,15 @@ namespace ChapeauUI
             {
                 if (menu.Controls[i] == sender)
                 {
+                    if (menuList[i/2].stock <= 0)
+                    {
+                        menu.Controls[i].BackColor = Color.DarkGray;
+                        menu.Controls[i].ForeColor = Color.Red;
+                        menu.Controls[i].Text += " OUT OF STOCK";
+                        menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
+                        return;
+                    }
+                    menuList[i / 2].stock--;
                     foreach (DataGridViewRow row in itemGridView.Rows)
                     {
                         if(Convert.ToInt32(row.Cells[0].Value) == menuList[i / 2].MenuItemId)
@@ -128,19 +147,24 @@ namespace ChapeauUI
         {
             if (e.RowIndex >= 0)
             {
-                if (itemGridView.Rows[e.RowIndex].Cells[2].Value != null)
+                if (e.ColumnIndex == 3)
                 {
-                    if (e.ColumnIndex == 3)
+                    if(menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 0)
                     {
-                        itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
+                        itemGridView.Rows[e.RowIndex].Cells[3].Style.BackColor = Color.Red;
+                        return;
                     }
-                    else if (e.ColumnIndex == 4)
+                    itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
+                    menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock -= 1;
+                }
+                else if (e.ColumnIndex == 4)
+                {
+                    itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
+                    menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock += 1;
+                    itemGridView.Rows[e.RowIndex].Cells[3].Style.BackColor = Color.Transparent;
+                    if (Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) == 0)
                     {
-                        itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
-                        if (Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) == 0)
-                        {
-                            itemGridView.Rows.Remove(itemGridView.Rows[e.RowIndex]);
-                        }
+                        itemGridView.Rows.Remove(itemGridView.Rows[e.RowIndex]);
                     }
                 }
             }
@@ -152,6 +176,11 @@ namespace ChapeauUI
 
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
+            if(itemGridView.Rows.Count == 1)
+            {
+                MessageBox.Show("No items added!");
+                return;
+            }
             ConfirmOrderUI confirm = new ConfirmOrderUI(MessageBoxButtons.YesNo);
             confirm.ShowDialog();
             DialogResult confirmation = confirm.DialogResult;

@@ -259,6 +259,7 @@ namespace ChapeauUI
             this.itemGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.itemGridView.Location = new System.Drawing.Point(-1, 6);
             this.itemGridView.Name = "itemGridView";
+            this.itemGridView.ReadOnly = true;
             this.itemGridView.RowHeadersWidth = 51;
             this.itemGridView.RowTemplate.Height = 29;
             this.itemGridView.Size = new System.Drawing.Size(679, 532);
