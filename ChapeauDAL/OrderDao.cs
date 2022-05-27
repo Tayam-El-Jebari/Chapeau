@@ -65,7 +65,7 @@ namespace ChapeauDAL
                 sqlParameters = new SqlParameter[3]
                 {
                      new SqlParameter("@orderId", 7),
-                     new SqlParameter("@menuItemId", orderItem.MenuItemID),
+                     new SqlParameter("@menuItemId", orderItem.MenuItemId),
                      new SqlParameter("@amount", orderItem.Amount),
                 };
                 ExecuteEditQuery(query, sqlParameters);
