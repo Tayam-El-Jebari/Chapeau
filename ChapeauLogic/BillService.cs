@@ -89,5 +89,4 @@ namespace ChapeauLogic
             return orderItems;
         }
     }
-    }
 }
