@@ -29,7 +29,7 @@ namespace ChapeauLogic
         public void GetUpdateStateIsFinished(bool isFinished)
         {
             orderDao.UpdateStateIsFinished(isFinished);
-        }
+        }//add een orderitem update
     }
 }
 
