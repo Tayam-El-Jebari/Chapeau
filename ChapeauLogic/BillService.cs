@@ -10,7 +10,10 @@ namespace ChapeauLogic
 {
     public class BillService
     {
-        BillDao billdb;
+        const double HighVat = 21;
+        const int LowVat = 6;
+
+        private BillDao billdb;
 
         public BillService()
         {
@@ -26,6 +29,53 @@ namespace ChapeauLogic
         public void AddBill(Bill bill)
         {
             billdb.AddBill(bill);
+        }
+        public Bill MakeBill(int reservationId)
+        {
+            double VAT = 0;
+            double TotalPrice = 0;
+
+            Bill bill = new Bill();
+            List<OrderItem> lowVatItems = SortList(billdb.GetLowVAT(reservationId));
+            List<OrderItem> highVatItems = SortList(billdb.GetHighVAT(reservationId));
+            
+
+            foreach (OrderItem hvItem in highVatItems)
+            {
+                VAT += (hvItem.Price + HighVat) / (100 + HighVat);
+                bill.MenuItems.Add(hvItem);
+                TotalPrice += hvItem.Price;
+            }
+            foreach (OrderItem lvItem in lowVatItems)
+            {
+                VAT += (lvItem.Price + HighVat) / (100 + HighVat);
+                bill.MenuItems.Add(lvItem);
+                TotalPrice += lvItem.Price;
+            }
+            foreach (OrderItem lvItem in lowVatItems)
+            {
+                highVatItems.Add(lvItem);
+            }
+
+            bill.TotalPriceInclVAT = TotalPrice;
+            bill.TotalPriceExclVAT = TotalPrice - VAT;
+            bill.TotalVAT = VAT;
+            bill.MenuItems = highVatItems;
+
+            return bill;
+        }
+
+        public List<OrderItem> SortList(List<OrderItem> orderItems)
+        {
+            for (int i = 0; i < orderItems.Count; i++)
+            {
+                if (orderItems[i].MenuItemId == orderItems[i + 1].MenuItemId)
+                {
+                    orderItems[i + 1].Amount += orderItems[i].Amount;
+                    orderItems.Remove(orderItems[i]);
+                }
+            }
+            return orderItems;
         }
     }
 }
