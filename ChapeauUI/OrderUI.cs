@@ -13,11 +13,13 @@ namespace ChapeauUI
         private List<MenuItem> menuList;
         private ThreeCourseMeal threeCourseMeal;
         private bool selectLunchMenu;
-        public OrderUI()
+        private Reservation reservation;
+        public OrderUI(Reservation reservation)
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;
             CreateUIComponents();
+            this.reservation = reservation;
         }
         private void FillGridView()
         {
@@ -191,18 +193,18 @@ namespace ChapeauUI
                 {
                     itemsForOrder.Add(new OrderItem
                     {
-                        menuItem = new MenuItem{MenuItemId = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value)},
+                        MenuItem = new MenuItem{MenuItemId = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value)},
                         Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
                     });
                 }
                 //temporarily creating new reservation in order to test system, will be removed
-                Reservation reservation = new Reservation
+                Reservation reservation1 = new Reservation
                 {
                     ReservationId = 202,
                     TableId = 4
                 };
                 OrderService orderService = new OrderService();
-                orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text);
+                orderService.CreateCompleteOrder(itemsForOrder, reservation1, commentsTextBox.Text);
                 itemGridView.Rows.Clear();
             }
 

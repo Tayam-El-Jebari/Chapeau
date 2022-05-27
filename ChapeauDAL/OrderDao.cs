@@ -11,7 +11,7 @@ namespace ChapeauDAL
 {
     public class OrderDao : BaseDao
     {
-        public List<Order> GetActiveOrders()//voor tayam, mist readtables
+        public List<Order> GetActiveOrders()
         {
             string query = "SELECT order_id, m.productName, m.[description], o.table_Id, o.comments, o.isFinished FROM [Order] AS o JOIN MenuItem AS m ON o.menuItem_ID = m.menuItem_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
@@ -37,13 +37,9 @@ namespace ChapeauDAL
             {
                 OrderItem orderItem = new OrderItem()
                 {
-                    OrderId = (int)dr["order_Id"],
-                    ProductName =  (string)dr["productName"],
+                    Order = new Order() { OrderId = (int)dr["order_Id"], Comments = Convert.ToString(dr["comments"]), IsFinished = (bool)dr["isFinished"], TimePlaced = (DateTime)dr["timePlaced"] },
+                    MenuItem = new MenuItem { ProductName = (string)dr["productName"], Description = Convert.ToString(dr["description"]), },
                     Amount = (int)dr["amount"],
-                    Description = Convert.ToString(dr["description"]),
-                    Comments = Convert.ToString(dr["comments"]),
-                    IsFinished = (bool)dr["isFinished"],
-                    TimePlaced = (DateTime)dr["timePlaced"]
                 };
 
 
@@ -60,8 +56,7 @@ namespace ChapeauDAL
                 Order order = new Order()
                 {
                     OrderId = (int)dr["order_Id"],
-                    ProductName = (string)dr["productName"],
-                    ProductDescription = (string)dr["description"],
+                    MenuItem = new MenuItem() { ProductName = (string)dr["productName"], Description = (string)dr["description"] },
                     TableId = (int)dr["table_Id"],
                     Comments = ConvertFromDR<string>(dr["comments"]),
                     IsFinished = (bool)dr["isFinished"],
@@ -109,7 +104,7 @@ namespace ChapeauDAL
                 sqlParameters = new SqlParameter[3]
                 {
                      new SqlParameter("@orderId", 7),
-                     new SqlParameter("@menuItemId", orderItem.MenuItemId),
+                     new SqlParameter("@menuItemId", orderItem.MenuItem.MenuItemId),
                      new SqlParameter("@amount", orderItem.Amount),
                 };
                 ExecuteEditQuery(query, sqlParameters);
