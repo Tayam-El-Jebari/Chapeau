@@ -38,6 +38,7 @@ namespace ChapeauDAL
                 OrderItem orderItem = new OrderItem()
                 {
                     OrderId = (int)dr["order_Id"],
+                    MenuItemId = (int)dr["menuItem_ID"],
                     ProductName =  (string)dr["productName"],
                     Amount = (int)dr["amount"],
                     Description = Convert.ToString(dr["description"]),
