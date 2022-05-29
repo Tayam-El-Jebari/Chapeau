@@ -21,6 +21,13 @@ namespace ChapeauUI
             InitializeComponent();
         }
 
+        private void checkTimeSinceOrderPlaced()
+        {
+            for(int i = 0; i < 10; i++)
+            {
+
+            }
+        }
         private void hideAllPanels()
         {
             startMenuPnl.Hide();
