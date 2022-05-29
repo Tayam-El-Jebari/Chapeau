@@ -19,8 +19,8 @@ namespace ChapeauDAL
             string query = "INSERT INTO [Bill] VALUES (@bill_Id, @table_Id, @staff_ID, @totalPriceInclVAT, @totalPriceExclVAT, @totalVAT, @tip, @isPaid, @discount, @currentDate, @comments);";
             SqlParameter[] sqlParameters = new SqlParameter[10];
             sqlParameters[0] = new SqlParameter("@bill_Id", bill.BillID);
-            sqlParameters[1] = new SqlParameter("@table_Id", bill.TableID);
-            sqlParameters[2] = new SqlParameter("@staff_ID", bill.StaffID);
+            sqlParameters[1] = new SqlParameter("@table_Id", bill.Table.TableID);
+            sqlParameters[2] = new SqlParameter("@staff_ID", bill.Table.WaiterID);
             sqlParameters[3] = new SqlParameter("@totalPriceInclVAT", bill.TotalPriceInclVAT);
             sqlParameters[4] = new SqlParameter("@totalPriceExclVAT", bill.TotalPriceExclVAT);
             sqlParameters[5] = new SqlParameter("@tip", bill.Tip);
@@ -39,8 +39,8 @@ namespace ChapeauDAL
                 Bill bill = new Bill()
                 {
                     BillID = (int)dr["bill_Id"],
-                    TableID = (int)dr["table_Id"],
-                    StaffID = (int)dr["staff_ID"],
+                    Table = new Table() { TableID = (int)dr["table_Id"], WaiterID = (int)dr["staff_ID"] },
+
                     TotalPriceInclVAT = (double)dr["totalPriceInclVAT"],
                     TotalPriceExclVAT = (double)dr["totalPriceExclVAT"],
                     Tip = (double)dr["tip"],
@@ -86,9 +86,7 @@ namespace ChapeauDAL
             {
                 OrderItem orderItem = new OrderItem()
                 {
-                    MenuItemId = (int)dr["menuItem_ID"],
-                    ProductName = (string)dr["productName"],
-                    Price = (double)dr["price"],
+                    MenuItem = new MenuItem() { MenuItemId = (int)dr["menuItem_ID"], ProductName = (string)dr["productName"], Price = (double)dr["price"] },
                     Amount = (int)dr["amount"]
                 };
 
