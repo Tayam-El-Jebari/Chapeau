@@ -13,11 +13,6 @@ namespace ChapeauLogic
         {
             orderDao = new OrderDao();
         }
-
-        public List<Order> GetActiveOrders()//voor tayam
-        {
-            return orderDao.GetActiveOrders();
-        }
         public List<OrderItem> GetActiveDrinkOrders()
         {
             return orderDao.GetActiveDrinkOrders();
