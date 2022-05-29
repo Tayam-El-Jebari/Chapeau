@@ -49,7 +49,9 @@ namespace ChapeauUI
                 }
                 else if (staffService.CheckIfWaiter(staffID))
                 {
-
+                    this.Hide();
+                    TableOverview tableOverview = new TableOverview();
+                    tableOverview.Show();
                 }
             }
             catch (Exception ex)

@@ -9,6 +9,7 @@ namespace ChapeauModel
     public enum MenuChoice
     {
         TakeOrder,
-        ShowBill
+        ShowBill,
+        MakeReservation
     }
 }

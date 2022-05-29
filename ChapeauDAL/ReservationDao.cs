@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace ChapeauDAL
 {
-    class ReservationDao : BaseDao
+    public class ReservationDao : BaseDao
     {
-        public void AddNewReservation(string customerFullName, bool isPresent, DataColumn reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
+        public void AddNewReservation(string customerFullName, bool isPresent, DateTime reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
         {
             string query = "INSERT INTO [staff] VALUES (@customerFullName, @isPresent, @reservationTime, @table_ID, @comments ,@phoneNumber, @emailAdress);";
             SqlParameter[] sqlParameters = new SqlParameter[7];

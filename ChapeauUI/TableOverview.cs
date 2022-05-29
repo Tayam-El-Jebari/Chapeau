@@ -1,4 +1,5 @@
-﻿using ChapeauModel;
+﻿using ChapeauLogic;
+using ChapeauModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,16 +25,8 @@ namespace ChapeauUI
         {
             startMenuPnl.Hide();
             TableOverviewPnl.Hide();
-            reservationPnl.Hide();
+            makeReservationPnl.Hide();
         }
-
-        private void takeOrderBtn_Click(object sender, EventArgs e)
-        {
-            hideAllPanels();
-            menuChoice = MenuChoice.TakeOrder;
-            TableOverviewPnl.Show();
-        }
-
         private void tableWasSelected(int tableNr)
         {
             if (menuChoice == MenuChoice.TakeOrder)
@@ -46,6 +39,36 @@ namespace ChapeauUI
             {
 
             }
+            else if (menuChoice == MenuChoice.MakeReservation)
+            {
+                hideAllPanels();
+                makeReservationPnl.Show();
+            }
+        }
+
+        private void takeOrderBtn_Click(object sender, EventArgs e)
+        {
+            hideAllPanels();
+            menuChoice = MenuChoice.TakeOrder;
+            TableOverviewPnl.Show();
+        }
+        private void showBillBtn_Click(object sender, EventArgs e)
+        {
+            hideAllPanels();
+            menuChoice = MenuChoice.ShowBill;
+            TableOverviewPnl.Show();
+        }
+
+        private void makeReservationBtn_Click(object sender, EventArgs e)
+        {
+            hideAllPanels();
+            menuChoice = MenuChoice.MakeReservation;
+            TableOverviewPnl.Show();
+        }
+
+        private void notificationsBtn_Click(object sender, EventArgs e)
+        {
+            hideAllPanels();
         }
 
         private void tableOneButton_Click(object sender, EventArgs e)
@@ -97,5 +120,20 @@ namespace ChapeauUI
         {
             tableWasSelected(10);
         }
+
+        private void confirmReservationBtn_Click(object sender, EventArgs e)
+        {
+            ReservationService reservationService = new ReservationService();
+            string customerName = reservationNameTextBox.Text;
+            DateTime reservationTime = reservationDateTimePicker.Value;
+            string comments = reservationCommentsTextBox.Text;
+            int phoneNumber = int.Parse(reservationPhonenumberTextBox.Text);
+            string emailAdress = reservationEmailTextBox.Text;
+            reservationService.AddNewReservation(customerName, false, reservationTime, selectedTable, comments, phoneNumber, emailAdress);
+            hideAllPanels();
+            startMenuPnl.Show();
+        }
+
+        
     }
 }
