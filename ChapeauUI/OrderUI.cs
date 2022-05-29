@@ -197,14 +197,9 @@ namespace ChapeauUI
                         Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
                     });
                 }
-                //temporarily creating new reservation in order to test system, will be removed
-                Reservation reservation1 = new Reservation
-                {
-                    ReservationId = 202,
-                    TableId = 4
-                };
+                //temporarily creating new reservation in order to test system, will be 
                 OrderService orderService = new OrderService();
-                orderService.CreateCompleteOrder(itemsForOrder, reservation1, commentsTextBox.Text);
+                orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text);
                 itemGridView.Rows.Clear();
             }
 
