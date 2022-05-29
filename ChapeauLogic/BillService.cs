@@ -80,7 +80,7 @@ namespace ChapeauLogic
         {
             for (int i = 0; i < orderItems.Count; i++)
             {
-                if (orderItems[i].MenuItemId == orderItems[i + 1].MenuItemId)
+                if (orderItems[i].MenuItem == orderItems[i + 1].MenuItem)
                 {
                     orderItems[i + 1].Amount += orderItems[i].Amount;
                     orderItems.Remove(orderItems[i]);
@@ -89,5 +89,5 @@ namespace ChapeauLogic
             return orderItems;
         }
     }
-    }
+    
 }

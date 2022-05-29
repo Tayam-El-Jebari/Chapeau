@@ -29,9 +29,11 @@ namespace ChapeauUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.kitchenListView = new System.Windows.Forms.ListView();
             this.finishedFoodButton = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
@@ -77,6 +79,7 @@ namespace ChapeauUI
             this.Controls.Add(this.label1);
             this.Name = "KitchenOverview";
             this.Text = "KitchenOverview";
+            this.Load += new System.EventHandler(this.KitchenOverview_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -87,5 +90,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListView kitchenListView;
         private System.Windows.Forms.Button finishedFoodButton;
+        private System.Windows.Forms.Timer timer1;
     }
 }

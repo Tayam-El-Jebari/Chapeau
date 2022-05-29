@@ -29,7 +29,16 @@ namespace ChapeauLogic
         public void GetUpdateStateIsFinished(bool isFinished)
         {
             orderDao.UpdateStateIsFinished(isFinished);
-        }//add een orderitem update
+        }
+        public void UpdateOrders(bool isFinished, DateTime timePlaced, string comments)
+        {
+            orderDao.UpdateOrders(isFinished, timePlaced, comments);
+        }
+        public void UpdateOrderItem(int amount)
+        {
+            orderDao.UpdateOrderItem(amount);
+        }
+
         public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments)
         {
             orderDao.CreateCompleteOrder(orderedItem, reservation, comments);
