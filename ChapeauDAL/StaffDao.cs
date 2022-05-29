@@ -106,11 +106,6 @@ namespace ChapeauDAL
                 {
                     Staff_ID = (int)dr["staff_ID"],
                     firstName = (string)dr["firstName"],
-                    lastName = (string)dr["lastName"],
-                    phoneNumber = (int)dr["phoneNumber"],
-                    emailAdress = (string)dr["emailAdress"],
-                    salt = (string)dr["salt"],
-                    passWord = (string)dr["password"]
                 };
                 staffs.Add(staff);
             }
@@ -123,11 +118,6 @@ namespace ChapeauDAL
             {
                 Staff_ID = dataTable.Rows[0].Field<int>("staff_ID"),
                 firstName = dataTable.Rows[0].Field<string>("firstName"),
-                lastName = dataTable.Rows[0].Field<string>("lastName"),
-                phoneNumber = dataTable.Rows[0].Field<int>("phoneNumber"),
-                emailAdress = dataTable.Rows[0].Field<string>("emailAdress"),
-                salt = dataTable.Rows[0].Field<string>("SALT"),
-                passWord = dataTable.Rows[0].Field<string>("password")
             };
             return staff;
         }

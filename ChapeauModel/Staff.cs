@@ -10,10 +10,6 @@ namespace ChapeauModel
     {
         public int Staff_ID { get; set; }
         public string firstName { get; set; }
-        public string lastName { get; set; }
-        public int phoneNumber { get; set; }
-        public string emailAdress { get; set; }
-        public string salt { get; set; }
-        public string passWord { get; set; }
+        
     }
 }
