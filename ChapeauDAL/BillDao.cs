@@ -40,7 +40,6 @@ namespace ChapeauDAL
                 {
                     BillID = (int)dr["bill_Id"],
                     Table = new Table() { TableID = (int)dr["table_Id"], WaiterID = (int)dr["staff_ID"] },
-
                     TotalPriceInclVAT = (double)dr["totalPriceInclVAT"],
                     TotalPriceExclVAT = (double)dr["totalPriceExclVAT"],
                     Tip = (double)dr["tip"],
