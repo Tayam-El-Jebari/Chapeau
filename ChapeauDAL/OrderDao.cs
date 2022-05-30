@@ -17,6 +17,14 @@ namespace ChapeauDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        public List<Order> GetOrdersForWaiterToDeliver(int staffID)
+        {
+            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE Waiter_ID = @staffID AND isFinished = 1";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@staffID", staffID);
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
         public List<OrderItem> GetActiveDrinkOrders()
         {
             string query = "select [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order].isFinished FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order] WHERE isFinished = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item); ";
@@ -56,10 +64,11 @@ namespace ChapeauDAL
                 Order order = new Order()
                 {
                     OrderId = (int)dr["order_Id"],
-                    MenuItem = new MenuItem() { ProductName = (string)dr["productName"], Description = (string)dr["description"] },
+                    //MenuItem = new MenuItem() { ProductName = (string)dr["productName"], Description = (string)dr["description"] },
                     TableId = (int)dr["table_Id"],
                     Comments = ConvertFromDR<string>(dr["comments"]),
                     IsFinished = (bool)dr["isFinished"],
+                    TimePlaced = (DateTime)dr["timePlaced"]
                 };
 
                 activeOrders.Add(order);

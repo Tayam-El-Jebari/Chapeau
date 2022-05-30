@@ -52,11 +52,11 @@ namespace ChapeauDAL
             {
                 Staff_ID = dataTable.Rows[0].Field<int>("staff_ID"),
                 firstName = dataTable.Rows[0].Field<string>("firstName"),
-                lastName = dataTable.Rows[0].Field<string>("lastName"),
-                phoneNumber = dataTable.Rows[0].Field<int>("phoneNumber"),
-                emailAdress = dataTable.Rows[0].Field<string>("emailAdress"),
-                salt = dataTable.Rows[0].Field<string>("SALT"),
-                passWord = dataTable.Rows[0].Field<string>("password")
+                //lastName = dataTable.Rows[0].Field<string>("lastName"),
+                //phoneNumber = dataTable.Rows[0].Field<int>("phoneNumber"),
+                //emailAdress = dataTable.Rows[0].Field<string>("emailAdress"),
+                //salt = dataTable.Rows[0].Field<string>("SALT"),
+                //passWord = dataTable.Rows[0].Field<string>("password")
             };
             return staff;
         }

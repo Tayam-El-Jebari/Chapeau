@@ -16,6 +16,7 @@ namespace ChapeauUI
     {
         private int selectedTable;
         private MenuChoice menuChoice;
+        private Staff loggedInStaffMember;
         public TableOverview()
         {
             InitializeComponent();
@@ -38,7 +39,7 @@ namespace ChapeauUI
         {
             if (menuChoice == MenuChoice.TakeOrder)
             {
-                OrderUI orderUI = new OrderUI();
+                OrderUI orderUI = new OrderUI(null);
                 this.Hide();
                 orderUI.Show();
             }
@@ -76,6 +77,9 @@ namespace ChapeauUI
         private void notificationsBtn_Click(object sender, EventArgs e)
         {
             hideAllPanels();
+            notificationPnl.Show();
+            OrderService orderService = new OrderService();
+            List<Order> readyOrders = orderService.GetOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
         }
 
         private void tableOneButton_Click(object sender, EventArgs e)

@@ -11,11 +11,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ChapeauUI
 {
-    public partial class InlogForm : Form
+    public partial class LogInDesktop : Form
     {
-        public InlogForm()
+        public LogInDesktop()
         {
             InitializeComponent();
         }
@@ -32,15 +33,22 @@ namespace ChapeauUI
                 string hashedPassword = pwHasher.StringHasher(passwordTextBox.Text, salt).Hash;
 
                 Staff loggedInStaffMemeber = staffService.CheckPassword(staffID, hashedPassword);
-                if (staffService.CheckIfWaiter(staffID))
+                if (staffService.CheckIfBartender(staffID))
+                {
+                    BarOverview barOverview = new BarOverview();
+                    barOverview.Show();
+                    this.Hide();
+                }
+                else if (staffService.CheckIfChef(staffID))
+                {
+
+                }
+                else if (staffService.CheckIfOwner(staffID))
                 {
                     this.Hide();
-                    TableOverview tableOverview = new TableOverview();
-                    tableOverview.Show();
-                }
-                else
-                {
-                    MessageBox.Show("You cant log in on this device please chance to the desktop.");
+                    OwnerForm ownerForm = new OwnerForm();
+                    ownerForm.Show();
+
                 }
             }
             catch (Exception ex)
