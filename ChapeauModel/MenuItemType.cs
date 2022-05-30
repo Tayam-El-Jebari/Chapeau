@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public enum ThreeCourseMeal
+    public enum MenuItemType
     {
         Appatizer,
         MainCourse,

@@ -11,23 +11,31 @@ namespace ChapeauDAL
 {
     public class MenuItemDao : BaseDao
     {
-        public List<MenuItem> GetAllMenuItems(ThreeCourseMeal threeCourseMealCode, bool isLunch)
+        public List<MenuItem> GetAllMenuItems(bool isLunch, MenuItemType menuItemType)
         {
-            string query = string.Empty;
-            if(threeCourseMealCode == ThreeCourseMeal.Drinks)
-            query = "SELECT menuItem_ID, productName, price, description, stock FROM [MenuItem] WHERE menuItem_ID IN (select menuItem_Id FROM Drink_Item)";
-            else if (isLunch)
-            query = "SELECT menuItem_ID, productName, price, description, stock FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode AND menuItem_ID IN (select * FROM Lunch_Item)";
-            else if (!isLunch)
-            query = "SELECT menuItem_ID, productName, price, description, stock FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode AND menuItem_ID IN (select * FROM Dinner_Item)";
-
+            string query = SelectQuery(isLunch, menuItemType);
 
             SqlParameter[] sqlParameters = new SqlParameter[1]
             {
-                new SqlParameter("@threeCourseMealCode", (int)threeCourseMealCode)
+                new SqlParameter("@threeCourseMealCode", (int)menuItemType)
             };
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        private string SelectQuery(bool isLunch, MenuItemType menuItemType)
+        {
+            if (menuItemType == MenuItemType.Drinks)
+                return "SELECT menuItem_ID, productName, price, description, stock FROM[MenuItem] WHERE menuItem_ID IN(select menuItem_Id FROM Drink_Item)";
+            else if (isLunch)
+            {
+                return "SELECT menuItem_ID, productName, price, description, stock FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode AND menuItem_ID IN (select * FROM Lunch_Item)";
+            }
+            else
+            {
+                return "SELECT menuItem_ID, productName, price, description, stock FROM [MenuItem] WHERE [threeCourseMealCode] = @threeCourseMealCode AND menuItem_ID IN (select * FROM Dinner_Item)";
+
+            }
         }
         public List<MenuItem> ReadTables(DataTable dataTable)
         {

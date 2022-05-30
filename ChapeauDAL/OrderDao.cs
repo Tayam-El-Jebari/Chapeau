@@ -51,24 +51,13 @@ namespace ChapeauDAL
                 {
                     OrderId = (int)dr["order_Id"],
                     TableId = (int)dr["table_Id"],
-                    Comments = ConvertFromDR<string>(dr["comments"]),
+                    Comments = Convert.ToString(dr["comments"]),
                     IsFinished = (bool)dr["isFinished"],
                 };
 
                 activeOrders.Add(order);
             }
             return activeOrders;
-        }
-        private T ConvertFromDR<T>(object obj)
-        {
-            if (obj == DBNull.Value)
-            {
-                return default(T);
-            }
-            else
-            {
-                return (T)obj;
-            }
         }
 
         public void UpdateStateIsFinished(bool isFinished)
