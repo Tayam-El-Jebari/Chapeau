@@ -191,10 +191,10 @@ namespace ChapeauUI
                 {
                     itemsForOrder.Add(new OrderItem
                     {
-                        MenuItemID = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value),
+                        MenuItem = new MenuItem() { MenuItemId = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value) },
                         Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
                     });
-                    MessageBox.Show($"{itemsForOrder[0].MenuItemID}");
+                    MessageBox.Show($"{itemsForOrder[0].MenuItem}");
                 }
                 //temporarily creating new reservation in order to test system, will be removed
                 Reservation reservation = new Reservation

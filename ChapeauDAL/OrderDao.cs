@@ -85,26 +85,7 @@ namespace ChapeauDAL
             sqlParameters[0] = new SqlParameter("@IsFinished", isFinished);
             ExecuteEditQuery(query, sqlParameters);
         }
-        public void UpdateOrders(bool isFinished, DateTime timePlaced, string comments)
-        {
-            string query = $"UPDATE Order SET isFinished=@isFinished, timePlaced=@timePlaced, comments=@comments";
-            SqlParameter[] sqlParameters = new SqlParameter[3]
-            {
-                new SqlParameter("@isFinished", isFinished),
-                new SqlParameter("@timePlaced", timePlaced),
-                new SqlParameter("@comments", comments)
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
-        public void UpdateOrderItem(int amount)
-        {
-            string query = $"UPDATE Order_Item SET amount=@amount";
-            SqlParameter[] sqlParameters = new SqlParameter[1]
-            {
-                new SqlParameter("@amount", amount)
-            };
-            ExecuteEditQuery(query, sqlParameters);
-        }
+ 
         public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments)
         {
             string query = "INSERT INTO [Order](reservation_Id, table_Id, isFinished, timePlaced, comments) VALUES (@reservationId, @tableId, 0, @currentTime, @comments);";
