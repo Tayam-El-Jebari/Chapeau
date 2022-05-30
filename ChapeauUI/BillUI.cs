@@ -9,14 +9,22 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChapeauModel;
 
 namespace ChapeauUI
 {
     public partial class BillUI : Form
     {
-        public BillUI()
+        public BillUI(Table table)
         {
             InitializeComponent();
+            ShowHeader(table);
+        }
+        public void ShowHeader(Table table)
+        {
+            headerLabel.Text = $"bill table {table.TableID}";
+            headerLabel.Text = headerLabel.Text.ToUpper();
+            InitFont(headerLabel);
         }
         public void InitFont(Label label)
         {

@@ -85,10 +85,10 @@ namespace ChapeauUI
             // labelTable
             // 
             this.labelTable.AutoSize = true;
-            this.labelTable.Font = new System.Drawing.Font("Cabin", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTable.Location = new System.Drawing.Point(32, 55);
             this.labelTable.Name = "labelTable";
-            this.labelTable.Size = new System.Drawing.Size(215, 63);
+            this.labelTable.Size = new System.Drawing.Size(237, 51);
             this.labelTable.TabIndex = 1;
             this.labelTable.Text = "TABLE xx :";
             // 
@@ -98,7 +98,7 @@ namespace ChapeauUI
             this.buttonDinner.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonDinner.FlatAppearance.BorderSize = 10;
             this.buttonDinner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDinner.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDinner.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonDinner.Location = new System.Drawing.Point(32, 436);
             this.buttonDinner.Margin = new System.Windows.Forms.Padding(60);
@@ -115,7 +115,7 @@ namespace ChapeauUI
             this.buttonLunch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonLunch.FlatAppearance.BorderSize = 10;
             this.buttonLunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLunch.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonLunch.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLunch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonLunch.Location = new System.Drawing.Point(31, 151);
             this.buttonLunch.Margin = new System.Windows.Forms.Padding(60);
@@ -142,10 +142,10 @@ namespace ChapeauUI
             // labelSelectMenu
             // 
             this.labelSelectMenu.AutoSize = true;
-            this.labelSelectMenu.Font = new System.Drawing.Font("Cabin", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelSelectMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelSelectMenu.Location = new System.Drawing.Point(30, 64);
             this.labelSelectMenu.Name = "labelSelectMenu";
-            this.labelSelectMenu.Size = new System.Drawing.Size(301, 63);
+            this.labelSelectMenu.Size = new System.Drawing.Size(328, 51);
             this.labelSelectMenu.TabIndex = 3;
             this.labelSelectMenu.Text = "SELECT MENU";
             // 
@@ -155,7 +155,7 @@ namespace ChapeauUI
             this.buttonDrinks.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonDrinks.FlatAppearance.BorderSize = 10;
             this.buttonDrinks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDrinks.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDrinks.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDrinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonDrinks.Location = new System.Drawing.Point(30, 1002);
             this.buttonDrinks.Margin = new System.Windows.Forms.Padding(60);
@@ -172,7 +172,7 @@ namespace ChapeauUI
             this.buttonDesserts.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonDesserts.FlatAppearance.BorderSize = 10;
             this.buttonDesserts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDesserts.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDesserts.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDesserts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonDesserts.Location = new System.Drawing.Point(30, 713);
             this.buttonDesserts.Margin = new System.Windows.Forms.Padding(60);
@@ -189,7 +189,7 @@ namespace ChapeauUI
             this.buttonMainCourse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonMainCourse.FlatAppearance.BorderSize = 10;
             this.buttonMainCourse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMainCourse.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMainCourse.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonMainCourse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonMainCourse.Location = new System.Drawing.Point(30, 433);
             this.buttonMainCourse.Margin = new System.Windows.Forms.Padding(60);
@@ -206,7 +206,7 @@ namespace ChapeauUI
             this.buttonAppetizer.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonAppetizer.FlatAppearance.BorderSize = 10;
             this.buttonAppetizer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAppetizer.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonAppetizer.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonAppetizer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonAppetizer.Location = new System.Drawing.Point(31, 151);
             this.buttonAppetizer.Margin = new System.Windows.Forms.Padding(60);
@@ -247,10 +247,10 @@ namespace ChapeauUI
             // 
             this.labelCommentsTitle.AutoSize = true;
             this.labelCommentsTitle.BackColor = System.Drawing.Color.Transparent;
-            this.labelCommentsTitle.Font = new System.Drawing.Font("Cabin", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCommentsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelCommentsTitle.Location = new System.Drawing.Point(10, 539);
             this.labelCommentsTitle.Name = "labelCommentsTitle";
-            this.labelCommentsTitle.Size = new System.Drawing.Size(140, 37);
+            this.labelCommentsTitle.Size = new System.Drawing.Size(144, 29);
             this.labelCommentsTitle.TabIndex = 5;
             this.labelCommentsTitle.Text = "Comments:";
             // 
@@ -308,7 +308,7 @@ namespace ChapeauUI
             // labelTitleItems
             // 
             this.labelTitleItems.BackColor = System.Drawing.Color.Transparent;
-            this.labelTitleItems.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTitleItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTitleItems.Location = new System.Drawing.Point(14, 20);
             this.labelTitleItems.Name = "labelTitleItems";
             this.labelTitleItems.Padding = new System.Windows.Forms.Padding(20);
