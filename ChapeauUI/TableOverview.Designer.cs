@@ -58,12 +58,19 @@ namespace ChapeauUI
             this.makeReservationBtn = new System.Windows.Forms.Button();
             this.takeOrderBtn = new System.Windows.Forms.Button();
             this.notificationPnl = new System.Windows.Forms.Panel();
-            this.readyOrdersListView = new System.Windows.Forms.ListView();
             this.ordersReadyLbl = new System.Windows.Forms.Label();
+            this.ordersReadyGridView = new System.Windows.Forms.DataGridView();
+            this.markReservationPresentBtn = new System.Windows.Forms.Button();
+            this.markReservationPresentPnl = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.reservationOverviewDataGrid = new System.Windows.Forms.DataGridView();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             this.startMenuPnl.SuspendLayout();
             this.notificationPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersReadyGridView)).BeginInit();
+            this.markReservationPresentPnl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reservationOverviewDataGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // tableOneButton
@@ -293,6 +300,7 @@ namespace ChapeauUI
             // 
             // startMenuPnl
             // 
+            this.startMenuPnl.Controls.Add(this.markReservationPresentBtn);
             this.startMenuPnl.Controls.Add(this.notificationsBtn);
             this.startMenuPnl.Controls.Add(this.showBillBtn);
             this.startMenuPnl.Controls.Add(this.makeReservationBtn);
@@ -306,7 +314,7 @@ namespace ChapeauUI
             // 
             this.notificationsBtn.Location = new System.Drawing.Point(3, 108);
             this.notificationsBtn.Name = "notificationsBtn";
-            this.notificationsBtn.Size = new System.Drawing.Size(182, 29);
+            this.notificationsBtn.Size = new System.Drawing.Size(241, 29);
             this.notificationsBtn.TabIndex = 3;
             this.notificationsBtn.Text = "NOTIFICATIONS";
             this.notificationsBtn.UseVisualStyleBackColor = true;
@@ -316,7 +324,7 @@ namespace ChapeauUI
             // 
             this.showBillBtn.Location = new System.Drawing.Point(3, 73);
             this.showBillBtn.Name = "showBillBtn";
-            this.showBillBtn.Size = new System.Drawing.Size(182, 29);
+            this.showBillBtn.Size = new System.Drawing.Size(241, 29);
             this.showBillBtn.TabIndex = 2;
             this.showBillBtn.Text = "SHOW BILL";
             this.showBillBtn.UseVisualStyleBackColor = true;
@@ -326,7 +334,7 @@ namespace ChapeauUI
             // 
             this.makeReservationBtn.Location = new System.Drawing.Point(3, 38);
             this.makeReservationBtn.Name = "makeReservationBtn";
-            this.makeReservationBtn.Size = new System.Drawing.Size(182, 29);
+            this.makeReservationBtn.Size = new System.Drawing.Size(241, 29);
             this.makeReservationBtn.TabIndex = 1;
             this.makeReservationBtn.Text = "MAKE RESERVATION";
             this.makeReservationBtn.UseVisualStyleBackColor = true;
@@ -336,7 +344,7 @@ namespace ChapeauUI
             // 
             this.takeOrderBtn.Location = new System.Drawing.Point(3, 3);
             this.takeOrderBtn.Name = "takeOrderBtn";
-            this.takeOrderBtn.Size = new System.Drawing.Size(182, 29);
+            this.takeOrderBtn.Size = new System.Drawing.Size(241, 29);
             this.takeOrderBtn.TabIndex = 0;
             this.takeOrderBtn.Text = "TAKE ORDER";
             this.takeOrderBtn.UseVisualStyleBackColor = true;
@@ -344,21 +352,12 @@ namespace ChapeauUI
             // 
             // notificationPnl
             // 
-            this.notificationPnl.Controls.Add(this.readyOrdersListView);
             this.notificationPnl.Controls.Add(this.ordersReadyLbl);
+            this.notificationPnl.Controls.Add(this.ordersReadyGridView);
             this.notificationPnl.Location = new System.Drawing.Point(119, 381);
             this.notificationPnl.Name = "notificationPnl";
             this.notificationPnl.Size = new System.Drawing.Size(334, 332);
             this.notificationPnl.TabIndex = 12;
-            // 
-            // readyOrdersListView
-            // 
-            this.readyOrdersListView.HideSelection = false;
-            this.readyOrdersListView.Location = new System.Drawing.Point(15, 39);
-            this.readyOrdersListView.Name = "readyOrdersListView";
-            this.readyOrdersListView.Size = new System.Drawing.Size(308, 275);
-            this.readyOrdersListView.TabIndex = 1;
-            this.readyOrdersListView.UseCompatibleStateImageBehavior = false;
             // 
             // ordersReadyLbl
             // 
@@ -369,11 +368,60 @@ namespace ChapeauUI
             this.ordersReadyLbl.TabIndex = 0;
             this.ordersReadyLbl.Text = "ORDERS READY";
             // 
+            // ordersReadyGridView
+            // 
+            this.ordersReadyGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ordersReadyGridView.Location = new System.Drawing.Point(4, 31);
+            this.ordersReadyGridView.Name = "ordersReadyGridView";
+            this.ordersReadyGridView.RowHeadersWidth = 51;
+            this.ordersReadyGridView.RowTemplate.Height = 29;
+            this.ordersReadyGridView.Size = new System.Drawing.Size(327, 298);
+            this.ordersReadyGridView.TabIndex = 13;
+            // 
+            // markReservationPresentBtn
+            // 
+            this.markReservationPresentBtn.Location = new System.Drawing.Point(3, 146);
+            this.markReservationPresentBtn.Name = "markReservationPresentBtn";
+            this.markReservationPresentBtn.Size = new System.Drawing.Size(241, 29);
+            this.markReservationPresentBtn.TabIndex = 4;
+            this.markReservationPresentBtn.Text = "MARK RESERVATION PRESENT";
+            this.markReservationPresentBtn.UseVisualStyleBackColor = true;
+            this.markReservationPresentBtn.Click += new System.EventHandler(this.markReservationPresentBtn_Click);
+            // 
+            // markReservationPresentPnl
+            // 
+            this.markReservationPresentPnl.Controls.Add(this.label1);
+            this.markReservationPresentPnl.Controls.Add(this.reservationOverviewDataGrid);
+            this.markReservationPresentPnl.Location = new System.Drawing.Point(518, 385);
+            this.markReservationPresentPnl.Name = "markReservationPresentPnl";
+            this.markReservationPresentPnl.Size = new System.Drawing.Size(334, 332);
+            this.markReservationPresentPnl.TabIndex = 14;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(115, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "ORDERS READY";
+            // 
+            // reservationOverviewDataGrid
+            // 
+            this.reservationOverviewDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.reservationOverviewDataGrid.Location = new System.Drawing.Point(4, 31);
+            this.reservationOverviewDataGrid.Name = "reservationOverviewDataGrid";
+            this.reservationOverviewDataGrid.RowHeadersWidth = 51;
+            this.reservationOverviewDataGrid.RowTemplate.Height = 29;
+            this.reservationOverviewDataGrid.Size = new System.Drawing.Size(327, 298);
+            this.reservationOverviewDataGrid.TabIndex = 13;
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1186, 725);
+            this.Controls.Add(this.markReservationPresentPnl);
             this.Controls.Add(this.notificationPnl);
             this.Controls.Add(this.startMenuPnl);
             this.Controls.Add(this.makeReservationPnl);
@@ -386,6 +434,10 @@ namespace ChapeauUI
             this.startMenuPnl.ResumeLayout(false);
             this.notificationPnl.ResumeLayout(false);
             this.notificationPnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ordersReadyGridView)).EndInit();
+            this.markReservationPresentPnl.ResumeLayout(false);
+            this.markReservationPresentPnl.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reservationOverviewDataGrid)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -421,7 +473,11 @@ namespace ChapeauUI
         private System.Windows.Forms.Button confirmReservationBtn;
         private System.Windows.Forms.TextBox reservationCommentsTextBox;
         private System.Windows.Forms.Label reservationCommentsLbl;
-        private System.Windows.Forms.ListView readyOrdersListView;
         private System.Windows.Forms.Label ordersReadyLbl;
+        private System.Windows.Forms.DataGridView ordersReadyGridView;
+        private System.Windows.Forms.Button markReservationPresentBtn;
+        private System.Windows.Forms.Panel markReservationPresentPnl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView reservationOverviewDataGrid;
     }
 }

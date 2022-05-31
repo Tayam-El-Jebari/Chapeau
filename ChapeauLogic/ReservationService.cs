@@ -30,5 +30,10 @@ namespace ChapeauLogic
         {
             return reservationDb.GetPresentReservationByTable(tableID);
         }
+
+        public List<Reservation> GetAllReservationsOrderedByTable()
+        {
+            return reservationDb.GetAllReservationsOrderedByTable();
+        }
     }
 }

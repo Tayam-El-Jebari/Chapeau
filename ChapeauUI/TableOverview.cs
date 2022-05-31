@@ -40,6 +40,7 @@ namespace ChapeauUI
             TableOverviewPnl.Hide();
             makeReservationPnl.Hide();
             notificationPnl.Hide();
+            markReservationPresentPnl.Hide();
         }
         private void tableWasSelected(int tableNr)
         {
@@ -88,20 +89,14 @@ namespace ChapeauUI
             notificationPnl.Show();
             OrderService orderService = new OrderService();
             List<Order> readyOrders = orderService.GetOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
-            //readyOrdersListView.Clear();
-            readyOrdersListView.Columns.Add("Order ID", 100);
-            readyOrdersListView.Columns.Add("Table ID", 100);
-            readyOrdersListView.Columns.Add("Start Time", 100);
-            foreach(Order order in readyOrders)
+            ordersReadyGridView.Rows.Clear();
+            ordersReadyGridView.ColumnCount = 2;
+            ordersReadyGridView.Columns[0].Name = "Order ID";
+            ordersReadyGridView.Columns[1].Name = "Table ID";
+            foreach (Order order in readyOrders)
             {
-                ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                li.SubItems.Add(order.TableId.ToString());
-                readyOrdersListView.Items.Add(li);
+                ordersReadyGridView.Rows.Add(order.OrderId, order.TableId);
             }
-            ListViewItem li2 = new ListViewItem("test");
-            li2.SubItems.Add("test");
-            li2.SubItems.Add("test");
-            readyOrdersListView.Items.Add(li2);
         }
 
         private void tableOneButton_Click(object sender, EventArgs e)
@@ -167,6 +162,19 @@ namespace ChapeauUI
             startMenuPnl.Show();
         }
 
-        
+        private void markReservationPresentBtn_Click(object sender, EventArgs e)
+        {
+            hideAllPanels();
+            markReservationPresentPnl.Show();
+            ReservationService reservationService = new ReservationService();
+            List<Reservation> reservations = reservationService.GetAllReservationsOrderedByTable();
+            ordersReadyGridView.ColumnCount = 2;
+            ordersReadyGridView.Columns[0].Name = "Order ID";
+            ordersReadyGridView.Columns[1].Name = "Table ID";
+            foreach (Reservation reservation in reservations)
+            {
+                ordersReadyGridView.Rows.Add(reservation.TableId, reservation.ReservationTime);
+            }
+        }
     }
 }

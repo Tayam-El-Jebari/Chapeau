@@ -11,6 +11,12 @@ namespace ChapeauDAL
 {
     public class ReservationDao : BaseDao
     {
+        public List<Reservation> GetAllReservationsOrderedByTable()
+        {
+            string query = "SELECT * FROM [Reservation] ORDER BY table_ID";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
         public void AddNewReservation(string customerFullName, bool isPresent, DateTime reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
         {
             string query = "INSERT INTO [Reservation] (customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress) VALUES (@customerFullName, @isPresent, @reservationTime, 4, @comments, @phoneNumber, @emailAdress);";
