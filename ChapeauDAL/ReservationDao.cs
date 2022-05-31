@@ -25,19 +25,19 @@ namespace ChapeauDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
-        public Reservation GetActiveReservationByTableID(int tableID)
+        public Reservation GetPresentReservationByTable(int tableID)
         {
-            string query = "SELECT * FROM [Reservation] WHERE table_ID = @tableID AND isPresent = 1";
+            string query = "SELECT * FROM Reservations WHERE table_ID = @table_ID AND isPresent = 1";
             SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@tableID", tableID);
+            sqlParameters[0] = new SqlParameter("@table_ID", tableID);
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public void MarkReservationAsPresent(int reservationID)
+        public void MarkReservationPresent(int reservationID)
         {
-            string query = "UPDATE Reservations SET isPresent = 1 WHERE reservation_id = reservationID";
+            string query = "UPDATE Reservations SET isPresent = 1 WHERE reservation_id = @reservation_id";
             SqlParameter[] sqlParameters = new SqlParameter[1];
-            sqlParameters[0] = new SqlParameter("@reservationID", reservationID);
+            sqlParameters[0] = new SqlParameter("@reservation_id", reservationID);
         }
         private List<Reservation> ReadTables(DataTable dataTable)
         {
@@ -68,7 +68,7 @@ namespace ChapeauDAL
                 ReservationId = dataTable.Rows[0].Field<int>("reservation_id"),
                 CustomerFullName = dataTable.Rows[0].Field<string>("customerFullName"),
                 isPresent = dataTable.Rows[0].Field<bool>("isPresent"),
-                ReservationTime = dataTable.Rows[0].Field <DateTime>("reservationTime"),
+                ReservationTime = dataTable.Rows[0].Field<DateTime>("reservationTime"),
                 TableId = dataTable.Rows[0].Field<int>("table_ID"),
                 Comments = dataTable.Rows[0].Field<string>("comments"),
                 PhoneNumber = dataTable.Rows[0].Field<int>("phoneNumber"),

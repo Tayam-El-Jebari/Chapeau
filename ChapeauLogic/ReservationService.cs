@@ -21,9 +21,14 @@ namespace ChapeauLogic
             reservationDb.AddNewReservation(customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress);
         }
 
-        public Reservation GetActiveReservationByTableID(int tableID)
+        public void MarkReservationPresent(int reservationID)
         {
-            return reservationDb.GetActiveReservationByTableID(tableID);
+            reservationDb.MarkReservationPresent(reservationID);
+        }
+
+        public Reservation GetPresentReservationByTable(int tableID)
+        {
+            return reservationDb.GetPresentReservationByTable(tableID);
         }
     }
 }
