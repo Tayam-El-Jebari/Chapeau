@@ -11,6 +11,10 @@ namespace ChapeauLogic
     {
         private ReservationDao reservationDb;
 
+        public ReservationService()
+        {
+            reservationDb = new ReservationDao();
+        }
         public void AddNewReservation(string customerFullName, bool isPresent, DateTime reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
         {
             reservationDb.AddNewReservation(customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress);

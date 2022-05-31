@@ -20,7 +20,7 @@ namespace ChapeauDAL
 
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {
-            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE Waiter_ID = @staffID AND isFinished = 0";
+            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE Waiter_ID = @staffID AND isFinished = 1 AND isDelivered IS NOT NULL";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
@@ -37,6 +37,14 @@ namespace ChapeauDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        public List<Order> GetLastOrders()
+        {
+            string query = "SELECT o.order_id, o.table_Id, o.comments, o.isFinished, MAX(o.timePlaced) AS timePlaced FROM [Order] AS o JOIN [Reservation] AS r ON r.reservation_id = o.reservation_Id WHERE r.IsPresent = 1 AND o.isDelivered IS NULL GROUP BYo.table_Id";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
         public List<OrderItem> ReadTablesItem(DataTable dataTable)
         {
             List<OrderItem> activeOrders = new List<OrderItem>();

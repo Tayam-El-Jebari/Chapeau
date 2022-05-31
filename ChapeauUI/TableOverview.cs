@@ -52,6 +52,7 @@ namespace ChapeauUI
             {
                 hideAllPanels();
                 makeReservationPnl.Show();
+                selectedTable = tableNr;
             }
         }
 
@@ -81,10 +82,10 @@ namespace ChapeauUI
             notificationPnl.Show();
             OrderService orderService = new OrderService();
             List<Order> readyOrders = orderService.GetOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
-            readyOrdersListView.Clear();
-            readyOrdersListView.Columns.Add("Order ID", 100, HorizontalAlignment.Center);
-            readyOrdersListView.Columns.Add("Table ID", 100, HorizontalAlignment.Center);
-            readyOrdersListView.Columns.Add("Start Time", 100, HorizontalAlignment.Center);
+            //readyOrdersListView.Clear();
+            readyOrdersListView.Columns.Add("Order ID", 100);
+            readyOrdersListView.Columns.Add("Table ID", 100);
+            readyOrdersListView.Columns.Add("Start Time", 100);
             foreach(Order order in readyOrders)
             {
                 ListViewItem li = new ListViewItem(order.OrderId.ToString());

@@ -13,7 +13,7 @@ namespace ChapeauDAL
     {
         public void AddNewReservation(string customerFullName, bool isPresent, DateTime reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
         {
-            string query = "INSERT INTO [staff] VALUES (@customerFullName, @isPresent, @reservationTime, @table_ID, @comments ,@phoneNumber, @emailAdress);";
+            string query = "INSERT INTO [Reservation] (customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress) VALUES (@customerFullName, @isPresent, @reservationTime, 4, @comments, @phoneNumber, @emailAdress);";
             SqlParameter[] sqlParameters = new SqlParameter[7];
             sqlParameters[0] = new SqlParameter("@customerFullName", customerFullName);
             sqlParameters[1] = new SqlParameter("@isPresent", isPresent);
@@ -21,7 +21,7 @@ namespace ChapeauDAL
             sqlParameters[3] = new SqlParameter("@table_ID", table_ID);
             sqlParameters[4] = new SqlParameter("@comments", comments);
             sqlParameters[5] = new SqlParameter("@phoneNumber", phoneNumber);
-            sqlParameters[6] = new SqlParameter("@emailAdress,", emailAdress);
+            sqlParameters[6] = new SqlParameter("@emailAdress", emailAdress);
             ExecuteEditQuery(query, sqlParameters);
         }
         private List<Reservation> ReadTables(DataTable dataTable)

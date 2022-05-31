@@ -38,6 +38,11 @@ namespace ChapeauLogic
         {
             return orderDao.GetOrdersForWaiterToDeliver(staffID);
         }
+
+        public List<Order> GetLastOrders()
+        {
+            return orderDao.GetLastOrders();
+        }
     }
 }
 
