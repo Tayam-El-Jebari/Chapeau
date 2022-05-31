@@ -24,6 +24,21 @@ namespace ChapeauDAL
             sqlParameters[6] = new SqlParameter("@emailAdress", emailAdress);
             ExecuteEditQuery(query, sqlParameters);
         }
+
+        public Reservation GetActiveReservationByTableID(int tableID)
+        {
+            string query = "SELECT * FROM [Reservation] WHERE table_ID = @tableID AND isPresent = 1";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@tableID", tableID);
+            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public void MarkReservationAsPresent(int reservationID)
+        {
+            string query = "UPDATE Reservations SET isPresent = 1 WHERE reservation_id = reservationID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@reservationID", reservationID);
+        }
         private List<Reservation> ReadTables(DataTable dataTable)
         {
             List<Reservation> reservations = new List<Reservation>();
@@ -46,19 +61,20 @@ namespace ChapeauDAL
             return reservations;
         }
 
-        private Staff ReadTable(DataTable dataTable)
+        private Reservation ReadTable(DataTable dataTable)
         {
-            Staff staff = new Staff()
+            Reservation reservation = new Reservation()
             {
-                Staff_ID = dataTable.Rows[0].Field<int>("staff_ID"),
-                firstName = dataTable.Rows[0].Field<string>("firstName"),
-                //lastName = dataTable.Rows[0].Field<string>("lastName"),
-                //phoneNumber = dataTable.Rows[0].Field<int>("phoneNumber"),
-                //emailAdress = dataTable.Rows[0].Field<string>("emailAdress"),
-                //salt = dataTable.Rows[0].Field<string>("SALT"),
-                //passWord = dataTable.Rows[0].Field<string>("password")
+                ReservationId = dataTable.Rows[0].Field<int>("reservation_id"),
+                CustomerFullName = dataTable.Rows[0].Field<string>("customerFullName"),
+                isPresent = dataTable.Rows[0].Field<bool>("isPresent"),
+                ReservationTime = dataTable.Rows[0].Field <DateTime>("reservationTime"),
+                TableId = dataTable.Rows[0].Field<int>("table_ID"),
+                Comments = dataTable.Rows[0].Field<string>("comments"),
+                PhoneNumber = dataTable.Rows[0].Field<int>("phoneNumber"),
+                EmailAddress = dataTable.Rows[0].Field<string>("emailAdress")
             };
-            return staff;
+            return reservation;
         }
     }
 }
