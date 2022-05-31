@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChapeauModel;
 
 namespace ChapeauUI
 {
@@ -17,7 +18,7 @@ namespace ChapeauUI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BillUI());//InlogForm());
+            Application.Run(new BillUI());
         }
     }
 }

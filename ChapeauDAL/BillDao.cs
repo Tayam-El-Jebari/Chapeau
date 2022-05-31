@@ -59,7 +59,7 @@ namespace ChapeauDAL
             string query = "SELECT oi.menuItem_ID, productName, price, amount FROM Order_Item AS OI" +
             "JOIN[Order] as o ON o.order_id = OI.order_id" +
             "JOIN[menuItem] AS M ON oi.menuItem_ID = m.menuItem_ID" +
-            "WHERE o.reservation_Id = @reservationId AND OI.menuItem_ID IN(SELECT MenuItem_Id FROM Drink_Item WHERE isAlcoholic = 0)"+
+            "WHERE o.reservation_Id = @reservationId AND OI.menuItem_ID IN(SELECT MenuItem_Id FROM Drink_Item WHERE isAlcoholic = 0)" +
             "ORDER BY oi.menuItem_ID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservationId", reservationId);
@@ -68,10 +68,10 @@ namespace ChapeauDAL
         }
         public List<OrderItem> GetLowVAT(int reservationId)
         {
-            string query = "SELECT m.menuItem_ID, m.productName, m.price, oi.amount FROM [MenuItem] AS m" +
-            "JOIN [Order_item] AS oi ON m.menuItem_ID = oi.menuItem_ID" +
-            "JOIN[Order] AS o ON o.order_id = oi.order_id" +
-            "WHERE o.reservation_Id = @reservationId AND OI.menuItem_ID NOT IN(SELECT MenuItem_Id FROM Drink_Item WHERE isAlcoholic = 0)" +
+            string query = "SELECT m.menuItem_ID, m.productName, m.price, oi.amount FROM [MenuItem] AS m " +
+            "JOIN [Order_item] AS oi ON m.menuItem_ID = oi.menuItem_ID " +
+            "JOIN[Order] AS o ON o.order_id = oi.order_id " +
+            "WHERE o.reservation_Id = @reservationId AND OI.menuItem_ID NOT IN(SELECT MenuItem_Id FROM Drink_Item WHERE isAlcoholic = 0) " +
             "ORDER BY oi.menuItem_ID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservationId", reservationId);
@@ -81,18 +81,20 @@ namespace ChapeauDAL
         public List<OrderItem> ReadOrderItemsTables(DataTable dataTable)
         {
             List<OrderItem> orderItems = new List<OrderItem>();
-
-            foreach (DataRow dr in dataTable.Rows)
+            if (dataTable != null)
             {
-                OrderItem orderItem = new OrderItem()
+                foreach (DataRow dr in dataTable.Rows)
                 {
-                    MenuItemId = (int)dr["menuItem_ID"],
-                    ProductName = (string)dr["productName"],
-                    Price = (double)dr["price"],
-                    Amount = (int)dr["amount"]
-                };
+                    OrderItem orderItem = new OrderItem()
+                    {
+                        MenuItemId = (int)dr["menuItem_ID"],
+                        ProductName = (string)dr["productName"],
+                        Price = (double)dr["price"],
+                        Amount = (int)dr["amount"]
+                    };
 
-                orderItems.Add(orderItem);
+                    orderItems.Add(orderItem);
+                }
             }
             return orderItems;
         }
