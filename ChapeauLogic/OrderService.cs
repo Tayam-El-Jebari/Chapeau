@@ -27,9 +27,9 @@ namespace ChapeauLogic
         {
             return orderDao.GetActiveFoodOrders();
         }
-        public void GetUpdateStateIsFinished(bool isFinished)
+        public void GetUpdateStateIsFinished(OrderItem order)
         {
-            orderDao.UpdateStateIsFinished(isFinished);
+            orderDao.UpdateStateIsFinished(order);
         }
         public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments)
         {
