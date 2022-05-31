@@ -43,7 +43,7 @@ namespace ChapeauUI
 
                     };
                     menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
-                    menuItemButton.FlatAppearance.BorderSize = 4;
+                    menuItemButton.FlatAppearance.BorderSize = 3;
                     if (menuItem.stock == 0)
                     {
                         menuItemButton.BackColor = Color.DarkGray;
@@ -73,7 +73,6 @@ namespace ChapeauUI
                     menu.Controls.Add(menuItemButton);
                 }
             }
-            this.panelItems.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrders_Paint);
         }
         private void UpdateMenuList(bool selectedLunchMenu)
         {
@@ -141,17 +140,6 @@ namespace ChapeauUI
                     MessageBox.Show(menuList[i / 2].Description);
                 }
             }
-            panelSelectMenu.Show();
-            foreach (Control item in menu.Controls.OfType<Button>().ToList())
-            {
-                menu.Controls.Remove(item);
-            }
-            
-        }
-
-        private void panelOrders_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(new Pen(Color.FromArgb(39, 39, 39), 10), 14, 20, 498, 81);
         }
 
         private void viewOrder_Click(object sender, EventArgs e)
@@ -309,8 +297,6 @@ namespace ChapeauUI
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            this.panelItems.Paint -= new System.Windows.Forms.PaintEventHandler(this.panelOrders_Paint);
-
             RemoveAllControlsMenu();
             if (!panelSelectMenu.Visible)
             {

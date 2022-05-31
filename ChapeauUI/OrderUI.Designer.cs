@@ -52,6 +52,7 @@ namespace ChapeauUI
             this.menu = new System.Windows.Forms.FlowLayoutPanel();
             this.labelSelectedMenuName = new System.Windows.Forms.Label();
             this.labelTitleItems = new System.Windows.Forms.Label();
+            this.labelBorder = new System.Windows.Forms.Label();
             this.topBarLabel = new System.Windows.Forms.Label();
             this.panelItems.SuspendLayout();
             this.PanelChooseMenu.SuspendLayout();
@@ -62,7 +63,8 @@ namespace ChapeauUI
             // 
             // panelItems
             // 
-            this.panelItems.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.panelItems.BackgroundImage = global::ChapeauUI.Properties.Resources.newhandheldbg;
+            this.panelItems.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelItems.Controls.Add(this.buttonBack);
             this.panelItems.Controls.Add(this.bottomBarLabel);
             this.panelItems.Controls.Add(this.PanelChooseMenu);
@@ -72,6 +74,7 @@ namespace ChapeauUI
             this.panelItems.Controls.Add(this.menu);
             this.panelItems.Controls.Add(this.labelSelectedMenuName);
             this.panelItems.Controls.Add(this.labelTitleItems);
+            this.panelItems.Controls.Add(this.labelBorder);
             this.panelItems.Location = new System.Drawing.Point(-2, 50);
             this.panelItems.Name = "panelItems";
             this.panelItems.Size = new System.Drawing.Size(701, 1440);
@@ -330,7 +333,7 @@ namespace ChapeauUI
             // viewOrder
             // 
             this.viewOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.viewOrder.FlatAppearance.BorderSize = 5;
+            this.viewOrder.FlatAppearance.BorderSize = 3;
             this.viewOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.viewOrder.Font = new System.Drawing.Font("Cabin", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.viewOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
@@ -375,6 +378,19 @@ namespace ChapeauUI
             this.labelTitleItems.Size = new System.Drawing.Size(520, 81);
             this.labelTitleItems.TabIndex = 1;
             this.labelTitleItems.Text = "LUNCH 11:00 - 16:00";
+            // 
+            // labelBorder
+            // 
+            this.labelBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.labelBorder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelBorder.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelBorder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.labelBorder.Location = new System.Drawing.Point(11, 17);
+            this.labelBorder.Name = "labelBorder";
+            this.labelBorder.Padding = new System.Windows.Forms.Padding(20);
+            this.labelBorder.Size = new System.Drawing.Size(526, 87);
+            this.labelBorder.TabIndex = 7;
+            this.labelBorder.Text = "emptyString";
             // 
             // topBarLabel
             // 
@@ -438,5 +454,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Label topBarLabel;
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Label bottomBarLabel;
+        private System.Windows.Forms.Label labelBorder;
     }
 }
