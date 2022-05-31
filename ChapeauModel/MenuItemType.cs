@@ -8,7 +8,7 @@ namespace ChapeauModel
 {
     public enum MenuItemType
     {
-        Appatizer,
+        Starter,
         MainCourse,
         Desserts,
         Drinks,

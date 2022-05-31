@@ -40,7 +40,7 @@ namespace ChapeauUI
             DenyButton.Visible = false;
             ConfirmButton.Visible = false;
             ReturnButton.Visible = true;
-            BackgroundImage = Properties.Resources.confirmed_order;
+            labelOrderConfirmed.Visible = true;
         }
     }
 }

@@ -82,12 +82,12 @@ namespace ChapeauDAL
             ExecuteEditQuery(query, sqlParameters);
             foreach (OrderItem orderItem in orderedItem)
             {
-                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount);";
+                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount);" +
+                    "UPDATE [menuItem] SET [stock] = [stock] - @amount WHERE [menuItem_ID] = @menuItemId";
                 sqlParameters = new SqlParameter[3]
                 {
                      new SqlParameter("@orderId", 7),
                      new SqlParameter("@menuItemId", orderItem.MenuItem.MenuItemId),
-
                      new SqlParameter("@amount", orderItem.Amount),
                 };
                 ExecuteEditQuery(query, sqlParameters);

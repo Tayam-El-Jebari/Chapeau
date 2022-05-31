@@ -32,6 +32,7 @@ namespace ChapeauUI
             this.ReturnButton = new System.Windows.Forms.Button();
             this.ConfirmButton = new System.Windows.Forms.Button();
             this.DenyButton = new System.Windows.Forms.Button();
+            this.labelOrderConfirmed = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ReturnButton
@@ -75,6 +76,18 @@ namespace ChapeauUI
             this.DenyButton.UseVisualStyleBackColor = false;
             this.DenyButton.Click += new System.EventHandler(this.DenyButton_Click);
             // 
+            // labelOrderConfirmed
+            // 
+            this.labelOrderConfirmed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.labelOrderConfirmed.Font = new System.Drawing.Font("Cabin", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelOrderConfirmed.Location = new System.Drawing.Point(32, 26);
+            this.labelOrderConfirmed.Name = "labelOrderConfirmed";
+            this.labelOrderConfirmed.Size = new System.Drawing.Size(596, 288);
+            this.labelOrderConfirmed.TabIndex = 3;
+            this.labelOrderConfirmed.Text = "ORDER HAS BEEN SEND";
+            this.labelOrderConfirmed.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelOrderConfirmed.Visible = false;
+            // 
             // ConfirmOrderUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -85,6 +98,7 @@ namespace ChapeauUI
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(653, 323);
             this.Controls.Add(this.ReturnButton);
+            this.Controls.Add(this.labelOrderConfirmed);
             this.Controls.Add(this.DenyButton);
             this.Controls.Add(this.ConfirmButton);
             this.DoubleBuffered = true;
@@ -102,5 +116,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button ReturnButton;
         private System.Windows.Forms.Button ConfirmButton;
         private System.Windows.Forms.Button DenyButton;
+        private System.Windows.Forms.Label labelOrderConfirmed;
     }
 }

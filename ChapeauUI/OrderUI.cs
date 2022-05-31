@@ -5,20 +5,20 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows;
+using System.Linq;
 
 namespace ChapeauUI
 {
-    public partial class OrderUI : Form
+    public partial class Topbar : Form
     {
         private List<MenuItem> menuList;
         private MenuItemType menuItemType;
         private bool selectLunchMenu;
         private Reservation reservation;
 
-        public OrderUI(Reservation reservation)
+        public Topbar(Reservation reservation)
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
             labelTable.Text += $"{reservation.TableId} :";
             CreateUIComponents();
             this.reservation = reservation;
@@ -36,11 +36,14 @@ namespace ChapeauUI
                     LeftText = $"{menuItem.ProductName}",
                     RightText = $"€{menuItem.Price.ToString("0.00")}",
                     Font = new Font("Cabin", 15),
-                    Margin = new Padding(10, 10, 10, 10),
+                    Margin = new Padding(6),
                     UseVisualStyleBackColor = true,
                     FlatStyle = FlatStyle.Flat,
+                    
                 };
-                if(menuItem.stock == 0)
+                menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
+                menuItemButton.FlatAppearance.BorderSize = 4;
+                if (menuItem.stock == 0)
                 {
                     menuItemButton.BackColor = Color.DarkGray;
                     menuItemButton.ForeColor = Color.LightGray;
@@ -50,7 +53,7 @@ namespace ChapeauUI
                 {
                     menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
                     menuItemButton.BackColor = Color.Transparent;
-                    menuItemButton.ForeColor = Color.FromArgb(24, 24, 24);
+                    menuItemButton.ForeColor = Color.FromArgb(39, 39, 39);
                 }
                 menu.Controls.Add(menuItemButton);
                 menuItemButton = new LeftAndRightTextButton()
@@ -59,13 +62,16 @@ namespace ChapeauUI
                     Height = 44,
                     Text = "?",
                     Font = new Font("Cabin", 9),
-                    ForeColor = Color.FromArgb(24, 24, 24),
+                    ForeColor = Color.FromArgb(39, 39, 39),
                     BackColor = Color.Transparent,
                     FlatStyle = FlatStyle.Flat,
                 };
+                menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
+                menuItemButton.FlatAppearance.BorderSize = 2;
                 menuItemButton.Click += new EventHandler(BtnDescriptionShow);
                 menu.Controls.Add(menuItemButton);
             }
+            this.panelItems.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrders_Paint);
         }
         private void CreateUIComponents()
         {
@@ -128,6 +134,12 @@ namespace ChapeauUI
                     MessageBox.Show(menuList[i / 2].Description);
                 }
             }
+            panelSelectMenu.Show();
+            foreach (Control item in menu.Controls.OfType<Button>().ToList())
+            {
+                menu.Controls.Remove(item);
+            }
+            
         }
 
         private void panelOrders_Paint(object sender, PaintEventArgs e)
@@ -135,16 +147,16 @@ namespace ChapeauUI
             e.Graphics.DrawRectangle(new Pen(Color.FromArgb(39, 39, 39), 10), 14, 20, 498, 81);
         }
 
-        private void viewOrders_Click(object sender, EventArgs e)
+        private void viewOrder_Click(object sender, EventArgs e)
         {
             if (itemAddedOrderPnl.Visible)
             {
-                viewOrders.Text = "View orders";
+                viewOrder.Text = "VIEW ORDER";
                 itemAddedOrderPnl.Hide();
             }
             else
             {
-                viewOrders.Text = "Close orders";
+                viewOrder.Text = "CLOSE ORDER";
                 itemAddedOrderPnl.Show();
             }
         }
@@ -192,7 +204,7 @@ namespace ChapeauUI
                             if (i % 2 == 0 && menuList[i / 2].stock == 1)
                             {
                                 menu.Controls[i].BackColor = Color.Transparent;
-                                menu.Controls[i].ForeColor = Color.FromArgb(24, 24, 24);
+                                menu.Controls[i].ForeColor = Color.FromArgb(39, 39, 39);
                                 menu.Controls[i].Click += new EventHandler(BtnOrderAdd_Click);
                                 menu.Controls[i].Text = string.Empty;
                             }
@@ -250,13 +262,15 @@ namespace ChapeauUI
         {
             selectLunchMenu = false;
             labelTitleItems.Text = "DINNER 17:00 - 21:00";
+            
             PanelChooseMenu.Hide();
         }
 
-        private void buttonAppetizer_Click(object sender, EventArgs e)
+        private void buttonStarters_Click(object sender, EventArgs e)
         {
-            menuItemType = MenuItemType.Appatizer;
+            menuItemType = MenuItemType.Starter;
             CreateButtons();
+            labelSelectedMenuName.Text = "STARTERS";
             panelSelectMenu.Hide();
         }
 
@@ -264,6 +278,7 @@ namespace ChapeauUI
         {
             menuItemType = MenuItemType.MainCourse;
             CreateButtons();
+            labelSelectedMenuName.Text = "MAIN COURSE";
             panelSelectMenu.Hide();
         }
 
@@ -271,6 +286,7 @@ namespace ChapeauUI
         {
             menuItemType = MenuItemType.Desserts;
             CreateButtons();
+            labelSelectedMenuName.Text = "DESSERTS";
             panelSelectMenu.Hide();
         }
 
@@ -278,6 +294,7 @@ namespace ChapeauUI
         {
             menuItemType = MenuItemType.Drinks;
             CreateButtons();
+            labelSelectedMenuName.Text = "DRINKS";
             panelSelectMenu.Hide();
         }
         public class LeftAndRightTextButton : Button

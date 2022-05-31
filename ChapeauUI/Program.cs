@@ -28,7 +28,7 @@ namespace ChapeauUI
                 ReservationId = 202,
                 TableId = 4
             };
-            Application.Run(new OrderUI(reservation));
+            Application.Run(new Topbar(reservation));
         }
     }
 }
