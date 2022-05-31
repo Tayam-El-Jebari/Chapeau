@@ -1,7 +1,7 @@
 ﻿
 namespace ChapeauUI
 {
-    partial class Topbar
+    partial class OrderUI
     {
         /// <summary>
         /// Required designer variable.
@@ -30,6 +30,8 @@ namespace ChapeauUI
         private void InitializeComponent()
         {
             this.panelItems = new System.Windows.Forms.Panel();
+            this.buttonBack = new System.Windows.Forms.Button();
+            this.bottomBarLabel = new System.Windows.Forms.Label();
             this.PanelChooseMenu = new System.Windows.Forms.Panel();
             this.labelTable = new System.Windows.Forms.Label();
             this.buttonLunch = new System.Windows.Forms.Button();
@@ -50,7 +52,7 @@ namespace ChapeauUI
             this.menu = new System.Windows.Forms.FlowLayoutPanel();
             this.labelSelectedMenuName = new System.Windows.Forms.Label();
             this.labelTitleItems = new System.Windows.Forms.Label();
-            this.emptystring = new System.Windows.Forms.Label();
+            this.topBarLabel = new System.Windows.Forms.Label();
             this.panelItems.SuspendLayout();
             this.PanelChooseMenu.SuspendLayout();
             this.panelSelectMenu.SuspendLayout();
@@ -61,6 +63,8 @@ namespace ChapeauUI
             // panelItems
             // 
             this.panelItems.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.panelItems.Controls.Add(this.buttonBack);
+            this.panelItems.Controls.Add(this.bottomBarLabel);
             this.panelItems.Controls.Add(this.PanelChooseMenu);
             this.panelItems.Controls.Add(this.panelSelectMenu);
             this.panelItems.Controls.Add(this.itemAddedOrderPnl);
@@ -73,6 +77,32 @@ namespace ChapeauUI
             this.panelItems.Size = new System.Drawing.Size(701, 1440);
             this.panelItems.TabIndex = 1;
             // 
+            // buttonBack
+            // 
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonBack.FlatAppearance.BorderSize = 0;
+            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBack.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBack.ForeColor = System.Drawing.Color.White;
+            this.buttonBack.Location = new System.Drawing.Point(0, 1370);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(163, 66);
+            this.buttonBack.TabIndex = 2;
+            this.buttonBack.Text = "<BACK";
+            this.buttonBack.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
+            // bottomBarLabel
+            // 
+            this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1367);
+            this.bottomBarLabel.Name = "bottomBarLabel";
+            this.bottomBarLabel.Size = new System.Drawing.Size(699, 74);
+            this.bottomBarLabel.TabIndex = 3;
+            this.bottomBarLabel.Text = "emptyString";
+            // 
             // PanelChooseMenu
             // 
             this.PanelChooseMenu.BackColor = System.Drawing.Color.Transparent;
@@ -81,7 +111,7 @@ namespace ChapeauUI
             this.PanelChooseMenu.Controls.Add(this.buttonDinner);
             this.PanelChooseMenu.Location = new System.Drawing.Point(1, 0);
             this.PanelChooseMenu.Name = "PanelChooseMenu";
-            this.PanelChooseMenu.Size = new System.Drawing.Size(700, 1440);
+            this.PanelChooseMenu.Size = new System.Drawing.Size(700, 1390);
             this.PanelChooseMenu.TabIndex = 5;
             // 
             // labelTable
@@ -139,7 +169,7 @@ namespace ChapeauUI
             this.panelSelectMenu.Controls.Add(this.buttonStarters);
             this.panelSelectMenu.Location = new System.Drawing.Point(2, 3);
             this.panelSelectMenu.Name = "panelSelectMenu";
-            this.panelSelectMenu.Size = new System.Drawing.Size(696, 1440);
+            this.panelSelectMenu.Size = new System.Drawing.Size(696, 1390);
             this.panelSelectMenu.TabIndex = 6;
             // 
             // labelSelectMenu
@@ -319,7 +349,7 @@ namespace ChapeauUI
             this.menu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.menu.Location = new System.Drawing.Point(0, 199);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(681, 1440);
+            this.menu.Size = new System.Drawing.Size(681, 1390);
             this.menu.TabIndex = 2;
             // 
             // labelSelectedMenuName
@@ -346,17 +376,17 @@ namespace ChapeauUI
             this.labelTitleItems.TabIndex = 1;
             this.labelTitleItems.Text = "LUNCH 11:00 - 16:00";
             // 
-            // emptystring
+            // topBarLabel
             // 
-            this.emptystring.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.emptystring.Dock = System.Windows.Forms.DockStyle.Top;
-            this.emptystring.Location = new System.Drawing.Point(0, 0);
-            this.emptystring.Name = "emptystring";
-            this.emptystring.Size = new System.Drawing.Size(699, 51);
-            this.emptystring.TabIndex = 2;
-            this.emptystring.Text = "label1";
+            this.topBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.topBarLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topBarLabel.Location = new System.Drawing.Point(0, 0);
+            this.topBarLabel.Name = "topBarLabel";
+            this.topBarLabel.Size = new System.Drawing.Size(699, 51);
+            this.topBarLabel.TabIndex = 2;
+            this.topBarLabel.Text = "emptyString";
             // 
-            // Topbar
+            // OrderUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -364,11 +394,11 @@ namespace ChapeauUI
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(720, 1097);
-            this.Controls.Add(this.emptystring);
+            this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.panelItems);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Topbar";
+            this.Name = "OrderUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrderUI";
             this.panelItems.ResumeLayout(false);
@@ -405,6 +435,8 @@ namespace ChapeauUI
         private System.Windows.Forms.Button buttonMainCourse;
         private System.Windows.Forms.Button buttonStarters;
         private System.Windows.Forms.Label labelSelectedMenuName;
-        private System.Windows.Forms.Label emptystring;
+        private System.Windows.Forms.Label topBarLabel;
+        private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.Label bottomBarLabel;
     }
 }

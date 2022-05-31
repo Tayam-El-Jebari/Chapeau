@@ -9,15 +9,16 @@ using System.Linq;
 
 namespace ChapeauUI
 {
-    public partial class Topbar : Form
+    public partial class OrderUI : Form
     {
         private List<MenuItem> menuList;
         private MenuItemType menuItemType;
-        private bool selectLunchMenu;
         private Reservation reservation;
+        int staffId;
 
-        public Topbar(Reservation reservation)
+        public OrderUI(Reservation reservation, int staffId)
         {
+            this.staffId = staffId;
             InitializeComponent();
             labelTable.Text += $"{reservation.TableId} :";
             CreateUIComponents();
@@ -25,53 +26,59 @@ namespace ChapeauUI
         }
         private void CreateButtons()
         {
-            MenuItemService menuItemService = new MenuItemService();
-            menuList = menuItemService.GetMenuItems(selectLunchMenu, menuItemType);
             foreach (MenuItem menuItem in menuList)
             {
-                LeftAndRightTextButton menuItemButton = new LeftAndRightTextButton()
+                if (menuItem.MenuItemType == menuItemType)
                 {
-                    Width = menu.Width - 70,
-                    Height = 62,
-                    LeftText = $"{menuItem.ProductName}",
-                    RightText = $"€{menuItem.Price.ToString("0.00")}",
-                    Font = new Font("Cabin", 15),
-                    Margin = new Padding(6),
-                    UseVisualStyleBackColor = true,
-                    FlatStyle = FlatStyle.Flat,
-                    
-                };
-                menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
-                menuItemButton.FlatAppearance.BorderSize = 4;
-                if (menuItem.stock == 0)
-                {
-                    menuItemButton.BackColor = Color.DarkGray;
-                    menuItemButton.ForeColor = Color.LightGray;
-                    menuItemButton.Text = "OUT OF STOCK";
+                    LeftAndRightTextButton menuItemButton = new LeftAndRightTextButton()
+                    {
+                        Width = menu.Width - 70,
+                        Height = 62,
+                        LeftText = $"{menuItem.ProductName}",
+                        RightText = $"€{menuItem.Price.ToString("0.00")}",
+                        Font = new Font("Cabin", 15),
+                        Margin = new Padding(6),
+                        UseVisualStyleBackColor = true,
+                        FlatStyle = FlatStyle.Flat,
+
+                    };
+                    menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
+                    menuItemButton.FlatAppearance.BorderSize = 4;
+                    if (menuItem.stock == 0)
+                    {
+                        menuItemButton.BackColor = Color.DarkGray;
+                        menuItemButton.ForeColor = Color.LightGray;
+                        menuItemButton.Text = "OUT OF STOCK";
+                    }
+                    else
+                    {
+                        menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
+                        menuItemButton.BackColor = Color.Transparent;
+                        menuItemButton.ForeColor = Color.FromArgb(39, 39, 39);
+                    }
+                    menu.Controls.Add(menuItemButton);
+                    menuItemButton = new LeftAndRightTextButton()
+                    {
+                        Width = 44,
+                        Height = 44,
+                        Text = "?",
+                        Font = new Font("Cabin", 9),
+                        ForeColor = Color.FromArgb(39, 39, 39),
+                        BackColor = Color.Transparent,
+                        FlatStyle = FlatStyle.Flat,
+                    };
+                    menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
+                    menuItemButton.FlatAppearance.BorderSize = 2;
+                    menuItemButton.Click += new EventHandler(BtnDescriptionShow);
+                    menu.Controls.Add(menuItemButton);
                 }
-                else
-                {
-                    menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
-                    menuItemButton.BackColor = Color.Transparent;
-                    menuItemButton.ForeColor = Color.FromArgb(39, 39, 39);
-                }
-                menu.Controls.Add(menuItemButton);
-                menuItemButton = new LeftAndRightTextButton()
-                {
-                    Width = 44,
-                    Height = 44,
-                    Text = "?",
-                    Font = new Font("Cabin", 9),
-                    ForeColor = Color.FromArgb(39, 39, 39),
-                    BackColor = Color.Transparent,
-                    FlatStyle = FlatStyle.Flat,
-                };
-                menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
-                menuItemButton.FlatAppearance.BorderSize = 2;
-                menuItemButton.Click += new EventHandler(BtnDescriptionShow);
-                menu.Controls.Add(menuItemButton);
             }
             this.panelItems.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrders_Paint);
+        }
+        private void UpdateMenuList(bool selectedLunchMenu)
+        {
+            MenuItemService menuItemService = new MenuItemService();
+            menuList = menuItemService.GetMenuItems(selectedLunchMenu);
         }
         private void CreateUIComponents()
         {
@@ -100,28 +107,28 @@ namespace ChapeauUI
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
         {
+            List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
             for (int i = 0; i < menu.Controls.Count; i++)
             {
                 if (menu.Controls[i] == sender)
                 {
-                    menuList[i / 2].stock--;
+                    menuList.Find(x => x == itemsWithMenuType[i / 2]).stock--;
                     foreach (DataGridViewRow row in itemGridView.Rows)
                     {
-                        if(Convert.ToInt32(row.Cells[0].Value) == menuList[i / 2].MenuItemId)
+                        if(Convert.ToInt32(row.Cells[0].Value) == itemsWithMenuType[i / 2].MenuItemId)
                         {
                             row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
-                            if (menuList[i / 2].stock == 0)
+                            if (itemsWithMenuType[i / 2].stock == 0)
                             {
                                 menu.Controls[i].BackColor = Color.DarkGray;
                                 menu.Controls[i].ForeColor = Color.LightGray;
                                 menu.Controls[i].Text = "OUT OF STOCK";
                                 menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
-                                return;
                             }
                             return;
                         }
                     }
-                    itemGridView.Rows.Add(new string[] { menuList[i / 2].MenuItemId.ToString(), menuList[i / 2].ProductName, "1"});
+                    itemGridView.Rows.Add(new string[] { itemsWithMenuType[i / 2].MenuItemId.ToString(), itemsWithMenuType[i / 2].ProductName, "1"});
                 }
             }
         }
@@ -180,10 +187,10 @@ namespace ChapeauUI
                     if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 0)
                     {
                         itemGridView.Rows[e.RowIndex].Cells[3].Style.BackColor = Color.DarkGray;
-                        itemGridView.Rows[e.RowIndex].Cells[3].Value = "OUT";
+                        List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
-                                if (i % 2 == 0 && menuList[i / 2].stock == 0)
+                                if (i % 2 == 0 && itemsWithMenuType[i / 2].stock == 0)
                                 {
                                     menu.Controls[i].BackColor = Color.DarkGray;
                                     menu.Controls[i].ForeColor = Color.LightGray;
@@ -197,17 +204,22 @@ namespace ChapeauUI
                 {
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
                     menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock += 1;
+                    List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
                     if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 1)
                     {
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
-                            if (i % 2 == 0 && menuList[i / 2].stock == 1)
+                            if (i % 2 == 0)
                             {
-                                menu.Controls[i].BackColor = Color.Transparent;
-                                menu.Controls[i].ForeColor = Color.FromArgb(39, 39, 39);
-                                menu.Controls[i].Click += new EventHandler(BtnOrderAdd_Click);
-                                menu.Controls[i].Text = string.Empty;
+                                if (itemsWithMenuType[i / 2].stock == 1)
+                                {
+                                    menu.Controls[i].BackColor = Color.Transparent;
+                                    menu.Controls[i].ForeColor = Color.FromArgb(39, 39, 39);
+                                    menu.Controls[i].Click += new EventHandler(BtnOrderAdd_Click);
+                                    menu.Controls[i].Text = string.Empty;
+                                }
                             }
+                            
                         }
                     }
                     if (Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) == 0)
@@ -243,9 +255,8 @@ namespace ChapeauUI
                         Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
                     });
                 }
-                //temporarily creating new reservation in order to test system, will be 
                 OrderService orderService = new OrderService();
-                orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text);
+                orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text, staffId);
                 itemGridView.Rows.Clear();
             }
 
@@ -253,80 +264,73 @@ namespace ChapeauUI
 
         private void buttonLunch_Click(object sender, EventArgs e)
         {
-            selectLunchMenu = true;
             labelTitleItems.Text = "LUNCH 11:00 - 16:00";
+            UpdateMenuList(true);
             PanelChooseMenu.Hide();
         }
 
         private void buttonDinner_Click(object sender, EventArgs e)
         {
-            selectLunchMenu = false;
             labelTitleItems.Text = "DINNER 17:00 - 21:00";
-            
+            UpdateMenuList(false);
             PanelChooseMenu.Hide();
         }
 
         private void buttonStarters_Click(object sender, EventArgs e)
         {
             menuItemType = MenuItemType.Starter;
-            CreateButtons();
             labelSelectedMenuName.Text = "STARTERS";
             panelSelectMenu.Hide();
+            CreateButtons();
         }
 
         private void buttonMainCourse_Click(object sender, EventArgs e)
         {
             menuItemType = MenuItemType.MainCourse;
-            CreateButtons();
             labelSelectedMenuName.Text = "MAIN COURSE";
             panelSelectMenu.Hide();
+            CreateButtons();
         }
 
         private void buttonDesserts_Click(object sender, EventArgs e)
         {
             menuItemType = MenuItemType.Desserts;
-            CreateButtons();
             labelSelectedMenuName.Text = "DESSERTS";
             panelSelectMenu.Hide();
+            CreateButtons();
         }
 
         private void buttonDrinks_Click(object sender, EventArgs e)
         {
             menuItemType = MenuItemType.Drinks;
-            CreateButtons();
             labelSelectedMenuName.Text = "DRINKS";
             panelSelectMenu.Hide();
+            CreateButtons();
         }
-        public class LeftAndRightTextButton : Button
+        private void buttonBack_Click(object sender, EventArgs e)
         {
-            public string LeftText { get; set; }
-            public string RightText { get; set; }
+            this.panelItems.Paint -= new System.Windows.Forms.PaintEventHandler(this.panelOrders_Paint);
 
-            protected override void OnPaint(PaintEventArgs pevent)
+            RemoveAllControlsMenu();
+            if (!panelSelectMenu.Visible)
             {
-                base.OnPaint(pevent);
-                SolidBrush leftTextBrush = new SolidBrush(this.ForeColor);
-
-                //hide left text when stock isn't available
-                if (this.ForeColor == Color.LightGray)
-                {
-                    leftTextBrush = new SolidBrush(Color.Transparent);
-                }
-                using (leftTextBrush)
-                {
-                    using (StringFormat sf = new StringFormat()
-                    { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
-                    {
-                        pevent.Graphics.DrawString(LeftText, this.Font, leftTextBrush, this.ClientRectangle, sf);
-                    }
-                }
-                using (StringFormat sf = new StringFormat()
-                { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Near })
-                {
-                    pevent.Graphics.DrawString(RightText, new Font(this.Font.FontFamily, this.Font.Size - 2), new SolidBrush(this.ForeColor), this.ClientRectangle, sf);
-                }
-
+                panelSelectMenu.Visible = true;
             }
+            else if(!PanelChooseMenu.Visible)
+            {
+                PanelChooseMenu.Visible = true;
+                itemGridView.Rows.Clear();
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+        private void RemoveAllControlsMenu()
+        {
+
+           menu.Controls.Clear();
+
         }
     }
 }
