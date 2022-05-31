@@ -41,6 +41,9 @@ namespace ChapeauUI
             this.tableTenButton = new System.Windows.Forms.Button();
             this.TableOverviewPnl = new System.Windows.Forms.Panel();
             this.makeReservationPnl = new System.Windows.Forms.Panel();
+            this.reservationCommentsTextBox = new System.Windows.Forms.TextBox();
+            this.reservationCommentsLbl = new System.Windows.Forms.Label();
+            this.confirmReservationBtn = new System.Windows.Forms.Button();
             this.reservationDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.reservationTimeLbl = new System.Windows.Forms.Label();
             this.reservationEmailTextBox = new System.Windows.Forms.TextBox();
@@ -55,11 +58,8 @@ namespace ChapeauUI
             this.makeReservationBtn = new System.Windows.Forms.Button();
             this.takeOrderBtn = new System.Windows.Forms.Button();
             this.notificationPnl = new System.Windows.Forms.Panel();
-            this.confirmReservationBtn = new System.Windows.Forms.Button();
-            this.reservationCommentsLbl = new System.Windows.Forms.Label();
-            this.reservationCommentsTextBox = new System.Windows.Forms.TextBox();
+            this.readyOrdersListView = new System.Windows.Forms.ListView();
             this.ordersReadyLbl = new System.Windows.Forms.Label();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             this.startMenuPnl.SuspendLayout();
@@ -201,6 +201,32 @@ namespace ChapeauUI
             this.makeReservationPnl.Size = new System.Drawing.Size(334, 332);
             this.makeReservationPnl.TabIndex = 11;
             // 
+            // reservationCommentsTextBox
+            // 
+            this.reservationCommentsTextBox.Location = new System.Drawing.Point(4, 262);
+            this.reservationCommentsTextBox.Name = "reservationCommentsTextBox";
+            this.reservationCommentsTextBox.Size = new System.Drawing.Size(125, 27);
+            this.reservationCommentsTextBox.TabIndex = 10;
+            // 
+            // reservationCommentsLbl
+            // 
+            this.reservationCommentsLbl.AutoSize = true;
+            this.reservationCommentsLbl.Location = new System.Drawing.Point(4, 238);
+            this.reservationCommentsLbl.Name = "reservationCommentsLbl";
+            this.reservationCommentsLbl.Size = new System.Drawing.Size(90, 20);
+            this.reservationCommentsLbl.TabIndex = 9;
+            this.reservationCommentsLbl.Text = "COMMENTS";
+            // 
+            // confirmReservationBtn
+            // 
+            this.confirmReservationBtn.Location = new System.Drawing.Point(4, 300);
+            this.confirmReservationBtn.Name = "confirmReservationBtn";
+            this.confirmReservationBtn.Size = new System.Drawing.Size(327, 29);
+            this.confirmReservationBtn.TabIndex = 8;
+            this.confirmReservationBtn.Text = "CONFIRM RESERVATION";
+            this.confirmReservationBtn.UseVisualStyleBackColor = true;
+            this.confirmReservationBtn.Click += new System.EventHandler(this.confirmReservationBtn_Click);
+            // 
             // reservationDateTimePicker
             // 
             this.reservationDateTimePicker.Location = new System.Drawing.Point(4, 204);
@@ -318,38 +344,21 @@ namespace ChapeauUI
             // 
             // notificationPnl
             // 
-            this.notificationPnl.Controls.Add(this.listView1);
+            this.notificationPnl.Controls.Add(this.readyOrdersListView);
             this.notificationPnl.Controls.Add(this.ordersReadyLbl);
             this.notificationPnl.Location = new System.Drawing.Point(119, 381);
             this.notificationPnl.Name = "notificationPnl";
             this.notificationPnl.Size = new System.Drawing.Size(334, 332);
             this.notificationPnl.TabIndex = 12;
             // 
-            // confirmReservationBtn
+            // readyOrdersListView
             // 
-            this.confirmReservationBtn.Location = new System.Drawing.Point(4, 300);
-            this.confirmReservationBtn.Name = "confirmReservationBtn";
-            this.confirmReservationBtn.Size = new System.Drawing.Size(327, 29);
-            this.confirmReservationBtn.TabIndex = 8;
-            this.confirmReservationBtn.Text = "CONFIRM RESERVATION";
-            this.confirmReservationBtn.UseVisualStyleBackColor = true;
-            this.confirmReservationBtn.Click += new System.EventHandler(this.confirmReservationBtn_Click);
-            // 
-            // reservationCommentsLbl
-            // 
-            this.reservationCommentsLbl.AutoSize = true;
-            this.reservationCommentsLbl.Location = new System.Drawing.Point(4, 238);
-            this.reservationCommentsLbl.Name = "reservationCommentsLbl";
-            this.reservationCommentsLbl.Size = new System.Drawing.Size(90, 20);
-            this.reservationCommentsLbl.TabIndex = 9;
-            this.reservationCommentsLbl.Text = "COMMENTS";
-            // 
-            // reservationCommentsTextBox
-            // 
-            this.reservationCommentsTextBox.Location = new System.Drawing.Point(4, 262);
-            this.reservationCommentsTextBox.Name = "reservationCommentsTextBox";
-            this.reservationCommentsTextBox.Size = new System.Drawing.Size(125, 27);
-            this.reservationCommentsTextBox.TabIndex = 10;
+            this.readyOrdersListView.HideSelection = false;
+            this.readyOrdersListView.Location = new System.Drawing.Point(15, 39);
+            this.readyOrdersListView.Name = "readyOrdersListView";
+            this.readyOrdersListView.Size = new System.Drawing.Size(308, 275);
+            this.readyOrdersListView.TabIndex = 1;
+            this.readyOrdersListView.UseCompatibleStateImageBehavior = false;
             // 
             // ordersReadyLbl
             // 
@@ -359,15 +368,6 @@ namespace ChapeauUI
             this.ordersReadyLbl.Size = new System.Drawing.Size(115, 20);
             this.ordersReadyLbl.TabIndex = 0;
             this.ordersReadyLbl.Text = "ORDERS READY";
-            // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(15, 39);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(308, 275);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
             // TableOverview
             // 
@@ -421,7 +421,7 @@ namespace ChapeauUI
         private System.Windows.Forms.Button confirmReservationBtn;
         private System.Windows.Forms.TextBox reservationCommentsTextBox;
         private System.Windows.Forms.Label reservationCommentsLbl;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView readyOrdersListView;
         private System.Windows.Forms.Label ordersReadyLbl;
     }
 }

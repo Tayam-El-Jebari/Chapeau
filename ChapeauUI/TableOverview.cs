@@ -17,8 +17,9 @@ namespace ChapeauUI
         private int selectedTable;
         private MenuChoice menuChoice;
         private Staff loggedInStaffMember;
-        public TableOverview()
+        public TableOverview(Staff loggedInStaffMember)
         {
+            this.loggedInStaffMember = loggedInStaffMember;
             InitializeComponent();
         }
 
@@ -80,6 +81,20 @@ namespace ChapeauUI
             notificationPnl.Show();
             OrderService orderService = new OrderService();
             List<Order> readyOrders = orderService.GetOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
+            readyOrdersListView.Clear();
+            readyOrdersListView.Columns.Add("Order ID", 100, HorizontalAlignment.Center);
+            readyOrdersListView.Columns.Add("Table ID", 100, HorizontalAlignment.Center);
+            readyOrdersListView.Columns.Add("Start Time", 100, HorizontalAlignment.Center);
+            foreach(Order order in readyOrders)
+            {
+                ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                li.SubItems.Add(order.TableId.ToString());
+                readyOrdersListView.Items.Add(li);
+            }
+            ListViewItem li2 = new ListViewItem("test");
+            li2.SubItems.Add("test");
+            li2.SubItems.Add("test");
+            readyOrdersListView.Items.Add(li2);
         }
 
         private void tableOneButton_Click(object sender, EventArgs e)

@@ -35,7 +35,7 @@ namespace ChapeauUI
                 if (staffService.CheckIfWaiter(staffID))
                 {
                     this.Hide();
-                    TableOverview tableOverview = new TableOverview();
+                    TableOverview tableOverview = new TableOverview(loggedInStaffMemeber);
                     tableOverview.Show();
                 }
                 else
