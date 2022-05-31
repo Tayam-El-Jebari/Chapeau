@@ -47,8 +47,14 @@ namespace ChapeauUI
                 li.SubItems.Add(order.MenuItem.Description);
                 li.SubItems.Add(order.Order.Comments);
                 li.SubItems.Add(order.Order.TimePlaced.ToString());
+                kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.ColumnContent);
+                kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.ColumnContent);
                 kitchenListView.Items.Add(li);
             }
+
             ColorListView(kitchenListView);
 
         }
@@ -86,10 +92,20 @@ namespace ChapeauUI
 
         private void KitchenOverview_Load(object sender, EventArgs e)
         {
-            System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
-            timer1.Interval = 30000;//30 seconds
-            timer1.Tick += new System.EventHandler(timer1_Tick);
-            timer1.Start();
+            if (radioButtonKitchen.Checked)
+            {
+                System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
+                timer1.Interval = 30000;//30 seconds
+                timer1.Tick += new System.EventHandler(timer1_Tick);
+                timer1.Start();
+            }
+            else if (radioButtonBar.Checked)
+            {
+                System.Windows.Forms.Timer timer2 = new System.Windows.Forms.Timer();
+                timer2.Interval = 30000;//30 seconds
+                timer2.Tick += new System.EventHandler(timer2_Tick);
+                timer2.Start();
+            }
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -138,18 +154,17 @@ namespace ChapeauUI
                 li.SubItems.Add(order.MenuItem.Description);
                 li.SubItems.Add(order.Order.Comments);
                 li.SubItems.Add(order.Order.TimePlaced.ToString());
+                barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.ColumnContent);
+                barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.ColumnContent);
                 barListView.Items.Add(li);
             }
             ColorListView(barListView);
 
         }
-        private void BarOverview_Load(object sender, EventArgs e)
-        {
-            System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
-            timer1.Interval = 30000;//30 seconds
-            timer1.Tick += new System.EventHandler(timer1_Tick);
-            timer1.Start();
-        }
+ 
 
         private void finishedDrinkButton_Click(object sender, EventArgs e)
         {

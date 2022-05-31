@@ -61,14 +61,14 @@ namespace ChapeauUI
             this.kitchenListView.Location = new System.Drawing.Point(12, 78);
             this.kitchenListView.Name = "kitchenListView";
             this.kitchenListView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.kitchenListView.Size = new System.Drawing.Size(577, 282);
+            this.kitchenListView.Size = new System.Drawing.Size(1040, 1000);
             this.kitchenListView.TabIndex = 1;
             this.kitchenListView.UseCompatibleStateImageBehavior = false;
             this.kitchenListView.SelectedIndexChanged += new System.EventHandler(this.kitchenListView_SelectedIndexChanged);
             // 
             // finishedFoodButton
             // 
-            this.finishedFoodButton.Location = new System.Drawing.Point(295, 366);
+            this.finishedFoodButton.Location = new System.Drawing.Point(295, 19);
             this.finishedFoodButton.Name = "finishedFoodButton";
             this.finishedFoodButton.Size = new System.Drawing.Size(294, 29);
             this.finishedFoodButton.TabIndex = 2;
@@ -78,7 +78,7 @@ namespace ChapeauUI
             // 
             // buttonLogOut
             // 
-            this.buttonLogOut.Location = new System.Drawing.Point(12, 409);
+            this.buttonLogOut.Location = new System.Drawing.Point(12, 965);
             this.buttonLogOut.Name = "buttonLogOut";
             this.buttonLogOut.Size = new System.Drawing.Size(94, 29);
             this.buttonLogOut.TabIndex = 3;
@@ -91,7 +91,7 @@ namespace ChapeauUI
             this.barListView.HideSelection = false;
             this.barListView.Location = new System.Drawing.Point(12, 78);
             this.barListView.Name = "barListView";
-            this.barListView.Size = new System.Drawing.Size(577, 282);
+            this.barListView.Size = new System.Drawing.Size(1040, 1000);
             this.barListView.TabIndex = 4;
             this.barListView.UseCompatibleStateImageBehavior = false;
             this.barListView.SelectedIndexChanged += new System.EventHandler(this.barListView_SelectedIndexChanged);
@@ -108,7 +108,7 @@ namespace ChapeauUI
             // 
             // finishedDrinkButton
             // 
-            this.finishedDrinkButton.Location = new System.Drawing.Point(295, 366);
+            this.finishedDrinkButton.Location = new System.Drawing.Point(295, 19);
             this.finishedDrinkButton.Name = "finishedDrinkButton";
             this.finishedDrinkButton.Size = new System.Drawing.Size(294, 29);
             this.finishedDrinkButton.TabIndex = 6;
@@ -121,7 +121,7 @@ namespace ChapeauUI
             this.radioButtonKitchen.AutoSize = true;
             this.radioButtonKitchen.Location = new System.Drawing.Point(597, 24);
             this.radioButtonKitchen.Name = "radioButtonKitchen";
-            this.radioButtonKitchen.Size = new System.Drawing.Size(76, 24);
+            this.radioButtonKitchen.Size = new System.Drawing.Size(79, 24);
             this.radioButtonKitchen.TabIndex = 7;
             this.radioButtonKitchen.TabStop = true;
             this.radioButtonKitchen.Text = "Kitchen";
@@ -133,7 +133,7 @@ namespace ChapeauUI
             this.radioButtonBar.AutoSize = true;
             this.radioButtonBar.Location = new System.Drawing.Point(597, 54);
             this.radioButtonBar.Name = "radioButtonBar";
-            this.radioButtonBar.Size = new System.Drawing.Size(49, 24);
+            this.radioButtonBar.Size = new System.Drawing.Size(52, 24);
             this.radioButtonBar.TabIndex = 8;
             this.radioButtonBar.TabStop = true;
             this.radioButtonBar.Text = "Bar";
@@ -144,7 +144,7 @@ namespace ChapeauUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1831, 1055);
             this.Controls.Add(this.radioButtonBar);
             this.Controls.Add(this.radioButtonKitchen);
             this.Controls.Add(this.finishedDrinkButton);
