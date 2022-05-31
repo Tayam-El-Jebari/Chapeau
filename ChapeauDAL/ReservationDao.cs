@@ -11,9 +11,9 @@ namespace ChapeauDAL
 {
     public class ReservationDao : BaseDao
     {
-        public List<Reservation> GetAllReservationsOrderedByTable()
+        public List<Reservation> GetAllNonPresentReservationsOrderedByTable()
         {
-            string query = "SELECT * FROM [Reservation] ORDER BY table_ID";
+            string query = "SELECT * FROM [Reservation] WHERE isPresent = 0 ORDER BY table_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -58,9 +58,7 @@ namespace ChapeauDAL
                     isPresent = (bool)dr["isPresent"],
                     ReservationTime = (DateTime)dr["reservationTime"],
                     TableId = (int)dr["table_ID"],
-                    Comments = (string)dr["comments"],
-                    PhoneNumber = (int)dr["phoneNumber"],
-                    EmailAddress = (string)dr["emailAdress"]
+                    Comments = Convert.ToString(dr["comments"]),
                 };
                 reservations.Add(reservation);
             }
@@ -77,8 +75,6 @@ namespace ChapeauDAL
                 ReservationTime = dataTable.Rows[0].Field<DateTime>("reservationTime"),
                 TableId = dataTable.Rows[0].Field<int>("table_ID"),
                 Comments = dataTable.Rows[0].Field<string>("comments"),
-                PhoneNumber = dataTable.Rows[0].Field<int>("phoneNumber"),
-                EmailAddress = dataTable.Rows[0].Field<string>("emailAdress")
             };
             return reservation;
         }

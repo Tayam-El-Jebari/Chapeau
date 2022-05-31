@@ -53,6 +53,7 @@ namespace ChapeauUI
             this.reservationNameTextBox = new System.Windows.Forms.TextBox();
             this.reservationNameLbl = new System.Windows.Forms.Label();
             this.startMenuPnl = new System.Windows.Forms.Panel();
+            this.markReservationPresentBtn = new System.Windows.Forms.Button();
             this.notificationsBtn = new System.Windows.Forms.Button();
             this.showBillBtn = new System.Windows.Forms.Button();
             this.makeReservationBtn = new System.Windows.Forms.Button();
@@ -60,7 +61,6 @@ namespace ChapeauUI
             this.notificationPnl = new System.Windows.Forms.Panel();
             this.ordersReadyLbl = new System.Windows.Forms.Label();
             this.ordersReadyGridView = new System.Windows.Forms.DataGridView();
-            this.markReservationPresentBtn = new System.Windows.Forms.Button();
             this.markReservationPresentPnl = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.reservationOverviewDataGrid = new System.Windows.Forms.DataGridView();
@@ -310,6 +310,16 @@ namespace ChapeauUI
             this.startMenuPnl.Size = new System.Drawing.Size(334, 332);
             this.startMenuPnl.TabIndex = 11;
             // 
+            // markReservationPresentBtn
+            // 
+            this.markReservationPresentBtn.Location = new System.Drawing.Point(3, 146);
+            this.markReservationPresentBtn.Name = "markReservationPresentBtn";
+            this.markReservationPresentBtn.Size = new System.Drawing.Size(241, 29);
+            this.markReservationPresentBtn.TabIndex = 4;
+            this.markReservationPresentBtn.Text = "MARK RESERVATION PRESENT";
+            this.markReservationPresentBtn.UseVisualStyleBackColor = true;
+            this.markReservationPresentBtn.Click += new System.EventHandler(this.markReservationPresentBtn_Click);
+            // 
             // notificationsBtn
             // 
             this.notificationsBtn.Location = new System.Drawing.Point(3, 108);
@@ -378,16 +388,6 @@ namespace ChapeauUI
             this.ordersReadyGridView.Size = new System.Drawing.Size(327, 298);
             this.ordersReadyGridView.TabIndex = 13;
             // 
-            // markReservationPresentBtn
-            // 
-            this.markReservationPresentBtn.Location = new System.Drawing.Point(3, 146);
-            this.markReservationPresentBtn.Name = "markReservationPresentBtn";
-            this.markReservationPresentBtn.Size = new System.Drawing.Size(241, 29);
-            this.markReservationPresentBtn.TabIndex = 4;
-            this.markReservationPresentBtn.Text = "MARK RESERVATION PRESENT";
-            this.markReservationPresentBtn.UseVisualStyleBackColor = true;
-            this.markReservationPresentBtn.Click += new System.EventHandler(this.markReservationPresentBtn_Click);
-            // 
             // markReservationPresentPnl
             // 
             this.markReservationPresentPnl.Controls.Add(this.label1);
@@ -402,9 +402,9 @@ namespace ChapeauUI
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(4, 4);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 20);
+            this.label1.Size = new System.Drawing.Size(110, 20);
             this.label1.TabIndex = 0;
-            this.label1.Text = "ORDERS READY";
+            this.label1.Text = "RESERVATIONS";
             // 
             // reservationOverviewDataGrid
             // 

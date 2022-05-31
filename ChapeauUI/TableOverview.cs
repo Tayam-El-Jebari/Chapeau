@@ -167,14 +167,19 @@ namespace ChapeauUI
             hideAllPanels();
             markReservationPresentPnl.Show();
             ReservationService reservationService = new ReservationService();
-            List<Reservation> reservations = reservationService.GetAllReservationsOrderedByTable();
-            ordersReadyGridView.ColumnCount = 2;
-            ordersReadyGridView.Columns[0].Name = "Order ID";
-            ordersReadyGridView.Columns[1].Name = "Table ID";
+            List<Reservation> reservations = reservationService.GetAllNonPresentReservationsOrderedByTable();
+            reservationOverviewDataGrid.ColumnCount = 2;
+            reservationOverviewDataGrid.Columns[0].Name = "Reservation ID";
+            reservationOverviewDataGrid.Columns[1].Name = "Reservation time";
             foreach (Reservation reservation in reservations)
             {
-                ordersReadyGridView.Rows.Add(reservation.TableId, reservation.ReservationTime);
+                reservationOverviewDataGrid.Rows.Add(reservation.TableId, reservation.ReservationTime);
             }
+        }
+
+        private void reservationOverviewDataGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("test");
         }
     }
 }

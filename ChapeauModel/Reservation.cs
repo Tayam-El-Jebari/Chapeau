@@ -14,8 +14,6 @@ namespace ChapeauModel
         public DateTime ReservationTime;
         public int TableId;
         public string Comments;
-        public int PhoneNumber;
-        public string EmailAddress;
 
     }
 }
