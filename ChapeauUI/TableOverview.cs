@@ -21,10 +21,14 @@ namespace ChapeauUI
         {
             this.loggedInStaffMember = loggedInStaffMember;
             InitializeComponent();
+            hideAllPanels();
+            startMenuPnl.Show();
         }
 
         private void checkTimeSinceOrderPlaced()
         {
+            OrderService orderService = new OrderService();
+            List<Order> lastOrders = orderService.GetLastOrders();
             for(int i = 0; i < 10; i++)
             {
 
@@ -35,12 +39,14 @@ namespace ChapeauUI
             startMenuPnl.Hide();
             TableOverviewPnl.Hide();
             makeReservationPnl.Hide();
+            notificationPnl.Hide();
         }
         private void tableWasSelected(int tableNr)
         {
             if (menuChoice == MenuChoice.TakeOrder)
             {
-                OrderUI orderUI = new OrderUI(null);
+                ReservationService reservationService = new ReservationService();
+                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr));
                 this.Hide();
                 orderUI.Show();
             }

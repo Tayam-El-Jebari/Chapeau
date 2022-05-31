@@ -20,7 +20,7 @@ namespace ChapeauDAL
 
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {
-            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE Waiter_ID = @staffID AND isFinished = 1 AND isDelivered IS NOT NULL";
+            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE Waiter_ID = @staffID AND isFinished = 1 AND isDelived IS NULL";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
