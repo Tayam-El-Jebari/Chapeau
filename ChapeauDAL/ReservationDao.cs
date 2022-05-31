@@ -44,6 +44,7 @@ namespace ChapeauDAL
             string query = "UPDATE Reservations SET isPresent = 1 WHERE reservation_id = @reservation_id";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservation_id", reservationID);
+            ExecuteEditQuery(query, sqlParameters);
         }
         private List<Reservation> ReadTables(DataTable dataTable)
         {
