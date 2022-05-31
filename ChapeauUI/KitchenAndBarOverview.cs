@@ -34,6 +34,7 @@ namespace ChapeauUI
             kitchenListView.View = View.Details;
             kitchenListView.FullRowSelect = true;
             kitchenListView.Columns.Add("Order ID", 100);
+            kitchenListView.Columns.Add("MenuItem ID", 100);
             kitchenListView.Columns.Add("Order", 500); //productname
             kitchenListView.Columns.Add("Amount of order", 100);
             kitchenListView.Columns.Add("Description", 200);
@@ -42,16 +43,20 @@ namespace ChapeauUI
             foreach (OrderItem order in ordersFoodList)
             {
                 ListViewItem li = new ListViewItem(order.Order.OrderId.ToString());
+                li.SubItems.Add(order.MenuItem.MenuItemId.ToString());
                 li.SubItems.Add(order.MenuItem.ProductName);
                 li.SubItems.Add(order.Amount.ToString());
                 li.SubItems.Add(order.MenuItem.Description);
                 li.SubItems.Add(order.Order.Comments);
                 li.SubItems.Add(order.Order.TimePlaced.ToString());
+                kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                 kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
                 kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                 kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.ColumnContent);
+                kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                 kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.ColumnContent);
+                kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+
                 kitchenListView.Items.Add(li);
             }
 
@@ -76,18 +81,31 @@ namespace ChapeauUI
         }
         private void finishedFoodButton_Click(object sender, EventArgs e)
         {
-            OrderItem order = new OrderItem()
+            try
             {
-                Order = new Order()
+                OrderItem order = new OrderItem()
                 {
-                    IsFinished = true,
-                    OrderId = int.Parse(kitchenListView.SelectedItems[0].SubItems[0].Text)
-                },
-                MenuItem = new MenuItem() { MenuItemId = int.Parse(kitchenListView.SelectedItems[0].SubItems[0].Text) }
-            };
+                    Order = new Order()
+                    {
+                        IsFinished = true,
+                        OrderId = int.Parse(kitchenListView.SelectedItems[0].SubItems[0].Text),
+                    },
+                    MenuItem = new MenuItem()
+                    {
+                        MenuItemId = int.Parse(kitchenListView.SelectedItems[0].SubItems[1].Text),
+                        ProductName = kitchenListView.SelectedItems[0].SubItems[2].Text
+                    }
+                };
 
-            OrderService orderService = new OrderService();
-            orderService.GetUpdateStateIsFinished(order);
+                OrderService orderService = new OrderService();
+                orderService.GetUpdateStateIsFinished(order);
+                MessageBox.Show($"Order {order.Order.OrderId}: {order.MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
+            } 
+
+            catch
+            {
+                MessageBox.Show("Please make sure to select an order to complete");
+            }
         }
 
         private void KitchenOverview_Load(object sender, EventArgs e)
@@ -141,24 +159,28 @@ namespace ChapeauUI
             barListView.View = View.Details;
             barListView.FullRowSelect = true;
             barListView.Columns.Add("Order ID", 100);
+            barListView.Columns.Add("Menuitem ID", 100);
             barListView.Columns.Add("Order", 500); //productname
             barListView.Columns.Add("Amount of order", 100);
             barListView.Columns.Add("Description", 200);
             barListView.Columns.Add("Comments", 200);
-            barListView.Columns.Add("Time of ordering", 200); ;
+            barListView.Columns.Add("Time of ordering", 200);
             foreach (OrderItem order in ordersDrinkList)
             {
                 ListViewItem li = new ListViewItem(order.Order.OrderId.ToString());
+                li.SubItems.Add(order.MenuItem.MenuItemId.ToString());
                 li.SubItems.Add(order.MenuItem.ProductName);
                 li.SubItems.Add(order.Amount.ToString());
                 li.SubItems.Add(order.MenuItem.Description);
                 li.SubItems.Add(order.Order.Comments);
                 li.SubItems.Add(order.Order.TimePlaced.ToString());
+                barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                 barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
                 barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                 barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.ColumnContent);
+                barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                 barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.ColumnContent);
+                barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
                 barListView.Items.Add(li);
             }
             ColorListView(barListView);
@@ -168,18 +190,30 @@ namespace ChapeauUI
 
         private void finishedDrinkButton_Click(object sender, EventArgs e)
         {
+            try 
+            { 
             OrderItem order = new OrderItem()
             {
                 Order = new Order()
                 {
                     IsFinished = true,
-                    OrderId = int.Parse(barListView.SelectedItems[0].SubItems[0].Text)
+                    OrderId = int.Parse(barListView.SelectedItems[0].SubItems[0].Text),
                 },
-                MenuItem = new MenuItem() { MenuItemId = int.Parse(barListView.SelectedItems[0].SubItems[0].Text) }
+                MenuItem = new MenuItem()
+                {
+                    MenuItemId = int.Parse(barListView.SelectedItems[0].SubItems[1].Text),
+                    ProductName = barListView.SelectedItems[0].SubItems[2].Text
+                }
             };
 
             OrderService orderService = new OrderService();
             orderService.GetUpdateStateIsFinished(order);
+            MessageBox.Show($"Order {order.Order.OrderId}: {order.MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
+            }
+            catch
+            {
+                MessageBox.Show("Please select an order!");
+            }
         }
 
         private void radioButtonKitchen_CheckedChanged(object sender, EventArgs e)

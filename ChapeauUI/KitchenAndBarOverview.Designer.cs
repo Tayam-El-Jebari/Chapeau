@@ -41,6 +41,7 @@ namespace ChapeauUI
             this.finishedDrinkButton = new System.Windows.Forms.Button();
             this.radioButtonKitchen = new System.Windows.Forms.RadioButton();
             this.radioButtonBar = new System.Windows.Forms.RadioButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelKitchen
@@ -61,29 +62,34 @@ namespace ChapeauUI
             this.kitchenListView.Location = new System.Drawing.Point(12, 78);
             this.kitchenListView.Name = "kitchenListView";
             this.kitchenListView.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.kitchenListView.Size = new System.Drawing.Size(1040, 1000);
+            this.kitchenListView.Size = new System.Drawing.Size(1500, 750);
             this.kitchenListView.TabIndex = 1;
             this.kitchenListView.UseCompatibleStateImageBehavior = false;
             this.kitchenListView.SelectedIndexChanged += new System.EventHandler(this.kitchenListView_SelectedIndexChanged);
             // 
             // finishedFoodButton
             // 
-            this.finishedFoodButton.Location = new System.Drawing.Point(295, 19);
+            this.finishedFoodButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.finishedFoodButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.finishedFoodButton.Location = new System.Drawing.Point(1313, 845);
             this.finishedFoodButton.Name = "finishedFoodButton";
-            this.finishedFoodButton.Size = new System.Drawing.Size(294, 29);
+            this.finishedFoodButton.Size = new System.Drawing.Size(199, 49);
             this.finishedFoodButton.TabIndex = 2;
             this.finishedFoodButton.Text = "Food is ready to be served\r\n";
-            this.finishedFoodButton.UseVisualStyleBackColor = true;
+            this.finishedFoodButton.UseVisualStyleBackColor = false;
             this.finishedFoodButton.Click += new System.EventHandler(this.finishedFoodButton_Click);
             // 
             // buttonLogOut
             // 
-            this.buttonLogOut.Location = new System.Drawing.Point(12, 965);
+            this.buttonLogOut.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonLogOut.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonLogOut.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.buttonLogOut.Location = new System.Drawing.Point(-13, 955);
             this.buttonLogOut.Name = "buttonLogOut";
-            this.buttonLogOut.Size = new System.Drawing.Size(94, 29);
+            this.buttonLogOut.Size = new System.Drawing.Size(141, 85);
             this.buttonLogOut.TabIndex = 3;
             this.buttonLogOut.Text = "<";
-            this.buttonLogOut.UseVisualStyleBackColor = true;
+            this.buttonLogOut.UseVisualStyleBackColor = false;
             this.buttonLogOut.Click += new System.EventHandler(this.buttonLogOut_Click);
             // 
             // barListView
@@ -91,7 +97,7 @@ namespace ChapeauUI
             this.barListView.HideSelection = false;
             this.barListView.Location = new System.Drawing.Point(12, 78);
             this.barListView.Name = "barListView";
-            this.barListView.Size = new System.Drawing.Size(1040, 1000);
+            this.barListView.Size = new System.Drawing.Size(1500, 750);
             this.barListView.TabIndex = 4;
             this.barListView.UseCompatibleStateImageBehavior = false;
             this.barListView.SelectedIndexChanged += new System.EventHandler(this.barListView_SelectedIndexChanged);
@@ -108,12 +114,14 @@ namespace ChapeauUI
             // 
             // finishedDrinkButton
             // 
-            this.finishedDrinkButton.Location = new System.Drawing.Point(295, 19);
+            this.finishedDrinkButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.finishedDrinkButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.finishedDrinkButton.Location = new System.Drawing.Point(1313, 845);
             this.finishedDrinkButton.Name = "finishedDrinkButton";
-            this.finishedDrinkButton.Size = new System.Drawing.Size(294, 29);
+            this.finishedDrinkButton.Size = new System.Drawing.Size(199, 49);
             this.finishedDrinkButton.TabIndex = 6;
             this.finishedDrinkButton.Text = "Drink is ready to be served";
-            this.finishedDrinkButton.UseVisualStyleBackColor = true;
+            this.finishedDrinkButton.UseVisualStyleBackColor = false;
             this.finishedDrinkButton.Click += new System.EventHandler(this.finishedDrinkButton_Click);
             // 
             // radioButtonKitchen
@@ -140,11 +148,24 @@ namespace ChapeauUI
             this.radioButtonBar.UseVisualStyleBackColor = true;
             this.radioButtonBar.CheckedChanged += new System.EventHandler(this.radioButtonBar_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(124, 959);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(1806, 81);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "label1";
+            // 
             // KitchenAndBarOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1831, 1055);
+            this.AutoScroll = true;
+            this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebgdesktop;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.radioButtonBar);
             this.Controls.Add(this.radioButtonKitchen);
             this.Controls.Add(this.finishedDrinkButton);
@@ -154,6 +175,7 @@ namespace ChapeauUI
             this.Controls.Add(this.finishedFoodButton);
             this.Controls.Add(this.kitchenListView);
             this.Controls.Add(this.labelKitchen);
+            this.DoubleBuffered = true;
             this.Name = "KitchenAndBarOverview";
             this.Text = "KitchenOverview";
             this.Load += new System.EventHandler(this.KitchenOverview_Load);
@@ -175,5 +197,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button finishedDrinkButton;
         private System.Windows.Forms.RadioButton radioButtonKitchen;
         private System.Windows.Forms.RadioButton radioButtonBar;
+        private System.Windows.Forms.Label label1;
     }
 }
