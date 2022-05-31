@@ -33,6 +33,7 @@ namespace ChapeauUI
             this.ConfirmButton = new System.Windows.Forms.Button();
             this.DenyButton = new System.Windows.Forms.Button();
             this.labelOrderConfirmed = new System.Windows.Forms.Label();
+            this.labelQuestion = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ReturnButton
@@ -88,6 +89,18 @@ namespace ChapeauUI
             this.labelOrderConfirmed.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelOrderConfirmed.Visible = false;
             // 
+            // labelQuestion
+            // 
+            this.labelQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.labelQuestion.Font = new System.Drawing.Font("Cabin", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelQuestion.Location = new System.Drawing.Point(28, 17);
+            this.labelQuestion.Name = "labelQuestion";
+            this.labelQuestion.Size = new System.Drawing.Size(596, 288);
+            this.labelQuestion.TabIndex = 4;
+            this.labelQuestion.Text = "ENTER QUESTION";
+            this.labelQuestion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelQuestion.Visible = false;
+            // 
             // ConfirmOrderUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -101,10 +114,12 @@ namespace ChapeauUI
             this.Controls.Add(this.labelOrderConfirmed);
             this.Controls.Add(this.DenyButton);
             this.Controls.Add(this.ConfirmButton);
+            this.Controls.Add(this.labelQuestion);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ConfirmOrderUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConfirmOrderUI";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ResumeLayout(false);
@@ -117,5 +132,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button ConfirmButton;
         private System.Windows.Forms.Button DenyButton;
         private System.Windows.Forms.Label labelOrderConfirmed;
+        private System.Windows.Forms.Label labelQuestion;
     }
 }

@@ -229,10 +229,9 @@ namespace ChapeauUI
                 MessageBox.Show("No items added!");
                 return;
             }
-            ConfirmOrderUI confirm = new ConfirmOrderUI(MessageBoxButtons.YesNo);
+            ConfirmOrderUI confirm = new ConfirmOrderUI();
             confirm.ShowDialog();
-            DialogResult confirmation = confirm.DialogResult;
-            if (confirmation == DialogResult.Yes)
+            if (confirm.DialogResult == DialogResult.Yes)
             {
                 List<OrderItem> itemsForOrder = new List<OrderItem>();
                 for(int i = 0; i < itemGridView.Rows.Count - 1; i++)
@@ -304,8 +303,13 @@ namespace ChapeauUI
             }
             else if(!PanelChooseMenu.Visible)
             {
-                PanelChooseMenu.Visible = true;
-                itemGridView.Rows.Clear();
+                ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Are you sure you would like to return?\nthis action will reset the order.");
+                confirmBackButton.ShowDialog();
+                if (confirmBackButton.DialogResult == DialogResult.Yes)
+                {
+                    PanelChooseMenu.Visible = true;
+                    itemGridView.Rows.Clear();
+                }
             }
             else
             {
