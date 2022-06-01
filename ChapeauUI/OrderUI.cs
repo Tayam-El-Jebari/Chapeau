@@ -40,7 +40,7 @@ namespace ChapeauUI
                         Height = 62,
                         LeftText = $"{menuItem.ProductName}",
                         RightText = $"€{menuItem.Price.ToString("0.00")}",
-                        Font = new Font("Cabin", 15),
+                        Font = new Font("Cabin", 12),
                         Margin = new Padding(6),
                         UseVisualStyleBackColor = true,
                         FlatStyle = FlatStyle.Flat,
