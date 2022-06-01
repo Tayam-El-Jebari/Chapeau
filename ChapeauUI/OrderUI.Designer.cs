@@ -29,6 +29,9 @@ namespace ChapeauUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelItems = new System.Windows.Forms.Panel();
             this.buttonBack = new System.Windows.Forms.Button();
             this.bottomBarLabel = new System.Windows.Forms.Label();
@@ -36,9 +39,9 @@ namespace ChapeauUI
             this.labelTable = new System.Windows.Forms.Label();
             this.buttonLunch = new System.Windows.Forms.Button();
             this.buttonDinner = new System.Windows.Forms.Button();
+            this.buttonDrinks = new System.Windows.Forms.Button();
             this.panelSelectMenu = new System.Windows.Forms.Panel();
             this.labelSelectMenu = new System.Windows.Forms.Label();
-            this.buttonDrinks = new System.Windows.Forms.Button();
             this.buttonDesserts = new System.Windows.Forms.Button();
             this.buttonMainCourse = new System.Windows.Forms.Button();
             this.buttonStarters = new System.Windows.Forms.Button();
@@ -46,6 +49,9 @@ namespace ChapeauUI
             this.commentsTextBox = new System.Windows.Forms.RichTextBox();
             this.labelCommentsTitle = new System.Windows.Forms.Label();
             this.itemGridView = new System.Windows.Forms.DataGridView();
+            this.MenuItemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clearAllButton = new System.Windows.Forms.Button();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.viewOrder = new System.Windows.Forms.Button();
@@ -112,6 +118,7 @@ namespace ChapeauUI
             this.PanelChooseMenu.Controls.Add(this.labelTable);
             this.PanelChooseMenu.Controls.Add(this.buttonLunch);
             this.PanelChooseMenu.Controls.Add(this.buttonDinner);
+            this.PanelChooseMenu.Controls.Add(this.buttonDrinks);
             this.PanelChooseMenu.Location = new System.Drawing.Point(1, 0);
             this.PanelChooseMenu.Name = "PanelChooseMenu";
             this.PanelChooseMenu.Size = new System.Drawing.Size(700, 1390);
@@ -162,11 +169,27 @@ namespace ChapeauUI
             this.buttonDinner.UseVisualStyleBackColor = false;
             this.buttonDinner.Click += new System.EventHandler(this.buttonDinner_Click);
             // 
+            // buttonDrinks
+            // 
+            this.buttonDrinks.BackColor = System.Drawing.Color.Transparent;
+            this.buttonDrinks.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonDrinks.FlatAppearance.BorderSize = 10;
+            this.buttonDrinks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDrinks.Font = new System.Drawing.Font("Cabin", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDrinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonDrinks.Location = new System.Drawing.Point(32, 716);
+            this.buttonDrinks.Margin = new System.Windows.Forms.Padding(60);
+            this.buttonDrinks.Name = "buttonDrinks";
+            this.buttonDrinks.Size = new System.Drawing.Size(616, 255);
+            this.buttonDrinks.TabIndex = 2;
+            this.buttonDrinks.Text = "DRINKS";
+            this.buttonDrinks.UseVisualStyleBackColor = false;
+            this.buttonDrinks.Click += new System.EventHandler(this.buttonDrinks_Click);
+            // 
             // panelSelectMenu
             // 
             this.panelSelectMenu.BackColor = System.Drawing.Color.Transparent;
             this.panelSelectMenu.Controls.Add(this.labelSelectMenu);
-            this.panelSelectMenu.Controls.Add(this.buttonDrinks);
             this.panelSelectMenu.Controls.Add(this.buttonDesserts);
             this.panelSelectMenu.Controls.Add(this.buttonMainCourse);
             this.panelSelectMenu.Controls.Add(this.buttonStarters);
@@ -184,23 +207,6 @@ namespace ChapeauUI
             this.labelSelectMenu.Size = new System.Drawing.Size(328, 51);
             this.labelSelectMenu.TabIndex = 3;
             this.labelSelectMenu.Text = "SELECT MENU";
-            // 
-            // buttonDrinks
-            // 
-            this.buttonDrinks.BackColor = System.Drawing.Color.Transparent;
-            this.buttonDrinks.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.buttonDrinks.FlatAppearance.BorderSize = 10;
-            this.buttonDrinks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDrinks.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDrinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.buttonDrinks.Location = new System.Drawing.Point(30, 1002);
-            this.buttonDrinks.Margin = new System.Windows.Forms.Padding(60);
-            this.buttonDrinks.Name = "buttonDrinks";
-            this.buttonDrinks.Size = new System.Drawing.Size(616, 255);
-            this.buttonDrinks.TabIndex = 2;
-            this.buttonDrinks.Text = "DRINKS";
-            this.buttonDrinks.UseVisualStyleBackColor = false;
-            this.buttonDrinks.Click += new System.EventHandler(this.buttonDrinks_Click);
             // 
             // buttonDesserts
             // 
@@ -259,12 +265,11 @@ namespace ChapeauUI
             this.itemAddedOrderPnl.BackColor = System.Drawing.Color.Transparent;
             this.itemAddedOrderPnl.Controls.Add(this.commentsTextBox);
             this.itemAddedOrderPnl.Controls.Add(this.labelCommentsTitle);
-            this.itemAddedOrderPnl.Controls.Add(this.itemGridView);
             this.itemAddedOrderPnl.Controls.Add(this.clearAllButton);
             this.itemAddedOrderPnl.Controls.Add(this.buttonCreateOrder);
-            this.itemAddedOrderPnl.Location = new System.Drawing.Point(1, 115);
+            this.itemAddedOrderPnl.Location = new System.Drawing.Point(11, 115);
             this.itemAddedOrderPnl.Name = "itemAddedOrderPnl";
-            this.itemAddedOrderPnl.Size = new System.Drawing.Size(694, 940);
+            this.itemAddedOrderPnl.Size = new System.Drawing.Size(678, 940);
             this.itemAddedOrderPnl.TabIndex = 4;
             this.itemAddedOrderPnl.Visible = false;
             this.itemAddedOrderPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.itemAddedOrderPnl_Paint);
@@ -273,9 +278,9 @@ namespace ChapeauUI
             // 
             this.commentsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.commentsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.commentsTextBox.Location = new System.Drawing.Point(31, 588);
+            this.commentsTextBox.Location = new System.Drawing.Point(31, 583);
             this.commentsTextBox.Name = "commentsTextBox";
-            this.commentsTextBox.Size = new System.Drawing.Size(627, 209);
+            this.commentsTextBox.Size = new System.Drawing.Size(627, 213);
             this.commentsTextBox.TabIndex = 7;
             this.commentsTextBox.Text = "";
             // 
@@ -292,15 +297,70 @@ namespace ChapeauUI
             // 
             // itemGridView
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(201)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(201)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.itemGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.itemGridView.BackgroundColor = System.Drawing.Color.White;
+            this.itemGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.itemGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(56)))), ((int)(((byte)(59)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(56)))), ((int)(((byte)(59)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.itemGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.itemGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.itemGridView.Location = new System.Drawing.Point(-1, 6);
+            this.itemGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MenuItemId,
+            this.productName,
+            this.amount});
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.itemGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            this.itemGridView.EnableHeadersVisualStyles = false;
+            this.itemGridView.GridColor = System.Drawing.Color.White;
+            this.itemGridView.Location = new System.Drawing.Point(0, 52);
+            this.itemGridView.MultiSelect = false;
             this.itemGridView.Name = "itemGridView";
             this.itemGridView.ReadOnly = true;
+            this.itemGridView.RowHeadersVisible = false;
             this.itemGridView.RowHeadersWidth = 51;
             this.itemGridView.RowTemplate.Height = 29;
             this.itemGridView.Size = new System.Drawing.Size(679, 532);
             this.itemGridView.TabIndex = 4;
             this.itemGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemGridView_CellClick);
+            // 
+            // MenuItemId
+            // 
+            this.MenuItemId.HeaderText = "id";
+            this.MenuItemId.MinimumWidth = 6;
+            this.MenuItemId.Name = "MenuItemId";
+            this.MenuItemId.ReadOnly = true;
+            this.MenuItemId.Width = 50;
+            // 
+            // productName
+            // 
+            this.productName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.productName.HeaderText = "name";
+            this.productName.MinimumWidth = 6;
+            this.productName.Name = "productName";
+            this.productName.ReadOnly = true;
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "amount";
+            this.amount.MinimumWidth = 6;
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            this.amount.Width = 70;
             // 
             // clearAllButton
             // 
@@ -372,7 +432,6 @@ namespace ChapeauUI
             this.labelTitleItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelTitleItems.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTitleItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-
             this.labelTitleItems.Location = new System.Drawing.Point(14, 20);
             this.labelTitleItems.Name = "labelTitleItems";
             this.labelTitleItems.Padding = new System.Windows.Forms.Padding(20);
@@ -411,6 +470,7 @@ namespace ChapeauUI
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(720, 1097);
+            this.Controls.Add(this.itemGridView);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.panelItems);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
@@ -456,5 +516,8 @@ namespace ChapeauUI
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Label bottomBarLabel;
         private System.Windows.Forms.Label labelBorder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MenuItemId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
     }
 }

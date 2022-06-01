@@ -92,16 +92,17 @@ namespace ChapeauUI
                 Name = "btnAddOrderItems",
                 UseColumnTextForButtonValue = true,
                 FlatStyle = FlatStyle.Flat,
+                Width = 50
             });
             itemGridView.Columns.Add(
                 new DataGridViewButtonColumn
                 {
-                    HeaderText = "Remove",
+                    HeaderText = "Min",
                     Text = "-",
                     Name = "btnAddOrderItems",
                     UseColumnTextForButtonValue = true,
-                    FlatStyle = FlatStyle.Flat
-
+                    FlatStyle = FlatStyle.Flat,
+                    Width = 50
                 });
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
@@ -176,7 +177,6 @@ namespace ChapeauUI
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
                     if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 0)
                     {
-                        itemGridView.Rows[e.RowIndex].Cells[3].Style.BackColor = Color.DarkGray;
                         List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
@@ -294,7 +294,11 @@ namespace ChapeauUI
             menuItemType = MenuItemType.Drinks;
             labelSelectedMenuName.Text = "DRINKS";
             panelSelectMenu.Hide();
+            PanelChooseMenu.Hide();
+            menu.Hide();
+            UpdateMenuList(false);
             CreateButtons();
+            menu.Show();
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {
@@ -320,6 +324,7 @@ namespace ChapeauUI
         }
         private void RemoveAllControlsMenu()
         {
+           // hide and show in order to hide visual bugs from .controls.Clear()
            menu.Hide();
            menu.Controls.Clear();
            menu.Show();
