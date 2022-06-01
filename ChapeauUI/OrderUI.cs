@@ -320,9 +320,9 @@ namespace ChapeauUI
         }
         private void RemoveAllControlsMenu()
         {
-
+           menu.Hide();
            menu.Controls.Clear();
-
+           menu.Show();
         }
     }
 }
