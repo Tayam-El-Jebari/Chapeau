@@ -13,8 +13,9 @@ namespace ChapeauUI
     {
         private List<MenuItem> menuList;
         private MenuItemType menuItemType;
+        private MenuType menuType;
         private Reservation reservation;
-        int staffId;
+        private int staffId;
 
         public OrderUI(Reservation reservation, int staffId)
         {
@@ -23,12 +24,15 @@ namespace ChapeauUI
             labelTable.Text += $"{reservation.TableId} :";
             CreateUIComponents();
             this.reservation = reservation;
+            UpdateMenuList();
+
         }
         private void CreateButtons()
         {
+            menu.Hide();
             foreach (MenuItem menuItem in menuList)
             {
-                if (menuItem.MenuItemType == menuItemType)
+                if ((menuItem.MenuItemType == menuItemType && menuItem.MenuType == menuType) || (menuType == MenuType.Drink && menuItem.MenuType == menuType))
                 {
                     LeftAndRightTextButton menuItemButton = new LeftAndRightTextButton()
                     {
@@ -73,11 +77,12 @@ namespace ChapeauUI
                     menu.Controls.Add(menuItemButton);
                 }
             }
+            menu.Show();
         }
-        private void UpdateMenuList(bool selectedLunchMenu)
+        private void UpdateMenuList()
         {
             MenuItemService menuItemService = new MenuItemService();
-            menuList = menuItemService.GetMenuItems(selectedLunchMenu);
+            menuList = menuItemService.GetMenuItems();
         }
         private void CreateUIComponents()
         {
@@ -107,7 +112,7 @@ namespace ChapeauUI
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
         {
-            List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
+            List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType && x.MenuType == menuType);
             for (int i = 0; i < menu.Controls.Count; i++)
             {
                 if (menu.Controls[i] == sender)
@@ -160,6 +165,9 @@ namespace ChapeauUI
         private void clearAllButton_Click(object sender, EventArgs e)
         {
             itemGridView.Rows.Clear();
+            UpdateMenuList();
+            CreateButtons();
+    
         }
 
         private void itemGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -251,71 +259,60 @@ namespace ChapeauUI
 
         }
 
-        private void buttonLunch_Click(object sender, EventArgs e)
+        private void buttonChooseMenuAndMenuType_Click(object sender, EventArgs e)
         {
-            labelTitleItems.Text = "LUNCH 11:00 - 16:00";
-            UpdateMenuList(true);
             PanelChooseMenu.Hide();
-        }
-
-        private void buttonDinner_Click(object sender, EventArgs e)
-        {
-            labelTitleItems.Text = "DINNER 17:00 - 21:00";
-            UpdateMenuList(false);
-            PanelChooseMenu.Hide();
-        }
-
-        private void buttonStarters_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.Starter;
-            labelSelectedMenuName.Text = "STARTERS";
+            if (sender == buttonStarters)
+            {
+                menuItemType = MenuItemType.Starter;
+            }
+            else if(sender == buttonMainCourse)
+            {
+                menuItemType = MenuItemType.MainCourse;
+            }
+            else if(sender == buttonDesserts)
+            {
+                menuItemType = MenuItemType.Desserts;
+            }
+            else if(sender == buttonDrinks)
+            {
+                menuType = MenuType.Drink;
+                menuItemType = MenuItemType.Drink; 
+            }
+            else
+            {
+                if (sender == buttonLunch)
+                {
+                    menuType = MenuType.Lunch;
+                    labelTitleItems.Text = $"{menuType} 11:00 - 16:00";
+                }
+                else if (sender == buttonDinner)
+                {
+                    menuType = MenuType.Dinner;
+                    labelTitleItems.Text = $"{menuType} 11:00 - 16:00";
+                }
+                panelSelectMenu.Show();
+                return;
+            }
             panelSelectMenu.Hide();
             CreateButtons();
-        }
+            labelSelectedMenuName.Text = $"{menuItemType}";
 
-        private void buttonMainCourse_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.MainCourse;
-            labelSelectedMenuName.Text = "MAIN COURSE";
-            panelSelectMenu.Hide();
-            CreateButtons();
-        }
-
-        private void buttonDesserts_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.Desserts;
-            labelSelectedMenuName.Text = "DESSERTS";
-            panelSelectMenu.Hide();
-            CreateButtons();
-        }
-
-        private void buttonDrinks_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.Drinks;
-            labelSelectedMenuName.Text = "DRINKS";
-            panelSelectMenu.Hide();
-            PanelChooseMenu.Hide();
-            menu.Hide();
-            UpdateMenuList(false);
-            CreateButtons();
-            menu.Show();
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {
             RemoveAllControlsMenu();
-            if (!panelSelectMenu.Visible)
+            if(menuType == MenuType.Drink)
+            {
+                PanelChooseMenu.Visible = true;
+            }
+            else if (!panelSelectMenu.Visible)
             {
                 panelSelectMenu.Visible = true;
             }
             else if(!PanelChooseMenu.Visible)
             {
-                ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Are you sure you would like to return?\nthis action will reset the order.");
-                confirmBackButton.ShowDialog();
-                if (confirmBackButton.DialogResult == DialogResult.Yes)
-                {
-                    PanelChooseMenu.Visible = true;
-                    itemGridView.Rows.Clear();
-                }
+                PanelChooseMenu.Visible = true;
             }
             else
             {
@@ -324,7 +321,7 @@ namespace ChapeauUI
         }
         private void RemoveAllControlsMenu()
         {
-           // hide and show in order to hide visual bugs from .controls.Clear()
+           // hide and show in order to prevent visual bugs from .controls.Clear() that is caused from there being too many controls.
            menu.Hide();
            menu.Controls.Clear();
            menu.Show();

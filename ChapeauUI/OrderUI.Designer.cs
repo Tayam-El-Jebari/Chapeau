@@ -46,12 +46,12 @@ namespace ChapeauUI
             this.buttonMainCourse = new System.Windows.Forms.Button();
             this.buttonStarters = new System.Windows.Forms.Button();
             this.itemAddedOrderPnl = new System.Windows.Forms.Panel();
-            this.commentsTextBox = new System.Windows.Forms.RichTextBox();
-            this.labelCommentsTitle = new System.Windows.Forms.Label();
             this.itemGridView = new System.Windows.Forms.DataGridView();
             this.MenuItemId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.commentsTextBox = new System.Windows.Forms.RichTextBox();
+            this.labelCommentsTitle = new System.Windows.Forms.Label();
             this.clearAllButton = new System.Windows.Forms.Button();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.viewOrder = new System.Windows.Forms.Button();
@@ -150,7 +150,7 @@ namespace ChapeauUI
             this.buttonLunch.TabIndex = 0;
             this.buttonLunch.Text = "LUNCH";
             this.buttonLunch.UseVisualStyleBackColor = true;
-            this.buttonLunch.Click += new System.EventHandler(this.buttonLunch_Click);
+            this.buttonLunch.Click += new System.EventHandler(this.buttonChooseMenuAndMenuType_Click);
             // 
             // buttonDinner
             // 
@@ -167,7 +167,7 @@ namespace ChapeauUI
             this.buttonDinner.TabIndex = 0;
             this.buttonDinner.Text = "DINNER";
             this.buttonDinner.UseVisualStyleBackColor = false;
-            this.buttonDinner.Click += new System.EventHandler(this.buttonDinner_Click);
+            this.buttonDinner.Click += new System.EventHandler(this.buttonChooseMenuAndMenuType_Click);
             // 
             // buttonDrinks
             // 
@@ -184,7 +184,7 @@ namespace ChapeauUI
             this.buttonDrinks.TabIndex = 2;
             this.buttonDrinks.Text = "DRINKS";
             this.buttonDrinks.UseVisualStyleBackColor = false;
-            this.buttonDrinks.Click += new System.EventHandler(this.buttonDrinks_Click);
+            this.buttonDrinks.Click += new System.EventHandler(this.buttonChooseMenuAndMenuType_Click);
             // 
             // panelSelectMenu
             // 
@@ -223,7 +223,7 @@ namespace ChapeauUI
             this.buttonDesserts.TabIndex = 1;
             this.buttonDesserts.Text = "DESSERTS";
             this.buttonDesserts.UseVisualStyleBackColor = false;
-            this.buttonDesserts.Click += new System.EventHandler(this.buttonDesserts_Click);
+            this.buttonDesserts.Click += new System.EventHandler(this.buttonChooseMenuAndMenuType_Click);
             // 
             // buttonMainCourse
             // 
@@ -240,7 +240,7 @@ namespace ChapeauUI
             this.buttonMainCourse.TabIndex = 0;
             this.buttonMainCourse.Text = "MAIN COURSE";
             this.buttonMainCourse.UseVisualStyleBackColor = false;
-            this.buttonMainCourse.Click += new System.EventHandler(this.buttonMainCourse_Click);
+            this.buttonMainCourse.Click += new System.EventHandler(this.buttonChooseMenuAndMenuType_Click);
             // 
             // buttonStarters
             // 
@@ -257,12 +257,13 @@ namespace ChapeauUI
             this.buttonStarters.TabIndex = 0;
             this.buttonStarters.Text = "STARTERS";
             this.buttonStarters.UseVisualStyleBackColor = false;
-            this.buttonStarters.Click += new System.EventHandler(this.buttonStarters_Click);
+            this.buttonStarters.Click += new System.EventHandler(this.buttonChooseMenuAndMenuType_Click);
             // 
             // itemAddedOrderPnl
             // 
             this.itemAddedOrderPnl.AutoScroll = true;
             this.itemAddedOrderPnl.BackColor = System.Drawing.Color.Transparent;
+            this.itemAddedOrderPnl.Controls.Add(this.itemGridView);
             this.itemAddedOrderPnl.Controls.Add(this.commentsTextBox);
             this.itemAddedOrderPnl.Controls.Add(this.labelCommentsTitle);
             this.itemAddedOrderPnl.Controls.Add(this.clearAllButton);
@@ -273,27 +274,6 @@ namespace ChapeauUI
             this.itemAddedOrderPnl.TabIndex = 4;
             this.itemAddedOrderPnl.Visible = false;
             this.itemAddedOrderPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.itemAddedOrderPnl_Paint);
-            // 
-            // commentsTextBox
-            // 
-            this.commentsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.commentsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.commentsTextBox.Location = new System.Drawing.Point(31, 583);
-            this.commentsTextBox.Name = "commentsTextBox";
-            this.commentsTextBox.Size = new System.Drawing.Size(627, 213);
-            this.commentsTextBox.TabIndex = 7;
-            this.commentsTextBox.Text = "";
-            // 
-            // labelCommentsTitle
-            // 
-            this.labelCommentsTitle.AutoSize = true;
-            this.labelCommentsTitle.BackColor = System.Drawing.Color.Transparent;
-            this.labelCommentsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelCommentsTitle.Location = new System.Drawing.Point(10, 539);
-            this.labelCommentsTitle.Name = "labelCommentsTitle";
-            this.labelCommentsTitle.Size = new System.Drawing.Size(144, 29);
-            this.labelCommentsTitle.TabIndex = 5;
-            this.labelCommentsTitle.Text = "Comments:";
             // 
             // itemGridView
             // 
@@ -327,7 +307,7 @@ namespace ChapeauUI
             this.itemGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.itemGridView.EnableHeadersVisualStyles = false;
             this.itemGridView.GridColor = System.Drawing.Color.White;
-            this.itemGridView.Location = new System.Drawing.Point(0, 52);
+            this.itemGridView.Location = new System.Drawing.Point(0, 0);
             this.itemGridView.MultiSelect = false;
             this.itemGridView.Name = "itemGridView";
             this.itemGridView.ReadOnly = true;
@@ -361,6 +341,27 @@ namespace ChapeauUI
             this.amount.Name = "amount";
             this.amount.ReadOnly = true;
             this.amount.Width = 70;
+            // 
+            // commentsTextBox
+            // 
+            this.commentsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.commentsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.commentsTextBox.Location = new System.Drawing.Point(31, 583);
+            this.commentsTextBox.Name = "commentsTextBox";
+            this.commentsTextBox.Size = new System.Drawing.Size(627, 213);
+            this.commentsTextBox.TabIndex = 7;
+            this.commentsTextBox.Text = "";
+            // 
+            // labelCommentsTitle
+            // 
+            this.labelCommentsTitle.AutoSize = true;
+            this.labelCommentsTitle.BackColor = System.Drawing.Color.Transparent;
+            this.labelCommentsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCommentsTitle.Location = new System.Drawing.Point(10, 539);
+            this.labelCommentsTitle.Name = "labelCommentsTitle";
+            this.labelCommentsTitle.Size = new System.Drawing.Size(144, 29);
+            this.labelCommentsTitle.TabIndex = 5;
+            this.labelCommentsTitle.Text = "Comments:";
             // 
             // clearAllButton
             // 
@@ -470,7 +471,6 @@ namespace ChapeauUI
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(720, 1097);
-            this.Controls.Add(this.itemGridView);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.panelItems);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
