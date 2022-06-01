@@ -101,7 +101,7 @@ namespace ChapeauDAL
             ExecuteEditQuery(query, sqlParameters);
             foreach (OrderItem orderItem in orderedItem)
             {
-                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount);" +
+                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount, status) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount, 0);" +
                     "UPDATE [menuItem] SET [stock] = [stock] - @amount WHERE [menuItem_ID] = @menuItemId;" +
                     "UPDATE [Table] SET [Waiter_id] = @staffId WHERE [table_ID] = @tableId;";
                 sqlParameters = new SqlParameter[5]
