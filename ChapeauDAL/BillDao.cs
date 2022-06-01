@@ -58,7 +58,7 @@ namespace ChapeauDAL
             string query = "SELECT oi.menuItem_ID, productName, price, amount FROM Order_Item AS OI" +
             "JOIN[Order] as o ON o.order_id = OI.order_id" +
             "JOIN[menuItem] AS M ON oi.menuItem_ID = m.menuItem_ID" +
-            "WHERE o.reservation_Id = @reservationId AND OI.menuItem_ID IN(SELECT MenuItem_Id FROM Drink_Item WHERE isAlcoholic = 0)"+
+            "WHERE o.reservation_Id = @reservationId AND OI.menuItem_ID IN(SELECT MenuItem_Id FROM Drink_Item WHERE isAlcoholic = 0)" +
             "ORDER BY oi.menuItem_ID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservationId", reservationId);

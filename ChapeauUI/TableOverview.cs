@@ -47,9 +47,9 @@ namespace ChapeauUI
             if (menuChoice == MenuChoice.TakeOrder)
             {
                 ReservationService reservationService = new ReservationService();
-                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr));
+                //OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr));
                 this.Hide();
-                orderUI.Show();
+                //orderUI.Show();
             }
             else if (menuChoice == MenuChoice.ShowBill)
             {

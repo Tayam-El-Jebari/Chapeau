@@ -10,5 +10,6 @@ namespace ChapeauModel
 		public int Amount { get; set; }
 
 	}
+
 }
 

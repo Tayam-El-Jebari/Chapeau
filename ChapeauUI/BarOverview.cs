@@ -16,7 +16,7 @@ namespace ChapeauUI
     {
         public BarOverview()
         {
-            InitializeComponent();
+            //InitializeComponent();
             Bar();
         }
         private void Bar()
@@ -26,17 +26,17 @@ namespace ChapeauUI
             OrderService orderService = new OrderService();
             List<OrderItem> ordersDrinkList = orderService.GetActiveDrinkOrders();
 
-            barListView.Clear();
-            barListView.View = View.Details;
-            barListView.FullRowSelect = true;
-            barListView.Columns.Add("Order ID", 100);
-            barListView.Columns.Add("Order", 100); //productname
-            barListView.Columns.Add("Amount of order", 100);
-            barListView.Columns.Add("Description", 100);
-            barListView.Columns.Add("Comments", 100);
-            barListView.Columns.Add("Is Finished", 100);//true/false
-            barListView.Columns.Add("Time of ordering", 100);
-            foreach (OrderItem order in ordersDrinkList)
+            //barListView.Clear();
+            //barListView.View = View.Details;
+            //barListView.FullRowSelect = true;
+            //barListView.Columns.Add("Order ID", 100);
+            //barListView.Columns.Add("Order", 100); //productname
+            //barListView.Columns.Add("Amount of order", 100);
+            //barListView.Columns.Add("Description", 100);
+            //barListView.Columns.Add("Comments", 100);
+            //barListView.Columns.Add("Is Finished", 100);//true/false
+            //barListView.Columns.Add("Time of ordering", 100);
+            //foreach (OrderItem order in ordersDrinkList)
             {
                 //ListViewItem li = new ListViewItem(order.OrderId.ToString());
                 //li.SubItems.Add(order.ProductName);
@@ -51,7 +51,7 @@ namespace ChapeauUI
                 list.Height = list.Height - 10;
                 list.Controls.Add(barListView);*/
             }
-            ColorListView(barListView);
+            //ColorListView(barListView);
         }
         private void barListView_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -70,10 +70,10 @@ namespace ChapeauUI
         private void finishedDrinkButton_Click(object sender, EventArgs e)
         {
             
-            Order order = (Order)barListView.SelectedItems[0].Tag;
-            order.IsFinished = true;
-            OrderService orderService = new OrderService();
-            orderService.GetUpdateStateIsFinished(order.IsFinished);
+            //Order order = (Order)barListView.SelectedItems[0].Tag;
+            //order.IsFinished = true;
+            //OrderService orderService = new OrderService();
+            //orderService.GetUpdateStateIsFinished(order.IsFinished);
         }
     }
 }

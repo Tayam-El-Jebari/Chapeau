@@ -38,7 +38,7 @@ namespace ChapeauLogic
             Bill bill = new Bill();
             List<OrderItem> lowVatItems = SortList(billdb.GetLowVAT(reservationId));
             List<OrderItem> highVatItems = SortList(billdb.GetHighVAT(reservationId));
-            
+
 
             foreach (OrderItem hvItem in highVatItems)
             {
