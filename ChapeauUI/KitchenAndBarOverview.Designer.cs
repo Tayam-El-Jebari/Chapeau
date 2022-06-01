@@ -37,7 +37,6 @@ namespace ChapeauUI
             this.buttonLogOut = new System.Windows.Forms.Button();
             this.barListView = new System.Windows.Forms.ListView();
             this.labelBar = new System.Windows.Forms.Label();
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.finishedDrinkButton = new System.Windows.Forms.Button();
             this.radioButtonKitchen = new System.Windows.Forms.RadioButton();
             this.radioButtonBar = new System.Windows.Forms.RadioButton();
@@ -192,7 +191,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button buttonLogOut;
         private System.Windows.Forms.ListView barListView;
         private System.Windows.Forms.Label labelBar;
-        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Button finishedDrinkButton;
         private System.Windows.Forms.RadioButton radioButtonKitchen;
         private System.Windows.Forms.RadioButton radioButtonBar;

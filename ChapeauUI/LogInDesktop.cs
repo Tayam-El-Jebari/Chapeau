@@ -35,8 +35,8 @@ namespace ChapeauUI
                 Staff loggedInStaffMemeber = staffService.CheckPassword(staffID, hashedPassword);
                 if (staffService.CheckIfBartender(staffID))
                 {
-                    BarOverview barOverview = new BarOverview();
-                    barOverview.Show();
+                    KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview();
+                    kitchenAndBarOverview.Show();
                     this.Hide();
                 }
                 else if (staffService.CheckIfChef(staffID))

@@ -29,7 +29,7 @@ namespace ChapeauUI
             //    TableId = 4
             //};
             //Application.Run(new OrderUI(reservation, 8));
-            Application.Run(new StartScreen());
+            Application.Run(new KitchenAndBarOverview());
         }
     }
 }

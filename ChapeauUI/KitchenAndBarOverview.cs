@@ -85,9 +85,9 @@ namespace ChapeauUI
             {
                 OrderItem order = new OrderItem()
                 {
+                    Status = Status.Ready,
                     Order = new Order()
                     {
-                        IsFinished = true,
                         OrderId = int.Parse(kitchenListView.SelectedItems[0].SubItems[0].Text),
                     },
                     MenuItem = new MenuItem()
@@ -110,27 +110,26 @@ namespace ChapeauUI
 
         private void KitchenOverview_Load(object sender, EventArgs e)
         {
-            if (radioButtonKitchen.Checked)
-            {
+
                 System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
                 timer1.Interval = 30000;//30 seconds
                 timer1.Tick += new System.EventHandler(timer1_Tick);
                 timer1.Start();
-            }
-            else if (radioButtonBar.Checked)
-            {
-                System.Windows.Forms.Timer timer2 = new System.Windows.Forms.Timer();
-                timer2.Interval = 30000;//30 seconds
-                timer2.Tick += new System.EventHandler(timer2_Tick);
-                timer2.Start();
-            }
+
+            
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            Kitchen();
 
+            if (radioButtonKitchen.Checked)
+            {
+                Kitchen();
+            }
+            else if (radioButtonBar.Checked)
+            {
+                Bar();
+            }
         }
-
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -194,9 +193,9 @@ namespace ChapeauUI
             { 
             OrderItem order = new OrderItem()
             {
+                Status = Status.Ready,
                 Order = new Order()
                 {
-                    IsFinished = true,
                     OrderId = int.Parse(barListView.SelectedItems[0].SubItems[0].Text),
                 },
                 MenuItem = new MenuItem()
