@@ -23,7 +23,6 @@ namespace ChapeauUI
             InitializeComponent();
             hideAllPanels();
             startMenuPnl.Show();
-            //listView1.Columns.Add()
         }
 
         private void checkTimeSinceOrderPlaced()
@@ -51,11 +50,16 @@ namespace ChapeauUI
 
                 OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember.Staff_ID);
                 this.Hide();
-                //orderUI.Show();
+                orderUI.ShowDialog();
+                this.Show();
             }
             else if (menuChoice == MenuChoice.ShowBill)
             {
-
+                ReservationService reservationService = new ReservationService();
+                BillUI billUI = new BillUI();
+                this.Hide();
+                billUI.ShowDialog();
+                this.Show();
             }
             else if (menuChoice == MenuChoice.MakeReservation)
             {
