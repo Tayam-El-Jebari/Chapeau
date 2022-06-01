@@ -68,6 +68,7 @@ namespace ChapeauUI
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.IDnummerTextBox);
             this.Name = "LogInDesktop";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LogInDesktop";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -20,15 +20,17 @@ namespace ChapeauUI
         private void startForHandheldbtn_Click(object sender, EventArgs e)
         {
             InlogForm inlogForm = new InlogForm();
-            inlogForm.Show();
             this.Hide();
+            inlogForm.ShowDialog();
+            this.Show();
         }
 
         private void startAsDesktopbts_Click(object sender, EventArgs e)
         {
             LogInDesktop logInDesktop = new LogInDesktop();
-            logInDesktop.Show();
             this.Hide();
+            logInDesktop.Show();
+            this.Show();
         }
     }
 }

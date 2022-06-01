@@ -61,6 +61,7 @@ namespace ChapeauUI
             this.Controls.Add(this.startForHandheldbtn);
             this.Controls.Add(this.startAsDesktopbts);
             this.Name = "StartScreen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StartScreen";
             this.ResumeLayout(false);
 
