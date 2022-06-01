@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChapeauModel;
 
 // using chapeau model (temp)
 using ChapeauModel;
@@ -29,7 +30,6 @@ namespace ChapeauUI
             //};
             //Application.Run(new OrderUI(reservation, 8));
             Application.Run(new StartScreen());
-
         }
     }
 }
