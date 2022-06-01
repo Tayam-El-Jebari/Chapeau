@@ -208,8 +208,9 @@ namespace ChapeauUI
             OrderService orderService = new OrderService();
             for(int i = 0; i < ordersReadyGridView.SelectedRows.Count; i++)
             {
-
+                orderService.UpdateStateIsdelivered(Convert.ToInt32(ordersReadyGridView.SelectedCells[i].Value));
             }
+            fillReadyOrderDataGrid();
         }
     }
 }

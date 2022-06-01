@@ -43,6 +43,11 @@ namespace ChapeauLogic
         {
             return orderDao.GetLastOrders();
         }
+
+        public void UpdateStateIsdelivered(int orderID)
+        {
+            orderDao.UpdateStateIsdelivered(orderID);
+        }
     }
 }
 

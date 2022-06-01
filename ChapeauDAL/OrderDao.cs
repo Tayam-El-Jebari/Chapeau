@@ -40,7 +40,7 @@ namespace ChapeauDAL
 
         public List<Order> GetLastOrders()
         {
-            string query = "SELECT o.order_id, o.table_Id, o.comments, o.isFinished, MAX(o.timePlaced) AS timePlaced FROM [Order] AS o JOIN [Reservation] AS r ON r.reservation_id = o.reservation_Id WHERE r.IsPresent = 1 AND o.isDelivered IS NULL GROUP BYo.table_Id";
+            string query = "SELECT o.order_id, o.table_Id, o.comments, o.isFinished, MAX(o.timePlaced) AS timePlaced FROM [Order] AS o JOIN [Reservation] AS r ON r.reservation_id = o.reservation_Id WHERE r.IsPresent = 1 AND o.isDelivered IS NULL GROUP BY o.table_Id";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -100,6 +100,14 @@ namespace ChapeauDAL
             string query = $"UPDATE Order SET IsFinished=@IsFinished WHERE IsFinished='{isFinished}'";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@IsFinished", isFinished);
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void UpdateStateIsdelivered(int orderID)
+        {
+            string query = $"UPDATE [Order] SET IsDelived=1 WHERE order_Id=@orderID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderID", orderID);
             ExecuteEditQuery(query, sqlParameters);
         }
 
