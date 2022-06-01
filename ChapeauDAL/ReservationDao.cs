@@ -41,7 +41,7 @@ namespace ChapeauDAL
 
         public void MarkReservationPresent(int reservationID)
         {
-            string query = "UPDATE Reservations SET isPresent = 1 WHERE reservation_id = @reservation_id";
+            string query = "UPDATE Reservation SET isPresent = 1 WHERE reservation_id = @reservation_id";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservation_id", reservationID);
             ExecuteEditQuery(query, sqlParameters);
