@@ -43,16 +43,16 @@ namespace ChapeauLogic
             {
                 foreach (OrderItem hvItem in highVatItems)
                 {
-                    VAT += (hvItem.Price * HighVat);
-                    TotalPrice += (hvItem.Amount * hvItem.Price);
+                    VAT += (hvItem.MenuItem.Price * HighVat);
+                    TotalPrice += (hvItem.Amount * hvItem.MenuItem.Price);
                 }
             }
             if (lowVatItems != null)
             {
                 foreach (OrderItem lvItem in lowVatItems)
                 {
-                    VAT += (lvItem.Price * LowVat);
-                    TotalPrice += (lvItem.Amount * lvItem.Price);
+                    VAT += (lvItem.MenuItem.Price * LowVat);
+                    TotalPrice += (lvItem.Amount * lvItem.MenuItem.Price);
                 }
             }
             foreach (OrderItem lvItem in lowVatItems)
@@ -72,12 +72,11 @@ namespace ChapeauLogic
         {
             for (int i = 0; i < orderItems.Count - 1; i++)
             {
-                if (orderItems[i].MenuItemId == orderItems[i + 1].MenuItemId)
+                if (orderItems[i].MenuItem.MenuItemId == orderItems[i + 1].MenuItem.MenuItemId)
                 {
                         orderItems[i + 1].Amount += orderItems[i].Amount;
                         orderItems.Remove(orderItems[i]);
                 }
-                            
             }
             return orderItems;
         }

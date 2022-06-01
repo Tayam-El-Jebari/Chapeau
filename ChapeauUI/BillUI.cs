@@ -45,7 +45,7 @@ namespace ChapeauUI
             billGrid.Columns[2].Width = 200;
             for (int i = 0; i < bill.MenuItems.Count; i++)
             {
-                billGrid.Rows.Add(bill.MenuItems[i].ProductName, bill.MenuItems[i].Amount, bill.MenuItems[i].Price);
+                billGrid.Rows.Add(bill.MenuItems[i].MenuItem.ProductName, bill.MenuItems[i].Amount, bill.MenuItems[i].MenuItem.Price);
             };
         }
         public void InitFont(Label label)

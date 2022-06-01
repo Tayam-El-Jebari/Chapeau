@@ -86,9 +86,12 @@ namespace ChapeauDAL
                 {
                     OrderItem orderItem = new OrderItem()
                     {
-                        MenuItemId = (int)dr["menuItem_ID"],
-                        ProductName = (string)dr["productName"],
-                        Price = (double)dr["price"],
+                        MenuItem = new MenuItem()
+                        {
+                            MenuItemId = (int)dr["menuItem_ID"],
+                            ProductName = (string)dr["productName"],
+                            Price = (double)dr["price"],
+                        },
                         Amount = (int)dr["amount"]
                     };
 
