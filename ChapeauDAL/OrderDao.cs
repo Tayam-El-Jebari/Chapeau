@@ -13,7 +13,7 @@ namespace ChapeauDAL
     {
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {
-            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE t.Waiter_ID = @staffID AND isFinished = 1 AND isDelived IS NULL";
+            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE t.Waiter_ID = @staffID AND isFinished = 1 AND isDelivered IS NULL";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
@@ -33,7 +33,7 @@ namespace ChapeauDAL
 
         public List<Order> GetLastOrders()
         {
-            string query = "SELECT o.order_id, o.table_Id, o.comments, o.isFinished, MAX(o.timePlaced) AS timePlaced FROM [Order] AS o JOIN [Reservation] AS r ON r.reservation_id = o.reservation_Id WHERE r.IsPresent = 1 AND o.isDelivered IS NULL GROUP BYo.table_Id";
+            string query = "SELECT o.order_id, o.table_Id, o.comments, o.isFinished, MAX(o.timePlaced) AS timePlaced FROM [Order] AS o JOIN [Reservation] AS r ON r.reservation_id = o.reservation_Id WHERE r.IsPresent = 1 AND o.isDelivered IS NULL GROUP BY o.table_Id";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -84,6 +84,14 @@ namespace ChapeauDAL
             new SqlParameter("@order_id", order.Order.OrderId),
             new SqlParameter("@menuItem_ID", order.MenuItem.MenuItemId),
             };
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void UpdateStateIsdelivered(int orderID)
+        {
+            string query = $"UPDATE [Order] SET IsDelivered=1 WHERE order_Id=@orderID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderID", orderID);
             ExecuteEditQuery(query, sqlParameters);
         }
 

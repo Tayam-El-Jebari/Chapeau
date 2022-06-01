@@ -45,8 +45,10 @@ namespace ChapeauUI
             // 
             this.passwordTextBox.Location = new System.Drawing.Point(13, 47);
             this.passwordTextBox.Name = "passwordTextBox";
+            this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(125, 27);
             this.passwordTextBox.TabIndex = 1;
+            this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // inlogBtn
             // 
