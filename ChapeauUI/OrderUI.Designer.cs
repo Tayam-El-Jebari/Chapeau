@@ -83,7 +83,7 @@ namespace ChapeauUI
             this.panelItems.Controls.Add(this.labelBorder);
             this.panelItems.Location = new System.Drawing.Point(-2, 50);
             this.panelItems.Name = "panelItems";
-            this.panelItems.Size = new System.Drawing.Size(701, 1440);
+            this.panelItems.Size = new System.Drawing.Size(700, 1440);
             this.panelItems.TabIndex = 1;
             // 
             // buttonBack
@@ -195,7 +195,7 @@ namespace ChapeauUI
             this.panelSelectMenu.Controls.Add(this.buttonStarters);
             this.panelSelectMenu.Location = new System.Drawing.Point(2, 3);
             this.panelSelectMenu.Name = "panelSelectMenu";
-            this.panelSelectMenu.Size = new System.Drawing.Size(696, 1390);
+            this.panelSelectMenu.Size = new System.Drawing.Size(700, 1390);
             this.panelSelectMenu.TabIndex = 6;
             // 
             // labelSelectMenu
@@ -268,9 +268,9 @@ namespace ChapeauUI
             this.itemAddedOrderPnl.Controls.Add(this.labelCommentsTitle);
             this.itemAddedOrderPnl.Controls.Add(this.clearAllButton);
             this.itemAddedOrderPnl.Controls.Add(this.buttonCreateOrder);
-            this.itemAddedOrderPnl.Location = new System.Drawing.Point(11, 115);
+            this.itemAddedOrderPnl.Location = new System.Drawing.Point(10, 115);
             this.itemAddedOrderPnl.Name = "itemAddedOrderPnl";
-            this.itemAddedOrderPnl.Size = new System.Drawing.Size(678, 940);
+            this.itemAddedOrderPnl.Size = new System.Drawing.Size(700, 1440);
             this.itemAddedOrderPnl.TabIndex = 4;
             this.itemAddedOrderPnl.Visible = false;
             this.itemAddedOrderPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.itemAddedOrderPnl_Paint);
@@ -314,7 +314,7 @@ namespace ChapeauUI
             this.itemGridView.RowHeadersVisible = false;
             this.itemGridView.RowHeadersWidth = 51;
             this.itemGridView.RowTemplate.Height = 29;
-            this.itemGridView.Size = new System.Drawing.Size(679, 532);
+            this.itemGridView.Size = new System.Drawing.Size(700, 532);
             this.itemGridView.TabIndex = 4;
             this.itemGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.itemGridView_CellClick);
             // 

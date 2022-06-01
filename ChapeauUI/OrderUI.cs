@@ -86,10 +86,6 @@ namespace ChapeauUI
         }
         private void CreateUIComponents()
         {
-            itemGridView.ColumnCount = 3;
-            itemGridView.Columns[0].Name = "Menu Nr";
-            itemGridView.Columns[1].Name = "Product Name";
-            itemGridView.Columns[2].Name = "amount added";
             itemGridView.Columns.Add(new DataGridViewButtonColumn
             {
                 HeaderText = "Add",
@@ -113,12 +109,14 @@ namespace ChapeauUI
         void BtnOrderAdd_Click(Object sender, EventArgs e)
         {
             List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType && x.MenuType == menuType);
+            int indexOfItem;
             for (int i = 0; i < menu.Controls.Count; i++)
             {
                 if (menu.Controls[i] == sender)
                 {
-                    --menuList[menuList.FindIndex(x => x == itemsWithMenuType[i / 2])].stock;
-                    if (menuList[menuList.FindIndex(x => x == itemsWithMenuType[i / 2])].stock == 0)
+                    indexOfItem = menuList.FindIndex(x => x == itemsWithMenuType[i / 2]);
+                    --menuList[indexOfItem].stock;
+                    if (menuList[indexOfItem].stock == 0)
                     {
                         menu.Controls[i].BackColor = Color.DarkGray;
                         menu.Controls[i].ForeColor = Color.LightGray;
@@ -164,25 +162,31 @@ namespace ChapeauUI
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            itemGridView.Rows.Clear();
-            UpdateMenuList();
-            CreateButtons();
+            ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Are you sure you wish to clear all?");
+            confirmBackButton.ShowDialog();
+            if (confirmBackButton.DialogResult == DialogResult.Yes)
+            {
+                itemGridView.Rows.Clear();
+                UpdateMenuList();
+                PanelChooseMenu.Visible = true;
+            }
+            
         }
-
         private void itemGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex != -1 && itemGridView.Rows[e.RowIndex].Cells[0].Value != null)
             {
+                int MenuListIndexOfItem = menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value));
                 if (e.ColumnIndex == 3)
                 {
-                    if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 0)
+                    if (menuList[MenuListIndexOfItem].stock == 0)
                     {
                         MessageBox.Show("Item is out of stock.");
                         return;
                     }
-                    menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock -= 1;
+                    menuList[MenuListIndexOfItem].stock -= 1;
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
-                    if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 0)
+                    if (menuList[MenuListIndexOfItem].stock == 0)
                     {
                         List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
                         for (int i = 0; i < menu.Controls.Count; i++)
@@ -200,9 +204,9 @@ namespace ChapeauUI
             else if (e.ColumnIndex == 4)
                 {
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
-                    menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock += 1;
+                    menuList[MenuListIndexOfItem].stock += 1;
                     List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
-                    if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 1)
+                    if (menuList[MenuListIndexOfItem].stock == 1)
                     {
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
@@ -242,7 +246,13 @@ namespace ChapeauUI
             confirm.ShowDialog();
             if (confirm.DialogResult == DialogResult.Yes)
             {
-                Order orderToSend = new Order() { Comments = commentsTextBox.Text, OrderItems = new List<OrderItem>(), Reservation = this.reservation };
+                Order orderToSend = new Order() 
+                { 
+                    Comments = commentsTextBox.Text, 
+                    OrderItems = new List<OrderItem>(), 
+                    Reservation = this.reservation 
+                
+                };
                 List<OrderItem> itemsForOrder = new List<OrderItem>();
                 for(int i = 0; i < itemGridView.Rows.Count - 1; i++)
                 {
@@ -256,7 +266,6 @@ namespace ChapeauUI
                 orderService.CreateCompleteOrder(orderToSend);
                 itemGridView.Rows.Clear();
             }
-
         }
 
         private void buttonChooseMenuAndMenuType_Click(object sender, EventArgs e)
