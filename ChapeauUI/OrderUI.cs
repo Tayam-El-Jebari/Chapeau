@@ -117,19 +117,19 @@ namespace ChapeauUI
             {
                 if (menu.Controls[i] == sender)
                 {
-                    menuList.Find(x => x == itemsWithMenuType[i / 2]).stock--;
+                    --menuList[menuList.FindIndex(x => x == itemsWithMenuType[i / 2])].stock;
+                    if (menuList[menuList.FindIndex(x => x == itemsWithMenuType[i / 2])].stock == 0)
+                    {
+                        menu.Controls[i].BackColor = Color.DarkGray;
+                        menu.Controls[i].ForeColor = Color.LightGray;
+                        menu.Controls[i].Text = "OUT OF STOCK";
+                        menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
+                    }
                     foreach (DataGridViewRow row in itemGridView.Rows)
                     {
                         if(Convert.ToInt32(row.Cells[0].Value) == itemsWithMenuType[i / 2].MenuItemId)
                         {
                             row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
-                            if (itemsWithMenuType[i / 2].stock == 0)
-                            {
-                                menu.Controls[i].BackColor = Color.DarkGray;
-                                menu.Controls[i].ForeColor = Color.LightGray;
-                                menu.Controls[i].Text = "OUT OF STOCK";
-                                menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
-                            }
                             return;
                         }
                     }
@@ -167,12 +167,11 @@ namespace ChapeauUI
             itemGridView.Rows.Clear();
             UpdateMenuList();
             CreateButtons();
-    
         }
 
         private void itemGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1 && Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value) != 0)
+            if (e.RowIndex != -1 && itemGridView.Rows[e.RowIndex].Cells[0].Value != null)
             {
                 if (e.ColumnIndex == 3)
                 {
@@ -197,8 +196,8 @@ namespace ChapeauUI
                                 }
                         }
                     }
-                }
-                else if (e.ColumnIndex == 4)
+            }
+            else if (e.ColumnIndex == 4)
                 {
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
                     menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock += 1;
@@ -243,17 +242,18 @@ namespace ChapeauUI
             confirm.ShowDialog();
             if (confirm.DialogResult == DialogResult.Yes)
             {
+                Order orderToSend = new Order() { Comments = commentsTextBox.Text, OrderItems = new List<OrderItem>(), Reservation = this.reservation };
                 List<OrderItem> itemsForOrder = new List<OrderItem>();
                 for(int i = 0; i < itemGridView.Rows.Count - 1; i++)
                 {
-                    itemsForOrder.Add(new OrderItem
+                    orderToSend.OrderItems.Add(new OrderItem
                     {
                         MenuItem = new MenuItem{MenuItemId = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value)},
                         Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
                     });
                 }
                 OrderService orderService = new OrderService();
-                orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text, staffId);
+                orderService.CreateCompleteOrder(orderToSend);
                 itemGridView.Rows.Clear();
             }
 

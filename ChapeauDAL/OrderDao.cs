@@ -96,18 +96,18 @@ namespace ChapeauDAL
         }
 
 
-        public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments, int staffId)
+        public void CreateCompleteOrder(Order order)
         {
             string query = "INSERT INTO [Order](reservation_Id, table_Id, isFinished, timePlaced, comments) VALUES (@reservationId, @tableId, 0, @currentTime, @comments);";
             SqlParameter[] sqlParameters = new SqlParameter[4]
             {
-                new SqlParameter("@reservationId", reservation.ReservationId),
-                new SqlParameter("@tableId", reservation.TableId),
+                new SqlParameter("@reservationId", order.Reservation.ReservationId),
+                new SqlParameter("@tableId", order.Reservation.TableId),
                 new SqlParameter("@currentTime", DateTime.Now),
-                new SqlParameter("@comments", comments),
+                new SqlParameter("@comments", order.Comments),
             };
             ExecuteEditQuery(query, sqlParameters);
-            foreach (OrderItem orderItem in orderedItem)
+            foreach (OrderItem orderItem in order.OrderItems)
             {
                 query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount, status) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount, 0);" +
                     "UPDATE [menuItem] SET [stock] = [stock] - @amount WHERE [menuItem_ID] = @menuItemId;" +
@@ -117,8 +117,8 @@ namespace ChapeauDAL
                      new SqlParameter("@orderId", 7),
                      new SqlParameter("@menuItemId", orderItem.MenuItem.MenuItemId),
                      new SqlParameter("@amount", orderItem.Amount),
-                     new SqlParameter("@staffId", staffId),
-                     new SqlParameter("@tableId", reservation.TableId),
+                     new SqlParameter("@staffId", order.StaffId),
+                     new SqlParameter("@tableId", order.Reservation.TableId),
                 };
                 ExecuteEditQuery(query, sqlParameters);
             }
