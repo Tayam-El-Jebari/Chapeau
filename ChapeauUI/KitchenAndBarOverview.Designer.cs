@@ -41,6 +41,7 @@ namespace ChapeauUI
             this.radioButtonKitchen = new System.Windows.Forms.RadioButton();
             this.radioButtonBar = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // labelKitchen
@@ -195,5 +196,6 @@ namespace ChapeauUI
         private System.Windows.Forms.RadioButton radioButtonKitchen;
         private System.Windows.Forms.RadioButton radioButtonBar;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer2;
     }
 }

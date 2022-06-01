@@ -29,7 +29,6 @@ namespace ChapeauUI
             OrderService orderService = new OrderService();
             OrderItem orderItem = new OrderItem();
             List<OrderItem> ordersFoodList = orderService.GetActiveFoodOrders();
-
             kitchenListView.Clear();
             kitchenListView.View = View.Details;
             kitchenListView.FullRowSelect = true;
@@ -59,9 +58,7 @@ namespace ChapeauUI
 
                 kitchenListView.Items.Add(li);
             }
-
             ColorListView(kitchenListView);
-
         }
 
         private void kitchenListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,9 +94,15 @@ namespace ChapeauUI
                     }
                 };
 
+ 
                 OrderService orderService = new OrderService();
                 orderService.GetUpdateStateIsFinished(order);
                 MessageBox.Show($"Order {order.Order.OrderId}: {order.MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
+                System.Windows.Forms.Timer timer2 = new System.Windows.Forms.Timer();
+                timer2.Interval = 5000;//5 seconds
+                timer2.Tick += new System.EventHandler(timer2_Tick);
+                timer2.Start();
+
             } 
 
             catch
@@ -144,16 +147,22 @@ namespace ChapeauUI
         }
         private void timer2_Tick(object sender, EventArgs e)
         {
-            Bar();
+            timer2.Stop();
+
+            if (radioButtonKitchen.Checked)
+            {
+                Kitchen();
+            }
+            else if (radioButtonBar.Checked)
+            {
+                Bar();
+            }
         }
         private void Bar()
         {
-            //do whatever you want 
             OrderService orderService = new OrderService();
             OrderItem orderItem = new OrderItem();
             List<OrderItem> ordersDrinkList = orderService.GetActiveDrinkOrders();
-
-
             barListView.Clear();
             barListView.View = View.Details;
             barListView.FullRowSelect = true;
@@ -183,7 +192,6 @@ namespace ChapeauUI
                 barListView.Items.Add(li);
             }
             ColorListView(barListView);
-
         }
  
 
@@ -205,9 +213,13 @@ namespace ChapeauUI
                 }
             };
 
-            OrderService orderService = new OrderService();
-            orderService.GetUpdateStateIsFinished(order);
-            MessageBox.Show($"Order {order.Order.OrderId}: {order.MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
+                OrderService orderService = new OrderService();
+                orderService.GetUpdateStateIsFinished(order);
+                MessageBox.Show($"Order {order.Order.OrderId}: {order.MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
+                System.Windows.Forms.Timer timer2 = new System.Windows.Forms.Timer();
+                timer2.Interval = 5000;//5 seconds
+                timer2.Tick += new System.EventHandler(timer2_Tick);
+                timer2.Start();
             }
             catch
             {

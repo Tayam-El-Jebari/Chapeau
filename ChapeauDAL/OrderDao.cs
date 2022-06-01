@@ -20,13 +20,13 @@ namespace ChapeauDAL
         }
         public List<OrderItem> GetActiveDrinkOrders()
         {
-            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order_Item].Status, [order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE [Order_Item].Status = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item) ORDER BY[order].timePlaced; ";
+            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].[description], [Order].comments, [Order_Item].[Status], [order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE[Order_Item].Status = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item) AND[Order_Item].Status = 0 ORDER BY[order].timePlaced; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<OrderItem> GetActiveFoodOrders()
         {
-            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order_Item].Status, [order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE [Order_Item].Status = 0) AND[order_Item].menuItem_ID NOT IN(select menuItem_ID FROM Drink_Item) ORDER BY[order].timePlaced; ";
+            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].[description], [Order].comments, [Order_Item].[Status], [order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE[Order_Item].Status = 0) AND[order_Item].menuItem_ID NOT IN(select menuItem_ID FROM Drink_Item) AND[Order_Item].Status = 0 ORDER BY[order].timePlaced; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -79,7 +79,7 @@ namespace ChapeauDAL
         }
         public void UpdateStateIsFinished(OrderItem order)
         {
-            string query = $"UPDATE [Order_Item] SET Status=@Status WHERE order_id=@order_id";
+            string query = $"UPDATE [Order_Item] SET Status=@Status WHERE order_id=@order_id AND menuItem_Id=@menuItem_id";
             SqlParameter[] sqlParameters = new SqlParameter[3] {
             new SqlParameter("@Status", order.Status),
             new SqlParameter("@order_id", order.Order.OrderId),
