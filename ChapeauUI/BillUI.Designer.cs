@@ -94,6 +94,7 @@ namespace ChapeauUI
             this.buttonTip.TabIndex = 7;
             this.buttonTip.Text = "ADD TIP";
             this.buttonTip.UseVisualStyleBackColor = false;
+            this.buttonTip.Click += new System.EventHandler(this.buttonTip_Click);
             // 
             // labelTip
             // 

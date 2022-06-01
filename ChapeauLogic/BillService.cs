@@ -32,9 +32,11 @@ namespace ChapeauLogic
         }
         public Bill MakeBill(int reservationId)
         {
-            double VAT = 0;
-            double TotalPrice = 0;
+            double vat = 0;
+            double totalPrice = 0;
 
+            ICalculateVAT calculateHighVAT = new CalculateHighVAT();
+            ICalculateVAT calculateLowVAT = new CalculateLowVAT();
             Bill bill = new Bill();
             List<OrderItem> lowVatItems = SortList(billdb.GetLowVAT(reservationId));
             List<OrderItem> highVatItems = SortList(billdb.GetHighVAT(reservationId));
@@ -43,16 +45,18 @@ namespace ChapeauLogic
             {
                 foreach (OrderItem hvItem in highVatItems)
                 {
-                    VAT += (hvItem.MenuItem.Price * HighVat);
-                    TotalPrice += (hvItem.Amount * hvItem.MenuItem.Price);
+                    double tempTotalPrice = (hvItem.Amount * hvItem.MenuItem.Price);
+                    vat += calculateHighVAT.CalculateVAT(tempTotalPrice);
+                    totalPrice += tempTotalPrice;
                 }
             }
             if (lowVatItems != null)
             {
                 foreach (OrderItem lvItem in lowVatItems)
                 {
-                    VAT += (lvItem.MenuItem.Price * LowVat);
-                    TotalPrice += (lvItem.Amount * lvItem.MenuItem.Price);
+                    double tempTotalPrice = (lvItem.Amount * lvItem.MenuItem.Price);
+                    vat += calculateLowVAT.CalculateVAT(tempTotalPrice);
+                    totalPrice += tempTotalPrice;
                 }
             }
             foreach (OrderItem lvItem in lowVatItems)
@@ -60,9 +64,9 @@ namespace ChapeauLogic
                 highVatItems.Add(lvItem);
             }
 
-            bill.TotalPriceInclVAT = TotalPrice;
-            bill.TotalPriceExclVAT = TotalPrice - VAT;
-            bill.TotalVAT = VAT;
+            bill.TotalPriceInclVAT = totalPrice;
+            bill.TotalPriceExclVAT = totalPrice - vat;
+            bill.TotalVAT = vat;
             bill.MenuItems = highVatItems;
 
             return bill;
