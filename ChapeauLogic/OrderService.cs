@@ -9,6 +9,7 @@ namespace ChapeauLogic
     {
 
         private OrderDao orderDao;
+
         public OrderService()
         {
             orderDao = new OrderDao();
@@ -21,9 +22,9 @@ namespace ChapeauLogic
         {
             return orderDao.GetActiveFoodOrders();
         }
-        public void GetUpdateStateIsFinished(bool isFinished)
+        public void GetUpdateStateIsFinished(OrderItem order)
         {
-            orderDao.UpdateStateIsFinished(isFinished);
+            orderDao.UpdateStateIsFinished(order);
         }//add een orderitem update
         public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments, int staffId)
         {

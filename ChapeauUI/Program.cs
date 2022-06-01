@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ChapeauModel;
 
 // using chapeau model (temp)
 using ChapeauModel;
@@ -20,8 +21,7 @@ namespace ChapeauUI
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            
+            Application.SetCompatibleTextRenderingDefault(false);            
             // DON'T FORGET TO REMOVE USING CHAPEAU MODEL SVP!
             //Reservation reservation = new Reservation
             //{

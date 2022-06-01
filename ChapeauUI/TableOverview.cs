@@ -48,9 +48,10 @@ namespace ChapeauUI
             if (menuChoice == MenuChoice.TakeOrder)
             {
                 ReservationService reservationService = new ReservationService();
+
                 OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember.Staff_ID);
                 this.Hide();
-                orderUI.Show();
+                //orderUI.Show();
             }
             else if (menuChoice == MenuChoice.ShowBill)
             {
