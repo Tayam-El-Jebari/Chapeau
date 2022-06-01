@@ -15,20 +15,24 @@ namespace ChapeauUI
         public ConfirmOrderUI()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            SetButtons();
+            SetControls();
         }
-        public ConfirmOrderUI(MessageBoxButtons Ok)
+        public ConfirmOrderUI(string question)
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
-            SetButtons();
+            SetControls(question);
         }
-        private void SetButtons()
+        private void SetControls()
         {
             ReturnButton.DialogResult = DialogResult.Yes;
             DenyButton.DialogResult = DialogResult.No;
-            
+        }
+        private void SetControls(string question)
+        {
+            ConfirmButton.DialogResult = DialogResult.Yes;
+            DenyButton.DialogResult = DialogResult.No;
+            labelQuestion.Visible = true;
+            labelQuestion.Text = question.ToUpper();
         }
         private void DenyButton_Click(object sender, EventArgs e)
         {
@@ -40,7 +44,7 @@ namespace ChapeauUI
             DenyButton.Visible = false;
             ConfirmButton.Visible = false;
             ReturnButton.Visible = true;
-            BackgroundImage = Properties.Resources.confirmed_order;
+            labelOrderConfirmed.Visible = true;
         }
     }
 }

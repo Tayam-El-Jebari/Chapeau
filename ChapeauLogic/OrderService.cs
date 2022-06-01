@@ -13,11 +13,6 @@ namespace ChapeauLogic
         {
             orderDao = new OrderDao();
         }
-
-        public List<Order> GetActiveOrders()//voor tayam
-        {
-            return orderDao.GetActiveOrders();
-        }
         public List<OrderItem> GetActiveDrinkOrders()
         {
             return orderDao.GetActiveDrinkOrders();
@@ -30,9 +25,9 @@ namespace ChapeauLogic
         {
             orderDao.UpdateStateIsFinished(isFinished);
         }//add een orderitem update
-        public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments)
+        public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments, int staffId)
         {
-            orderDao.CreateCompleteOrder(orderedItem, reservation, comments);
+            orderDao.CreateCompleteOrder(orderedItem, reservation, comments, staffId);
         }
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {

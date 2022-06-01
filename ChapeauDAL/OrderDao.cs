@@ -11,13 +11,6 @@ namespace ChapeauDAL
 {
     public class OrderDao : BaseDao
     {
-        public List<Order> GetActiveOrders()
-        {
-            string query = "SELECT order_id, m.productName, m.[description], o.table_Id, o.comments, o.isFinished FROM [Order] AS o JOIN MenuItem AS m ON o.menuItem_ID = m.menuItem_ID";
-            SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        }
-
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {
             string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE t.Waiter_ID = @staffID AND isFinished = 1 AND isDelived IS NULL";
@@ -72,9 +65,10 @@ namespace ChapeauDAL
                 Order order = new Order()
                 {
                     OrderId = (int)dr["order_Id"],
+
                     //MenuItem = new MenuItem() { ProductName = (string)dr["productName"], Description = (string)dr["description"] },
                     TableId = (int)dr["table_Id"],
-                    Comments = ConvertFromDR<string>(dr["comments"]),
+                    Comments = Convert.ToString(dr["comments"]),
                     IsFinished = (bool)dr["isFinished"],
                     TimePlaced = (DateTime)dr["timePlaced"]
                 };
@@ -82,17 +76,6 @@ namespace ChapeauDAL
                 activeOrders.Add(order);
             }
             return activeOrders;
-        }
-        private T ConvertFromDR<T>(object obj)
-        {
-            if (obj == DBNull.Value)
-            {
-                return default(T);
-            }
-            else
-            {
-                return (T)obj;
-            }
         }
 
         public void UpdateStateIsFinished(bool isFinished)
@@ -112,7 +95,7 @@ namespace ChapeauDAL
         }
 
 
-        public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments)
+        public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments, int staffId)
         {
             string query = "INSERT INTO [Order](reservation_Id, table_Id, isFinished, timePlaced, comments) VALUES (@reservationId, @tableId, 0, @currentTime, @comments);";
             SqlParameter[] sqlParameters = new SqlParameter[4]
@@ -125,13 +108,16 @@ namespace ChapeauDAL
             ExecuteEditQuery(query, sqlParameters);
             foreach (OrderItem orderItem in orderedItem)
             {
-                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount);";
-                sqlParameters = new SqlParameter[3]
+                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount);" +
+                    "UPDATE [menuItem] SET [stock] = [stock] - @amount WHERE [menuItem_ID] = @menuItemId;" +
+                    "UPDATE [Table] SET [Waiter_id] = @staffId WHERE [table_ID] = @tableId;";
+                sqlParameters = new SqlParameter[5]
                 {
                      new SqlParameter("@orderId", 7),
                      new SqlParameter("@menuItemId", orderItem.MenuItem.MenuItemId),
-
                      new SqlParameter("@amount", orderItem.Amount),
+                     new SqlParameter("@staffId", staffId),
+                     new SqlParameter("@tableId", reservation.TableId),
                 };
                 ExecuteEditQuery(query, sqlParameters);
             }

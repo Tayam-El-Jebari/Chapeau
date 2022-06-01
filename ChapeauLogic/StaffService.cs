@@ -17,12 +17,6 @@ namespace ChapeauLogic
             staffDb = new StaffDao();
         }
 
-        public List<Staff> GetStaffs()
-        {
-            List<Staff> staffs = staffDb.GetAllStaffs();
-            return staffs;
-        }
-
         public string GetSaltByStaffID(int staffID)
         {
             return staffDb.GetSaltByID(staffID);

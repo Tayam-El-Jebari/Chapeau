@@ -11,7 +11,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="ChapeauLogic.OrderService">
-    <Position X="2.5" Y="6.75" Width="1.5" />
+    <Position X="2.5" Y="6.75" Width="2" />
     <TypeIdentifier>
       <HashCode>IAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAAAAAgAEAgAA=</HashCode>
       <FileName>OrderService.cs</FileName>
@@ -35,7 +35,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ChapeauLogic.StaffService">
-    <Position X="4.75" Y="6.75" Width="1.5" />
+    <Position X="4.75" Y="6.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AIAAAAAAAgAAAAIAAAAAAAAKgAAAABAAAAAACIAAAAA=</HashCode>
       <FileName>StaffService.cs</FileName>
@@ -55,7 +55,7 @@
     </ShowAsAssociation>
   </Class>
   <Class Name="ChapeauModel.HashWithSaltResult">
-    <Position X="13.25" Y="4.25" Width="1.5" />
+    <Position X="13.25" Y="4.25" Width="1.75" />
     <TypeIdentifier />
   </Class>
   <Class Name="ChapeauModel.MenuItem">
@@ -64,6 +64,9 @@
   </Class>
   <Class Name="ChapeauModel.Order">
     <Position X="2.5" Y="9.75" Width="1.75" />
+    <Members>
+      <Property Name="MenuItem" Hidden="true" />
+    </Members>
     <TypeIdentifier />
   </Class>
   <Class Name="ChapeauModel.Reservation">
@@ -79,11 +82,11 @@
     <TypeIdentifier />
   </Class>
   <Class Name="ChapeauDAL.BaseDao">
-    <Position X="7" Y="0.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="2" />
     <TypeIdentifier />
   </Class>
   <Class Name="ChapeauDAL.BillDao">
-    <Position X="7" Y="3.25" Width="1.5" />
+    <Position X="7" Y="3.25" Width="2" />
     <TypeIdentifier />
   </Class>
   <Class Name="ChapeauDAL.MenuItemDao">
@@ -116,8 +119,23 @@
     <Position X="2.75" Y="13.25" Width="1.5" />
     <TypeIdentifier />
     <ShowAsAssociation>
-      <Property Name="menuItem" />
+      <Property Name="MenuItem" />
       <Property Name="Order" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ChapeauModel.Bill">
+    <Position X="7" Y="9.75" Width="1.5" />
+    <AssociationLine Name="Table" Type="ChapeauModel.Table" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.75" Y="9.75" />
+        <Point X="7.75" Y="9.308" />
+        <Point X="12" Y="9.308" />
+        <Point X="12" Y="9.75" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier />
+    <ShowAsAssociation>
+      <Property Name="Table" />
     </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -9,5 +9,6 @@ namespace ChapeauModel
         public double Price { get; set; }
         public string Description { get; set; }
         public int stock { get; set; }
+        public MenuItemType MenuItemType { get; set; }
     }
 }
