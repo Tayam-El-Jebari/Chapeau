@@ -19,7 +19,7 @@ namespace ChapeauLogic
 
         public string GetSaltByStaffID(int staffID)
         {
-            return staffDb.GetAllSaltByID(staffID);
+            return staffDb.GetSaltByID(staffID);
         }
 
         public Staff CheckPassword(int staffID, string hashedPassword)

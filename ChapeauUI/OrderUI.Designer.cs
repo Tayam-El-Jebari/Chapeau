@@ -1,7 +1,7 @@
 ﻿
 namespace ChapeauUI
 {
-    partial class OrderUI
+    public partial class OrderUI
     {
         /// <summary>
         /// Required designer variable.
@@ -178,10 +178,10 @@ namespace ChapeauUI
             // labelSelectMenu
             // 
             this.labelSelectMenu.AutoSize = true;
-            this.labelSelectMenu.Font = new System.Drawing.Font("Cabin", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelSelectMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelSelectMenu.Location = new System.Drawing.Point(30, 64);
             this.labelSelectMenu.Name = "labelSelectMenu";
-            this.labelSelectMenu.Size = new System.Drawing.Size(301, 63);
+            this.labelSelectMenu.Size = new System.Drawing.Size(328, 51);
             this.labelSelectMenu.TabIndex = 3;
             this.labelSelectMenu.Text = "SELECT MENU";
             // 
@@ -283,10 +283,10 @@ namespace ChapeauUI
             // 
             this.labelCommentsTitle.AutoSize = true;
             this.labelCommentsTitle.BackColor = System.Drawing.Color.Transparent;
-            this.labelCommentsTitle.Font = new System.Drawing.Font("Cabin", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCommentsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelCommentsTitle.Location = new System.Drawing.Point(10, 539);
             this.labelCommentsTitle.Name = "labelCommentsTitle";
-            this.labelCommentsTitle.Size = new System.Drawing.Size(140, 37);
+            this.labelCommentsTitle.Size = new System.Drawing.Size(144, 29);
             this.labelCommentsTitle.TabIndex = 5;
             this.labelCommentsTitle.Text = "Comments:";
             // 
@@ -372,6 +372,7 @@ namespace ChapeauUI
             this.labelTitleItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.labelTitleItems.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTitleItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+
             this.labelTitleItems.Location = new System.Drawing.Point(14, 20);
             this.labelTitleItems.Name = "labelTitleItems";
             this.labelTitleItems.Padding = new System.Windows.Forms.Padding(20);

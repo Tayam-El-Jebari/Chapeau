@@ -46,7 +46,6 @@ namespace ChapeauUI
                 //li.SubItems.Add(order.IsFinished.ToString());
                 //li.SubItems.Add(order.TimePlaced.ToString());
                 //barListView.Items.Add(li);
-
                 /*barListView = new ListView();
                 barListView.Width = list.Width - 10;
                 list.Height = list.Height - 10;

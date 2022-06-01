@@ -18,7 +18,7 @@ namespace ChapeauDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public string GetAllSaltByID(int staffID)
+        public string GetSaltByID(int staffID)
         {
             string query = "SELECT salt FROM [staff] WHERE staff_ID = @staffID";
             SqlParameter[] sqlParameters = new SqlParameter[1];

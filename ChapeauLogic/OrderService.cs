@@ -29,6 +29,15 @@ namespace ChapeauLogic
         {
             orderDao.CreateCompleteOrder(orderedItem, reservation, comments, staffId);
         }
+        public List<Order> GetOrdersForWaiterToDeliver(int staffID)
+        {
+            return orderDao.GetOrdersForWaiterToDeliver(staffID);
+        }
+
+        public List<Order> GetLastOrders()
+        {
+            return orderDao.GetLastOrders();
+        }
     }
 }
 
