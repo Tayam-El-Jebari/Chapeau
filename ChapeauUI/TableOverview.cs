@@ -23,6 +23,7 @@ namespace ChapeauUI
             InitializeComponent();
             hideAllPanels();
             startMenuPnl.Show();
+            //listView1.Columns.Add()
         }
 
         private void checkTimeSinceOrderPlaced()
