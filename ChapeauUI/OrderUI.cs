@@ -245,6 +245,7 @@ namespace ChapeauUI
                     });
                 }
                 OrderService orderService = new OrderService();
+                // maak object
                 orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text, staffId);
                 itemGridView.Rows.Clear();
             }
