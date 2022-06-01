@@ -33,7 +33,7 @@ namespace ChapeauDAL
 
         public Reservation GetPresentReservationByTable(int tableID)
         {
-            string query = "SELECT * FROM Reservations WHERE table_ID = @table_ID AND isPresent = 1";
+            string query = "SELECT * FROM Reservation WHERE table_ID = @table_ID AND isPresent = 1";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@table_ID", tableID);
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));

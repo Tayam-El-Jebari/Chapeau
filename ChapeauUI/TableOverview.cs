@@ -47,7 +47,7 @@ namespace ChapeauUI
             if (menuChoice == MenuChoice.TakeOrder)
             {
                 ReservationService reservationService = new ReservationService();
-                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr));
+                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember.Staff_ID);
                 this.Hide();
                 orderUI.Show();
             }
@@ -206,7 +206,7 @@ namespace ChapeauUI
         private void markOrderReadyBtn_Click(object sender, EventArgs e)
         {
             OrderService orderService = new OrderService();
-            for(int i = 0; i < ordersReadyGridView.SelectedRows.Count; i++)
+            for (int i = 0; i < ordersReadyGridView.SelectedCells.Count; i++)
             {
                 orderService.UpdateStateIsdelivered(Convert.ToInt32(ordersReadyGridView.SelectedCells[i].Value));
             }
