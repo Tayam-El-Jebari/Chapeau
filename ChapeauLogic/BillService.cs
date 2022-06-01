@@ -13,7 +13,7 @@ namespace ChapeauLogic
         const double HighVat = 0.21;
         const double LowVat = 0.16;
 
-        BillDao billdb;
+        private BillDao billdb;
 
         public BillService()
         {
@@ -72,17 +72,14 @@ namespace ChapeauLogic
         {
             for (int i = 0; i < orderItems.Count - 1; i++)
             {
-               
                 if (orderItems[i].MenuItemId == orderItems[i + 1].MenuItemId)
                 {
                         orderItems[i + 1].Amount += orderItems[i].Amount;
                         orderItems.Remove(orderItems[i]);
                 }
-                
-                
+                            
             }
             return orderItems;
         }
     }
-    
 }

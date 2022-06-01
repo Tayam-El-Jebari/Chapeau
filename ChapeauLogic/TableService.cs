@@ -10,7 +10,7 @@ namespace ChapeauLogic
 {
     public class TableService
     {
-        TableDao tabledb;
+        private TableDao tabledb;
 
         public TableService()
         {

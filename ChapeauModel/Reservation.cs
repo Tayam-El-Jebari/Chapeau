@@ -10,11 +10,10 @@ namespace ChapeauModel
     {
         public int ReservationId;
         public string CustomerFullName;
+        public bool isPresent;
         public DateTime ReservationTime;
         public int TableId;
         public string Comments;
-        public int PhoneNumber;
-        public string EmailAddress;
 
     }
 }

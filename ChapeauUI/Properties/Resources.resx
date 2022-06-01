@@ -121,11 +121,15 @@
   <data name="achtergrond" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\achtergrond.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+
   <data name="border" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\border.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Cabin" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Cabin.ttf;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+
+  <data name="winebg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\winebg2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="confirm order" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -1270,6 +1274,7 @@
   <data name="newhandheldbg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\newhandheldbg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+
   <data name="winebackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\winebackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1280,3 +1285,4 @@
     <value>..\Resources\winebgdesktop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
+

@@ -10,22 +10,16 @@ namespace ChapeauLogic
 {
     public class StaffService
     {
-        StaffDao staffDb;
+        private StaffDao staffDb;
 
         public StaffService()
         {
             staffDb = new StaffDao();
         }
 
-        public List<Staff> GetStaffs()
-        {
-            List<Staff> staffs = staffDb.GetAllStaffs();
-            return staffs;
-        }
-
         public string GetSaltByStaffID(int staffID)
         {
-            return staffDb.GetAllSaltByID(staffID);
+            return staffDb.GetSaltByID(staffID);
         }
 
         public Staff CheckPassword(int staffID, string hashedPassword)

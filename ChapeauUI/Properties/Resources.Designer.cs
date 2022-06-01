@@ -123,6 +123,7 @@ namespace ChapeauUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+
         public static System.Drawing.Bitmap winebackground {
             get {
                 object obj = ResourceManager.GetObject("winebackground", resourceCulture);
@@ -134,6 +135,7 @@ namespace ChapeauUI.Properties {
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap winebg2 {
+
             get {
                 object obj = ResourceManager.GetObject("winebg2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));

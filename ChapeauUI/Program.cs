@@ -5,6 +5,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChapeauModel;
 
+// using chapeau model (temp)
+using ChapeauModel;
+
+
 namespace ChapeauUI
 {
     static class Program
@@ -17,8 +21,15 @@ namespace ChapeauUI
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BillUI());
+            Application.SetCompatibleTextRenderingDefault(false);            
+            // DON'T FORGET TO REMOVE USING CHAPEAU MODEL SVP!
+            //Reservation reservation = new Reservation
+            //{
+            //    ReservationId = 202,
+            //    TableId = 4
+            //};
+            //Application.Run(new OrderUI(reservation, 8));
+            Application.Run(new StartScreen());
         }
     }
 }

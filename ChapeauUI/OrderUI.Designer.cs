@@ -1,7 +1,7 @@
 ﻿
 namespace ChapeauUI
 {
-    partial class OrderUI
+    public partial class OrderUI
     {
         /// <summary>
         /// Required designer variable.
@@ -30,25 +30,30 @@ namespace ChapeauUI
         private void InitializeComponent()
         {
             this.panelItems = new System.Windows.Forms.Panel();
+            this.buttonBack = new System.Windows.Forms.Button();
+            this.bottomBarLabel = new System.Windows.Forms.Label();
             this.PanelChooseMenu = new System.Windows.Forms.Panel();
             this.labelTable = new System.Windows.Forms.Label();
-            this.buttonDinner = new System.Windows.Forms.Button();
             this.buttonLunch = new System.Windows.Forms.Button();
+            this.buttonDinner = new System.Windows.Forms.Button();
             this.panelSelectMenu = new System.Windows.Forms.Panel();
             this.labelSelectMenu = new System.Windows.Forms.Label();
             this.buttonDrinks = new System.Windows.Forms.Button();
             this.buttonDesserts = new System.Windows.Forms.Button();
             this.buttonMainCourse = new System.Windows.Forms.Button();
-            this.buttonAppetizer = new System.Windows.Forms.Button();
+            this.buttonStarters = new System.Windows.Forms.Button();
             this.itemAddedOrderPnl = new System.Windows.Forms.Panel();
             this.commentsTextBox = new System.Windows.Forms.RichTextBox();
             this.labelCommentsTitle = new System.Windows.Forms.Label();
             this.itemGridView = new System.Windows.Forms.DataGridView();
             this.clearAllButton = new System.Windows.Forms.Button();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
-            this.viewOrders = new System.Windows.Forms.Button();
+            this.viewOrder = new System.Windows.Forms.Button();
             this.menu = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelSelectedMenuName = new System.Windows.Forms.Label();
             this.labelTitleItems = new System.Windows.Forms.Label();
+            this.labelBorder = new System.Windows.Forms.Label();
+            this.topBarLabel = new System.Windows.Forms.Label();
             this.panelItems.SuspendLayout();
             this.PanelChooseMenu.SuspendLayout();
             this.panelSelectMenu.SuspendLayout();
@@ -58,48 +63,96 @@ namespace ChapeauUI
             // 
             // panelItems
             // 
-            this.panelItems.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.panelItems.BackgroundImage = global::ChapeauUI.Properties.Resources.newhandheldbg;
+            this.panelItems.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panelItems.Controls.Add(this.buttonBack);
+            this.panelItems.Controls.Add(this.bottomBarLabel);
             this.panelItems.Controls.Add(this.PanelChooseMenu);
             this.panelItems.Controls.Add(this.panelSelectMenu);
             this.panelItems.Controls.Add(this.itemAddedOrderPnl);
-            this.panelItems.Controls.Add(this.viewOrders);
+            this.panelItems.Controls.Add(this.viewOrder);
             this.panelItems.Controls.Add(this.menu);
+            this.panelItems.Controls.Add(this.labelSelectedMenuName);
             this.panelItems.Controls.Add(this.labelTitleItems);
-            this.panelItems.Location = new System.Drawing.Point(-2, -2);
+            this.panelItems.Controls.Add(this.labelBorder);
+            this.panelItems.Location = new System.Drawing.Point(-2, 50);
             this.panelItems.Name = "panelItems";
-            this.panelItems.Size = new System.Drawing.Size(681, 1440);
+            this.panelItems.Size = new System.Drawing.Size(701, 1440);
             this.panelItems.TabIndex = 1;
-            this.panelItems.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrders_Paint);
+            // 
+            // buttonBack
+            // 
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonBack.FlatAppearance.BorderSize = 0;
+            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBack.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBack.ForeColor = System.Drawing.Color.White;
+            this.buttonBack.Location = new System.Drawing.Point(0, 1370);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(163, 66);
+            this.buttonBack.TabIndex = 2;
+            this.buttonBack.Text = "<BACK";
+            this.buttonBack.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
+            // bottomBarLabel
+            // 
+            this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1367);
+            this.bottomBarLabel.Name = "bottomBarLabel";
+            this.bottomBarLabel.Size = new System.Drawing.Size(699, 74);
+            this.bottomBarLabel.TabIndex = 3;
+            this.bottomBarLabel.Text = "emptyString";
             // 
             // PanelChooseMenu
             // 
-            this.PanelChooseMenu.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.PanelChooseMenu.BackColor = System.Drawing.Color.Transparent;
             this.PanelChooseMenu.Controls.Add(this.labelTable);
-            this.PanelChooseMenu.Controls.Add(this.buttonDinner);
             this.PanelChooseMenu.Controls.Add(this.buttonLunch);
+            this.PanelChooseMenu.Controls.Add(this.buttonDinner);
             this.PanelChooseMenu.Location = new System.Drawing.Point(1, 0);
             this.PanelChooseMenu.Name = "PanelChooseMenu";
-            this.PanelChooseMenu.Size = new System.Drawing.Size(681, 1440);
+            this.PanelChooseMenu.Size = new System.Drawing.Size(700, 1390);
             this.PanelChooseMenu.TabIndex = 5;
             // 
             // labelTable
             // 
             this.labelTable.AutoSize = true;
-            this.labelTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTable.Font = new System.Drawing.Font("Cabin", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.labelTable.Location = new System.Drawing.Point(32, 55);
             this.labelTable.Name = "labelTable";
-            this.labelTable.Size = new System.Drawing.Size(237, 51);
+            this.labelTable.Size = new System.Drawing.Size(156, 63);
             this.labelTable.TabIndex = 1;
-            this.labelTable.Text = "TABLE xx :";
+            this.labelTable.Text = "TABLE ";
+            // 
+            // buttonLunch
+            // 
+            this.buttonLunch.BackColor = System.Drawing.Color.Transparent;
+            this.buttonLunch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonLunch.FlatAppearance.BorderSize = 10;
+            this.buttonLunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonLunch.Font = new System.Drawing.Font("Cabin", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonLunch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonLunch.Location = new System.Drawing.Point(31, 151);
+            this.buttonLunch.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonLunch.Name = "buttonLunch";
+            this.buttonLunch.Size = new System.Drawing.Size(616, 255);
+            this.buttonLunch.TabIndex = 0;
+            this.buttonLunch.Text = "LUNCH";
+            this.buttonLunch.UseVisualStyleBackColor = true;
+            this.buttonLunch.Click += new System.EventHandler(this.buttonLunch_Click);
             // 
             // buttonDinner
             // 
             this.buttonDinner.BackColor = System.Drawing.Color.Transparent;
-            this.buttonDinner.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonDinner.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDinner.FlatAppearance.BorderSize = 10;
             this.buttonDinner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDinner.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDinner.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonDinner.Font = new System.Drawing.Font("Cabin", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDinner.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDinner.Location = new System.Drawing.Point(32, 436);
             this.buttonDinner.Margin = new System.Windows.Forms.Padding(60);
             this.buttonDinner.Name = "buttonDinner";
@@ -109,34 +162,17 @@ namespace ChapeauUI
             this.buttonDinner.UseVisualStyleBackColor = false;
             this.buttonDinner.Click += new System.EventHandler(this.buttonDinner_Click);
             // 
-            // buttonLunch
-            // 
-            this.buttonLunch.BackColor = System.Drawing.Color.Transparent;
-            this.buttonLunch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonLunch.FlatAppearance.BorderSize = 10;
-            this.buttonLunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLunch.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonLunch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonLunch.Location = new System.Drawing.Point(31, 151);
-            this.buttonLunch.Margin = new System.Windows.Forms.Padding(60);
-            this.buttonLunch.Name = "buttonLunch";
-            this.buttonLunch.Size = new System.Drawing.Size(616, 255);
-            this.buttonLunch.TabIndex = 0;
-            this.buttonLunch.Text = "LUNCH";
-            this.buttonLunch.UseVisualStyleBackColor = false;
-            this.buttonLunch.Click += new System.EventHandler(this.buttonLunch_Click);
-            // 
             // panelSelectMenu
             // 
-            this.panelSelectMenu.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.panelSelectMenu.BackColor = System.Drawing.Color.Transparent;
             this.panelSelectMenu.Controls.Add(this.labelSelectMenu);
             this.panelSelectMenu.Controls.Add(this.buttonDrinks);
             this.panelSelectMenu.Controls.Add(this.buttonDesserts);
             this.panelSelectMenu.Controls.Add(this.buttonMainCourse);
-            this.panelSelectMenu.Controls.Add(this.buttonAppetizer);
+            this.panelSelectMenu.Controls.Add(this.buttonStarters);
             this.panelSelectMenu.Location = new System.Drawing.Point(2, 3);
             this.panelSelectMenu.Name = "panelSelectMenu";
-            this.panelSelectMenu.Size = new System.Drawing.Size(681, 1440);
+            this.panelSelectMenu.Size = new System.Drawing.Size(696, 1390);
             this.panelSelectMenu.TabIndex = 6;
             // 
             // labelSelectMenu
@@ -152,11 +188,11 @@ namespace ChapeauUI
             // buttonDrinks
             // 
             this.buttonDrinks.BackColor = System.Drawing.Color.Transparent;
-            this.buttonDrinks.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonDrinks.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDrinks.FlatAppearance.BorderSize = 10;
             this.buttonDrinks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDrinks.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDrinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonDrinks.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDrinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDrinks.Location = new System.Drawing.Point(30, 1002);
             this.buttonDrinks.Margin = new System.Windows.Forms.Padding(60);
             this.buttonDrinks.Name = "buttonDrinks";
@@ -169,11 +205,11 @@ namespace ChapeauUI
             // buttonDesserts
             // 
             this.buttonDesserts.BackColor = System.Drawing.Color.Transparent;
-            this.buttonDesserts.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonDesserts.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDesserts.FlatAppearance.BorderSize = 10;
             this.buttonDesserts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDesserts.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonDesserts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonDesserts.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDesserts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDesserts.Location = new System.Drawing.Point(30, 713);
             this.buttonDesserts.Margin = new System.Windows.Forms.Padding(60);
             this.buttonDesserts.Name = "buttonDesserts";
@@ -186,11 +222,11 @@ namespace ChapeauUI
             // buttonMainCourse
             // 
             this.buttonMainCourse.BackColor = System.Drawing.Color.Transparent;
-            this.buttonMainCourse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonMainCourse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonMainCourse.FlatAppearance.BorderSize = 10;
             this.buttonMainCourse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMainCourse.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonMainCourse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonMainCourse.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMainCourse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonMainCourse.Location = new System.Drawing.Point(30, 433);
             this.buttonMainCourse.Margin = new System.Windows.Forms.Padding(60);
             this.buttonMainCourse.Name = "buttonMainCourse";
@@ -200,27 +236,27 @@ namespace ChapeauUI
             this.buttonMainCourse.UseVisualStyleBackColor = false;
             this.buttonMainCourse.Click += new System.EventHandler(this.buttonMainCourse_Click);
             // 
-            // buttonAppetizer
+            // buttonStarters
             // 
-            this.buttonAppetizer.BackColor = System.Drawing.Color.Transparent;
-            this.buttonAppetizer.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonAppetizer.FlatAppearance.BorderSize = 10;
-            this.buttonAppetizer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonAppetizer.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonAppetizer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonAppetizer.Location = new System.Drawing.Point(31, 151);
-            this.buttonAppetizer.Margin = new System.Windows.Forms.Padding(60);
-            this.buttonAppetizer.Name = "buttonAppetizer";
-            this.buttonAppetizer.Size = new System.Drawing.Size(616, 255);
-            this.buttonAppetizer.TabIndex = 0;
-            this.buttonAppetizer.Text = "APPETIZERS";
-            this.buttonAppetizer.UseVisualStyleBackColor = false;
-            this.buttonAppetizer.Click += new System.EventHandler(this.buttonAppetizer_Click);
+            this.buttonStarters.BackColor = System.Drawing.Color.Transparent;
+            this.buttonStarters.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonStarters.FlatAppearance.BorderSize = 10;
+            this.buttonStarters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonStarters.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonStarters.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonStarters.Location = new System.Drawing.Point(31, 151);
+            this.buttonStarters.Margin = new System.Windows.Forms.Padding(60);
+            this.buttonStarters.Name = "buttonStarters";
+            this.buttonStarters.Size = new System.Drawing.Size(616, 255);
+            this.buttonStarters.TabIndex = 0;
+            this.buttonStarters.Text = "STARTERS";
+            this.buttonStarters.UseVisualStyleBackColor = false;
+            this.buttonStarters.Click += new System.EventHandler(this.buttonStarters_Click);
             // 
             // itemAddedOrderPnl
             // 
             this.itemAddedOrderPnl.AutoScroll = true;
-            this.itemAddedOrderPnl.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.itemAddedOrderPnl.BackColor = System.Drawing.Color.Transparent;
             this.itemAddedOrderPnl.Controls.Add(this.commentsTextBox);
             this.itemAddedOrderPnl.Controls.Add(this.labelCommentsTitle);
             this.itemAddedOrderPnl.Controls.Add(this.itemGridView);
@@ -228,7 +264,7 @@ namespace ChapeauUI
             this.itemAddedOrderPnl.Controls.Add(this.buttonCreateOrder);
             this.itemAddedOrderPnl.Location = new System.Drawing.Point(1, 115);
             this.itemAddedOrderPnl.Name = "itemAddedOrderPnl";
-            this.itemAddedOrderPnl.Size = new System.Drawing.Size(678, 940);
+            this.itemAddedOrderPnl.Size = new System.Drawing.Size(694, 940);
             this.itemAddedOrderPnl.TabIndex = 4;
             this.itemAddedOrderPnl.Visible = false;
             this.itemAddedOrderPnl.Paint += new System.Windows.Forms.PaintEventHandler(this.itemAddedOrderPnl_Paint);
@@ -268,6 +304,10 @@ namespace ChapeauUI
             // 
             // clearAllButton
             // 
+            this.clearAllButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.clearAllButton.FlatAppearance.BorderSize = 8;
+            this.clearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearAllButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.clearAllButton.Location = new System.Drawing.Point(463, 825);
             this.clearAllButton.Name = "clearAllButton";
             this.clearAllButton.Size = new System.Drawing.Size(202, 97);
@@ -278,6 +318,10 @@ namespace ChapeauUI
             // 
             // buttonCreateOrder
             // 
+            this.buttonCreateOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonCreateOrder.FlatAppearance.BorderSize = 8;
+            this.buttonCreateOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCreateOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonCreateOrder.Location = new System.Drawing.Point(31, 825);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(202, 97);
@@ -286,35 +330,78 @@ namespace ChapeauUI
             this.buttonCreateOrder.UseVisualStyleBackColor = true;
             this.buttonCreateOrder.Click += new System.EventHandler(this.buttonCreateOrder_Click);
             // 
-            // viewOrders
+            // viewOrder
             // 
-            this.viewOrders.Location = new System.Drawing.Point(540, 5);
-            this.viewOrders.Name = "viewOrders";
-            this.viewOrders.Size = new System.Drawing.Size(126, 104);
-            this.viewOrders.TabIndex = 3;
-            this.viewOrders.Text = "View Orders";
-            this.viewOrders.UseVisualStyleBackColor = true;
-            this.viewOrders.Click += new System.EventHandler(this.viewOrders_Click);
+            this.viewOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.viewOrder.FlatAppearance.BorderSize = 3;
+            this.viewOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.viewOrder.Font = new System.Drawing.Font("Cabin", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.viewOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.viewOrder.Location = new System.Drawing.Point(576, 5);
+            this.viewOrder.Name = "viewOrder";
+            this.viewOrder.Size = new System.Drawing.Size(122, 104);
+            this.viewOrder.TabIndex = 3;
+            this.viewOrder.Text = "VIEW ORDER";
+            this.viewOrder.UseVisualStyleBackColor = true;
+            this.viewOrder.Click += new System.EventHandler(this.viewOrder_Click);
             // 
             // menu
             // 
-            this.menu.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.menu.BackColor = System.Drawing.Color.Transparent;
             this.menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.menu.Location = new System.Drawing.Point(0, 115);
+            this.menu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.menu.Location = new System.Drawing.Point(0, 199);
             this.menu.Name = "menu";
-            this.menu.Size = new System.Drawing.Size(681, 1440);
+            this.menu.Size = new System.Drawing.Size(681, 1390);
             this.menu.TabIndex = 2;
+            // 
+            // labelSelectedMenuName
+            // 
+            this.labelSelectedMenuName.Font = new System.Drawing.Font("Cabin", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelSelectedMenuName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.labelSelectedMenuName.Location = new System.Drawing.Point(96, 115);
+            this.labelSelectedMenuName.Name = "labelSelectedMenuName";
+            this.labelSelectedMenuName.Size = new System.Drawing.Size(510, 81);
+            this.labelSelectedMenuName.TabIndex = 2;
+            this.labelSelectedMenuName.Text = "ERROR";
+            this.labelSelectedMenuName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelTitleItems
             // 
             this.labelTitleItems.BackColor = System.Drawing.Color.Transparent;
-            this.labelTitleItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTitleItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelTitleItems.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTitleItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+
             this.labelTitleItems.Location = new System.Drawing.Point(14, 20);
             this.labelTitleItems.Name = "labelTitleItems";
             this.labelTitleItems.Padding = new System.Windows.Forms.Padding(20);
             this.labelTitleItems.Size = new System.Drawing.Size(520, 81);
             this.labelTitleItems.TabIndex = 1;
             this.labelTitleItems.Text = "LUNCH 11:00 - 16:00";
+            // 
+            // labelBorder
+            // 
+            this.labelBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.labelBorder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.labelBorder.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelBorder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.labelBorder.Location = new System.Drawing.Point(11, 17);
+            this.labelBorder.Name = "labelBorder";
+            this.labelBorder.Padding = new System.Windows.Forms.Padding(20);
+            this.labelBorder.Size = new System.Drawing.Size(526, 87);
+            this.labelBorder.TabIndex = 7;
+            this.labelBorder.Text = "emptyString";
+            // 
+            // topBarLabel
+            // 
+            this.topBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.topBarLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topBarLabel.Location = new System.Drawing.Point(0, 0);
+            this.topBarLabel.Name = "topBarLabel";
+            this.topBarLabel.Size = new System.Drawing.Size(699, 51);
+            this.topBarLabel.TabIndex = 2;
+            this.topBarLabel.Text = "emptyString";
             // 
             // OrderUI
             // 
@@ -323,9 +410,13 @@ namespace ChapeauUI
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(702, 1055);
+            this.ClientSize = new System.Drawing.Size(720, 1097);
+            this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.panelItems);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "OrderUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "OrderUI";
             this.panelItems.ResumeLayout(false);
             this.PanelChooseMenu.ResumeLayout(false);
@@ -343,7 +434,7 @@ namespace ChapeauUI
         private System.Windows.Forms.Panel panelItems;
         private System.Windows.Forms.Label labelTitleItems;
         private System.Windows.Forms.FlowLayoutPanel menu;
-        private System.Windows.Forms.Button viewOrders;
+        private System.Windows.Forms.Button viewOrder;
         private System.Windows.Forms.Panel itemAddedOrderPnl;
         private System.Windows.Forms.RichTextBox commentsTextBox;
         private System.Windows.Forms.Label labelCommentsTitle;
@@ -359,6 +450,11 @@ namespace ChapeauUI
         private System.Windows.Forms.Button buttonDrinks;
         private System.Windows.Forms.Button buttonDesserts;
         private System.Windows.Forms.Button buttonMainCourse;
-        private System.Windows.Forms.Button buttonAppetizer;
+        private System.Windows.Forms.Button buttonStarters;
+        private System.Windows.Forms.Label labelSelectedMenuName;
+        private System.Windows.Forms.Label topBarLabel;
+        private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.Label bottomBarLabel;
+        private System.Windows.Forms.Label labelBorder;
     }
 }
