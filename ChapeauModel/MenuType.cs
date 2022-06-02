@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public enum MenuItemType
+    public enum MenuType
     {
-        Starter,
-        MainCourse,
-        Desserts,
-        Drink,
+        Lunch,
+        Dinner,
+        Drink
     }
 }

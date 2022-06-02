@@ -11,26 +11,15 @@ namespace ChapeauDAL
 {
     public class MenuItemDao : BaseDao
     {
-        public List<MenuItem> GetAllMenuItems(bool isLunch)
+        public List<MenuItem> GetAllMenuItems()
         {
-            string query = SelectQuery(isLunch);
+            string query = "SELECT menuItem_ID, productName, price, [description], stock, threeCourseMealCode, menuType FROM [MenuItem]";
 
-            SqlParameter[] sqlParameters = new SqlParameter[0];
+        SqlParameter[] sqlParameters = new SqlParameter[0];
 
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        private string SelectQuery(bool isLunch)
-        {
-            if (isLunch)
-            {
-                return "SELECT menuItem_ID, productName, price, [description], stock, threeCourseMealCode FROM [MenuItem] WHERE menuItem_ID IN (select * FROM Lunch_Item) OR menuItem_ID IN (select menuItem_Id FROM [Drink_Item])";
-            }
-            else
-            {
-                return "SELECT menuItem_ID, productName, price, [description], stock, threeCourseMealCode FROM [MenuItem] WHERE menuItem_ID IN (select * FROM Dinner_Item) OR menuItem_ID IN (select menuItem_Id FROM [Drink_Item]);";
-            }
-        }
         public List<MenuItem> ReadTables(DataTable dataTable)
         {
             List<MenuItem> menuItems = new List<MenuItem>();
@@ -45,7 +34,8 @@ namespace ChapeauDAL
                         Price = (double)dr["price"],
                         Description = Convert.ToString(dr["description"]),
                         stock = (int)dr["stock"],
-                        MenuItemType = (MenuItemType)dr["ThreeCourseMealCode"]
+                        MenuItemType = (MenuItemType)dr["ThreeCourseMealCode"],
+                        MenuType = (MenuType)dr["MenuType"]
                     };
                     menuItems.Add(menuItem);
                 }

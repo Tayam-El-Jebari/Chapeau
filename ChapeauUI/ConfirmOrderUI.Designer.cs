@@ -39,7 +39,7 @@ namespace ChapeauUI
             // ReturnButton
             // 
             this.ReturnButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.ReturnButton.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ReturnButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ReturnButton.ForeColor = System.Drawing.Color.White;
             this.ReturnButton.Location = new System.Drawing.Point(71, 209);
             this.ReturnButton.Name = "ReturnButton";
@@ -53,7 +53,7 @@ namespace ChapeauUI
             // ConfirmButton
             // 
             this.ConfirmButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.ConfirmButton.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ConfirmButton.ForeColor = System.Drawing.Color.White;
             this.ConfirmButton.Location = new System.Drawing.Point(55, 201);
             this.ConfirmButton.Name = "ConfirmButton";
@@ -67,7 +67,7 @@ namespace ChapeauUI
             // DenyButton
             // 
             this.DenyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.DenyButton.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DenyButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DenyButton.ForeColor = System.Drawing.Color.White;
             this.DenyButton.Location = new System.Drawing.Point(371, 201);
             this.DenyButton.Name = "DenyButton";
@@ -80,7 +80,7 @@ namespace ChapeauUI
             // labelOrderConfirmed
             // 
             this.labelOrderConfirmed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.labelOrderConfirmed.Font = new System.Drawing.Font("Cabin", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelOrderConfirmed.Font = new System.Drawing.Font("Trebuchet MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelOrderConfirmed.Location = new System.Drawing.Point(32, 26);
             this.labelOrderConfirmed.Name = "labelOrderConfirmed";
             this.labelOrderConfirmed.Size = new System.Drawing.Size(596, 288);
@@ -92,7 +92,7 @@ namespace ChapeauUI
             // labelQuestion
             // 
             this.labelQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.labelQuestion.Font = new System.Drawing.Font("Cabin", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelQuestion.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelQuestion.Location = new System.Drawing.Point(28, 17);
             this.labelQuestion.Name = "labelQuestion";
             this.labelQuestion.Size = new System.Drawing.Size(596, 288);

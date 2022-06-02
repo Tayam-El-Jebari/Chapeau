@@ -13,8 +13,9 @@ namespace ChapeauUI
     {
         private List<MenuItem> menuList;
         private MenuItemType menuItemType;
+        private MenuType menuType;
         private Reservation reservation;
-        int staffId;
+        private int staffId;
 
         public OrderUI(Reservation reservation, int staffId)
         {
@@ -23,12 +24,15 @@ namespace ChapeauUI
             labelTable.Text += $"{reservation.TableId} :";
             CreateUIComponents();
             this.reservation = reservation;
+            UpdateMenuList();
+
         }
         private void CreateButtons()
         {
+            menu.Hide();
             foreach (MenuItem menuItem in menuList)
             {
-                if (menuItem.MenuItemType == menuItemType)
+                if ((menuItem.MenuItemType == menuItemType && menuItem.MenuType == menuType) || (menuType == MenuType.Drink && menuItem.MenuType == menuType))
                 {
                     LeftAndRightTextButton menuItemButton = new LeftAndRightTextButton()
                     {
@@ -36,7 +40,7 @@ namespace ChapeauUI
                         Height = 62,
                         LeftText = $"{menuItem.ProductName}",
                         RightText = $"€{menuItem.Price.ToString("0.00")}",
-                        Font = new Font("Cabin", 15),
+                        Font = new Font("Trebuchet MS", 12),
                         Margin = new Padding(6),
                         UseVisualStyleBackColor = true,
                         FlatStyle = FlatStyle.Flat,
@@ -62,7 +66,7 @@ namespace ChapeauUI
                         Width = 44,
                         Height = 44,
                         Text = "?",
-                        Font = new Font("Cabin", 9),
+                        Font = new Font("Trebuchet MS", 9),
                         ForeColor = Color.FromArgb(39, 39, 39),
                         BackColor = Color.Transparent,
                         FlatStyle = FlatStyle.Flat,
@@ -73,18 +77,15 @@ namespace ChapeauUI
                     menu.Controls.Add(menuItemButton);
                 }
             }
+            menu.Show();
         }
-        private void UpdateMenuList(bool selectedLunchMenu)
+        private void UpdateMenuList()
         {
             MenuItemService menuItemService = new MenuItemService();
-            menuList = menuItemService.GetMenuItems(selectedLunchMenu);
+            menuList = menuItemService.GetMenuItems();
         }
         private void CreateUIComponents()
         {
-            itemGridView.ColumnCount = 3;
-            itemGridView.Columns[0].Name = "Menu Nr";
-            itemGridView.Columns[1].Name = "Product Name";
-            itemGridView.Columns[2].Name = "amount added";
             itemGridView.Columns.Add(new DataGridViewButtonColumn
             {
                 HeaderText = "Add",
@@ -92,38 +93,41 @@ namespace ChapeauUI
                 Name = "btnAddOrderItems",
                 UseColumnTextForButtonValue = true,
                 FlatStyle = FlatStyle.Flat,
+                Width = 70
             });
             itemGridView.Columns.Add(
                 new DataGridViewButtonColumn
                 {
-                    HeaderText = "Remove",
+                    HeaderText = "Min",
                     Text = "-",
                     Name = "btnAddOrderItems",
                     UseColumnTextForButtonValue = true,
-                    FlatStyle = FlatStyle.Flat
-
+                    FlatStyle = FlatStyle.Flat,
+                    Width = 70
                 });
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
         {
-            List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
+            List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType && x.MenuType == menuType);
+            int indexOfItem;
             for (int i = 0; i < menu.Controls.Count; i++)
             {
                 if (menu.Controls[i] == sender)
                 {
-                    menuList.Find(x => x == itemsWithMenuType[i / 2]).stock--;
+                    indexOfItem = menuList.FindIndex(x => x == itemsWithMenuType[i / 2]);
+                    --menuList[indexOfItem].stock;
+                    if (menuList[indexOfItem].stock == 0)
+                    {
+                        menu.Controls[i].BackColor = Color.DarkGray;
+                        menu.Controls[i].ForeColor = Color.LightGray;
+                        menu.Controls[i].Text = "OUT OF STOCK";
+                        menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
+                    }
                     foreach (DataGridViewRow row in itemGridView.Rows)
                     {
                         if(Convert.ToInt32(row.Cells[0].Value) == itemsWithMenuType[i / 2].MenuItemId)
                         {
                             row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
-                            if (itemsWithMenuType[i / 2].stock == 0)
-                            {
-                                menu.Controls[i].BackColor = Color.DarkGray;
-                                menu.Controls[i].ForeColor = Color.LightGray;
-                                menu.Controls[i].Text = "OUT OF STOCK";
-                                menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
-                            }
                             return;
                         }
                     }
@@ -158,25 +162,32 @@ namespace ChapeauUI
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            itemGridView.Rows.Clear();
+            ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Are you sure you wish to clear all?");
+            confirmBackButton.ShowDialog();
+            if (confirmBackButton.DialogResult == DialogResult.Yes)
+            {
+                itemGridView.Rows.Clear();
+                UpdateMenuList();
+                PanelChooseMenu.Visible = true;
+            }
+            
         }
-
         private void itemGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex != -1 && Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value) != 0)
+            if (e.RowIndex != -1 && itemGridView.Rows[e.RowIndex].Cells[0].Value != null)
             {
+                int MenuListIndexOfItem = menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value));
                 if (e.ColumnIndex == 3)
                 {
-                    if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 0)
+                    if (menuList[MenuListIndexOfItem].stock == 0)
                     {
                         MessageBox.Show("Item is out of stock.");
                         return;
                     }
-                    menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock -= 1;
+                    menuList[MenuListIndexOfItem].stock -= 1;
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) + 1;
-                    if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 0)
+                    if (menuList[MenuListIndexOfItem].stock == 0)
                     {
-                        itemGridView.Rows[e.RowIndex].Cells[3].Style.BackColor = Color.DarkGray;
                         List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
@@ -189,13 +200,13 @@ namespace ChapeauUI
                                 }
                         }
                     }
-                }
-                else if (e.ColumnIndex == 4)
+            }
+            else if (e.ColumnIndex == 4)
                 {
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
-                    menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock += 1;
+                    menuList[MenuListIndexOfItem].stock += 1;
                     List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
-                    if (menuList[menuList.FindIndex(x => x.MenuItemId == Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[0].Value))].stock == 1)
+                    if (menuList[MenuListIndexOfItem].stock == 1)
                     {
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
@@ -235,83 +246,82 @@ namespace ChapeauUI
             confirm.ShowDialog();
             if (confirm.DialogResult == DialogResult.Yes)
             {
+                Order orderToSend = new Order() 
+                { 
+                    Comments = commentsTextBox.Text, 
+                    OrderItems = new List<OrderItem>(), 
+                    Reservation = this.reservation 
+                
+                };
                 List<OrderItem> itemsForOrder = new List<OrderItem>();
                 for(int i = 0; i < itemGridView.Rows.Count - 1; i++)
                 {
-                    itemsForOrder.Add(new OrderItem
+                    orderToSend.OrderItems.Add(new OrderItem
                     {
                         MenuItem = new MenuItem{MenuItemId = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value)},
                         Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
                     });
                 }
                 OrderService orderService = new OrderService();
-                orderService.CreateCompleteOrder(itemsForOrder, reservation, commentsTextBox.Text, staffId);
+                orderService.CreateCompleteOrder(orderToSend);
                 itemGridView.Rows.Clear();
             }
-
         }
 
-        private void buttonLunch_Click(object sender, EventArgs e)
+        private void buttonChooseMenuAndMenuType_Click(object sender, EventArgs e)
         {
-            labelTitleItems.Text = "LUNCH 11:00 - 16:00";
-            UpdateMenuList(true);
             PanelChooseMenu.Hide();
-        }
-
-        private void buttonDinner_Click(object sender, EventArgs e)
-        {
-            labelTitleItems.Text = "DINNER 17:00 - 21:00";
-            UpdateMenuList(false);
-            PanelChooseMenu.Hide();
-        }
-
-        private void buttonStarters_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.Starter;
-            labelSelectedMenuName.Text = "STARTERS";
+            if (sender == buttonStarters)
+            {
+                menuItemType = MenuItemType.Starter;
+            }
+            else if(sender == buttonMainCourse)
+            {
+                menuItemType = MenuItemType.MainCourse;
+            }
+            else if(sender == buttonDesserts)
+            {
+                menuItemType = MenuItemType.Desserts;
+            }
+            else if(sender == buttonDrinks)
+            {
+                menuType = MenuType.Drink;
+                menuItemType = MenuItemType.Drink; 
+            }
+            else
+            {
+                if (sender == buttonLunch)
+                {
+                    menuType = MenuType.Lunch;
+                    labelTitleItems.Text = $"{menuType} 11:00 - 16:00";
+                }
+                else if (sender == buttonDinner)
+                {
+                    menuType = MenuType.Dinner;
+                    labelTitleItems.Text = $"{menuType} 11:00 - 16:00";
+                }
+                panelSelectMenu.Show();
+                return;
+            }
             panelSelectMenu.Hide();
             CreateButtons();
-        }
+            labelSelectedMenuName.Text = $"{menuItemType}";
 
-        private void buttonMainCourse_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.MainCourse;
-            labelSelectedMenuName.Text = "MAIN COURSE";
-            panelSelectMenu.Hide();
-            CreateButtons();
-        }
-
-        private void buttonDesserts_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.Desserts;
-            labelSelectedMenuName.Text = "DESSERTS";
-            panelSelectMenu.Hide();
-            CreateButtons();
-        }
-
-        private void buttonDrinks_Click(object sender, EventArgs e)
-        {
-            menuItemType = MenuItemType.Drinks;
-            labelSelectedMenuName.Text = "DRINKS";
-            panelSelectMenu.Hide();
-            CreateButtons();
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {
             RemoveAllControlsMenu();
-            if (!panelSelectMenu.Visible)
+            if(menuType == MenuType.Drink)
+            {
+                PanelChooseMenu.Visible = true;
+            }
+            else if (!panelSelectMenu.Visible)
             {
                 panelSelectMenu.Visible = true;
             }
             else if(!PanelChooseMenu.Visible)
             {
-                ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Are you sure you would like to return?\nthis action will reset the order.");
-                confirmBackButton.ShowDialog();
-                if (confirmBackButton.DialogResult == DialogResult.Yes)
-                {
-                    PanelChooseMenu.Visible = true;
-                    itemGridView.Rows.Clear();
-                }
+                PanelChooseMenu.Visible = true;
             }
             else
             {
@@ -320,9 +330,10 @@ namespace ChapeauUI
         }
         private void RemoveAllControlsMenu()
         {
-
+           // hide and show in order to prevent visual bugs from .controls.Clear() that is caused from there being too many controls.
+           menu.Hide();
            menu.Controls.Clear();
-
+           menu.Show();
         }
     }
 }

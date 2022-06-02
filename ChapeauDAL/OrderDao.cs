@@ -13,7 +13,7 @@ namespace ChapeauDAL
     {
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {
-            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE t.Waiter_ID = @staffID AND isFinished = 1 AND isDelived IS NULL";
+            string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE t.Waiter_ID = @staffID AND isFinished = 1 AND isDelivered IS NULL";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
@@ -33,7 +33,7 @@ namespace ChapeauDAL
 
         public List<Order> GetLastOrders()
         {
-            string query = "SELECT o.order_id, o.table_Id, o.comments, o.isFinished, MAX(o.timePlaced) AS timePlaced FROM [Order] AS o JOIN [Reservation] AS r ON r.reservation_id = o.reservation_Id WHERE r.IsPresent = 1 AND o.isDelivered IS NULL GROUP BYo.table_Id";
+            string query = "SELECT o.order_id, o.table_Id, o.comments, o.isFinished, MAX(o.timePlaced) AS timePlaced FROM [Order] AS o JOIN [Reservation] AS r ON r.reservation_id = o.reservation_Id WHERE r.IsPresent = 1 AND o.isDelivered IS NULL GROUP BY o.table_Id";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -87,21 +87,29 @@ namespace ChapeauDAL
             ExecuteEditQuery(query, sqlParameters);
         }
 
+        public void UpdateStateIsdelivered(int orderID)
+        {
+            string query = $"UPDATE [Order] SET IsDelivered=1 WHERE order_Id=@orderID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderID", orderID);
+            ExecuteEditQuery(query, sqlParameters);
+        }
 
-        public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments, int staffId)
+
+        public void CreateCompleteOrder(Order order)
         {
             string query = "INSERT INTO [Order](reservation_Id, table_Id, isFinished, timePlaced, comments) VALUES (@reservationId, @tableId, 0, @currentTime, @comments);";
             SqlParameter[] sqlParameters = new SqlParameter[4]
             {
-                new SqlParameter("@reservationId", reservation.ReservationId),
-                new SqlParameter("@tableId", reservation.TableId),
+                new SqlParameter("@reservationId", order.Reservation.ReservationId),
+                new SqlParameter("@tableId", order.Reservation.TableId),
                 new SqlParameter("@currentTime", DateTime.Now),
-                new SqlParameter("@comments", comments),
+                new SqlParameter("@comments", order.Comments),
             };
             ExecuteEditQuery(query, sqlParameters);
-            foreach (OrderItem orderItem in orderedItem)
+            foreach (OrderItem orderItem in order.OrderItems)
             {
-                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount);" +
+                query = "INSERT INTO[order_Item](order_id, menuItem_Id, amount, status) VALUES((SELECT TOP 1 order_id FROM [Order] ORDER BY order_id DESC), @menuItemId, @amount, 0);" +
                     "UPDATE [menuItem] SET [stock] = [stock] - @amount WHERE [menuItem_ID] = @menuItemId;" +
                     "UPDATE [Table] SET [Waiter_id] = @staffId WHERE [table_ID] = @tableId;";
                 sqlParameters = new SqlParameter[5]
@@ -109,8 +117,8 @@ namespace ChapeauDAL
                      new SqlParameter("@orderId", 7),
                      new SqlParameter("@menuItemId", orderItem.MenuItem.MenuItemId),
                      new SqlParameter("@amount", orderItem.Amount),
-                     new SqlParameter("@staffId", staffId),
-                     new SqlParameter("@tableId", reservation.TableId),
+                     new SqlParameter("@staffId", order.StaffId),
+                     new SqlParameter("@tableId", order.Reservation.TableId),
                 };
                 ExecuteEditQuery(query, sqlParameters);
             }

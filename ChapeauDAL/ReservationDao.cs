@@ -33,7 +33,7 @@ namespace ChapeauDAL
 
         public Reservation GetPresentReservationByTable(int tableID)
         {
-            string query = "SELECT * FROM Reservations WHERE table_ID = @table_ID AND isPresent = 1";
+            string query = "SELECT * FROM Reservation WHERE table_ID = @table_ID AND isPresent = 1";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@table_ID", tableID);
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
@@ -41,7 +41,7 @@ namespace ChapeauDAL
 
         public void MarkReservationPresent(int reservationID)
         {
-            string query = "UPDATE Reservations SET isPresent = 1 WHERE reservation_id = @reservation_id";
+            string query = "UPDATE Reservation SET isPresent = 1 WHERE reservation_id = @reservation_id";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservation_id", reservationID);
             ExecuteEditQuery(query, sqlParameters);

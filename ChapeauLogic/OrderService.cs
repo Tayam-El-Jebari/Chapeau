@@ -26,9 +26,9 @@ namespace ChapeauLogic
         {
             orderDao.UpdateStateIsFinished(order);
         }//add een orderitem update
-        public void CreateCompleteOrder(List<OrderItem> orderedItem, Reservation reservation, string comments, int staffId)
+        public void CreateCompleteOrder(Order orderToSend)
         {
-            orderDao.CreateCompleteOrder(orderedItem, reservation, comments, staffId);
+            orderDao.CreateCompleteOrder(orderToSend);
         }
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {
@@ -38,6 +38,11 @@ namespace ChapeauLogic
         public List<Order> GetLastOrders()
         {
             return orderDao.GetLastOrders();
+        }
+
+        public void UpdateStateIsdelivered(int orderID)
+        {
+            orderDao.UpdateStateIsdelivered(orderID);
         }
     }
 }

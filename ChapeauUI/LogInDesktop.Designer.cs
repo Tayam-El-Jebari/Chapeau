@@ -47,6 +47,7 @@ namespace ChapeauUI
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(125, 27);
             this.passwordTextBox.TabIndex = 1;
+            this.passwordTextBox.UseSystemPasswordChar = true;
             // 
             // inlogBtn
             // 
@@ -67,6 +68,7 @@ namespace ChapeauUI
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.IDnummerTextBox);
             this.Name = "LogInDesktop";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LogInDesktop";
             this.ResumeLayout(false);
             this.PerformLayout();

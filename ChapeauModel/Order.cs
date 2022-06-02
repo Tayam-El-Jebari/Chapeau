@@ -10,8 +10,11 @@ namespace ChapeauModel
     {
         public int OrderId { get; set; }
         public int TableId { get; set; }
+        public int StaffId { get; set; }
         public string Comments { get; set; }
         public DateTime TimePlaced { get; set; }
         public bool IsFinished { get; set; }
+        public Reservation Reservation { get; set; }
+        public List<OrderItem> OrderItems{ get; set;}
     }
 }

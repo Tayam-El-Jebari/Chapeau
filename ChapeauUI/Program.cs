@@ -22,14 +22,12 @@ namespace ChapeauUI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // DON'T FORGET TO REMOVE USING CHAPEAU MODEL SVP!
-            //Reservation reservation = new Reservation
-            //{
-            //    ReservationId = 202,
-            //    TableId = 4
-            //};
-            //Application.Run(new OrderUI(reservation, 8));
-            Application.Run(new BillUI());//StartScreen());
+            Reservation reservation = new Reservation
+            {
+                ReservationId = 202,
+                TableId = 4
+            };
+            Application.Run(new BillUI(reservation));//StartScreen());
         }
     }
 }
