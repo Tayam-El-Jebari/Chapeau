@@ -10,9 +10,6 @@ namespace ChapeauLogic
 {
     public class BillService
     {
-        const double HighVat = 0.21;
-        const double LowVat = 0.16;
-
         private BillDao billdb;
 
         public BillService()
@@ -35,12 +32,13 @@ namespace ChapeauLogic
             double vat = 0;
             double totalPrice = 0;
 
+            //1 minder
             ICalculateVAT calculateHighVAT = new CalculateHighVAT();
             ICalculateVAT calculateLowVAT = new CalculateLowVAT();
             Bill bill = new Bill();
             List<OrderItem> lowVatItems = SortList(billdb.GetLowVAT(reservationId));
             List<OrderItem> highVatItems = SortList(billdb.GetHighVAT(reservationId));
-
+            //1 lijst
             if (highVatItems != null)
             {
                 foreach (OrderItem hvItem in highVatItems)
