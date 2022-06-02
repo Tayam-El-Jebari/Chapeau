@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChapeauModel;
 using ChapeauLogic;
+using Microsoft.VisualBasic;
 
 namespace ChapeauUI
 {
@@ -27,14 +28,15 @@ namespace ChapeauUI
         {
              //headerLabel.Text = $"bill table {table.TableID}";
              //headerLabel.Text = headerLabel.Text.ToUpper();
-             //InitFont(headerLabel);
         }
         private void MakeBill(int reservation)
         {
             BillService billService = new BillService();
             Bill bill = billService.MakeBill(reservation);
-            labelExVAT.Text = bill.TotalPriceExclVAT.ToString("0.00");
-            labelInVAT.Text = bill.TotalPriceInclVAT.ToString("0.00");
+            labelExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
+            labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
+            //also display vat
+            //bon half cash half pin
 
             billGrid.ColumnCount = 3;
             billGrid.Columns[0].Name = "Menu Item";
@@ -45,19 +47,24 @@ namespace ChapeauUI
             billGrid.Columns[2].Width = 200;
             for (int i = 0; i < bill.MenuItems.Count; i++)
             {
-                billGrid.Rows.Add(bill.MenuItems[i].MenuItem.ProductName, bill.MenuItems[i].Amount, bill.MenuItems[i].MenuItem.Price);
+                billGrid.Rows.Add(bill.MenuItems[i].MenuItem.ProductName, bill.MenuItems[i].Amount, bill.MenuItems[i].MenuItem.Price.ToString("€ 0.00"));
             };
         }
-        public void InitFont(Label label)
-        {
-            PrivateFontCollection pfc = new PrivateFontCollection();
-            int fontLength = Properties.Resources.Cabin.Length;
-            byte[] fontdata = Properties.Resources.Cabin;
-            IntPtr data = Marshal.AllocCoTaskMem(fontLength);
-            Marshal.Copy(fontdata, 0, data, fontLength);
-            pfc.AddMemoryFont(data, fontLength);
-            label.Font = new Font(pfc.Families[0], label.Font.Size);
-        }
 
+        private void buttonTip_Click(object sender, EventArgs e)
+        {
+            double tip = double.Parse(Interaction.InputBox("Do you want to add a tip?", "Add tip", "Amount"));
+            if(tip > 0)
+            {
+                labelTip.Text = tip.ToString("€ 0.00");
+                double newTotal = double.Parse(labelInVAT.Text.Substring(1)) + tip;
+                labelInVAT.Text = newTotal.ToString("€ 0.00");
+            }
+            else
+            {
+                MessageBox.Show("Tip can not be negative");
+            }
+            
+        }
     }
 }
