@@ -14,18 +14,69 @@ namespace ChapeauUI
 {
     public partial class KitchenAndBarOverview : Form
     {
-        public KitchenAndBarOverview()
+        public KitchenAndBarOverview(StaffJob staffJob)
         {
             InitializeComponent();
-            kitchenListView.Hide();
-            labelKitchen.Hide();
-            finishedFoodButton.Hide();
+            Staff staff = new Staff();
+            if (staffJob == StaffJob.Chef)
+            {
+                KitchenListView();
+            }
+            else if (staffJob == StaffJob.Bartender)
+            {
+                BarListView();
+            }
+            else
+            {
+                this.Hide();
+                InlogForm loginPage = new InlogForm();
+                loginPage.ShowDialog();
+                this.Close();
+            }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            StaffJob staffJob = new StaffJob();
+            Staff staff = new Staff();
+            if (staffJob == StaffJob.Bartender)
+            {
+                KitchenListView();
+            }
+            else if (staffJob == StaffJob.Bartender)
+            {
+                BarListView();
+            }
+
+        }        
+        private void KitchenOverview_Load(object sender, EventArgs e)
+        {
+
+                System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
+                timer1.Interval = 30000;//30 seconds
+                timer1.Tick += new System.EventHandler(timer1_Tick);
+                timer1.Start();   
+        }
+        private void buttonLogOut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            InlogForm loginPage = new InlogForm();
+            loginPage.ShowDialog();
+            this.Close();
+        }
+
+        private void barListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        public void KitchenListView()
+        {
+            kitchenListView.Show();
+            labelKitchen.Show();
+            finishedFoodButton.Show();
             barListView.Hide();
             labelBar.Hide();
             finishedDrinkButton.Hide();
-        }
-        public void Kitchen()
-        {
+
             OrderService orderService = new OrderService();
             OrderItem orderItem = new OrderItem();
             List<OrderItem> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -44,8 +95,8 @@ namespace ChapeauUI
             kitchenListView.Columns.Add("Time of ordering", 200);
             foreach (OrderItem order in ordersFoodList)
             {
-                //if (order.Order.TimePlaced == DateTime.Today)
-                //{
+                if (order.Order.TimePlaced == DateTime.Today)
+                {
                     TimeSpan durationOfOrder = DateTime.Now - order.Order.TimePlaced;
                     ListViewItem li = new ListViewItem(order.Order.OrderId.ToString());
                     li.SubItems.Add(order.MenuItem.MenuItemId.ToString());
@@ -67,12 +118,19 @@ namespace ChapeauUI
 
                     kitchenListView.Items.Add(li);
                 }
-            //}
+            }
             kitchenListView.Show();
             ColorListView(kitchenListView);
         }
-        private void Bar()
+        private void BarListView()
         {
+            kitchenListView.Hide();
+            labelKitchen.Hide();
+            finishedFoodButton.Hide();
+            barListView.Show();
+            labelBar.Show();
+            finishedDrinkButton.Show();
+
             OrderService orderService = new OrderService();
             OrderItem orderItem = new OrderItem();
             List<OrderItem> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -197,84 +255,18 @@ namespace ChapeauUI
                     orderService.GetUpdateStateIsFinished(order);
                     MessageBox.Show($"Order {order.Order.OrderId}: {order.MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
                 }
-                timer2_Tick(sender, e);
-                System.Windows.Forms.Timer timer2 = new System.Windows.Forms.Timer();
-                timer2.Interval = 5000;//5 seconds
-                timer2.Tick += new System.EventHandler(timer2_Tick);
-                timer2.Start();
+            timer1_Tick(sender, e);
 
-        }
-        private void KitchenOverview_Load(object sender, EventArgs e)
-        {
-
-                System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
-                timer1.Interval = 30000;//30 seconds
-                timer1.Tick += new System.EventHandler(timer1_Tick);
-                timer1.Start();
-
-            
-        }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
-            if (radioButtonKitchen.Checked)
-            {
-                Kitchen();
-            }
-            else if (radioButtonBar.Checked)
-            {
-                Bar();
-            }
-        }
-
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            timer2.Stop();
-
-            if (radioButtonKitchen.Checked)
-            {
-                Kitchen();
-            }
-            else if (radioButtonBar.Checked)
-            {
-                Bar();
-            }
-        }
-         private void buttonLogOut_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            InlogForm loginPage = new InlogForm();
-            loginPage.ShowDialog();
-            this.Close();
-        }
-
-        private void barListView_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
         }
 
 
-        private void radioButtonKitchen_CheckedChanged(object sender, EventArgs e)
-        {
-            kitchenListView.Show();
-            labelKitchen.Show();
-            finishedFoodButton.Show();
-            barListView.Hide();
-            labelBar.Hide();
-            finishedDrinkButton.Hide();
-            Kitchen();
-        }
 
-        private void radioButtonBar_CheckedChanged(object sender, EventArgs e)
-        {
-            kitchenListView.Hide();
-            labelKitchen.Hide();
-            finishedFoodButton.Hide();
-            barListView.Show();
-            labelBar.Show();
-            finishedDrinkButton.Show();
-            Bar();
-        }
+
+
+
+
+
     }
         
     

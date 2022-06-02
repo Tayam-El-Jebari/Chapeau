@@ -126,27 +126,17 @@ namespace ChapeauUI
             // 
             // radioButtonKitchen
             // 
-            this.radioButtonKitchen.AutoSize = true;
-            this.radioButtonKitchen.Location = new System.Drawing.Point(597, 24);
+            this.radioButtonKitchen.Location = new System.Drawing.Point(0, 0);
             this.radioButtonKitchen.Name = "radioButtonKitchen";
-            this.radioButtonKitchen.Size = new System.Drawing.Size(79, 24);
-            this.radioButtonKitchen.TabIndex = 7;
-            this.radioButtonKitchen.TabStop = true;
-            this.radioButtonKitchen.Text = "Kitchen";
-            this.radioButtonKitchen.UseVisualStyleBackColor = true;
-            this.radioButtonKitchen.CheckedChanged += new System.EventHandler(this.radioButtonKitchen_CheckedChanged);
+            this.radioButtonKitchen.Size = new System.Drawing.Size(104, 24);
+            this.radioButtonKitchen.TabIndex = 11;
             // 
             // radioButtonBar
             // 
-            this.radioButtonBar.AutoSize = true;
-            this.radioButtonBar.Location = new System.Drawing.Point(597, 54);
+            this.radioButtonBar.Location = new System.Drawing.Point(0, 0);
             this.radioButtonBar.Name = "radioButtonBar";
-            this.radioButtonBar.Size = new System.Drawing.Size(52, 24);
-            this.radioButtonBar.TabIndex = 8;
-            this.radioButtonBar.TabStop = true;
-            this.radioButtonBar.Text = "Bar";
-            this.radioButtonBar.UseVisualStyleBackColor = true;
-            this.radioButtonBar.CheckedChanged += new System.EventHandler(this.radioButtonBar_CheckedChanged);
+            this.radioButtonBar.Size = new System.Drawing.Size(104, 24);
+            this.radioButtonBar.TabIndex = 10;
             // 
             // label1
             // 
@@ -162,6 +152,7 @@ namespace ChapeauUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
+            this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebgdesktop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
             this.Controls.Add(this.label1);

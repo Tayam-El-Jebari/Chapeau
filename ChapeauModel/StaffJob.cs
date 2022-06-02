@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public class Staff
+    public enum StaffJob
     {
-        public int Staff_ID { get; set; }
-        public string firstName { get; set; }
-        public StaffJob StaffJob { get; set; }
-
+        Waiter,
+        Chef, 
+        Bartender,
+        Owner
     }
 }
