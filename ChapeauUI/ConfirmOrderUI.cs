@@ -15,25 +15,29 @@ namespace ChapeauUI
         public ConfirmOrderUI()
         {
             InitializeComponent();
-            SetControls();
+            ReturnButton.DialogResult = DialogResult.Yes;
+            DenyButton.DialogResult = DialogResult.No;
         }
         public ConfirmOrderUI(string question)
         {
             InitializeComponent();
-            SetControls(question);
-        }
-        private void SetControls()
-        {
-            ReturnButton.DialogResult = DialogResult.Yes;
-            DenyButton.DialogResult = DialogResult.No;
-        }
-        private void SetControls(string question)
-        {
             ConfirmButton.DialogResult = DialogResult.Yes;
             DenyButton.DialogResult = DialogResult.No;
             labelQuestion.Visible = true;
             labelQuestion.Text = question.ToUpper();
         }
+        public ConfirmOrderUI(string question, DialogResult dialogResult)
+        {
+            InitializeComponent();
+            labelQuestion.Text = question.ToUpper();
+            labelQuestion.Visible = true;
+            ReturnButton.DialogResult = DialogResult.OK;
+            DenyButton.Hide();
+            ConfirmButton.Hide();
+            ReturnButton.Show();
+        }
+
+
         private void DenyButton_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -69,7 +69,7 @@ namespace ChapeauUI
             // 
             // panelItems
             // 
-            this.panelItems.BackgroundImage = global::ChapeauUI.Properties.Resources.newhandheldbg;
+            this.panelItems.BackColor = System.Drawing.Color.Transparent;
             this.panelItems.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelItems.Controls.Add(this.buttonBack);
             this.panelItems.Controls.Add(this.bottomBarLabel);
@@ -91,7 +91,7 @@ namespace ChapeauUI
             this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonBack.FlatAppearance.BorderSize = 0;
             this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBack.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBack.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonBack.ForeColor = System.Drawing.Color.White;
             this.buttonBack.Location = new System.Drawing.Point(0, 1370);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
@@ -127,11 +127,11 @@ namespace ChapeauUI
             // labelTable
             // 
             this.labelTable.AutoSize = true;
-            this.labelTable.Font = new System.Drawing.Font("Cabin", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTable.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.labelTable.Location = new System.Drawing.Point(32, 55);
             this.labelTable.Name = "labelTable";
-            this.labelTable.Size = new System.Drawing.Size(156, 63);
+            this.labelTable.Size = new System.Drawing.Size(151, 54);
             this.labelTable.TabIndex = 1;
             this.labelTable.Text = "TABLE ";
             // 
@@ -141,7 +141,7 @@ namespace ChapeauUI
             this.buttonLunch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonLunch.FlatAppearance.BorderSize = 10;
             this.buttonLunch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLunch.Font = new System.Drawing.Font("Cabin", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonLunch.Font = new System.Drawing.Font("Trebuchet MS", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLunch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonLunch.Location = new System.Drawing.Point(31, 151);
             this.buttonLunch.Margin = new System.Windows.Forms.Padding(0);
@@ -158,7 +158,7 @@ namespace ChapeauUI
             this.buttonDinner.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDinner.FlatAppearance.BorderSize = 10;
             this.buttonDinner.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDinner.Font = new System.Drawing.Font("Cabin", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDinner.Font = new System.Drawing.Font("Trebuchet MS", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDinner.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDinner.Location = new System.Drawing.Point(32, 436);
             this.buttonDinner.Margin = new System.Windows.Forms.Padding(60);
@@ -175,7 +175,7 @@ namespace ChapeauUI
             this.buttonDrinks.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDrinks.FlatAppearance.BorderSize = 10;
             this.buttonDrinks.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDrinks.Font = new System.Drawing.Font("Cabin", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDrinks.Font = new System.Drawing.Font("Trebuchet MS", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDrinks.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDrinks.Location = new System.Drawing.Point(32, 716);
             this.buttonDrinks.Margin = new System.Windows.Forms.Padding(60);
@@ -201,10 +201,10 @@ namespace ChapeauUI
             // labelSelectMenu
             // 
             this.labelSelectMenu.AutoSize = true;
-            this.labelSelectMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelSelectMenu.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelSelectMenu.Location = new System.Drawing.Point(30, 64);
             this.labelSelectMenu.Name = "labelSelectMenu";
-            this.labelSelectMenu.Size = new System.Drawing.Size(328, 51);
+            this.labelSelectMenu.Size = new System.Drawing.Size(284, 54);
             this.labelSelectMenu.TabIndex = 3;
             this.labelSelectMenu.Text = "SELECT MENU";
             // 
@@ -214,7 +214,7 @@ namespace ChapeauUI
             this.buttonDesserts.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDesserts.FlatAppearance.BorderSize = 10;
             this.buttonDesserts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDesserts.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDesserts.Font = new System.Drawing.Font("Trebuchet MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDesserts.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonDesserts.Location = new System.Drawing.Point(30, 713);
             this.buttonDesserts.Margin = new System.Windows.Forms.Padding(60);
@@ -231,7 +231,7 @@ namespace ChapeauUI
             this.buttonMainCourse.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonMainCourse.FlatAppearance.BorderSize = 10;
             this.buttonMainCourse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonMainCourse.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonMainCourse.Font = new System.Drawing.Font("Trebuchet MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonMainCourse.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonMainCourse.Location = new System.Drawing.Point(30, 433);
             this.buttonMainCourse.Margin = new System.Windows.Forms.Padding(60);
@@ -248,7 +248,7 @@ namespace ChapeauUI
             this.buttonStarters.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonStarters.FlatAppearance.BorderSize = 10;
             this.buttonStarters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonStarters.Font = new System.Drawing.Font("Cabin", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonStarters.Font = new System.Drawing.Font("Trebuchet MS", 48F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonStarters.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonStarters.Location = new System.Drawing.Point(31, 151);
             this.buttonStarters.Margin = new System.Windows.Forms.Padding(60);
@@ -278,15 +278,17 @@ namespace ChapeauUI
             // itemGridView
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(201)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(192)))), ((int)(((byte)(201)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.itemGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.itemGridView.BackgroundColor = System.Drawing.Color.White;
             this.itemGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.itemGridView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(56)))), ((int)(((byte)(59)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 14.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(56)))), ((int)(((byte)(59)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -299,11 +301,11 @@ namespace ChapeauUI
             this.amount});
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.itemGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.itemGridView.EnableHeadersVisualStyles = false;
             this.itemGridView.GridColor = System.Drawing.Color.White;
@@ -336,7 +338,7 @@ namespace ChapeauUI
             // 
             // amount
             // 
-            this.amount.HeaderText = "amount";
+            this.amount.HeaderText = "amnt";
             this.amount.MinimumWidth = 6;
             this.amount.Name = "amount";
             this.amount.ReadOnly = true;
@@ -356,10 +358,10 @@ namespace ChapeauUI
             // 
             this.labelCommentsTitle.AutoSize = true;
             this.labelCommentsTitle.BackColor = System.Drawing.Color.Transparent;
-            this.labelCommentsTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelCommentsTitle.Font = new System.Drawing.Font("Trebuchet MS", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelCommentsTitle.Location = new System.Drawing.Point(10, 539);
             this.labelCommentsTitle.Name = "labelCommentsTitle";
-            this.labelCommentsTitle.Size = new System.Drawing.Size(144, 29);
+            this.labelCommentsTitle.Size = new System.Drawing.Size(141, 32);
             this.labelCommentsTitle.TabIndex = 5;
             this.labelCommentsTitle.Text = "Comments:";
             // 
@@ -368,12 +370,13 @@ namespace ChapeauUI
             this.clearAllButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.clearAllButton.FlatAppearance.BorderSize = 8;
             this.clearAllButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clearAllButton.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.clearAllButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.clearAllButton.Location = new System.Drawing.Point(463, 825);
+            this.clearAllButton.Location = new System.Drawing.Point(31, 825);
             this.clearAllButton.Name = "clearAllButton";
             this.clearAllButton.Size = new System.Drawing.Size(202, 97);
             this.clearAllButton.TabIndex = 1;
-            this.clearAllButton.Text = "Clear all";
+            this.clearAllButton.Text = "CLEAR ALL";
             this.clearAllButton.UseVisualStyleBackColor = true;
             this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
             // 
@@ -382,12 +385,13 @@ namespace ChapeauUI
             this.buttonCreateOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.buttonCreateOrder.FlatAppearance.BorderSize = 8;
             this.buttonCreateOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCreateOrder.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonCreateOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.buttonCreateOrder.Location = new System.Drawing.Point(31, 825);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(463, 825);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(202, 97);
             this.buttonCreateOrder.TabIndex = 8;
-            this.buttonCreateOrder.Text = "Create order";
+            this.buttonCreateOrder.Text = "CREATE ORDER";
             this.buttonCreateOrder.UseVisualStyleBackColor = true;
             this.buttonCreateOrder.Click += new System.EventHandler(this.buttonCreateOrder_Click);
             // 
@@ -396,7 +400,7 @@ namespace ChapeauUI
             this.viewOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.viewOrder.FlatAppearance.BorderSize = 3;
             this.viewOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.viewOrder.Font = new System.Drawing.Font("Cabin", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.viewOrder.Font = new System.Drawing.Font("Trebuchet MS", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.viewOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.viewOrder.Location = new System.Drawing.Point(576, 5);
             this.viewOrder.Name = "viewOrder";
@@ -418,7 +422,7 @@ namespace ChapeauUI
             // 
             // labelSelectedMenuName
             // 
-            this.labelSelectedMenuName.Font = new System.Drawing.Font("Cabin", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelSelectedMenuName.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelSelectedMenuName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.labelSelectedMenuName.Location = new System.Drawing.Point(96, 115);
             this.labelSelectedMenuName.Name = "labelSelectedMenuName";
@@ -431,7 +435,7 @@ namespace ChapeauUI
             // 
             this.labelTitleItems.BackColor = System.Drawing.Color.Transparent;
             this.labelTitleItems.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelTitleItems.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTitleItems.Font = new System.Drawing.Font("Trebuchet MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTitleItems.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.labelTitleItems.Location = new System.Drawing.Point(14, 20);
             this.labelTitleItems.Name = "labelTitleItems";
@@ -444,7 +448,7 @@ namespace ChapeauUI
             // 
             this.labelBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.labelBorder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelBorder.Font = new System.Drawing.Font("Cabin", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelBorder.Font = new System.Drawing.Font("Trebuchet MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelBorder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.labelBorder.Location = new System.Drawing.Point(11, 17);
             this.labelBorder.Name = "labelBorder";
@@ -470,6 +474,7 @@ namespace ChapeauUI
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.BackgroundImage = global::ChapeauUI.Properties.Resources.newhandheldbg;
             this.ClientSize = new System.Drawing.Size(720, 1097);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.panelItems);

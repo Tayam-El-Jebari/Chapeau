@@ -40,7 +40,7 @@ namespace ChapeauUI
                         Height = 62,
                         LeftText = $"{menuItem.ProductName}",
                         RightText = $"€{menuItem.Price.ToString("0.00")}",
-                        Font = new Font("Cabin", 12),
+                        Font = new Font("Trebuchet MS", 12),
                         Margin = new Padding(6),
                         UseVisualStyleBackColor = true,
                         FlatStyle = FlatStyle.Flat,
@@ -66,7 +66,7 @@ namespace ChapeauUI
                         Width = 44,
                         Height = 44,
                         Text = "?",
-                        Font = new Font("Cabin", 9),
+                        Font = new Font("Trebuchet MS", 9),
                         ForeColor = Color.FromArgb(39, 39, 39),
                         BackColor = Color.Transparent,
                         FlatStyle = FlatStyle.Flat,
@@ -93,7 +93,7 @@ namespace ChapeauUI
                 Name = "btnAddOrderItems",
                 UseColumnTextForButtonValue = true,
                 FlatStyle = FlatStyle.Flat,
-                Width = 50
+                Width = 70
             });
             itemGridView.Columns.Add(
                 new DataGridViewButtonColumn
@@ -103,7 +103,7 @@ namespace ChapeauUI
                     Name = "btnAddOrderItems",
                     UseColumnTextForButtonValue = true,
                     FlatStyle = FlatStyle.Flat,
-                    Width = 50
+                    Width = 70
                 });
         }
         void BtnOrderAdd_Click(Object sender, EventArgs e)
