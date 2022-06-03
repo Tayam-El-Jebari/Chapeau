@@ -96,6 +96,17 @@ namespace ChapeauUI
             fillReadyOrderDataGrid();
         }
 
+        private void CheckIfOrderDrinksReady(Order order)
+        {
+            foreach(OrderItem orderItem in order.OrderItems)
+            {
+                if(orderItem.MenuItem.MenuItemType == MenuItemType.Drinks &&)
+                {
+
+                }
+            }
+        }
+
         private void fillReadyOrderDataGrid()
         {
             OrderService orderService = new OrderService();

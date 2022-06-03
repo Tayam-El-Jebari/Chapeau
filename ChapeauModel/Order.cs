@@ -13,5 +13,7 @@ namespace ChapeauModel
         public string Comments { get; set; }
         public DateTime TimePlaced { get; set; }
         public bool IsFinished { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
+
     }
 }

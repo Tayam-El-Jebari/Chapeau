@@ -32,7 +32,12 @@ namespace ChapeauLogic
         }
         public List<Order> GetOrdersForWaiterToDeliver(int staffID)
         {
-            return orderDao.GetOrdersForWaiterToDeliver(staffID);
+            List<Order> orders = orderDao.GetOrdersForWaiterToDeliver(staffID);
+            foreach(Order order in orders)
+            {
+                orderDao.GetOrderItemsForOrder(order);
+            }
+            return orders;
         }
 
         public List<Order> GetLastOrders()
