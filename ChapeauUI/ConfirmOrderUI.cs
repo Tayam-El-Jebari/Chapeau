@@ -14,6 +14,7 @@ namespace ChapeauUI
 {
     public partial class ConfirmOrderUI : Form
     {
+        //DONT FORGET TO RENAME CLASS
        
         public ConfirmOrderUI()
         {
@@ -45,10 +46,13 @@ namespace ChapeauUI
                 case DialogResult.None:
                     labelQuestion.Text = question.ToUpper();
                     labelQuestion.Visible = true;
-                    ReturnButton.DialogResult = DialogResult.OK;
-                    DenyButton.Hide();
-                    ConfirmButton.Hide();
-                    ReturnButton.Show();
+                    DenyButton.DialogResult = DialogResult.No;
+                    DenyButton.Text = "CANCEL";
+                    DenyButton.Click += new EventHandler(OkAndCancel_Click);
+                    ConfirmButton.Text = "OK";
+                    ConfirmButton.Click -= ConfirmButton_Click;
+                    ConfirmButton.Click += new EventHandler(OkAndCancel_Click);
+                    DenyButton.DialogResult = DialogResult.Yes;
                     textBoxInput.Show();
                     break;
             }
@@ -57,16 +61,33 @@ namespace ChapeauUI
         public double InputDouble()
         {
             double input = 0;
+            if (denied)
+            {
+                throw new Exception("No tip added");
+            }
+
             try
             {
-                if (textBoxInput.Text != null)
+                try
                 {
-                    input = double.Parse(textBoxInput.Text);
+                    if (double.Parse(textBoxInput.Text) > 0)
+                    {
+                        input = double.Parse(textBoxInput.Text);
+                    }
+                }
+                catch
+                {
+                    throw new Exception("Please enter a number");
+                }
+                if (double.Parse(textBoxInput.Text) <= 0)
+                {
+                    throw new Exception("Please fill in a tip above 0");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Please only enter numbers");
+                ConfirmOrderUI confirmOrder = new ConfirmOrderUI(ex.Message, DialogResult.OK);
+                confirmOrder.ShowDialog();
             }
             return input;
         }
@@ -74,7 +95,6 @@ namespace ChapeauUI
         {
             this.Close();
         }
-
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             DenyButton.Visible = false;
@@ -82,5 +102,15 @@ namespace ChapeauUI
             ReturnButton.Visible = true;
             labelOrderConfirmed.Visible = true;
         }
+        private bool denied;
+        private void OkAndCancel_Click(object sender, EventArgs e)
+        {
+            if (sender == DenyButton)
+            {
+                denied = true;
+            }
+            this.Close();
+        }
     }
 }
+

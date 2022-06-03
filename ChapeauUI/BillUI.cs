@@ -17,23 +17,25 @@ namespace ChapeauUI
 {
     public partial class BillUI : Form
     {
+        private double totalPrice;
         public BillUI(Reservation reservation)
         {
             InitializeComponent();
-            //ShowHeader();
+            ShowHeader(reservation.TableId);
             MakeBill(reservation.ReservationId);//reservation.ReservationId);
         }
 
-        public void ShowHeader()
+        public void ShowHeader(int table)
         {
-             //headerLabel.Text = $"bill table {table.TableID}";
-             //headerLabel.Text = headerLabel.Text.ToUpper();
+             headerLabel.Text = $"bill table {table}";
+             headerLabel.Text = headerLabel.Text.ToUpper();
         }
         private void MakeBill(int reservation)
         {
             BillService billService = new BillService();
             Bill bill = billService.MakeBill(reservation);
-            labelExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
+            this.totalPrice = bill.TotalPriceExclVAT;
+            labelExVAT.Text = totalPrice.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
             //bon half cash half pin
@@ -53,23 +55,13 @@ namespace ChapeauUI
 
         private void buttonTip_Click(object sender, EventArgs e)
         {
-            double tip = double.Parse(Interaction.InputBox("Do you want to add a tip?", "Add tip", "Amount"));
-
-            if (tip > 0)
-            {
+          
+                ConfirmOrderUI confirmOrder = new ConfirmOrderUI("Do you want to add a tip?", DialogResult.None);
+                confirmOrder.ShowDialog();
+                double tip = confirmOrder.InputDouble();
                 labelTip.Text = tip.ToString("€ 0.00");
-                double newTotal = double.Parse(labelInVAT.Text.Substring(1)) + tip;
-                labelInVAT.Text = newTotal.ToString("€ 0.00");
-            }
-            else
-            {
-                ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Tip can not be negative");
-                confirmBackButton.ShowDialog();
-                MessageBox.Show("Tip can not be negative");
-                
-            }
-            
+                double newTotal = totalPrice + tip;
+                labelInVAT.Text = newTotal.ToString("€ 0.00");   
         }
-
     }
 }

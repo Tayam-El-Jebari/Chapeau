@@ -104,9 +104,10 @@ namespace ChapeauUI
             // 
             // textBoxInput
             // 
-            this.textBoxInput.Location = new System.Drawing.Point(102, 176);
+            this.textBoxInput.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxInput.Location = new System.Drawing.Point(71, 152);
             this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(480, 27);
+            this.textBoxInput.Size = new System.Drawing.Size(511, 38);
             this.textBoxInput.TabIndex = 5;
             this.textBoxInput.Visible = false;
             // 
