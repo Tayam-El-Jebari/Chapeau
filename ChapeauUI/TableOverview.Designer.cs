@@ -66,6 +66,8 @@ namespace ChapeauUI
             this.setReservationPresentBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.reservationOverviewDataGrid = new System.Windows.Forms.DataGridView();
+            this.topBarLabel = new System.Windows.Forms.Label();
+            this.bottomBarLabel = new System.Windows.Forms.Label();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             this.startMenuPnl.SuspendLayout();
@@ -187,7 +189,7 @@ namespace ChapeauUI
             this.TableOverviewPnl.Controls.Add(this.tableFourButton);
             this.TableOverviewPnl.Controls.Add(this.tableNineButton);
             this.TableOverviewPnl.Controls.Add(this.tableTwoButton);
-            this.TableOverviewPnl.Location = new System.Drawing.Point(12, 12);
+            this.TableOverviewPnl.Location = new System.Drawing.Point(12, 94);
             this.TableOverviewPnl.Name = "TableOverviewPnl";
             this.TableOverviewPnl.Size = new System.Drawing.Size(334, 332);
             this.TableOverviewPnl.TabIndex = 10;
@@ -205,7 +207,7 @@ namespace ChapeauUI
             this.makeReservationPnl.Controls.Add(this.reservationPhonenumberLbl);
             this.makeReservationPnl.Controls.Add(this.reservationNameTextBox);
             this.makeReservationPnl.Controls.Add(this.reservationNameLbl);
-            this.makeReservationPnl.Location = new System.Drawing.Point(791, 37);
+            this.makeReservationPnl.Location = new System.Drawing.Point(835, 307);
             this.makeReservationPnl.Name = "makeReservationPnl";
             this.makeReservationPnl.Size = new System.Drawing.Size(334, 332);
             this.makeReservationPnl.TabIndex = 11;
@@ -307,7 +309,7 @@ namespace ChapeauUI
             this.startMenuPnl.Controls.Add(this.showBillBtn);
             this.startMenuPnl.Controls.Add(this.makeReservationBtn);
             this.startMenuPnl.Controls.Add(this.takeOrderBtn);
-            this.startMenuPnl.Location = new System.Drawing.Point(404, 37);
+            this.startMenuPnl.Location = new System.Drawing.Point(374, 94);
             this.startMenuPnl.Name = "startMenuPnl";
             this.startMenuPnl.Size = new System.Drawing.Size(334, 332);
             this.startMenuPnl.TabIndex = 11;
@@ -367,7 +369,7 @@ namespace ChapeauUI
             this.notificationPnl.Controls.Add(this.markOrderReadyBtn);
             this.notificationPnl.Controls.Add(this.ordersReadyLbl);
             this.notificationPnl.Controls.Add(this.ordersReadyGridView);
-            this.notificationPnl.Location = new System.Drawing.Point(119, 381);
+            this.notificationPnl.Location = new System.Drawing.Point(33, 633);
             this.notificationPnl.Name = "notificationPnl";
             this.notificationPnl.Size = new System.Drawing.Size(334, 332);
             this.notificationPnl.TabIndex = 12;
@@ -406,7 +408,7 @@ namespace ChapeauUI
             this.markReservationPresentPnl.Controls.Add(this.setReservationPresentBtn);
             this.markReservationPresentPnl.Controls.Add(this.label1);
             this.markReservationPresentPnl.Controls.Add(this.reservationOverviewDataGrid);
-            this.markReservationPresentPnl.Location = new System.Drawing.Point(518, 385);
+            this.markReservationPresentPnl.Location = new System.Drawing.Point(423, 664);
             this.markReservationPresentPnl.Name = "markReservationPresentPnl";
             this.markReservationPresentPnl.Size = new System.Drawing.Size(334, 332);
             this.markReservationPresentPnl.TabIndex = 14;
@@ -440,16 +442,43 @@ namespace ChapeauUI
             this.reservationOverviewDataGrid.Size = new System.Drawing.Size(327, 269);
             this.reservationOverviewDataGrid.TabIndex = 13;
             // 
+            // topBarLabel
+            // 
+            this.topBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.topBarLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topBarLabel.Location = new System.Drawing.Point(0, 0);
+            this.topBarLabel.Name = "topBarLabel";
+            this.topBarLabel.Size = new System.Drawing.Size(1169, 51);
+            this.topBarLabel.TabIndex = 15;
+            this.topBarLabel.Text = "emptyString";
+            // 
+            // bottomBarLabel
+            // 
+            this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.bottomBarLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1002);
+            this.bottomBarLabel.Name = "bottomBarLabel";
+            this.bottomBarLabel.Size = new System.Drawing.Size(1169, 74);
+            this.bottomBarLabel.TabIndex = 16;
+            this.bottomBarLabel.Text = "emptyString";
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1186, 725);
+            this.AutoScroll = true;
+            this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.ClientSize = new System.Drawing.Size(720, 1097);
+            this.Controls.Add(this.bottomBarLabel);
+            this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.markReservationPresentPnl);
             this.Controls.Add(this.notificationPnl);
             this.Controls.Add(this.startMenuPnl);
             this.Controls.Add(this.makeReservationPnl);
             this.Controls.Add(this.TableOverviewPnl);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TableOverview";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TableOverview";
@@ -506,5 +535,7 @@ namespace ChapeauUI
         private System.Windows.Forms.DataGridView reservationOverviewDataGrid;
         private System.Windows.Forms.Button markOrderReadyBtn;
         private System.Windows.Forms.Button setReservationPresentBtn;
+        private System.Windows.Forms.Label topBarLabel;
+        private System.Windows.Forms.Label bottomBarLabel;
     }
 }
