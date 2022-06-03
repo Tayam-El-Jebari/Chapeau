@@ -29,6 +29,7 @@ namespace ChapeauUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonCash = new System.Windows.Forms.Button();
             this.buttonCard = new System.Windows.Forms.Button();
             this.buttonTip = new System.Windows.Forms.Button();
@@ -40,6 +41,8 @@ namespace ChapeauUI
             this.label6 = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Button();
             this.billPanel = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelVAT = new System.Windows.Forms.Label();
             this.bottomBarLabel = new System.Windows.Forms.Label();
             this.billGrid = new System.Windows.Forms.DataGridView();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,7 +104,7 @@ namespace ChapeauUI
             // 
             this.labelTip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTip.BackColor = System.Drawing.Color.Transparent;
-            this.labelTip.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelTip.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelTip.Location = new System.Drawing.Point(471, 855);
             this.labelTip.Name = "labelTip";
             this.labelTip.Size = new System.Drawing.Size(204, 34);
@@ -113,8 +116,8 @@ namespace ChapeauUI
             // 
             this.labelExVAT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelExVAT.BackColor = System.Drawing.Color.Transparent;
-            this.labelExVAT.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelExVAT.Location = new System.Drawing.Point(471, 900);
+            this.labelExVAT.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelExVAT.Location = new System.Drawing.Point(471, 899);
             this.labelExVAT.Name = "labelExVAT";
             this.labelExVAT.Size = new System.Drawing.Size(204, 34);
             this.labelExVAT.TabIndex = 10;
@@ -125,8 +128,8 @@ namespace ChapeauUI
             // 
             this.labelInVAT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelInVAT.BackColor = System.Drawing.Color.Transparent;
-            this.labelInVAT.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelInVAT.Location = new System.Drawing.Point(471, 947);
+            this.labelInVAT.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelInVAT.Location = new System.Drawing.Point(471, 994);
             this.labelInVAT.Name = "labelInVAT";
             this.labelInVAT.Size = new System.Drawing.Size(204, 34);
             this.labelInVAT.TabIndex = 11;
@@ -137,8 +140,8 @@ namespace ChapeauUI
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(23, 947);
+            this.label4.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(23, 994);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(261, 34);
             this.label4.TabIndex = 14;
@@ -149,8 +152,8 @@ namespace ChapeauUI
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(23, 900);
+            this.label5.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(23, 899);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(261, 34);
             this.label5.TabIndex = 13;
@@ -161,7 +164,7 @@ namespace ChapeauUI
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label6.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label6.Location = new System.Drawing.Point(23, 855);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(204, 34);
@@ -175,7 +178,7 @@ namespace ChapeauUI
             this.headerLabel.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.headerLabel.FlatAppearance.BorderSize = 10;
             this.headerLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.headerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.headerLabel.Font = new System.Drawing.Font("Trebuchet MS", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.headerLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.headerLabel.Location = new System.Drawing.Point(23, 54);
             this.headerLabel.Margin = new System.Windows.Forms.Padding(60);
@@ -188,6 +191,8 @@ namespace ChapeauUI
             // billPanel
             // 
             this.billPanel.BackgroundImage = global::ChapeauUI.Properties.Resources.newhandheldbg;
+            this.billPanel.Controls.Add(this.label1);
+            this.billPanel.Controls.Add(this.labelVAT);
             this.billPanel.Controls.Add(this.bottomBarLabel);
             this.billPanel.Controls.Add(this.billGrid);
             this.billPanel.Controls.Add(this.headerLabel);
@@ -205,6 +210,30 @@ namespace ChapeauUI
             this.billPanel.Size = new System.Drawing.Size(720, 1440);
             this.billPanel.TabIndex = 17;
             // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(23, 947);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(261, 34);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "VAT";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelVAT
+            // 
+            this.labelVAT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelVAT.BackColor = System.Drawing.Color.Transparent;
+            this.labelVAT.Font = new System.Drawing.Font("Trebuchet MS", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelVAT.Location = new System.Drawing.Point(471, 947);
+            this.labelVAT.Name = "labelVAT";
+            this.labelVAT.Size = new System.Drawing.Size(204, 34);
+            this.labelVAT.TabIndex = 19;
+            this.labelVAT.Text = "€";
+            this.labelVAT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // bottomBarLabel
             // 
             this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
@@ -219,6 +248,15 @@ namespace ChapeauUI
             this.billGrid.AllowUserToAddRows = false;
             this.billGrid.AllowUserToDeleteRows = false;
             this.billGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.billGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.billGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.billGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.billGrid.Location = new System.Drawing.Point(23, 166);
             this.billGrid.Name = "billGrid";
@@ -280,5 +318,7 @@ namespace ChapeauUI
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn gridBill;
         private System.Windows.Forms.Label bottomBarLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelVAT;
     }
 }

@@ -12,12 +12,14 @@ namespace ChapeauUI
 {
     public partial class ConfirmOrderUI : Form
     {
+       
         public ConfirmOrderUI()
         {
             InitializeComponent();
             ReturnButton.DialogResult = DialogResult.Yes;
             DenyButton.DialogResult = DialogResult.No;
         }
+
         public ConfirmOrderUI(string question)
         {
             InitializeComponent();

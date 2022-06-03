@@ -83,7 +83,7 @@ namespace ChapeauUI
             this.labelOrderConfirmed.Font = new System.Drawing.Font("Trebuchet MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelOrderConfirmed.Location = new System.Drawing.Point(32, 26);
             this.labelOrderConfirmed.Name = "labelOrderConfirmed";
-            this.labelOrderConfirmed.Size = new System.Drawing.Size(596, 288);
+            this.labelOrderConfirmed.Size = new System.Drawing.Size(596, 279);
             this.labelOrderConfirmed.TabIndex = 3;
             this.labelOrderConfirmed.Text = "ORDER HAS BEEN SEND";
             this.labelOrderConfirmed.TextAlign = System.Drawing.ContentAlignment.TopCenter;

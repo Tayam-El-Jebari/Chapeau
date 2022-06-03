@@ -34,8 +34,8 @@ namespace ChapeauUI
             BillService billService = new BillService();
             Bill bill = billService.MakeBill(reservation);
             labelExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
+            labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
-            //also display vat
             //bon half cash half pin
 
             billGrid.ColumnCount = 3;
@@ -54,7 +54,8 @@ namespace ChapeauUI
         private void buttonTip_Click(object sender, EventArgs e)
         {
             double tip = double.Parse(Interaction.InputBox("Do you want to add a tip?", "Add tip", "Amount"));
-            if(tip > 0)
+
+            if (tip > 0)
             {
                 labelTip.Text = tip.ToString("€ 0.00");
                 double newTotal = double.Parse(labelInVAT.Text.Substring(1)) + tip;
@@ -65,8 +66,10 @@ namespace ChapeauUI
                 ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Tip can not be negative");
                 confirmBackButton.ShowDialog();
                 MessageBox.Show("Tip can not be negative");
+                
             }
             
         }
+
     }
 }
