@@ -18,13 +18,13 @@ namespace ChapeauDAL
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-        public List<OrderItem> GetActiveDrinkOrders()
+        public List<Order> GetActiveDrinkOrders()
         {
             string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order].isFinished, [order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order] WHERE isFinished = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item) ORDER BY[order].timePlaced; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
-        public List<OrderItem> GetActiveFoodOrders()
+        public List<Order> GetActiveFoodOrders()
         {
             string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order].isFinished, [order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order] WHERE isFinished = 0) AND[order_Item].menuItem_ID NOT IN(select menuItem_ID FROM Drink_Item) ORDER BY[order].timePlaced; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
@@ -38,20 +38,34 @@ namespace ChapeauDAL
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        public List<OrderItem> ReadTablesItem(DataTable dataTable)
+        public List<Order> ReadTablesItem(DataTable dataTable)
         {
-            List<OrderItem> activeOrders = new List<OrderItem>();
+            List<Order> activeOrders = new List<Order>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-
-                OrderItem orderItem = new OrderItem()
+                Order order = new Order()
                 {
-                    Order = new Order() { OrderId = (int)dr["order_Id"], Comments = Convert.ToString(dr["comments"]), IsFinished = (bool)dr["isFinished"], TimePlaced = (DateTime)dr["timePlaced"] },
-                    MenuItem = new MenuItem {MenuItemId = (int)dr["menuItem_ID"], ProductName = (string)dr["productName"], Description = Convert.ToString(dr["description"]), },
-                    Amount = (int)dr["amount"],
+                    OrderId = (int)dr["order_Id"],
+                    Comments = Convert.ToString(dr["comments"]),
+                    IsFinished = (bool)dr["isFinished"],
+                    TimePlaced = (DateTime)dr["timePlaced"],
+                    OrderItems = new List<OrderItem>()
+                    {
+                        new OrderItem()
+                        {
+                        MenuItem = new MenuItem
+                            {
+                                MenuItemId = (int)dr["menuItem_ID"],
+                                ProductName = (string)dr["productName"],
+                                Description = Convert.ToString(dr["description"]),
+                            },
+                        Amount = (int)dr["amount"],
+                        }
+
+                    }
                 };
-                activeOrders.Add(orderItem);
+                activeOrders.Add(order);
             }
             return activeOrders;
         }
@@ -76,13 +90,13 @@ namespace ChapeauDAL
             }
             return activeOrders;
         }
-        public void UpdateStateIsFinished(OrderItem order)
+        public void UpdateStateIsFinished(Order order)
         {
             string query = $"UPDATE [Order] SET isFinished=@isFinished WHERE order_id=@order_id";
             SqlParameter[] sqlParameters = new SqlParameter[3] {
-            new SqlParameter("@isFinished", order.Order.IsFinished),
-            new SqlParameter("@order_id", order.Order.OrderId),
-            new SqlParameter("@menuItem_ID", order.MenuItem.MenuItemId),
+            new SqlParameter("@isFinished", order.IsFinished),
+            new SqlParameter("@order_id", order.OrderId),
+            new SqlParameter("@menuItem_ID", order.OrderItems[0].MenuItem.MenuItemId),
             };
             ExecuteEditQuery(query, sqlParameters);
         }

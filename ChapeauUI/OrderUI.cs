@@ -15,11 +15,11 @@ namespace ChapeauUI
         private MenuItemType menuItemType;
         private MenuType menuType;
         private Reservation reservation;
-        private int staffId;
+        private Staff staff;
 
-        public OrderUI(Reservation reservation, int staffId)
+        public OrderUI(Reservation reservation, Staff staff)
         {
-            this.staffId = staffId;
+            this.staff = staff;
             InitializeComponent();
             labelTable.Text += $"{reservation.TableId} :";
             CreateUIComponents();
@@ -234,7 +234,6 @@ namespace ChapeauUI
         {
             e.Graphics.DrawRectangle(new Pen(Color.FromArgb(39, 39, 39), 10), 13, 578, 652, 224);
         }
-
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
             if(itemGridView.Rows.Count == 1)
@@ -271,6 +270,7 @@ namespace ChapeauUI
         private void buttonChooseMenuAndMenuType_Click(object sender, EventArgs e)
         {
             PanelChooseMenu.Hide();
+            //switch 
             if (sender == buttonStarters)
             {
                 menuItemType = MenuItemType.Starter;
@@ -311,17 +311,14 @@ namespace ChapeauUI
         private void buttonBack_Click(object sender, EventArgs e)
         {
             RemoveAllControlsMenu();
-            if(menuType == MenuType.Drink)
+            if(menuType == MenuType.Drink || !PanelChooseMenu.Visible)
             {
+                //menu type
                 PanelChooseMenu.Visible = true;
             }
             else if (!panelSelectMenu.Visible)
             {
                 panelSelectMenu.Visible = true;
-            }
-            else if(!PanelChooseMenu.Visible)
-            {
-                PanelChooseMenu.Visible = true;
             }
             else
             {
