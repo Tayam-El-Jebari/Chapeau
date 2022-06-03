@@ -292,6 +292,10 @@ namespace ChapeauUI
             {
                 if (sender == buttonLunch)
                 {
+                    ConfirmOrderUI confirmOrder = new ConfirmOrderUI("oelala", DialogResult.None);
+                    confirmOrder.ShowDialog();
+                    double oe = confirmOrder.InputDouble();
+                    MessageBox.Show(oe.ToString());
                     menuType = MenuType.Lunch;
                     labelTitleItems.Text = $"{menuType} 11:00 - 16:00";
                 }

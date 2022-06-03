@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.VisualBasic;
+
 
 namespace ChapeauUI
 {
@@ -29,15 +31,43 @@ namespace ChapeauUI
         public ConfirmOrderUI(string question, DialogResult dialogResult)
         {
             InitializeComponent();
-            labelQuestion.Text = question.ToUpper();
-            labelQuestion.Visible = true;
-            ReturnButton.DialogResult = DialogResult.OK;
-            DenyButton.Hide();
-            ConfirmButton.Hide();
-            ReturnButton.Show();
+            switch (dialogResult){
+                case DialogResult.OK:
+                    labelQuestion.Text = question.ToUpper();
+                    labelQuestion.Visible = true;
+                    ReturnButton.DialogResult = DialogResult.OK;
+                    DenyButton.Hide();
+                    ConfirmButton.Hide();
+                    ReturnButton.Show();
+                    break;
+                case DialogResult.None:
+                    labelQuestion.Text = question.ToUpper();
+                    labelQuestion.Visible = true;
+                    ReturnButton.DialogResult = DialogResult.OK;
+                    DenyButton.Hide();
+                    ConfirmButton.Hide();
+                    ReturnButton.Show();
+                    textBoxInput.Show();
+                    break;
+            }
         }
 
-
+        public double InputDouble()
+        {
+            double input = 0;
+            try
+            {
+                if (textBoxInput.Text != null)
+                {
+                    input = double.Parse(textBoxInput.Text);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please only enter numbers");
+            }
+            return input;
+        }
         private void DenyButton_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -34,6 +34,7 @@ namespace ChapeauUI
             this.DenyButton = new System.Windows.Forms.Button();
             this.labelOrderConfirmed = new System.Windows.Forms.Label();
             this.labelQuestion = new System.Windows.Forms.Label();
+            this.textBoxInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // ReturnButton
@@ -101,6 +102,14 @@ namespace ChapeauUI
             this.labelQuestion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelQuestion.Visible = false;
             // 
+            // textBoxInput
+            // 
+            this.textBoxInput.Location = new System.Drawing.Point(102, 176);
+            this.textBoxInput.Name = "textBoxInput";
+            this.textBoxInput.Size = new System.Drawing.Size(480, 27);
+            this.textBoxInput.TabIndex = 5;
+            this.textBoxInput.Visible = false;
+            // 
             // ConfirmOrderUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -110,6 +119,7 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.confirm_order;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(653, 323);
+            this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.ReturnButton);
             this.Controls.Add(this.labelOrderConfirmed);
             this.Controls.Add(this.DenyButton);
@@ -123,6 +133,7 @@ namespace ChapeauUI
             this.Text = "ConfirmOrderUI";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -133,5 +144,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button DenyButton;
         private System.Windows.Forms.Label labelOrderConfirmed;
         private System.Windows.Forms.Label labelQuestion;
+        private System.Windows.Forms.TextBox textBoxInput;
     }
 }
