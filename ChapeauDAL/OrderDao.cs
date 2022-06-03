@@ -47,7 +47,13 @@ namespace ChapeauDAL
 
                 OrderItem orderItem = new OrderItem()
                 {
-                    Order = new Order() { OrderId = (int)dr["order_Id"], Comments = Convert.ToString(dr["comments"]), IsFinished = (bool)dr["isFinished"], TimePlaced = (DateTime)dr["timePlaced"] },
+                    Order = new Order() 
+                    { 
+                        OrderId = (int)dr["order_Id"], 
+                        Comments = Convert.ToString(dr["comments"]), 
+                        IsFinished = (bool)dr["isFinished"], 
+                        TimePlaced = (DateTime)dr["timePlaced"] 
+                    },
                     MenuItem = new MenuItem {MenuItemId = (int)dr["menuItem_ID"], ProductName = (string)dr["productName"], Description = Convert.ToString(dr["description"]), },
                     Amount = (int)dr["amount"],
                 };
