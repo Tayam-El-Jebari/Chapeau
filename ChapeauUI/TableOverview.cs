@@ -56,9 +56,9 @@ namespace ChapeauUI
             else if (menuChoice == MenuChoice.ShowBill)
             {
                 ReservationService reservationService = new ReservationService();
-                BillUI billUI = new BillUI();
+               // BillUI billUI = new BillUI();
                 this.Hide();
-                billUI.ShowDialog();
+                //billUI.ShowDialog();
                 this.Show();
             }
             else if (menuChoice == MenuChoice.MakeReservation)

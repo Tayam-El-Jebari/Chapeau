@@ -34,9 +34,7 @@ namespace ChapeauLogic
 
             //1 minder
             ICalculateVAT calculateHighVAT = new CalculateHighVAT();
-            ICalculateVAT calculateLowVAT = new CalculateLowVAT();
             Bill bill = new Bill();
-            List<OrderItem> lowVatItems = SortList(billdb.GetLowVAT(reservationId));
             List<OrderItem> highVatItems = SortList(billdb.GetHighVAT(reservationId));
             //1 lijst
             if (highVatItems != null)
@@ -47,19 +45,6 @@ namespace ChapeauLogic
                     vat += calculateHighVAT.CalculateVAT(tempTotalPrice);
                     totalPrice += tempTotalPrice;
                 }
-            }
-            if (lowVatItems != null)
-            {
-                foreach (OrderItem lvItem in lowVatItems)
-                {
-                    double tempTotalPrice = (lvItem.Amount * lvItem.MenuItem.Price);
-                    vat += calculateLowVAT.CalculateVAT(tempTotalPrice);
-                    totalPrice += tempTotalPrice;
-                }
-            }
-            foreach (OrderItem lvItem in lowVatItems)
-            {
-                highVatItems.Add(lvItem);
             }
 
             bill.TotalPriceInclVAT = totalPrice;
@@ -76,8 +61,9 @@ namespace ChapeauLogic
             {
                 if (orderItems[i].MenuItem.MenuItemId == orderItems[i + 1].MenuItem.MenuItemId)
                 {
-                        orderItems[i + 1].Amount += orderItems[i].Amount;
-                        orderItems.Remove(orderItems[i]);
+                    orderItems[i].Amount = orderItems[i].Amount + orderItems[i+ 1].Amount;
+                    orderItems.RemoveAt(i + 1);
+                    i--;
                 }
             }
             return orderItems;

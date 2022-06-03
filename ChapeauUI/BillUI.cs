@@ -17,11 +17,11 @@ namespace ChapeauUI
 {
     public partial class BillUI : Form
     {
-        public BillUI()// Reservation reservation)
+        public BillUI(Reservation reservation)
         {
             InitializeComponent();
             //ShowHeader();
-            MakeBill(204);//reservation.ReservationId);
+            MakeBill(reservation.ReservationId);//reservation.ReservationId);
         }
 
         public void ShowHeader()
@@ -62,6 +62,8 @@ namespace ChapeauUI
             }
             else
             {
+                ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Tip can not be negative");
+                confirmBackButton.ShowDialog();
                 MessageBox.Show("Tip can not be negative");
             }
             
