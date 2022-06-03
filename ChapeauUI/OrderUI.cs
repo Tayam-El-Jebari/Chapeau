@@ -270,7 +270,6 @@ namespace ChapeauUI
         private void buttonChooseMenuAndMenuType_Click(object sender, EventArgs e)
         {
             PanelChooseMenu.Hide();
-            //switch 
             if (sender == buttonStarters)
             {
                 menuItemType = MenuItemType.Starter;

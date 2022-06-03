@@ -43,10 +43,13 @@ namespace ChapeauUI
                 case DialogResult.None:
                     labelQuestion.Text = question.ToUpper();
                     labelQuestion.Visible = true;
-                    ReturnButton.DialogResult = DialogResult.OK;
-                    DenyButton.Hide();
-                    ConfirmButton.Hide();
-                    ReturnButton.Show();
+                    DenyButton.DialogResult = DialogResult.No;
+                    DenyButton.Text = "CANCEL";
+                    DenyButton.Click += new EventHandler(OkAndCancel_Click);
+                    ConfirmButton.Text = "OK";
+                    ConfirmButton.Click -= ConfirmButton_Click;
+                    ConfirmButton.Click += new EventHandler(OkAndCancel_Click);
+                    DenyButton.DialogResult = DialogResult.Yes;
                     textBoxInput.Show();
                     break;
             }
@@ -55,16 +58,24 @@ namespace ChapeauUI
         public double InputDouble()
         {
             double input = 0;
+            if(denied)
+            {
+                throw new Exception("no tip added");
+            }
             try
             {
                 if (textBoxInput.Text != null)
                 {
                     input = double.Parse(textBoxInput.Text);
                 }
+                if(input <= 0)
+                {
+
+                }
             }
             catch
             {
-                MessageBox.Show("Please only enter numbers");
+                throw new Exception("Please only enter numbers");
             }
             return input;
         }
@@ -72,13 +83,21 @@ namespace ChapeauUI
         {
             this.Close();
         }
-
         private void ConfirmButton_Click(object sender, EventArgs e)
         {
             DenyButton.Visible = false;
             ConfirmButton.Visible = false;
             ReturnButton.Visible = true;
             labelOrderConfirmed.Visible = true;
+        }
+        private bool denied;
+        private void OkAndCancel_Click(object sender, EventArgs e)
+        {
+            if(sender == DenyButton)
+            {
+                denied = true;
+            }
+            this.Close();
         }
     }
 }
