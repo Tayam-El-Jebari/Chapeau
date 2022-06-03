@@ -48,7 +48,7 @@ namespace ChapeauUI
             {
                 ReservationService reservationService = new ReservationService();
 
-                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember.Staff_ID);
+                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember);
                 this.Hide();
                 orderUI.ShowDialog();
                 this.Show();

@@ -105,7 +105,7 @@ namespace ChapeauUI
                 OrderService orderService = new OrderService();
                 orderService.GetUpdateStateIsFinished(order);
                 MessageBox.Show($"Order {order.OrderId}: {order.OrderItems[0].MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
-            }
+            } 
 
             catch
             {
@@ -172,7 +172,8 @@ namespace ChapeauUI
             barListView.Columns.Add("Time of ordering", 200);
             foreach (Order order in ordersDrinkList)
             {
-                for (int i = 0; i < order.OrderItems.Count; i++)
+
+                for(int i = 0; i < order.OrderItems.Count; i++)
                 {
                     ListViewItem li = new ListViewItem(order.OrderId.ToString());
                     li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
@@ -199,7 +200,7 @@ namespace ChapeauUI
 
         private void finishedDrinkButton_Click(object sender, EventArgs e)
         {
-            try
+            try 
             {
                 Order order = new Order()
                 {
@@ -217,7 +218,6 @@ namespace ChapeauUI
                             }
                         }
                 };
-
                 OrderService orderService = new OrderService();
                 orderService.GetUpdateStateIsFinished(order);
                 MessageBox.Show($"Order {order.OrderId}: {order.OrderItems[0].MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");

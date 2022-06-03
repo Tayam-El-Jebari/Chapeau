@@ -10,6 +10,7 @@ namespace ChapeauModel
     {
         public int Staff_ID { get; set; }
         public string firstName { get; set; }
+        public StaffJob StaffJob { get; set; }
         
     }
 }
