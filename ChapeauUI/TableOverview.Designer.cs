@@ -82,12 +82,13 @@ namespace ChapeauUI
             // 
             // tableOneButton
             // 
+            this.tableOneButton.BackColor = System.Drawing.Color.Transparent;
             this.tableOneButton.Location = new System.Drawing.Point(31, 16);
             this.tableOneButton.Name = "tableOneButton";
             this.tableOneButton.Size = new System.Drawing.Size(94, 29);
             this.tableOneButton.TabIndex = 0;
             this.tableOneButton.Text = "1";
-            this.tableOneButton.UseVisualStyleBackColor = true;
+            this.tableOneButton.UseVisualStyleBackColor = false;
             this.tableOneButton.Click += new System.EventHandler(this.tableOneButton_Click);
             // 
             // tableThreeButton

@@ -73,20 +73,20 @@ namespace ChapeauUI
         {
             hideAllPanels();
             menuChoice = MenuChoice.TakeOrder;
-            TableOverviewPnl.Show();
+            openTableOverviewPnl();
         }
         private void showBillBtn_Click(object sender, EventArgs e)
         {
             hideAllPanels();
             menuChoice = MenuChoice.ShowBill;
-            TableOverviewPnl.Show();
+            openTableOverviewPnl();
         }
 
         private void makeReservationBtn_Click(object sender, EventArgs e)
         {
             hideAllPanels();
             menuChoice = MenuChoice.MakeReservation;
-            TableOverviewPnl.Show();
+            openTableOverviewPnl();
         }
 
         private void notificationsBtn_Click(object sender, EventArgs e)
@@ -100,15 +100,60 @@ namespace ChapeauUI
         private void openTableOverviewPnl()
         {
             ReservationService reservationService = new ReservationService();
-            List<Reservation> reservations = reservationService.
+            List<Reservation> reservations = reservationService.GetAllPresentReservationsOrderedByTable();
+            setAllTablesBackgroundFree();
+            foreach(Reservation reservation in reservations)
+            {
+                setTableImagePresent(reservation.TableId);
+            }
+            TableOverviewPnl.Show();
         }
-
+        private void setAllTablesBackgroundFree()
+        {
+            tableOneButton.BackgroundImage = Properties.Resources.TableFree;
+            tableTwoButton.BackgroundImage = Properties.Resources.TableFree;
+            tableThreeButton.BackgroundImage = Properties.Resources.TableFree;
+            tableFourButton.BackgroundImage = Properties.Resources.TableFree;
+            tableFiveButton.BackgroundImage = Properties.Resources.TableFree;
+            tableSixButton.BackgroundImage = Properties.Resources.TableFree;
+            tableSevenButton.BackgroundImage = Properties.Resources.TableFree;
+            tableEightButton.BackgroundImage = Properties.Resources.TableFree;
+            tableNineButton.BackgroundImage = Properties.Resources.TableFree;
+            tableTenButton.BackgroundImage = Properties.Resources.TableFree;
+        }
         private void setTableImagePresent(int tableID)
         {
             switch (tableID)
             {
                 case 1:
-                    tableOneButton.BackgroundImage = Properties.Resources.Ta
+                    tableOneButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 2:
+                    tableTwoButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 3:
+                    tableThreeButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 4:
+                    tableFourButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 5:
+                    tableFiveButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 6:
+                    tableSixButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 7:
+                    tableSevenButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 8:
+                    tableEightButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 9:
+                    tableNineButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 10:
+                    tableOneButton.BackgroundImage = Properties.Resources.TableOccupied;
                     break;
             }
         }
