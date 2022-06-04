@@ -39,8 +39,8 @@ namespace ChapeauUI
             startMenuPnl.Hide();
             TableOverviewPnl.Hide();
             makeReservationPnl.Hide();
-            notificationPnl.Hide();
             markReservationPresentPnl.Hide();
+            notificationsPnl.Hide();
         }
         private void tableWasSelected(int tableNr)
         {
@@ -92,32 +92,67 @@ namespace ChapeauUI
         private void notificationsBtn_Click(object sender, EventArgs e)
         {
             hideAllPanels();
-            notificationPnl.Show();
+            notificationsPnl.Show();
             fillReadyOrderDataGrid();
+            fillOngoingOrderDataGrid();
         }
 
-        private void CheckIfOrderDrinksReady(Order order)
+        private void openTableOverviewPnl()
         {
-            foreach(OrderItem orderItem in order.OrderItems)
-            {
-                if(orderItem.MenuItem.MenuItemType == MenuItemType.Drinks &&)
-                {
+            ReservationService reservationService = new ReservationService();
+            List<Reservation> reservations = reservationService.
+        }
 
-                }
+        private void setTableImagePresent(int tableID)
+        {
+            switch (tableID)
+            {
+                case 1:
+                    tableOneButton.BackgroundImage = Properties.Resources.Ta
+                    break;
             }
         }
 
         private void fillReadyOrderDataGrid()
         {
             OrderService orderService = new OrderService();
-            List<Order> readyOrders = orderService.GetOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
+            List<Order> readyFoodOrders = orderService.GetFoodOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
+            List<Order> readyDrinkOrders = orderService.GetDrinkOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
             ordersReadyGridView.Rows.Clear();
-            ordersReadyGridView.ColumnCount = 2;
+            ordersReadyGridView.ColumnCount = 3;
             ordersReadyGridView.Columns[0].Name = "Order ID";
             ordersReadyGridView.Columns[1].Name = "Table ID";
-            foreach (Order order in readyOrders)
+            ordersReadyGridView.Columns[2].Name = "Order Type";
+            foreach (Order foodOrder in readyFoodOrders)
             {
-                ordersReadyGridView.Rows.Add(order.OrderId, order.TableId);
+                ordersReadyGridView.Rows.Add(foodOrder.OrderId, foodOrder.TableId, "Food");
+            }
+            foreach (Order drinkOrder in readyDrinkOrders)
+            {
+                ordersReadyGridView.Rows.Add(drinkOrder.OrderId, drinkOrder.TableId, "Drink");
+            }
+        }
+
+        private void fillOngoingOrderDataGrid()
+        {
+            OrderService orderService = new OrderService();
+            List<Order> ongoingFoodOrders = orderService.GetOngoingFoodOrdersForWaiter(loggedInStaffMember.Staff_ID);
+            List<Order> ongoingDrinkOrders = orderService.GetOngoingDrinkOrdersForWaiter(loggedInStaffMember.Staff_ID);
+            ongoingOrdersDataGridView.Rows.Clear();
+            ongoingOrdersDataGridView.ColumnCount = 4;
+            ongoingOrdersDataGridView.Columns[0].Name = "Order ID";
+            ongoingOrdersDataGridView.Columns[0].Width = 100;
+            ongoingOrdersDataGridView.Columns[1].Name = "Table ID";
+            ongoingOrdersDataGridView.Columns[2].Name = "Order Type";
+            ongoingOrdersDataGridView.Columns[3].Name = "Time placed";
+            ongoingOrdersDataGridView.Columns[3].Width = 250;
+            foreach (Order foodOrder in ongoingFoodOrders)
+            {
+                ongoingOrdersDataGridView.Rows.Add(foodOrder.OrderId, foodOrder.TableId, "Food", foodOrder.TimePlaced);
+            }
+            foreach (Order drinkOrder in ongoingDrinkOrders)
+            {
+                ongoingOrdersDataGridView.Rows.Add(drinkOrder.OrderId, drinkOrder.TableId, "Drink", drinkOrder.TimePlaced);
             }
         }
 
@@ -223,10 +258,17 @@ namespace ChapeauUI
         private void markOrderReadyBtn_Click(object sender, EventArgs e)
         {
             OrderService orderService = new OrderService();
-            for (int i = 0; i < ordersReadyGridView.SelectedCells.Count; i++)
+            OrderItemService orderItemService = new OrderItemService();
+            int orderID = Convert.ToInt32(ordersReadyGridView.SelectedRows[0].Cells[0].Value);
+            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Drink")
             {
-                orderService.UpdateStateIsdelivered(Convert.ToInt32(ordersReadyGridView.SelectedCells[i].Value));
+                orderItemService.UpdateDrinkOrderStatusToDeliverd(orderID);
             }
+            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Food")
+            {
+                orderItemService.UpdateFoodOrderStatusToDeliverd(orderID);
+            }
+            orderService.UpdateStateIsFinished(orderID);
             fillReadyOrderDataGrid();
         }
     }

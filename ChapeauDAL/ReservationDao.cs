@@ -46,6 +46,13 @@ namespace ChapeauDAL
             sqlParameters[0] = new SqlParameter("@reservation_id", reservationID);
             ExecuteEditQuery(query, sqlParameters);
         }
+
+        public List<Reservation> GetAllPresentReservationsOrderedByTable()
+        {
+            string query = "SELECT * FROM [Reservation] WHERE isPresent = 1 ORDER BY table_ID";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
         private List<Reservation> ReadTables(DataTable dataTable)
         {
             List<Reservation> reservations = new List<Reservation>();
