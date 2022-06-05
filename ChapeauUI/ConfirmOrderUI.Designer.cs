@@ -34,12 +34,13 @@ namespace ChapeauUI
             this.DenyButton = new System.Windows.Forms.Button();
             this.labelOrderConfirmed = new System.Windows.Forms.Label();
             this.labelQuestion = new System.Windows.Forms.Label();
+            this.textBoxInput = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // ReturnButton
             // 
             this.ReturnButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.ReturnButton.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ReturnButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ReturnButton.ForeColor = System.Drawing.Color.White;
             this.ReturnButton.Location = new System.Drawing.Point(71, 209);
             this.ReturnButton.Name = "ReturnButton";
@@ -53,7 +54,7 @@ namespace ChapeauUI
             // ConfirmButton
             // 
             this.ConfirmButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.ConfirmButton.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.ConfirmButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ConfirmButton.ForeColor = System.Drawing.Color.White;
             this.ConfirmButton.Location = new System.Drawing.Point(55, 201);
             this.ConfirmButton.Name = "ConfirmButton";
@@ -67,7 +68,7 @@ namespace ChapeauUI
             // DenyButton
             // 
             this.DenyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
-            this.DenyButton.Font = new System.Drawing.Font("Cabin", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.DenyButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DenyButton.ForeColor = System.Drawing.Color.White;
             this.DenyButton.Location = new System.Drawing.Point(371, 201);
             this.DenyButton.Name = "DenyButton";
@@ -80,7 +81,7 @@ namespace ChapeauUI
             // labelOrderConfirmed
             // 
             this.labelOrderConfirmed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.labelOrderConfirmed.Font = new System.Drawing.Font("Cabin", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelOrderConfirmed.Font = new System.Drawing.Font("Trebuchet MS", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelOrderConfirmed.Location = new System.Drawing.Point(32, 26);
             this.labelOrderConfirmed.Name = "labelOrderConfirmed";
             this.labelOrderConfirmed.Size = new System.Drawing.Size(596, 288);
@@ -92,7 +93,7 @@ namespace ChapeauUI
             // labelQuestion
             // 
             this.labelQuestion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.labelQuestion.Font = new System.Drawing.Font("Cabin", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelQuestion.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelQuestion.Location = new System.Drawing.Point(28, 17);
             this.labelQuestion.Name = "labelQuestion";
             this.labelQuestion.Size = new System.Drawing.Size(596, 288);
@@ -100,6 +101,14 @@ namespace ChapeauUI
             this.labelQuestion.Text = "ENTER QUESTION";
             this.labelQuestion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.labelQuestion.Visible = false;
+            // 
+            // textBoxInput
+            // 
+            this.textBoxInput.Location = new System.Drawing.Point(102, 176);
+            this.textBoxInput.Name = "textBoxInput";
+            this.textBoxInput.Size = new System.Drawing.Size(480, 27);
+            this.textBoxInput.TabIndex = 5;
+            this.textBoxInput.Visible = false;
             // 
             // ConfirmOrderUI
             // 
@@ -110,6 +119,7 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.confirm_order;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(653, 323);
+            this.Controls.Add(this.textBoxInput);
             this.Controls.Add(this.ReturnButton);
             this.Controls.Add(this.labelOrderConfirmed);
             this.Controls.Add(this.DenyButton);
@@ -123,6 +133,7 @@ namespace ChapeauUI
             this.Text = "ConfirmOrderUI";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -133,5 +144,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button DenyButton;
         private System.Windows.Forms.Label labelOrderConfirmed;
         private System.Windows.Forms.Label labelQuestion;
+        private System.Windows.Forms.TextBox textBoxInput;
     }
 }

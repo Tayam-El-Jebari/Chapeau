@@ -47,13 +47,19 @@ namespace ChapeauUI
             if (menuChoice == MenuChoice.TakeOrder)
             {
                 ReservationService reservationService = new ReservationService();
-                //OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr));
+
+                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember);
                 this.Hide();
-                //orderUI.Show();
+                orderUI.ShowDialog();
+                this.Show();
             }
             else if (menuChoice == MenuChoice.ShowBill)
             {
-
+                ReservationService reservationService = new ReservationService();
+                BillUI billUI = new BillUI();
+                this.Hide();
+                billUI.ShowDialog();
+                this.Show();
             }
             else if (menuChoice == MenuChoice.MakeReservation)
             {
@@ -87,6 +93,11 @@ namespace ChapeauUI
         {
             hideAllPanels();
             notificationPnl.Show();
+            fillReadyOrderDataGrid();
+        }
+
+        private void fillReadyOrderDataGrid()
+        {
             OrderService orderService = new OrderService();
             List<Order> readyOrders = orderService.GetOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
             ordersReadyGridView.Rows.Clear();
@@ -166,6 +177,12 @@ namespace ChapeauUI
         {
             hideAllPanels();
             markReservationPresentPnl.Show();
+            fillnonPresentReservationOverviewDataGrid();
+        }
+
+        private void fillnonPresentReservationOverviewDataGrid()
+        {
+            reservationOverviewDataGrid.Rows.Clear();
             ReservationService reservationService = new ReservationService();
             List<Reservation> reservations = reservationService.GetAllNonPresentReservationsOrderedByTable();
             reservationOverviewDataGrid.ColumnCount = 2;
@@ -173,13 +190,33 @@ namespace ChapeauUI
             reservationOverviewDataGrid.Columns[1].Name = "Reservation time";
             foreach (Reservation reservation in reservations)
             {
-                reservationOverviewDataGrid.Rows.Add(reservation.TableId, reservation.ReservationTime);
+                reservationOverviewDataGrid.Rows.Add(reservation.ReservationId, reservation.ReservationTime);
             }
         }
 
         private void reservationOverviewDataGrid_SelectionChanged(object sender, EventArgs e)
         {
             MessageBox.Show("test");
+        }
+
+        private void setReservationPresentBtn_Click(object sender, EventArgs e)
+        {
+            ReservationService reservationService = new ReservationService();
+            for(int i = 0; i < reservationOverviewDataGrid.SelectedCells.Count; i++)
+            {
+                reservationService.MarkReservationPresent(Convert.ToInt32(reservationOverviewDataGrid.SelectedCells[i].Value));
+            }
+            fillnonPresentReservationOverviewDataGrid();
+        }
+
+        private void markOrderReadyBtn_Click(object sender, EventArgs e)
+        {
+            OrderService orderService = new OrderService();
+            for (int i = 0; i < ordersReadyGridView.SelectedCells.Count; i++)
+            {
+                orderService.UpdateStateIsdelivered(Convert.ToInt32(ordersReadyGridView.SelectedCells[i].Value));
+            }
+            fillReadyOrderDataGrid();
         }
     }
 }

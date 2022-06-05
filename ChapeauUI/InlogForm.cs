@@ -36,7 +36,8 @@ namespace ChapeauUI
                 {
                     this.Hide();
                     TableOverview tableOverview = new TableOverview(loggedInStaffMemeber);
-                    tableOverview.Show();
+                    tableOverview.ShowDialog();
+                    this.Show();
                 }
                 else
                 {

@@ -40,6 +40,7 @@ namespace ChapeauUI
             this.label6 = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Button();
             this.billPanel = new System.Windows.Forms.Panel();
+            this.bottomBarLabel = new System.Windows.Forms.Label();
             this.billGrid = new System.Windows.Forms.DataGridView();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridBill = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,6 +95,7 @@ namespace ChapeauUI
             this.buttonTip.TabIndex = 7;
             this.buttonTip.Text = "ADD TIP";
             this.buttonTip.UseVisualStyleBackColor = false;
+            this.buttonTip.Click += new System.EventHandler(this.buttonTip_Click);
             // 
             // labelTip
             // 
@@ -104,7 +106,7 @@ namespace ChapeauUI
             this.labelTip.Name = "labelTip";
             this.labelTip.Size = new System.Drawing.Size(204, 34);
             this.labelTip.TabIndex = 9;
-            this.labelTip.Text = "€";
+            this.labelTip.Text = "€ 0.00";
             this.labelTip.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelExVAT
@@ -186,6 +188,7 @@ namespace ChapeauUI
             // billPanel
             // 
             this.billPanel.BackgroundImage = global::ChapeauUI.Properties.Resources.newhandheldbg;
+            this.billPanel.Controls.Add(this.bottomBarLabel);
             this.billPanel.Controls.Add(this.billGrid);
             this.billPanel.Controls.Add(this.headerLabel);
             this.billPanel.Controls.Add(this.label4);
@@ -201,6 +204,15 @@ namespace ChapeauUI
             this.billPanel.Name = "billPanel";
             this.billPanel.Size = new System.Drawing.Size(720, 1440);
             this.billPanel.TabIndex = 17;
+            // 
+            // bottomBarLabel
+            // 
+            this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1379);
+            this.bottomBarLabel.Name = "bottomBarLabel";
+            this.bottomBarLabel.Size = new System.Drawing.Size(699, 74);
+            this.bottomBarLabel.TabIndex = 18;
+            this.bottomBarLabel.Text = "emptyString";
             // 
             // billGrid
             // 
@@ -267,5 +279,6 @@ namespace ChapeauUI
         private System.Windows.Forms.DataGridView billGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn gridBill;
+        private System.Windows.Forms.Label bottomBarLabel;
     }
 }

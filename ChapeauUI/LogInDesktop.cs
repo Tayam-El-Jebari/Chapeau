@@ -35,10 +35,11 @@ namespace ChapeauUI
                 Staff loggedInStaffMemeber = staffService.CheckPassword(staffID, hashedPassword);
                 if (staffService.CheckIfBartender(staffID))
                 {
-
                     KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview(StaffJob.Waiter);
                     kitchenAndBarOverview.Show();
                     this.Hide();
+                    kitchenAndBarOverview.ShowDialog();
+                    this.Show();
                 }
                 else if (staffService.CheckIfChef(staffID))
                 {
@@ -51,7 +52,8 @@ namespace ChapeauUI
                 {
                     this.Hide();
                     OwnerForm ownerForm = new OwnerForm();
-                    ownerForm.Show();
+                    ownerForm.ShowDialog();
+                    this.Show();
 
                 }
             }
