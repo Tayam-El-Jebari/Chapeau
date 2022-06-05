@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauLogic
 {
-    internal interface ICalculateVAT
+    public interface IVATCalculation
     {
         double CalculateVAT(double price);
     }

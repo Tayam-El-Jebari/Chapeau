@@ -42,11 +42,11 @@ namespace ChapeauUI
 
             billGrid.ColumnCount = 3;
             billGrid.Columns[0].Name = "Menu Item";
-            billGrid.Columns[0].Width = 319;
+            billGrid.Columns[0].Width = 369;
             billGrid.Columns[1].Name = "Amount";
             billGrid.Columns[1].Width = 80;
             billGrid.Columns[2].Name = "Price";
-            billGrid.Columns[2].Width = 200;
+            billGrid.Columns[2].Width = 150;
             for (int i = 0; i < bill.MenuItems.Count; i++)
             {
                 billGrid.Rows.Add(bill.MenuItems[i].MenuItem.ProductName, bill.MenuItems[i].Amount, bill.MenuItems[i].MenuItem.Price.ToString("€ 0.00"));
@@ -62,6 +62,21 @@ namespace ChapeauUI
                 labelTip.Text = tip.ToString("€ 0.00");
                 double newTotal = totalPrice + tip;
                 labelInVAT.Text = newTotal.ToString("€ 0.00");   
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void buttonCash_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCard_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

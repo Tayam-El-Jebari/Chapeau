@@ -27,31 +27,43 @@ namespace ChapeauLogic
         {
             billdb.AddBill(bill);
         }
+        public void FinishReservarion(int reservationId)
+        {
+            billdb.FinishReservation(reservationId);
+        }
         public Bill MakeBill(int reservationId)
         {
             double vat = 0;
             double totalPrice = 0;
 
-            //1 minder
-            ICalculateVAT calculateHighVAT = new CalculateHighVAT();
+            CalculateVAT calculateVAT = new CalculateVAT();
             Bill bill = new Bill();
-            List<OrderItem> highVatItems = SortList(billdb.GetHighVAT(reservationId));
-            //1 lijst
-            if (highVatItems != null)
-            {
-                foreach (OrderItem hvItem in highVatItems)
+          
+                List<OrderItem> items = SortList(billdb.GetBillItems(reservationId));
+            
+                foreach (OrderItem item in items)
                 {
-                    double tempTotalPrice = (hvItem.Amount * hvItem.MenuItem.Price);
-                    vat += calculateHighVAT.CalculateVAT(tempTotalPrice);
-                    totalPrice += tempTotalPrice;
+                    calculateVAT.Price = (item.Amount * item.MenuItem.Price);
+                    double currentvat = 0;
+                    if (item.IsAlcoholic == true)
+                    {
+                        calculateVAT.VATCalculation = new CalculateHighVAT();
+                    }
+                    else
+                    {
+                        calculateVAT.VATCalculation = new CalculateLowVAT();
+                    }
+                    currentvat = calculateVAT.ExecuteCalculation();
+                    vat += currentvat;
+                    totalPrice += calculateVAT.Price;
                 }
-            }
 
-            bill.TotalPriceInclVAT = totalPrice;
-            bill.TotalPriceExclVAT = totalPrice - vat;
-            bill.TotalVAT = vat;
-            bill.MenuItems = highVatItems;
-
+                bill.TotalPriceInclVAT = totalPrice;
+                bill.TotalPriceExclVAT = totalPrice - vat;
+                bill.TotalVAT = vat;
+                bill.MenuItems = items;
+            
+          
             return bill;
         }
 

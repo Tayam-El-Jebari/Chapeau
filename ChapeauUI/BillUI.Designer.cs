@@ -30,6 +30,8 @@ namespace ChapeauUI
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.buttonCash = new System.Windows.Forms.Button();
             this.buttonCard = new System.Windows.Forms.Button();
             this.buttonTip = new System.Windows.Forms.Button();
@@ -41,9 +43,11 @@ namespace ChapeauUI
             this.label6 = new System.Windows.Forms.Label();
             this.headerLabel = new System.Windows.Forms.Button();
             this.billPanel = new System.Windows.Forms.Panel();
+            this.topBarLabel = new System.Windows.Forms.Label();
+            this.buttonBack = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.labelVAT = new System.Windows.Forms.Label();
-            this.bottomBarLabel = new System.Windows.Forms.Label();
             this.billGrid = new System.Windows.Forms.DataGridView();
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridBill = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -66,6 +70,7 @@ namespace ChapeauUI
             this.buttonCash.TabIndex = 5;
             this.buttonCash.Text = "CASH";
             this.buttonCash.UseVisualStyleBackColor = false;
+            this.buttonCash.Click += new System.EventHandler(this.buttonCash_Click);
             // 
             // buttonCard
             // 
@@ -82,6 +87,7 @@ namespace ChapeauUI
             this.buttonCard.TabIndex = 6;
             this.buttonCard.Text = "CARD";
             this.buttonCard.UseVisualStyleBackColor = false;
+            this.buttonCard.Click += new System.EventHandler(this.buttonCard_Click);
             // 
             // buttonTip
             // 
@@ -180,7 +186,7 @@ namespace ChapeauUI
             this.headerLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.headerLabel.Font = new System.Drawing.Font("Trebuchet MS", 26F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.headerLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.headerLabel.Location = new System.Drawing.Point(23, 54);
+            this.headerLabel.Location = new System.Drawing.Point(23, 69);
             this.headerLabel.Margin = new System.Windows.Forms.Padding(60);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(652, 80);
@@ -191,9 +197,11 @@ namespace ChapeauUI
             // billPanel
             // 
             this.billPanel.BackgroundImage = global::ChapeauUI.Properties.Resources.newhandheldbg;
+            this.billPanel.Controls.Add(this.topBarLabel);
+            this.billPanel.Controls.Add(this.buttonBack);
             this.billPanel.Controls.Add(this.label1);
+            this.billPanel.Controls.Add(this.label2);
             this.billPanel.Controls.Add(this.labelVAT);
-            this.billPanel.Controls.Add(this.bottomBarLabel);
             this.billPanel.Controls.Add(this.billGrid);
             this.billPanel.Controls.Add(this.headerLabel);
             this.billPanel.Controls.Add(this.label4);
@@ -210,6 +218,32 @@ namespace ChapeauUI
             this.billPanel.Size = new System.Drawing.Size(720, 1440);
             this.billPanel.TabIndex = 17;
             // 
+            // topBarLabel
+            // 
+            this.topBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.topBarLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.topBarLabel.Location = new System.Drawing.Point(0, 0);
+            this.topBarLabel.Name = "topBarLabel";
+            this.topBarLabel.Size = new System.Drawing.Size(720, 51);
+            this.topBarLabel.TabIndex = 21;
+            // 
+            // buttonBack
+            // 
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonBack.FlatAppearance.BorderSize = 0;
+            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBack.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBack.ForeColor = System.Drawing.Color.White;
+            this.buttonBack.Location = new System.Drawing.Point(0, 1369);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(163, 66);
+            this.buttonBack.TabIndex = 18;
+            this.buttonBack.Text = "<BACK";
+            this.buttonBack.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
             // label1
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -221,6 +255,15 @@ namespace ChapeauUI
             this.label1.TabIndex = 20;
             this.label1.Text = "VAT";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.label2.Location = new System.Drawing.Point(0, 1366);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(699, 74);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "emptyString";
             // 
             // labelVAT
             // 
@@ -234,30 +277,32 @@ namespace ChapeauUI
             this.labelVAT.Text = "€";
             this.labelVAT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // bottomBarLabel
-            // 
-            this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1379);
-            this.bottomBarLabel.Name = "bottomBarLabel";
-            this.bottomBarLabel.Size = new System.Drawing.Size(699, 74);
-            this.bottomBarLabel.TabIndex = 18;
-            this.bottomBarLabel.Text = "emptyString";
-            // 
             // billGrid
             // 
             this.billGrid.AllowUserToAddRows = false;
             this.billGrid.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.billGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.billGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.billGrid.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.billGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.billGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.billGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.billGrid.DefaultCellStyle = dataGridViewCellStyle3;
+            this.billGrid.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.billGrid.Location = new System.Drawing.Point(23, 166);
             this.billGrid.Name = "billGrid";
             this.billGrid.ReadOnly = true;
@@ -317,8 +362,10 @@ namespace ChapeauUI
         private System.Windows.Forms.DataGridView billGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn description;
         private System.Windows.Forms.DataGridViewTextBoxColumn gridBill;
-        private System.Windows.Forms.Label bottomBarLabel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelVAT;
+        private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label topBarLabel;
     }
 }

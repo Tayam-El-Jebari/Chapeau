@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChapeauLogic
 {
-    internal class CalculateHighVAT : ICalculateVAT
+    internal class CalculateHighVAT : IVATCalculation
     {
         private double VATPercentage = 0.21;
         public double CalculateVAT(double price)

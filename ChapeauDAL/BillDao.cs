@@ -53,14 +53,26 @@ namespace ChapeauDAL
             }
             return bills;
         }
-
-        public List<OrderItem> GetHighVAT(int reservationId)
+        public void FinishReservation(int reservationId)
         {
-            string query = "SELECT oi.menuItem_ID, productName, price, amount FROM Order_Item AS OI " +
+            //change reservation isPresent to false
+            string query = "UPDATE [Reservation] SET isPresent = 0 " +
+            "WHERE reservation_id = @reservationId";
+            SqlParameter[] sqlParameters = new SqlParameter[10];
+            sqlParameters[0] = new SqlParameter("@bill_Id", reservationId);
+
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public List<OrderItem> GetBillItems(int reservationId)
+        {
+            string query = "SELECT oi.menuItem_ID, productName, price, amount, D.isAlcoholic FROM Order_Item AS OI " +
             "JOIN[Order] as o ON o.order_id = OI.order_id " +
             "JOIN[menuItem] AS M ON oi.menuItem_ID = m.menuItem_ID " +
+            "LEFT JOIN[Drink_Item] AS D ON oi.menuItem_ID = D.menuItem_ID " +
             "WHERE o.reservation_Id = @reservationId " +
             "ORDER BY oi.menuItem_ID";
+            
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservationId", reservationId);
 
@@ -69,7 +81,6 @@ namespace ChapeauDAL
         public List<OrderItem> ReadOrderItemsTables(DataTable dataTable)
         {
             List<OrderItem> orderItems = new List<OrderItem>();
-            int j = dataTable.Rows.Count;
             if (dataTable != null)
             {
                 foreach (DataRow dr in dataTable.Rows)
@@ -82,9 +93,9 @@ namespace ChapeauDAL
                             ProductName = (string)dr["productName"],
                             Price = (double)dr["price"],
                         },
-                        Amount = (int)dr["amount"]
+                        Amount = (int)dr["amount"],
+                        IsAlcoholic = dr.Field<bool?>("isAlcoholic") ?? false,
                     };
-
                     orderItems.Add(orderItem);
                 }
             }
