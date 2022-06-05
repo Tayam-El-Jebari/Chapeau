@@ -52,7 +52,6 @@ namespace ChapeauUI
                 if (staffService.CheckIfBartender(staffID))
                 {
                     KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview(StaffJob.Waiter);
-                    kitchenAndBarOverview.Show();
                     this.Hide();
                     kitchenAndBarOverview.ShowDialog();
                     this.Show();
@@ -61,8 +60,9 @@ namespace ChapeauUI
                 {
 
                     KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview(StaffJob.Chef);
-                    kitchenAndBarOverview.Show();
                     this.Hide();
+                    kitchenAndBarOverview.ShowDialog();
+                    this.Show();
                 }
                 else if (staffService.CheckIfOwner(staffID))
                 {
