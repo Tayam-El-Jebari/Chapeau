@@ -34,6 +34,7 @@ namespace ChapeauUI
             this.startMenuPnl = new System.Windows.Forms.Panel();
             this.inlogBtn = new System.Windows.Forms.Button();
             this.topBarLabel = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.startMenuPnl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,6 +61,7 @@ namespace ChapeauUI
             // startMenuPnl
             // 
             this.startMenuPnl.BackColor = System.Drawing.Color.Transparent;
+            this.startMenuPnl.Controls.Add(this.button1);
             this.startMenuPnl.Controls.Add(this.inlogBtn);
             this.startMenuPnl.Controls.Add(this.passwordTextBox);
             this.startMenuPnl.Controls.Add(this.userListView);
@@ -95,6 +97,19 @@ namespace ChapeauUI
             this.topBarLabel.TabIndex = 20;
             this.topBarLabel.Text = "emptyString";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.button1.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Location = new System.Drawing.Point(87, 28);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(195, 195);
+            this.button1.TabIndex = 6;
+            this.button1.Text = "button1";
+            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
+            this.button1.UseVisualStyleBackColor = false;
+            // 
             // InlogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -121,5 +136,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Panel startMenuPnl;
         private System.Windows.Forms.Button inlogBtn;
         private System.Windows.Forms.Label topBarLabel;
+        private System.Windows.Forms.Button button1;
     }
 }
