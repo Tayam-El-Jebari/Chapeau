@@ -41,12 +41,12 @@ namespace ChapeauUI
             //bon half cash half pin
 
             billGrid.ColumnCount = 3;
-            billGrid.Columns[0].Name = "Menu Item";
-            billGrid.Columns[0].Width = 369;
-            billGrid.Columns[1].Name = "Amount";
+            billGrid.Columns[0].Name = "MENU ITEMS";
+            billGrid.Columns[0].Width = 450;
+            billGrid.Columns[1].Name = "QTY";
             billGrid.Columns[1].Width = 80;
-            billGrid.Columns[2].Name = "Price";
-            billGrid.Columns[2].Width = 150;
+            billGrid.Columns[2].Name = "PRICE";
+            billGrid.Columns[2].Width = 120;
             for (int i = 0; i < bill.MenuItems.Count; i++)
             {
                 billGrid.Rows.Add(bill.MenuItems[i].MenuItem.ProductName, bill.MenuItems[i].Amount, bill.MenuItems[i].MenuItem.Price.ToString("€ 0.00"));
