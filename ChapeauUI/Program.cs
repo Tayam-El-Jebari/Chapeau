@@ -28,7 +28,7 @@ namespace ChapeauUI
                 TableId = 4
             };
             Staff staff = new Staff() { Staff_ID = 4 };
-            Application.Run(new InlogForm());
+            Application.Run(new StartScreen());
         }
     }
 }
