@@ -15,9 +15,9 @@ namespace ChapeauLogic
             menuItemdb = new MenuItemDao();
         }
        
-        public List<MenuItem> GetMenuItems(bool isLunch)
+        public List<MenuItem> GetMenuItems()
         {
-            return menuItemdb.GetAllMenuItems(isLunch);
+            return menuItemdb.GetAllMenuItems();
         }
     }
 }

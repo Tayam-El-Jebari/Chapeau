@@ -15,7 +15,7 @@ namespace ChapeauDAL
             return ReadBillTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public void AddBill(Bill bill)
-        {
+        {   //betaalwijze toevoegen
             string query = "INSERT INTO [Bill] VALUES (@bill_Id, @table_Id, @staff_ID, @totalPriceInclVAT, @totalPriceExclVAT, @totalVAT, @tip, @isPaid, @discount, @currentDate, @comments);";
             SqlParameter[] sqlParameters = new SqlParameter[10];
             sqlParameters[0] = new SqlParameter("@bill_Id", bill.BillID);
@@ -30,6 +30,7 @@ namespace ChapeauDAL
             sqlParameters[9] = new SqlParameter("@comments", bill.Comments);
             ExecuteEditQuery(query, sqlParameters);
         }
+        //finish reservation
         public List<Bill> ReadBillTables(DataTable dataTable)
         {
             List<Bill> bills = new List<Bill>();
@@ -58,7 +59,7 @@ namespace ChapeauDAL
             string query = "SELECT oi.menuItem_ID, productName, price, amount FROM Order_Item AS OI" +
             "JOIN[Order] as o ON o.order_id = OI.order_id" +
             "JOIN[menuItem] AS M ON oi.menuItem_ID = m.menuItem_ID" +
-            "WHERE o.reservation_Id = @reservationId AND OI.menuItem_ID IN(SELECT MenuItem_Id FROM Drink_Item WHERE isAlcoholic = 0)" +
+            "WHERE o.reservation_Id = @reservationId" +
             "ORDER BY oi.menuItem_ID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@reservationId", reservationId);
