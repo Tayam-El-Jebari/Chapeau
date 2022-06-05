@@ -139,7 +139,7 @@ namespace ChapeauUI
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
             this.Hide();
-            InlogForm loginPage = new InlogForm();
+            LogInForm loginPage = new LogInForm();
             loginPage.ShowDialog();
             this.Close();
         }

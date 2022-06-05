@@ -150,8 +150,11 @@ namespace ChapeauUI
         {
             if (itemAddedOrderPnl.Visible)
             {
+                //menu gets hidden in order to prevent visual bugs for the paint function of panel menu
+                menu.Hide();
                 viewOrder.Text = "VIEW ORDER";
                 itemAddedOrderPnl.Hide();
+                menu.Show();
             }
             else
             {
@@ -312,7 +315,7 @@ namespace ChapeauUI
         private void buttonBack_Click(object sender, EventArgs e)
         {
             RemoveAllControlsMenu();
-            if(menuType == MenuType.Drink || !PanelChooseMenu.Visible)
+            if(menuType == MenuType.Drink)
             {
                 //menu type
                 PanelChooseMenu.Visible = true;
@@ -320,6 +323,10 @@ namespace ChapeauUI
             else if (!panelSelectMenu.Visible)
             {
                 panelSelectMenu.Visible = true;
+            }
+            else if (!PanelChooseMenu.Visible)
+            {
+                PanelChooseMenu.Visible = true;
             }
             else
             {

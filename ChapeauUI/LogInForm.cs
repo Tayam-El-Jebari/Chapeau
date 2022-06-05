@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace ChapeauUI
 {
-    public partial class InlogForm : Form
+    public partial class LogInForm : Form
     {
-        public InlogForm()
+        public LogInForm()
         {
             InitializeComponent();
             fillListView();

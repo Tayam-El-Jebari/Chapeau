@@ -1,7 +1,7 @@
 ﻿
 namespace ChapeauUI
 {
-    partial class InlogForm
+    partial class LogInForm
     {
         /// <summary>
         /// Required designer variable.
