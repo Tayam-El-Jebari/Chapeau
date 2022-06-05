@@ -13,7 +13,7 @@
   <Class Name="ChapeauLogic.OrderService">
     <Position X="2.5" Y="6.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>IAAAAAAAAAAAAAAAAAACAgAAAAAAAAAAAAAAgAEAgAA=</HashCode>
+      <HashCode>IAAAAAAAABAAKAAAAAACAgAAAAAAAAAAAAAAgAEAAAA=</HashCode>
       <FileName>OrderService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -37,7 +37,7 @@
   <Class Name="ChapeauLogic.StaffService">
     <Position X="4.75" Y="6.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AIAAAAAAAgAAAAIAAAAAAAAKgAAAABAAAAAACIAAAAA=</HashCode>
+      <HashCode>AIAAAAAAAgAAAAAAAAAAAAAKgAAAABAAAAAACIAAAAA=</HashCode>
       <FileName>StaffService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -64,9 +64,6 @@
   </Class>
   <Class Name="ChapeauModel.Order">
     <Position X="2.5" Y="9.75" Width="1.75" />
-    <Members>
-      <Property Name="MenuItem" Hidden="true" />
-    </Members>
     <TypeIdentifier />
   </Class>
   <Class Name="ChapeauModel.Reservation">
@@ -108,7 +105,7 @@
   <Class Name="ChapeauLogic.BillService">
     <Position X="7" Y="6.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAACAAAAAAAAEQAAAAAKAAAIAAAAEAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAKAAAIAAAAEAAAAAAAAA=</HashCode>
       <FileName>BillService.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -120,7 +117,6 @@
     <TypeIdentifier />
     <ShowAsAssociation>
       <Property Name="MenuItem" />
-      <Property Name="Order" />
     </ShowAsAssociation>
   </Class>
   <Class Name="ChapeauModel.Bill">

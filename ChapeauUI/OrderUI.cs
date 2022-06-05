@@ -249,8 +249,8 @@ namespace ChapeauUI
                 { 
                     Comments = commentsTextBox.Text, 
                     OrderItems = new List<OrderItem>(), 
-                    Reservation = this.reservation 
-                
+                    Reservation = this.reservation,
+                    StaffId = staff.Staff_ID
                 };
                 List<OrderItem> itemsForOrder = new List<OrderItem>();
                 for(int i = 0; i < itemGridView.Rows.Count - 1; i++)
@@ -264,6 +264,8 @@ namespace ChapeauUI
                 OrderService orderService = new OrderService();
                 orderService.CreateCompleteOrder(orderToSend);
                 itemGridView.Rows.Clear();
+                viewOrder_Click(sender, e);
+                PanelChooseMenu.Visible = true;
             }
         }
 
@@ -297,7 +299,7 @@ namespace ChapeauUI
                 else if (sender == buttonDinner)
                 {
                     menuType = MenuType.Dinner;
-                    labelTitleItems.Text = $"{menuType} 11:00 - 16:00";
+                    labelTitleItems.Text = $"{menuType} 17:00 - 21:00";
                 }
                 panelSelectMenu.Show();
                 return;

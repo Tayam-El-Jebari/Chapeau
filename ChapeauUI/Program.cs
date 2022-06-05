@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChapeauModel;
 
-// using chapeau model (temp)
-using ChapeauModel;
-
 
 namespace ChapeauUI
 {

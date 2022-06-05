@@ -412,6 +412,7 @@ namespace ChapeauUI
             // 
             // menu
             // 
+            this.menu.AutoScroll = true;
             this.menu.BackColor = System.Drawing.Color.Transparent;
             this.menu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.menu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
