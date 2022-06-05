@@ -29,44 +29,56 @@ namespace ChapeauUI
         /// </summary>
         private void InitializeComponent()
         {
-            this.IDnummerTextBox = new System.Windows.Forms.TextBox();
             this.passwordTextBox = new System.Windows.Forms.TextBox();
+            this.userListView = new System.Windows.Forms.ListView();
             this.inlogBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // IDnummerTextBox
-            // 
-            this.IDnummerTextBox.Location = new System.Drawing.Point(13, 13);
-            this.IDnummerTextBox.Name = "IDnummerTextBox";
-            this.IDnummerTextBox.Size = new System.Drawing.Size(125, 27);
-            this.IDnummerTextBox.TabIndex = 0;
-            // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(13, 47);
+            this.passwordTextBox.Location = new System.Drawing.Point(101, 418);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(125, 27);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
+            // userListView
+            // 
+            this.userListView.FullRowSelect = true;
+            this.userListView.HideSelection = false;
+            this.userListView.Location = new System.Drawing.Point(101, 28);
+            this.userListView.MultiSelect = false;
+            this.userListView.Name = "userListView";
+            this.userListView.Size = new System.Drawing.Size(543, 366);
+            this.userListView.TabIndex = 5;
+            this.userListView.UseCompatibleStateImageBehavior = false;
+            // 
             // inlogBtn
             // 
-            this.inlogBtn.Location = new System.Drawing.Point(13, 81);
+            this.inlogBtn.BackColor = System.Drawing.Color.Transparent;
+            this.inlogBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.inlogBtn.FlatAppearance.BorderSize = 10;
+            this.inlogBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.inlogBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.inlogBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.inlogBtn.Location = new System.Drawing.Point(101, 467);
+            this.inlogBtn.Margin = new System.Windows.Forms.Padding(60);
             this.inlogBtn.Name = "inlogBtn";
-            this.inlogBtn.Size = new System.Drawing.Size(94, 29);
-            this.inlogBtn.TabIndex = 2;
+            this.inlogBtn.Size = new System.Drawing.Size(543, 106);
+            this.inlogBtn.TabIndex = 6;
             this.inlogBtn.Text = "LOG IN";
-            this.inlogBtn.UseVisualStyleBackColor = true;
+            this.inlogBtn.UseVisualStyleBackColor = false;
             this.inlogBtn.Click += new System.EventHandler(this.inlogBtn_Click);
             // 
             // LogInDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.ClientSize = new System.Drawing.Size(800, 698);
             this.Controls.Add(this.inlogBtn);
+            this.Controls.Add(this.userListView);
             this.Controls.Add(this.passwordTextBox);
-            this.Controls.Add(this.IDnummerTextBox);
             this.Name = "LogInDesktop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LogInDesktop";
@@ -76,9 +88,8 @@ namespace ChapeauUI
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox IDnummerTextBox;
         private System.Windows.Forms.TextBox passwordTextBox;
+        private System.Windows.Forms.ListView userListView;
         private System.Windows.Forms.Button inlogBtn;
     }
 }
