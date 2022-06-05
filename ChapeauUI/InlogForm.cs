@@ -58,10 +58,10 @@ namespace ChapeauUI
                 }
                 else
                 {
-                    MessageBox.Show("You cant log in on this device please chance to the desktop.");
+                    MessageBox.Show("You can't log in on this device please change to the desktop.");
                 }
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show("Something went wrong while logging in: " + ex.Message);
             }
