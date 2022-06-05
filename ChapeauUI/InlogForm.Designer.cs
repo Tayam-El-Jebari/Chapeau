@@ -34,7 +34,7 @@ namespace ChapeauUI
             this.startMenuPnl = new System.Windows.Forms.Panel();
             this.inlogBtn = new System.Windows.Forms.Button();
             this.topBarLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.staffCodeTextBox = new System.Windows.Forms.TextBox();
             this.startMenuPnl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,19 +49,20 @@ namespace ChapeauUI
             // 
             // userListView
             // 
+            this.userListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.userListView.FullRowSelect = true;
             this.userListView.HideSelection = false;
             this.userListView.Location = new System.Drawing.Point(78, 259);
             this.userListView.MultiSelect = false;
             this.userListView.Name = "userListView";
-            this.userListView.Size = new System.Drawing.Size(543, 366);
+            this.userListView.Size = new System.Drawing.Size(543, 331);
             this.userListView.TabIndex = 4;
             this.userListView.UseCompatibleStateImageBehavior = false;
             // 
             // startMenuPnl
             // 
             this.startMenuPnl.BackColor = System.Drawing.Color.Transparent;
-            this.startMenuPnl.Controls.Add(this.button1);
+            this.startMenuPnl.Controls.Add(this.staffCodeTextBox);
             this.startMenuPnl.Controls.Add(this.inlogBtn);
             this.startMenuPnl.Controls.Add(this.passwordTextBox);
             this.startMenuPnl.Controls.Add(this.userListView);
@@ -97,18 +98,12 @@ namespace ChapeauUI
             this.topBarLabel.TabIndex = 20;
             this.topBarLabel.Text = "emptyString";
             // 
-            // button1
+            // staffCodeTextBox
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.button1.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.button1.Location = new System.Drawing.Point(87, 28);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(195, 195);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
-            this.button1.UseVisualStyleBackColor = false;
+            this.staffCodeTextBox.Location = new System.Drawing.Point(78, 612);
+            this.staffCodeTextBox.Name = "staffCodeTextBox";
+            this.staffCodeTextBox.Size = new System.Drawing.Size(214, 27);
+            this.staffCodeTextBox.TabIndex = 6;
             // 
             // InlogForm
             // 
@@ -116,6 +111,7 @@ namespace ChapeauUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.AutoSize = true;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(720, 1097);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.startMenuPnl);
@@ -136,6 +132,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Panel startMenuPnl;
         private System.Windows.Forms.Button inlogBtn;
         private System.Windows.Forms.Label topBarLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox staffCodeTextBox;
     }
 }
