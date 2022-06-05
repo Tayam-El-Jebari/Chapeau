@@ -29,7 +29,7 @@ namespace ChapeauUI
         {
             LogInDesktop logInDesktop = new LogInDesktop();
             this.Hide();
-            logInDesktop.Show();
+            logInDesktop.ShowDialog();
             this.Show();
         }
     }

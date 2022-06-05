@@ -40,14 +40,14 @@ namespace ChapeauDAL
             SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             sqlParameters[1] = new SqlParameter("@password", hashedPassword);
-            DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);
             try
             {
+                DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);
                 return ReadTable(dataTable);
             }
             catch (Exception ex)
             {
-                throw new Exception("Password and username dont match" + ex);
+                throw new Exception("Password and username dont match.");
             }
         }
         public void AddNewStaffMember(string firstname, string lastname, int phonenumber, string email, string hashedPassword, string salt)

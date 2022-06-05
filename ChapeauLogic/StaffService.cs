@@ -48,6 +48,11 @@ namespace ChapeauLogic
         {
             return staffDb.CheckIfWaiter(staffID);
         }
+
+        public List<Staff> GetAllStaffs()
+        {
+            return staffDb.GetAllStaffs();
+        }
     }
 }
 
