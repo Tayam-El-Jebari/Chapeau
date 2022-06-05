@@ -17,7 +17,6 @@ namespace ChapeauUI
         public KitchenAndBarOverview(StaffJob staffJob)
         {
             InitializeComponent();
-            Staff staff = new Staff();
             if (staffJob == StaffJob.Chef)
             {
                 KitchenListView();
@@ -28,9 +27,6 @@ namespace ChapeauUI
             }
             else
             {
-                this.Hide();
-                InlogForm loginPage = new InlogForm();
-                loginPage.ShowDialog();
                 this.Close();
             }
         }
@@ -58,9 +54,6 @@ namespace ChapeauUI
         }
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            InlogForm loginPage = new InlogForm();
-            loginPage.ShowDialog();
             this.Close();
         }
 
@@ -158,6 +151,8 @@ namespace ChapeauUI
                             li.SubItems.Add(order.OrderItems[i].Amount.ToString());
                             li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
                             li.SubItems.Add(order.Comments);
+                            li.SubItems.Add(order.TableId.ToString());
+                            li.SubItems.Add(order.TimePlaced.ToString());
                             li.SubItems.Add(order.TimePlaced.ToString());
                             kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                             kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -217,7 +212,6 @@ namespace ChapeauUI
                         }
                     };
 
-
                     OrderService orderService = new OrderService();
                     orderService.GetUpdateStateIsFinished(order);
                     MessageBox.Show($"Order {order.OrderId}: {order.OrderItems[0].MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
@@ -266,14 +260,6 @@ namespace ChapeauUI
 
             }
         }
-
-
-
-
-
-
-
-
     }
         
     

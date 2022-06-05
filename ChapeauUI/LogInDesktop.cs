@@ -39,8 +39,8 @@ namespace ChapeauUI
         }
         private void inlogBtn_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                 StaffService staffService = new StaffService();
                 int staffID = int.Parse(userListView.SelectedItems[0].SubItems[0].Text);
@@ -51,7 +51,7 @@ namespace ChapeauUI
                 Staff loggedInStaffMemeber = staffService.CheckPassword(staffID, hashedPassword);
                 if (staffService.CheckIfBartender(staffID))
                 {
-                    KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview(StaffJob.Waiter);
+                    KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview(StaffJob.Bartender);
                     this.Hide();
                     kitchenAndBarOverview.ShowDialog();
                     this.Show();
@@ -72,11 +72,11 @@ namespace ChapeauUI
                     this.Show();
 
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Something went wrong while logging in: " + ex.Message);
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Something went wrong while logging in: " + ex.Message);
+            //}
         }
     }
 }
