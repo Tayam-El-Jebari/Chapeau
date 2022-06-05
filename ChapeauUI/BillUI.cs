@@ -71,11 +71,17 @@ namespace ChapeauUI
 
         private void buttonCash_Click(object sender, EventArgs e)
         {
-
+            ShowBill();
         }
 
         private void buttonCard_Click(object sender, EventArgs e)
         {
+
+        }
+        private void ShowBill()
+        {
+            billPanel.Hide();
+            completeBill.Show();
 
         }
     }
