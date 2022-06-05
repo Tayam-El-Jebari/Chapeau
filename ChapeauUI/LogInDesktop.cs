@@ -19,6 +19,7 @@ namespace ChapeauUI
         public LogInDesktop()
         {
             InitializeComponent();
+            fillListView();
         }
 
         private void fillListView()
