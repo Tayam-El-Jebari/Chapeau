@@ -19,7 +19,7 @@ namespace ChapeauUI
 
         private void startForHandheldbtn_Click(object sender, EventArgs e)
         {
-            InlogForm inlogForm = new InlogForm();
+            LogInForm inlogForm = new LogInForm();
             this.Hide();
             inlogForm.ShowDialog();
             this.Show();
@@ -29,7 +29,7 @@ namespace ChapeauUI
         {
             LogInDesktop logInDesktop = new LogInDesktop();
             this.Hide();
-            logInDesktop.Show();
+            logInDesktop.ShowDialog();
             this.Show();
         }
     }

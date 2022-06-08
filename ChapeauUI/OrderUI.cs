@@ -148,8 +148,11 @@ namespace ChapeauUI
         {
             if (itemAddedOrderPnl.Visible)
             {
+                //menu gets hidden in order to prevent visual bugs for the paint function of panel menu
+                menu.Hide();
                 viewOrder.Text = "VIEW ORDER";
                 itemAddedOrderPnl.Hide();
+                menu.Show();
             }
             else
             {
@@ -243,12 +246,12 @@ namespace ChapeauUI
             confirm.ShowDialog();
             if (confirm.DialogResult == DialogResult.Yes)
             {
-                Order orderToSend = new Order()
-                {
-                    Comments = commentsTextBox.Text,
-                    OrderItems = new List<OrderItem>(),
-                    Reservation = this.reservation
-
+                Order orderToSend = new Order() 
+                { 
+                    Comments = commentsTextBox.Text, 
+                    OrderItems = new List<OrderItem>(), 
+                    Reservation = this.reservation,
+                    StaffId = staff.Staff_ID
                 };
                 List<OrderItem> itemsForOrder = new List<OrderItem>();
                 for (int i = 0; i < itemGridView.Rows.Count - 1; i++)
@@ -262,13 +265,14 @@ namespace ChapeauUI
                 OrderService orderService = new OrderService();
                 orderService.CreateCompleteOrder(orderToSend);
                 itemGridView.Rows.Clear();
+                viewOrder_Click(sender, e);
+                PanelChooseMenu.Visible = true;
             }
         }
 
         private void buttonChooseMenuAndMenuType_Click(object sender, EventArgs e)
         {
             PanelChooseMenu.Hide();
-            //switch 
             if (sender == buttonStarters)
             {
                 menuItemType = MenuItemType.Starter;
@@ -296,7 +300,7 @@ namespace ChapeauUI
                 else if (sender == buttonDinner)
                 {
                     menuType = MenuType.Dinner;
-                    labelTitleItems.Text = $"{menuType} 11:00 - 16:00";
+                    labelTitleItems.Text = $"{menuType} 17:00 - 21:00";
                 }
                 panelSelectMenu.Show();
                 return;
@@ -309,7 +313,7 @@ namespace ChapeauUI
         private void buttonBack_Click(object sender, EventArgs e)
         {
             RemoveAllControlsMenu();
-            if (menuType == MenuType.Drink || !PanelChooseMenu.Visible)
+            if(menuType == MenuType.Drink)
             {
                 //menu type
                 PanelChooseMenu.Visible = true;
@@ -317,6 +321,10 @@ namespace ChapeauUI
             else if (!panelSelectMenu.Visible)
             {
                 panelSelectMenu.Visible = true;
+            }
+            else if (!PanelChooseMenu.Visible)
+            {
+                PanelChooseMenu.Visible = true;
             }
             else
             {

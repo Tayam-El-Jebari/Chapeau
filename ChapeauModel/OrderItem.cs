@@ -8,6 +8,8 @@ namespace ChapeauModel
 		public MenuItem MenuItem { get; set; }
 		public int Amount { get; set; }
 		public bool? IsAlcoholic { get; set; }
+		public Status Status { get; set; }
+
 	}
 
 }

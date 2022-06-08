@@ -11,13 +11,45 @@ namespace ChapeauDAL
 {
     public class OrderDao : BaseDao
     {
-        public List<Order> GetOrdersForWaiterToDeliver(int staffID)
+        public List<Order> GetOrdersForWaiter(int staffID)
         {
             string query = "SELECT order_id, o.table_Id, o.comments, o.isFinished, o.timePlaced FROM [Order] AS o JOIN [Table] AS t ON t.table_ID = o.table_Id WHERE t.Waiter_ID = @staffID AND isFinished = 1 AND isDelivered IS NULL";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
+
+        public List<Order> GetFoodOrdersForWaiterToDeliver(int staffID)
+        {
+            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) = (select COUNT(*)) AND[order_Item].menuItem_ID NOT in (SELECT menuItem_ID FROM Drink_Item) ORDER BY [order].table_Id";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@staffID", staffID);
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Order> GetDrinkOrdersForWaiterToDeliver(int staffID)
+        {
+            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Drink_Item] AS d ON d.menuItem_Id = [MenuItem].menuItem_ID JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) = (select COUNT(*)) ORDER BY [order].table_Id";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@staffID", staffID);
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+        public List<Order> GetOngoingFoodOrdersForWaiter(int staffID)
+        {
+            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) != (select COUNT(*)) AND[order_Item].menuItem_ID NOT in (SELECT menuItem_ID FROM Drink_Item) ORDER BY [order].table_Id";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@staffID", staffID);
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Order> GetOngoingDrinkOrdersForWaiter(int staffID)
+        {
+            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Drink_Item] AS d ON d.menuItem_Id = [MenuItem].menuItem_ID JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) != (select COUNT(*)) ORDER BY [order].table_Id";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@staffID", staffID);
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
         public List<Order> GetActiveDrinkOrders()
         {
             string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [Order].comments, [Order].isFinished, [order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order] WHERE isFinished = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item) ORDER BY[order].timePlaced; ";
@@ -37,7 +69,50 @@ namespace ChapeauDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
+        
+        public Order GetDrinkOrder(Order order)
+        {
+            string query = "SELECT [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].description, [MenuItem].ThreeCourseMealCode FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Drink_Item] AS d ON d.menuItem_Id = [MenuItem].menuItem_ID WHERE[Order_Item].order_id = 20";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            order.OrderItems = ReadTablesOrderItems(ExecuteSelectQuery(query, sqlParameters));
+            return order;
+        }
 
+        public Order GetOrderItemsForOrder(Order order)
+        {
+            string query = "SELECT [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].[description], [MenuItem].ThreeCourseMealCode, [order_Item].[Status] FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id = @OrderID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@OrderID", order.OrderId);
+            order.OrderItems = ReadTablesOrderItems(ExecuteSelectQuery(query, sqlParameters));
+            return order;
+        }
+
+        public List<OrderItem> ReadTablesOrderItems(DataTable dataTable)
+        {
+            List<OrderItem> activeOrders = new List<OrderItem>();
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+
+                OrderItem orderItem = new OrderItem()
+                {
+                    //Order = new Order() { OrderId = (int)dr["order_Id"], Comments = Convert.ToString(dr["comments"]), IsFinished = (bool)dr["isFinished"], TimePlaced = (DateTime)dr["timePlaced"] },
+                    MenuItem = new MenuItem
+                    {
+                        MenuItemId = (int)dr["menuItem_ID"],
+                        ProductName = (string)dr["productName"],
+                        //Price = (double)dr["price"],
+                        Description = Convert.ToString(dr["description"]),
+                        //stock = (int)dr["stock"],
+                        MenuItemType = (MenuItemType)dr["ThreeCourseMealCode"]
+                    },
+                    Amount = (int)dr["amount"],
+                    Status = (Status)dr["Status"]
+                };
+                activeOrders.Add(orderItem);
+            }
+            return activeOrders;
+        }
         public List<Order> ReadTablesItem(DataTable dataTable)
         {
             List<Order> activeOrders = new List<Order>();
@@ -104,6 +179,14 @@ namespace ChapeauDAL
         public void UpdateStateIsdelivered(int orderID)
         {
             string query = $"UPDATE [Order] SET IsDelivered=1 WHERE order_Id=@orderID";
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@orderID", orderID);
+            ExecuteEditQuery(query, sqlParameters);
+        }
+
+        public void UpdateStateIsFinished(int orderID)
+        {
+            string query = $"UPDATE [Order] SET[isFinished] = 1 WHERE order_id = @orderID AND (select count(*) FROM Order_Item WHERE order_id = 20 AND[Status] = 2) = (select COUNT(*)FROM Order_Item WHERE order_id = 20)";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@orderID", orderID);
             ExecuteEditQuery(query, sqlParameters);

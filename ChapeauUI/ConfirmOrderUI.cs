@@ -66,7 +66,6 @@ namespace ChapeauUI
             {
                 throw new Exception("No tip added");
             }
-
             try
             {
                 try
@@ -106,7 +105,7 @@ namespace ChapeauUI
         private bool denied;
         private void OkAndCancel_Click(object sender, EventArgs e)
         {
-            if (sender == DenyButton)
+            if(sender == DenyButton)
             {
                 denied = true;
             }

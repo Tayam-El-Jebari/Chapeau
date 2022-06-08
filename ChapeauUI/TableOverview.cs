@@ -21,28 +21,22 @@ namespace ChapeauUI
         {
             this.loggedInStaffMember = loggedInStaffMember;
             InitializeComponent();
-            hideAllPanels();
+            HideAllPanels();
             startMenuPnl.Show();
         }
 
-        private void checkTimeSinceOrderPlaced()
-        {
-            OrderService orderService = new OrderService();
-            List<Order> lastOrders = orderService.GetLastOrders();
-            for(int i = 0; i < 10; i++)
-            {
-
-            }
-        }
-        private void hideAllPanels()
+        
+        private void HideAllPanels()
         {
             startMenuPnl.Hide();
             TableOverviewPnl.Hide();
             makeReservationPnl.Hide();
-            notificationPnl.Hide();
             markReservationPresentPnl.Hide();
+            notificationsPnl.Hide();
         }
-        private void tableWasSelected(int tableNr)
+
+        // make switch
+        private void TableWasSelected(int tableNr)
         {
             if (menuChoice == MenuChoice.TakeOrder)
             {
@@ -63,7 +57,7 @@ namespace ChapeauUI
             }
             else if (menuChoice == MenuChoice.MakeReservation)
             {
-                hideAllPanels();
+                HideAllPanels();
                 makeReservationPnl.Show();
                 selectedTable = tableNr;
             }
@@ -71,93 +65,184 @@ namespace ChapeauUI
 
         private void takeOrderBtn_Click(object sender, EventArgs e)
         {
-            hideAllPanels();
+            HideAllPanels();
             menuChoice = MenuChoice.TakeOrder;
-            TableOverviewPnl.Show();
+            openTableOverviewPnl();
         }
         private void showBillBtn_Click(object sender, EventArgs e)
         {
-            hideAllPanels();
+            HideAllPanels();
             menuChoice = MenuChoice.ShowBill;
-            TableOverviewPnl.Show();
+            openTableOverviewPnl();
         }
 
         private void makeReservationBtn_Click(object sender, EventArgs e)
         {
-            hideAllPanels();
+            HideAllPanels();
             menuChoice = MenuChoice.MakeReservation;
-            TableOverviewPnl.Show();
+            openTableOverviewPnl();
         }
 
         private void notificationsBtn_Click(object sender, EventArgs e)
         {
-            hideAllPanels();
-            notificationPnl.Show();
+            HideAllPanels();
+            notificationsPnl.Show();
             fillReadyOrderDataGrid();
+            fillOngoingOrderDataGrid();
+        }
+
+        private void openTableOverviewPnl()
+        {
+            ReservationService reservationService = new ReservationService();
+            List<Reservation> reservations = reservationService.GetAllPresentReservationsOrderedByTable();
+            setAllTablesBackgroundFree();
+            foreach(Reservation reservation in reservations)
+            {
+                setTableImagePresent(reservation.TableId);
+            }
+            TableOverviewPnl.Show();
+        }
+        private void setAllTablesBackgroundFree()
+        {
+            tableOneButton.BackgroundImage = Properties.Resources.TableFree;
+            tableTwoButton.BackgroundImage = Properties.Resources.TableFree;
+            tableThreeButton.BackgroundImage = Properties.Resources.TableFree;
+            tableFourButton.BackgroundImage = Properties.Resources.TableFree;
+            tableFiveButton.BackgroundImage = Properties.Resources.TableFree;
+            tableSixButton.BackgroundImage = Properties.Resources.TableFree;
+            tableSevenButton.BackgroundImage = Properties.Resources.TableFree;
+            tableEightButton.BackgroundImage = Properties.Resources.TableFree;
+            tableNineButton.BackgroundImage = Properties.Resources.TableFree;
+            tableTenButton.BackgroundImage = Properties.Resources.TableFree;
+        }
+        private void setTableImagePresent(int tableID)
+        {
+            switch (tableID)
+            {
+                case 1:
+                    tableOneButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 2:
+                    tableTwoButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 3:
+                    tableThreeButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 4:
+                    tableFourButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 5:
+                    tableFiveButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 6:
+                    tableSixButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 7:
+                    tableSevenButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 8:
+                    tableEightButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 9:
+                    tableNineButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+                case 10:
+                    tableOneButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+            }
         }
 
         private void fillReadyOrderDataGrid()
         {
             OrderService orderService = new OrderService();
-            List<Order> readyOrders = orderService.GetOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
+            List<Order> readyFoodOrders = orderService.GetFoodOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
+            List<Order> readyDrinkOrders = orderService.GetDrinkOrdersForWaiterToDeliver(loggedInStaffMember.Staff_ID);
             ordersReadyGridView.Rows.Clear();
-            ordersReadyGridView.ColumnCount = 2;
+            ordersReadyGridView.ColumnCount = 3;
             ordersReadyGridView.Columns[0].Name = "Order ID";
             ordersReadyGridView.Columns[1].Name = "Table ID";
-            foreach (Order order in readyOrders)
+            ordersReadyGridView.Columns[2].Name = "Order Type";
+            foreach (Order foodOrder in readyFoodOrders)
             {
-                ordersReadyGridView.Rows.Add(order.OrderId, order.TableId);
+                ordersReadyGridView.Rows.Add(foodOrder.OrderId, foodOrder.TableId, "Food");
+            }
+            foreach (Order drinkOrder in readyDrinkOrders)
+            {
+                ordersReadyGridView.Rows.Add(drinkOrder.OrderId, drinkOrder.TableId, "Drink");
+            }
+        }
+
+        private void fillOngoingOrderDataGrid()
+        {
+            OrderService orderService = new OrderService();
+            List<Order> ongoingFoodOrders = orderService.GetOngoingFoodOrdersForWaiter(loggedInStaffMember.Staff_ID);
+            List<Order> ongoingDrinkOrders = orderService.GetOngoingDrinkOrdersForWaiter(loggedInStaffMember.Staff_ID);
+            ongoingOrdersDataGridView.Rows.Clear();
+            ongoingOrdersDataGridView.ColumnCount = 4;
+            ongoingOrdersDataGridView.Columns[0].Name = "Order ID";
+            ongoingOrdersDataGridView.Columns[0].Width = 100;
+            ongoingOrdersDataGridView.Columns[1].Name = "Table ID";
+            ongoingOrdersDataGridView.Columns[2].Name = "Order Type";
+            ongoingOrdersDataGridView.Columns[3].Name = "Time placed";
+            ongoingOrdersDataGridView.Columns[3].Width = 250;
+            foreach (Order foodOrder in ongoingFoodOrders)
+            {
+                ongoingOrdersDataGridView.Rows.Add(foodOrder.OrderId, foodOrder.TableId, "Food", foodOrder.TimePlaced);
+            }
+            foreach (Order drinkOrder in ongoingDrinkOrders)
+            {
+                ongoingOrdersDataGridView.Rows.Add(drinkOrder.OrderId, drinkOrder.TableId, "Drink", drinkOrder.TimePlaced);
             }
         }
 
         private void tableOneButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(1);
+            TableWasSelected(1);
         }
 
         private void tableTwoButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(2);
+            TableWasSelected(2);
         }
 
         private void tableThreeButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(3);
+            TableWasSelected(3);
         }
 
         private void tableFourButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(4);
+            TableWasSelected(4);
         }
 
         private void tableFiveButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(5);
+            TableWasSelected(5);
         }
 
         private void tableSixButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(6);
+            TableWasSelected(6);
         }
 
         private void tableSevenButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(7);
+            TableWasSelected(7);
         }
 
         private void tableEightButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(8);
+            TableWasSelected(8);
         }
 
         private void tableNineButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(9);
+            TableWasSelected(9);
         }
 
         private void tableTenButton_Click(object sender, EventArgs e)
         {
-            tableWasSelected(10);
+            TableWasSelected(10);
         }
 
         private void confirmReservationBtn_Click(object sender, EventArgs e)
@@ -168,14 +253,15 @@ namespace ChapeauUI
             string comments = reservationCommentsTextBox.Text;
             int phoneNumber = int.Parse(reservationPhonenumberTextBox.Text);
             string emailAdress = reservationEmailTextBox.Text;
+            //maak object
             reservationService.AddNewReservation(customerName, false, reservationTime, selectedTable, comments, phoneNumber, emailAdress);
-            hideAllPanels();
+            HideAllPanels();
             startMenuPnl.Show();
         }
 
         private void markReservationPresentBtn_Click(object sender, EventArgs e)
         {
-            hideAllPanels();
+            HideAllPanels();
             markReservationPresentPnl.Show();
             fillnonPresentReservationOverviewDataGrid();
         }
@@ -194,11 +280,6 @@ namespace ChapeauUI
             }
         }
 
-        private void reservationOverviewDataGrid_SelectionChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show("test");
-        }
-
         private void setReservationPresentBtn_Click(object sender, EventArgs e)
         {
             ReservationService reservationService = new ReservationService();
@@ -212,10 +293,17 @@ namespace ChapeauUI
         private void markOrderReadyBtn_Click(object sender, EventArgs e)
         {
             OrderService orderService = new OrderService();
-            for (int i = 0; i < ordersReadyGridView.SelectedCells.Count; i++)
+            OrderItemService orderItemService = new OrderItemService();
+            int orderID = Convert.ToInt32(ordersReadyGridView.SelectedRows[0].Cells[0].Value);
+            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Drink")
             {
-                orderService.UpdateStateIsdelivered(Convert.ToInt32(ordersReadyGridView.SelectedCells[i].Value));
+                orderItemService.UpdateDrinkOrderStatusToDeliverd(orderID);
             }
+            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Food")
+            {
+                orderItemService.UpdateFoodOrderStatusToDeliverd(orderID);
+            }
+            orderService.UpdateStateIsFinished(orderID);
             fillReadyOrderDataGrid();
         }
     }

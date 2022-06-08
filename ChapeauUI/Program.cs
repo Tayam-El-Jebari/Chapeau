@@ -5,9 +5,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ChapeauModel;
 
-// using chapeau model (temp)
-using ChapeauModel;
-
 
 namespace ChapeauUI
 {
@@ -22,6 +19,7 @@ namespace ChapeauUI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Reservation reservation = new Reservation
             {
                 ReservationId = 202,
