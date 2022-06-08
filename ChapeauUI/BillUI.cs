@@ -43,7 +43,7 @@ namespace ChapeauUI
         private void MakeBill()
         {
             billService = new BillService();
-            bill = billService.MakeBill(reservation.TableId);
+            bill = billService.MakeBill(reservation.ReservationId);
             totalPrice = bill.TotalPriceExclVAT;
             labelExVAT.Text = totalPrice.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
@@ -75,18 +75,6 @@ namespace ChapeauUI
             this.Close();
         }
 
-        private void buttonCash_Click(object sender, EventArgs e)
-        {
-            ReadComment();
-            FillCompleteBill("CASH");
-
-            ShowBill();
-        }
-
-        private void buttonCard_Click(object sender, EventArgs e)
-        {
-
-        }
         private void ShowBill()
         {
             ReadComment();
@@ -94,13 +82,13 @@ namespace ChapeauUI
             completeBill.Show();
 
         }
-        private void FillCompleteBill(string paymentMethod)
+        private void FillCompleteBill()
         {
             labelBillExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
             labelBillTotal.Text = totalPrice.ToString("€ 0.00");
             labelTip.Text = tip.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
-            labelPaymentMethod.Text = paymentMethod;
+            //labelPaymentMethod.Text = paymentMethod;
             labelSplitBill.Text = "3";
             
 

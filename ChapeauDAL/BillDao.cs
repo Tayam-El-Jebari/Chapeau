@@ -12,7 +12,7 @@ namespace ChapeauDAL
         {
             string query = "SELECT bill_Id, table_Id, staff_ID, totalPriceInclVAT, totalPriceExclVAT, tip, isPaid, discount, currentDate, comments FROM [Bill]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadBillTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadBillsTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public void AddBill(Bill bill)
         {   //betaalwijze toevoegen
@@ -31,7 +31,7 @@ namespace ChapeauDAL
             ExecuteEditQuery(query, sqlParameters);
         }
         //finish reservation
-        public List<Bill> ReadBillTables(DataTable dataTable)
+        public List<Bill> ReadBillsTables(DataTable dataTable)
         {
             List<Bill> bills = new List<Bill>();
 
@@ -58,8 +58,8 @@ namespace ChapeauDAL
             //change reservation isPresent to false
             string query = "UPDATE [Reservation] SET isPresent = 0 " +
             "WHERE reservation_id = @reservationId";
-            SqlParameter[] sqlParameters = new SqlParameter[10];
-            sqlParameters[0] = new SqlParameter("@bill_Id", reservationId);
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@reservationId", reservationId);
 
             ExecuteEditQuery(query, sqlParameters);
         }
