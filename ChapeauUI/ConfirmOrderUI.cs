@@ -31,6 +31,7 @@ namespace ChapeauUI
             labelQuestion.Visible = true;
             labelQuestion.Text = question.ToUpper();
         }
+
         public ConfirmOrderUI(string question, DialogResult dialogResult)
         {
             InitializeComponent();

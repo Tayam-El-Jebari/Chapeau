@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Windows;
-using System.Linq;
 
 namespace ChapeauUI
 {
@@ -125,13 +123,13 @@ namespace ChapeauUI
                     }
                     foreach (DataGridViewRow row in itemGridView.Rows)
                     {
-                        if(Convert.ToInt32(row.Cells[0].Value) == itemsWithMenuType[i / 2].MenuItemId)
+                        if (Convert.ToInt32(row.Cells[0].Value) == itemsWithMenuType[i / 2].MenuItemId)
                         {
                             row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
                             return;
                         }
                     }
-                    itemGridView.Rows.Add(new string[] { itemsWithMenuType[i / 2].MenuItemId.ToString(), itemsWithMenuType[i / 2].ProductName, "1"});
+                    itemGridView.Rows.Add(new string[] { itemsWithMenuType[i / 2].MenuItemId.ToString(), itemsWithMenuType[i / 2].ProductName, "1" });
                 }
             }
         }
@@ -170,7 +168,7 @@ namespace ChapeauUI
                 UpdateMenuList();
                 PanelChooseMenu.Visible = true;
             }
-            
+
         }
         private void itemGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -191,17 +189,17 @@ namespace ChapeauUI
                         List<MenuItem> itemsWithMenuType = menuList.FindAll(x => x.MenuItemType == menuItemType);
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
-                                if (i % 2 == 0 && itemsWithMenuType[i / 2].stock == 0)
-                                {
-                                    menu.Controls[i].BackColor = Color.DarkGray;
-                                    menu.Controls[i].ForeColor = Color.LightGray;
-                                    menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
-                                    menu.Controls[i].Text = "OUT OF STOCK";
-                                }
+                            if (i % 2 == 0 && itemsWithMenuType[i / 2].stock == 0)
+                            {
+                                menu.Controls[i].BackColor = Color.DarkGray;
+                                menu.Controls[i].ForeColor = Color.LightGray;
+                                menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
+                                menu.Controls[i].Text = "OUT OF STOCK";
+                            }
                         }
                     }
-            }
-            else if (e.ColumnIndex == 4)
+                }
+                else if (e.ColumnIndex == 4)
                 {
                     itemGridView.Rows[e.RowIndex].Cells[2].Value = Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) - 1;
                     menuList[MenuListIndexOfItem].stock += 1;
@@ -220,7 +218,7 @@ namespace ChapeauUI
                                     menu.Controls[i].Text = string.Empty;
                                 }
                             }
-                            
+
                         }
                     }
                     if (Convert.ToInt32(itemGridView.Rows[e.RowIndex].Cells[2].Value) == 0)
@@ -236,7 +234,7 @@ namespace ChapeauUI
         }
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
-            if(itemGridView.Rows.Count == 1)
+            if (itemGridView.Rows.Count == 1)
             {
                 MessageBox.Show("No items added!");
                 return;
@@ -245,19 +243,19 @@ namespace ChapeauUI
             confirm.ShowDialog();
             if (confirm.DialogResult == DialogResult.Yes)
             {
-                Order orderToSend = new Order() 
-                { 
-                    Comments = commentsTextBox.Text, 
-                    OrderItems = new List<OrderItem>(), 
-                    Reservation = this.reservation 
-                
+                Order orderToSend = new Order()
+                {
+                    Comments = commentsTextBox.Text,
+                    OrderItems = new List<OrderItem>(),
+                    Reservation = this.reservation
+
                 };
                 List<OrderItem> itemsForOrder = new List<OrderItem>();
-                for(int i = 0; i < itemGridView.Rows.Count - 1; i++)
+                for (int i = 0; i < itemGridView.Rows.Count - 1; i++)
                 {
                     orderToSend.OrderItems.Add(new OrderItem
                     {
-                        MenuItem = new MenuItem{MenuItemId = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value)},
+                        MenuItem = new MenuItem { MenuItemId = Convert.ToInt32(itemGridView.Rows[i].Cells[0].Value) },
                         Amount = Convert.ToInt32(itemGridView.Rows[i].Cells[2].Value)
                     });
                 }
@@ -275,18 +273,18 @@ namespace ChapeauUI
             {
                 menuItemType = MenuItemType.Starter;
             }
-            else if(sender == buttonMainCourse)
+            else if (sender == buttonMainCourse)
             {
                 menuItemType = MenuItemType.MainCourse;
             }
-            else if(sender == buttonDesserts)
+            else if (sender == buttonDesserts)
             {
                 menuItemType = MenuItemType.Desserts;
             }
-            else if(sender == buttonDrinks)
+            else if (sender == buttonDrinks)
             {
                 menuType = MenuType.Drink;
-                menuItemType = MenuItemType.Drink; 
+                menuItemType = MenuItemType.Drink;
             }
             else
             {
@@ -311,7 +309,7 @@ namespace ChapeauUI
         private void buttonBack_Click(object sender, EventArgs e)
         {
             RemoveAllControlsMenu();
-            if(menuType == MenuType.Drink || !PanelChooseMenu.Visible)
+            if (menuType == MenuType.Drink || !PanelChooseMenu.Visible)
             {
                 //menu type
                 PanelChooseMenu.Visible = true;
@@ -327,10 +325,10 @@ namespace ChapeauUI
         }
         private void RemoveAllControlsMenu()
         {
-           // hide and show in order to prevent visual bugs from .controls.Clear() that is caused from there being too many controls.
-           menu.Hide();
-           menu.Controls.Clear();
-           menu.Show();
+            // hide and show in order to prevent visual bugs from .controls.Clear() that is caused from there being too many controls.
+            menu.Hide();
+            menu.Controls.Clear();
+            menu.Show();
         }
     }
 }

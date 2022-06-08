@@ -17,51 +17,48 @@ namespace ChapeauUI
 {
     public partial class BillUI : Form
     {
+
         private double totalPrice;
-        public BillUI(Reservation reservation)
+        private BillService billService;
+        private Bill bill;
+        private ConfirmOrderUI confirmOrder;
+        private Reservation reservation;
+        private double tip;
+        private double priceAfterTip;
+
+        public BillUI(Reservation choosenReservation)
         {
             InitializeComponent();
-            ShowHeader(reservation.TableId);
-            MakeBill(reservation.ReservationId);//reservation.ReservationId);
+            this.reservation = choosenReservation;
+            ShowHeader();
+            MakeBill();
         }
 
-        public void ShowHeader(int table)
+        public void ShowHeader()
         {
-             headerLabel.Text = $"bill table {table}";
+             headerLabel.Text = $"bill table {reservation.TableId}";
              headerLabel.Text = headerLabel.Text.ToUpper();
         }
-        private void MakeBill(int reservation)
+        private void MakeBill()
         {
-            BillService billService = new BillService();
-            Bill bill = billService.MakeBill(reservation);
-            this.totalPrice = bill.TotalPriceExclVAT;
+            billService = new BillService();
+            bill = billService.MakeBill(reservation.TableId);
+            totalPrice = bill.TotalPriceExclVAT;
             labelExVAT.Text = totalPrice.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
-            //bon half cash half pin
-
-            billGrid.ColumnCount = 3;
-            billGrid.Columns[0].Name = "MENU ITEMS";
-            billGrid.Columns[0].Width = 450;
-            billGrid.Columns[1].Name = "QTY";
-            billGrid.Columns[1].Width = 80;
-            billGrid.Columns[2].Name = "PRICE";
-            billGrid.Columns[2].Width = 120;
-            for (int i = 0; i < bill.MenuItems.Count; i++)
-            {
-                billGrid.Rows.Add(bill.MenuItems[i].MenuItem.ProductName, bill.MenuItems[i].Amount, bill.MenuItems[i].MenuItem.Price.ToString("€ 0.00"));
-            };
+            FillGrid(billGrid);
         }
 
         private void buttonTip_Click(object sender, EventArgs e)
         {
           
-                ConfirmOrderUI confirmOrder = new ConfirmOrderUI("Do you want to add a tip?", DialogResult.None);
-                confirmOrder.ShowDialog();
-                double tip = confirmOrder.InputDouble();
-                labelTip.Text = tip.ToString("€ 0.00");
-                double newTotal = totalPrice + tip;
-                labelInVAT.Text = newTotal.ToString("€ 0.00");   
+            confirmOrder = new ConfirmOrderUI("Do you want to add a tip?", DialogResult.None);
+            confirmOrder.ShowDialog();
+            tip = confirmOrder.InputDouble();
+            labelTip.Text = tip.ToString("€ 0.00");
+            priceAfterTip = totalPrice + tip;
+            labelInVAT.Text = priceAfterTip.ToString("€ 0.00");   
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -71,6 +68,10 @@ namespace ChapeauUI
 
         private void buttonCash_Click(object sender, EventArgs e)
         {
+
+
+            FillCompleteBill("CASH");
+
             ShowBill();
         }
 
@@ -83,6 +84,35 @@ namespace ChapeauUI
             billPanel.Hide();
             completeBill.Show();
 
+        }
+        private void FillCompleteBill(string paymentMethod)
+        {
+            labelBillExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
+            labelBillTotal.Text = totalPrice.ToString("€ 0.00");
+            labelTip.Text = tip.ToString("€ 0.00");
+            labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
+            labelPaymentMethod.Text = paymentMethod;
+            labelSplitBill.Text = "3";
+            
+
+            FillGrid(gridCompleteBill);
+        }
+        private void FillGrid(DataGridView grid)
+        {
+            grid.ColumnCount = 3;
+            grid.Columns[0].Name = "MENU ITEMS";
+            grid.Columns[0].Width = 450;
+            grid.Columns[1].Name = "QTY";
+            grid.Columns[1].Width = 80;
+            grid.Columns[2].Name = "PRICE";
+            grid.Columns[2].Width = 120;
+            for (int i = 0; i < bill.MenuItems.Count; i++)
+            {
+                grid.Rows.Add
+                    (bill.MenuItems[i].MenuItem.ProductName,
+                    bill.MenuItems[i].Amount,
+                    bill.MenuItems[i].MenuItem.Price.ToString("€ 0.00"));
+            };
         }
     }
 }

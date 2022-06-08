@@ -57,9 +57,6 @@ namespace ChapeauUI
             this.description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gridBill = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.completeBill = new System.Windows.Forms.Panel();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.labelSplitBill = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.labelPaymentMethod = new System.Windows.Forms.Label();
@@ -86,13 +83,16 @@ namespace ChapeauUI
             this.label7 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.gridCompleteBill = new System.Windows.Forms.DataGridView();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.billPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.billGrid)).BeginInit();
             this.completeBill.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCompleteBill)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridCompleteBill)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonCash
@@ -383,10 +383,6 @@ namespace ChapeauUI
             // 
             this.completeBill.BackgroundImage = global::ChapeauUI.Properties.Resources.bill_logo;
             this.completeBill.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.completeBill.Controls.Add(this.gridCompleteBill);
-            this.completeBill.Controls.Add(this.pictureBox3);
-            this.completeBill.Controls.Add(this.pictureBox2);
-            this.completeBill.Controls.Add(this.pictureBox1);
             this.completeBill.Controls.Add(this.labelSplitBill);
             this.completeBill.Controls.Add(this.label20);
             this.completeBill.Controls.Add(this.labelPaymentMethod);
@@ -412,41 +408,15 @@ namespace ChapeauUI
             this.completeBill.Controls.Add(this.label8);
             this.completeBill.Controls.Add(this.label7);
             this.completeBill.Controls.Add(this.label3);
+            this.completeBill.Controls.Add(this.gridCompleteBill);
+            this.completeBill.Controls.Add(this.pictureBox2);
+            this.completeBill.Controls.Add(this.pictureBox1);
+            this.completeBill.Controls.Add(this.pictureBox3);
             this.completeBill.Enabled = false;
             this.completeBill.Location = new System.Drawing.Point(0, 0);
             this.completeBill.Name = "completeBill";
             this.completeBill.Size = new System.Drawing.Size(720, 1440);
             this.completeBill.TabIndex = 22;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackgroundImage = global::ChapeauUI.Properties.Resources.line;
-            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox3.Location = new System.Drawing.Point(0, 1060);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(729, 16);
-            this.pictureBox3.TabIndex = 28;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BackgroundImage = global::ChapeauUI.Properties.Resources.line;
-            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Location = new System.Drawing.Point(0, 1184);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(729, 16);
-            this.pictureBox2.TabIndex = 27;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackgroundImage = global::ChapeauUI.Properties.Resources.line;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 1264);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(729, 16);
-            this.pictureBox1.TabIndex = 26;
-            this.pictureBox1.TabStop = false;
             // 
             // labelSplitBill
             // 
@@ -783,6 +753,36 @@ namespace ChapeauUI
             this.gridCompleteBill.Size = new System.Drawing.Size(652, 651);
             this.gridCompleteBill.TabIndex = 29;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackgroundImage = global::ChapeauUI.Properties.Resources.line;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox2.Location = new System.Drawing.Point(0, 1184);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(729, 16);
+            this.pictureBox2.TabIndex = 27;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImage = global::ChapeauUI.Properties.Resources.line;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 1264);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(729, 16);
+            this.pictureBox1.TabIndex = 26;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.BackgroundImage = global::ChapeauUI.Properties.Resources.line;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox3.Location = new System.Drawing.Point(0, 1060);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(729, 16);
+            this.pictureBox3.TabIndex = 28;
+            this.pictureBox3.TabStop = false;
+            // 
             // BillUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -792,8 +792,8 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebg2;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(720, 1102);
-            this.Controls.Add(this.completeBill);
             this.Controls.Add(this.billPanel);
+            this.Controls.Add(this.completeBill);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BillUI";
@@ -802,10 +802,10 @@ namespace ChapeauUI
             ((System.ComponentModel.ISupportInitialize)(this.billGrid)).EndInit();
             this.completeBill.ResumeLayout(false);
             this.completeBill.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridCompleteBill)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridCompleteBill)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
