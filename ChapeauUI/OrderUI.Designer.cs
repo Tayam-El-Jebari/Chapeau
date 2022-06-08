@@ -40,7 +40,7 @@ namespace ChapeauUI
             this.buttonLunch = new System.Windows.Forms.Button();
             this.buttonDinner = new System.Windows.Forms.Button();
             this.buttonDrinks = new System.Windows.Forms.Button();
-            this.panelSelectMenu = new System.Windows.Forms.Panel();
+            this.panelSelectTheThreeCourseMeal = new System.Windows.Forms.Panel();
             this.labelSelectMenu = new System.Windows.Forms.Label();
             this.buttonDesserts = new System.Windows.Forms.Button();
             this.buttonMainCourse = new System.Windows.Forms.Button();
@@ -62,7 +62,7 @@ namespace ChapeauUI
             this.topBarLabel = new System.Windows.Forms.Label();
             this.panelItems.SuspendLayout();
             this.PanelChooseMenu.SuspendLayout();
-            this.panelSelectMenu.SuspendLayout();
+            this.panelSelectTheThreeCourseMeal.SuspendLayout();
             this.itemAddedOrderPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemGridView)).BeginInit();
             this.SuspendLayout();
@@ -74,7 +74,7 @@ namespace ChapeauUI
             this.panelItems.Controls.Add(this.buttonBack);
             this.panelItems.Controls.Add(this.bottomBarLabel);
             this.panelItems.Controls.Add(this.PanelChooseMenu);
-            this.panelItems.Controls.Add(this.panelSelectMenu);
+            this.panelItems.Controls.Add(this.panelSelectTheThreeCourseMeal);
             this.panelItems.Controls.Add(this.itemAddedOrderPnl);
             this.panelItems.Controls.Add(this.viewOrder);
             this.panelItems.Controls.Add(this.menu);
@@ -188,15 +188,15 @@ namespace ChapeauUI
             // 
             // panelSelectMenu
             // 
-            this.panelSelectMenu.BackColor = System.Drawing.Color.Transparent;
-            this.panelSelectMenu.Controls.Add(this.labelSelectMenu);
-            this.panelSelectMenu.Controls.Add(this.buttonDesserts);
-            this.panelSelectMenu.Controls.Add(this.buttonMainCourse);
-            this.panelSelectMenu.Controls.Add(this.buttonStarters);
-            this.panelSelectMenu.Location = new System.Drawing.Point(2, 3);
-            this.panelSelectMenu.Name = "panelSelectMenu";
-            this.panelSelectMenu.Size = new System.Drawing.Size(700, 1390);
-            this.panelSelectMenu.TabIndex = 6;
+            this.panelSelectTheThreeCourseMeal.BackColor = System.Drawing.Color.Transparent;
+            this.panelSelectTheThreeCourseMeal.Controls.Add(this.labelSelectMenu);
+            this.panelSelectTheThreeCourseMeal.Controls.Add(this.buttonDesserts);
+            this.panelSelectTheThreeCourseMeal.Controls.Add(this.buttonMainCourse);
+            this.panelSelectTheThreeCourseMeal.Controls.Add(this.buttonStarters);
+            this.panelSelectTheThreeCourseMeal.Location = new System.Drawing.Point(2, 3);
+            this.panelSelectTheThreeCourseMeal.Name = "panelSelectMenu";
+            this.panelSelectTheThreeCourseMeal.Size = new System.Drawing.Size(700, 1390);
+            this.panelSelectTheThreeCourseMeal.TabIndex = 6;
             // 
             // labelSelectMenu
             // 
@@ -487,8 +487,8 @@ namespace ChapeauUI
             this.panelItems.ResumeLayout(false);
             this.PanelChooseMenu.ResumeLayout(false);
             this.PanelChooseMenu.PerformLayout();
-            this.panelSelectMenu.ResumeLayout(false);
-            this.panelSelectMenu.PerformLayout();
+            this.panelSelectTheThreeCourseMeal.ResumeLayout(false);
+            this.panelSelectTheThreeCourseMeal.PerformLayout();
             this.itemAddedOrderPnl.ResumeLayout(false);
             this.itemAddedOrderPnl.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.itemGridView)).EndInit();
@@ -511,7 +511,7 @@ namespace ChapeauUI
         private System.Windows.Forms.Button buttonLunch;
         private System.Windows.Forms.Label labelTable;
         private System.Windows.Forms.Button buttonDinner;
-        private System.Windows.Forms.Panel panelSelectMenu;
+        private System.Windows.Forms.Panel panelSelectTheThreeCourseMeal;
         private System.Windows.Forms.Label labelSelectMenu;
         private System.Windows.Forms.Button buttonDrinks;
         private System.Windows.Forms.Button buttonDesserts;
