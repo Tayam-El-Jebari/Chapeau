@@ -32,13 +32,14 @@ namespace ChapeauUI
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.userListView = new System.Windows.Forms.ListView();
             this.inlogBtn = new System.Windows.Forms.Button();
+            this.staffCodeTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(101, 418);
+            this.passwordTextBox.Location = new System.Drawing.Point(101, 436);
             this.passwordTextBox.Name = "passwordTextBox";
-            this.passwordTextBox.Size = new System.Drawing.Size(125, 27);
+            this.passwordTextBox.Size = new System.Drawing.Size(214, 27);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
@@ -52,6 +53,7 @@ namespace ChapeauUI
             this.userListView.Size = new System.Drawing.Size(543, 366);
             this.userListView.TabIndex = 5;
             this.userListView.UseCompatibleStateImageBehavior = false;
+            this.userListView.SelectedIndexChanged += new System.EventHandler(this.userListView_SelectedIndexChanged);
             // 
             // inlogBtn
             // 
@@ -70,12 +72,20 @@ namespace ChapeauUI
             this.inlogBtn.UseVisualStyleBackColor = false;
             this.inlogBtn.Click += new System.EventHandler(this.inlogBtn_Click);
             // 
+            // staffCodeTextBox
+            // 
+            this.staffCodeTextBox.Location = new System.Drawing.Point(101, 403);
+            this.staffCodeTextBox.Name = "staffCodeTextBox";
+            this.staffCodeTextBox.Size = new System.Drawing.Size(214, 27);
+            this.staffCodeTextBox.TabIndex = 7;
+            // 
             // LogInDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ClientSize = new System.Drawing.Size(800, 698);
+            this.Controls.Add(this.staffCodeTextBox);
             this.Controls.Add(this.inlogBtn);
             this.Controls.Add(this.userListView);
             this.Controls.Add(this.passwordTextBox);
@@ -91,5 +101,6 @@ namespace ChapeauUI
         private System.Windows.Forms.TextBox passwordTextBox;
         private System.Windows.Forms.ListView userListView;
         private System.Windows.Forms.Button inlogBtn;
+        private System.Windows.Forms.TextBox staffCodeTextBox;
     }
 }
