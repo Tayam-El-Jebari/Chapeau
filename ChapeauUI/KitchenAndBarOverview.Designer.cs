@@ -47,11 +47,6 @@ namespace ChapeauUI
             this.foodButtonTable = new System.Windows.Forms.Button();
             this.foodButtonDuration = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.drinkButtonOrder = new System.Windows.Forms.Button();
-            this.drinkButtonAmount = new System.Windows.Forms.Button();
-            this.drinkButtonTable = new System.Windows.Forms.Button();
-            this.drinkButtonComments = new System.Windows.Forms.Button();
-            this.drinkButtonDuration = new System.Windows.Forms.Button();
             this.radioButtonSortForwards = new System.Windows.Forms.RadioButton();
             this.radioButtonSortBackwards = new System.Windows.Forms.RadioButton();
             this.listViewComments = new System.Windows.Forms.ListView();
@@ -61,10 +56,10 @@ namespace ChapeauUI
             // labelKitchen
             // 
             this.labelKitchen.AutoSize = true;
-            this.labelKitchen.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelKitchen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.labelKitchen.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelKitchen.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelKitchen.Location = new System.Drawing.Point(12, 9);
+            this.labelKitchen.Location = new System.Drawing.Point(13, 9);
             this.labelKitchen.Name = "labelKitchen";
             this.labelKitchen.Size = new System.Drawing.Size(117, 38);
             this.labelKitchen.TabIndex = 0;
@@ -81,7 +76,7 @@ namespace ChapeauUI
             this.kitchenListView.Size = new System.Drawing.Size(1500, 750);
             this.kitchenListView.TabIndex = 1;
             this.kitchenListView.UseCompatibleStateImageBehavior = false;
-            this.kitchenListView.SelectedIndexChanged += new System.EventHandler(this.kitchenListView_SelectedIndexChanged);
+            this.kitchenListView.SelectedIndexChanged += new System.EventHandler(this.kitchenListview_SelectedIndexChanged);
             // 
             // finishedFoodButton
             // 
@@ -97,7 +92,7 @@ namespace ChapeauUI
             // 
             // buttonLogOut
             // 
-            this.buttonLogOut.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonLogOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.buttonLogOut.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLogOut.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonLogOut.Location = new System.Drawing.Point(-13, 955);
@@ -123,7 +118,7 @@ namespace ChapeauUI
             // labelBar
             // 
             this.labelBar.AutoSize = true;
-            this.labelBar.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.labelBar.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.labelBar.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.labelBar.Location = new System.Drawing.Point(12, 9);
@@ -158,9 +153,9 @@ namespace ChapeauUI
             // 
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label2.Location = new System.Drawing.Point(13, -5);
+            this.label2.Location = new System.Drawing.Point(-13, -5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1905, 81);
+            this.label2.Size = new System.Drawing.Size(1931, 81);
             this.label2.TabIndex = 12;
             this.label2.Text = "labelHeader";
             // 
@@ -239,41 +234,6 @@ namespace ChapeauUI
             this.label3.TabIndex = 22;
             this.label3.Text = "Sort by\r\n";
             // 
-            // drinkButtonOrder
-            // 
-            this.drinkButtonOrder.Location = new System.Drawing.Point(0, 0);
-            this.drinkButtonOrder.Name = "drinkButtonOrder";
-            this.drinkButtonOrder.Size = new System.Drawing.Size(75, 23);
-            this.drinkButtonOrder.TabIndex = 36;
-            // 
-            // drinkButtonAmount
-            // 
-            this.drinkButtonAmount.Location = new System.Drawing.Point(0, 0);
-            this.drinkButtonAmount.Name = "drinkButtonAmount";
-            this.drinkButtonAmount.Size = new System.Drawing.Size(75, 23);
-            this.drinkButtonAmount.TabIndex = 35;
-            // 
-            // drinkButtonTable
-            // 
-            this.drinkButtonTable.Location = new System.Drawing.Point(0, 0);
-            this.drinkButtonTable.Name = "drinkButtonTable";
-            this.drinkButtonTable.Size = new System.Drawing.Size(75, 23);
-            this.drinkButtonTable.TabIndex = 34;
-            // 
-            // drinkButtonComments
-            // 
-            this.drinkButtonComments.Location = new System.Drawing.Point(0, 0);
-            this.drinkButtonComments.Name = "drinkButtonComments";
-            this.drinkButtonComments.Size = new System.Drawing.Size(75, 23);
-            this.drinkButtonComments.TabIndex = 33;
-            // 
-            // drinkButtonDuration
-            // 
-            this.drinkButtonDuration.Location = new System.Drawing.Point(0, 0);
-            this.drinkButtonDuration.Name = "drinkButtonDuration";
-            this.drinkButtonDuration.Size = new System.Drawing.Size(75, 23);
-            this.drinkButtonDuration.TabIndex = 32;
-            // 
             // radioButtonSortForwards
             // 
             this.radioButtonSortForwards.AutoSize = true;
@@ -307,9 +267,11 @@ namespace ChapeauUI
             // 
             // progressBarUpdate
             // 
-            this.progressBarUpdate.Location = new System.Drawing.Point(1559, 586);
+            this.progressBarUpdate.BackColor = System.Drawing.Color.White;
+            this.progressBarUpdate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(159)))), ((int)(((byte)(56)))), ((int)(((byte)(59)))));
+            this.progressBarUpdate.Location = new System.Drawing.Point(13, 75);
             this.progressBarUpdate.Name = "progressBarUpdate";
-            this.progressBarUpdate.Size = new System.Drawing.Size(323, 29);
+            this.progressBarUpdate.Size = new System.Drawing.Size(1500, 10);
             this.progressBarUpdate.TabIndex = 31;
             // 
             // KitchenAndBarOverview
@@ -324,11 +286,6 @@ namespace ChapeauUI
             this.Controls.Add(this.listViewComments);
             this.Controls.Add(this.radioButtonSortBackwards);
             this.Controls.Add(this.radioButtonSortForwards);
-            this.Controls.Add(this.drinkButtonDuration);
-            this.Controls.Add(this.drinkButtonComments);
-            this.Controls.Add(this.drinkButtonTable);
-            this.Controls.Add(this.drinkButtonAmount);
-            this.Controls.Add(this.drinkButtonOrder);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.foodButtonDuration);
             this.Controls.Add(this.foodButtonTable);
@@ -373,11 +330,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button foodButtonTable;
         private System.Windows.Forms.Button foodButtonDuration;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button drinkButtonOrder;
-        private System.Windows.Forms.Button drinkButtonAmount;
-        private System.Windows.Forms.Button drinkButtonTable;
-        private System.Windows.Forms.Button drinkButtonComments;
-        private System.Windows.Forms.Button drinkButtonDuration;
         private System.Windows.Forms.RadioButton radioButtonSortForwards;
         private System.Windows.Forms.RadioButton radioButtonSortBackwards;
         private System.Windows.Forms.ListView listViewComments;

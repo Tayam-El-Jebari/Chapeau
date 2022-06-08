@@ -52,13 +52,13 @@ namespace ChapeauDAL
 
         public List<Order> GetActiveDrinkOrders()
         {
-            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].[description], [Order].comments, [Order_Item].[Status], [order].timePlaced, [order].table_Id, [Order].[IsFinished], [order].table_Id FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE[Order_Item].Status = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item) AND[Order_Item].Status = 0 ORDER BY[order].timePlaced; ";
+            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].[description], [Order].comments, [Order_Item].[Status], [order].timePlaced, [order].table_Id, [order].table_Id FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE[Order_Item].Status = 0) AND[order_Item].menuItem_ID IN(select menuItem_ID FROM Drink_Item) AND[Order_Item].Status = 0 ORDER BY[order].timePlaced; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
         public List<Order> GetActiveFoodOrders()
         {
-            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].[description], [Order].comments, [Order_Item].[Status], [order].timePlaced, [order].table_Id, [Order].[IsFinished], [order].table_Id FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE[Order_Item].Status = 0) AND[order_Item].menuItem_ID NOT IN(select menuItem_ID FROM Drink_Item) AND[Order_Item].Status = 0 ORDER BY[order].timePlaced; ";
+            string query = "SELECT [Order_Item].order_id, [Order_Item].menuItem_ID, [Order_Item].amount, [MenuItem].productName, [MenuItem].[description], [Order].comments, [Order_Item].[Status], [order].timePlaced, [order].table_Id, [order].table_Id FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id WHERE[Order_Item].order_id in (SELECT order_id FROM[order_Item] WHERE[Order_Item].Status = 0) AND[order_Item].menuItem_ID NOT IN(select menuItem_ID FROM Drink_Item) AND[Order_Item].Status = 0 ORDER BY[order].timePlaced; ";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTablesItem(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -123,7 +123,6 @@ namespace ChapeauDAL
                 {
                     OrderId = (int)dr["order_Id"],
                     Comments = Convert.ToString(dr["comments"]),
-                    IsFinished = (bool)dr["isFinished"],
                     TimePlaced = (DateTime)dr["timePlaced"],
                     TableId = (int)dr["table_Id"],
                     OrderItems = new List<OrderItem>()
@@ -137,6 +136,7 @@ namespace ChapeauDAL
                                 Description = Convert.ToString(dr["description"]),
                             },
                         Amount = (int)dr["amount"],
+                        Status = (Status)dr["status"],
                         }
 
                     }
@@ -170,9 +170,9 @@ namespace ChapeauDAL
         {
             string query = $"UPDATE [Order_Item] SET Status=@Status WHERE order_id=@order_id AND menuItem_Id=@menuItem_id";
             SqlParameter[] sqlParameters = new SqlParameter[3] {
-            new SqlParameter("@isFinished", order.IsFinished),
             new SqlParameter("@order_id", order.OrderId),
             new SqlParameter("@menuItem_ID", order.OrderItems[0].MenuItem.MenuItemId),
+            new SqlParameter("@status", order.OrderItems[0].Status),
             };
             ExecuteEditQuery(query, sqlParameters);
         }
