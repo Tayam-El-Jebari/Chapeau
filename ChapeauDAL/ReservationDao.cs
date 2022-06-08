@@ -17,17 +17,17 @@ namespace ChapeauDAL
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-        public void AddNewReservation(string customerFullName, bool isPresent, DateTime reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
+        public void AddNewReservation(Reservation reservation)
         {
             string query = "INSERT INTO [Reservation] (customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress) VALUES (@customerFullName, @isPresent, @reservationTime, 4, @comments, @phoneNumber, @emailAdress);";
             SqlParameter[] sqlParameters = new SqlParameter[7];
-            sqlParameters[0] = new SqlParameter("@customerFullName", customerFullName);
-            sqlParameters[1] = new SqlParameter("@isPresent", isPresent);
-            sqlParameters[2] = new SqlParameter("@reservationTime", reservationTime);
-            sqlParameters[3] = new SqlParameter("@table_ID", table_ID);
-            sqlParameters[4] = new SqlParameter("@comments", comments);
-            sqlParameters[5] = new SqlParameter("@phoneNumber", phoneNumber);
-            sqlParameters[6] = new SqlParameter("@emailAdress", emailAdress);
+            sqlParameters[0] = new SqlParameter("@customerFullName", reservation.CustomerFullName);
+            sqlParameters[1] = new SqlParameter("@isPresent", reservation.isPresent);
+            sqlParameters[2] = new SqlParameter("@reservationTime", reservation.ReservationTime);
+            sqlParameters[3] = new SqlParameter("@table_ID", reservation.TableId);
+            sqlParameters[4] = new SqlParameter("@comments", reservation.Comments);
+            sqlParameters[5] = new SqlParameter("@phoneNumber", reservation.Phonenumber);
+            sqlParameters[6] = new SqlParameter("@emailAdress", reservation.Emailaddres);
             ExecuteEditQuery(query, sqlParameters);
         }
 
