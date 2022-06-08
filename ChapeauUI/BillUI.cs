@@ -25,6 +25,7 @@ namespace ChapeauUI
         private Reservation reservation;
         private double tip;
         private double priceAfterTip;
+        private string comment;
 
         public BillUI(Reservation choosenReservation)
         {
@@ -60,6 +61,14 @@ namespace ChapeauUI
             priceAfterTip = totalPrice + tip;
             labelInVAT.Text = priceAfterTip.ToString("€ 0.00");   
         }
+        private void ReadComment()
+        {
+            comment = commentBox.Text;
+            if (comment == "Add comment here...")
+            {
+                comment = "No Comment";
+            }
+        }
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
@@ -68,8 +77,7 @@ namespace ChapeauUI
 
         private void buttonCash_Click(object sender, EventArgs e)
         {
-
-
+            ReadComment();
             FillCompleteBill("CASH");
 
             ShowBill();
@@ -81,6 +89,7 @@ namespace ChapeauUI
         }
         private void ShowBill()
         {
+            ReadComment();
             billPanel.Hide();
             completeBill.Show();
 
