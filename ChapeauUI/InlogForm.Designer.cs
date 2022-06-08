@@ -32,9 +32,9 @@ namespace ChapeauUI
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.userListView = new System.Windows.Forms.ListView();
             this.startMenuPnl = new System.Windows.Forms.Panel();
+            this.staffCodeTextBox = new System.Windows.Forms.TextBox();
             this.inlogBtn = new System.Windows.Forms.Button();
             this.topBarLabel = new System.Windows.Forms.Label();
-            this.staffCodeTextBox = new System.Windows.Forms.TextBox();
             this.startMenuPnl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +58,7 @@ namespace ChapeauUI
             this.userListView.Size = new System.Drawing.Size(543, 331);
             this.userListView.TabIndex = 4;
             this.userListView.UseCompatibleStateImageBehavior = false;
+            this.userListView.SelectedIndexChanged += new System.EventHandler(this.userListView_SelectedIndexChanged);
             // 
             // startMenuPnl
             // 
@@ -70,6 +71,13 @@ namespace ChapeauUI
             this.startMenuPnl.Name = "startMenuPnl";
             this.startMenuPnl.Size = new System.Drawing.Size(700, 1390);
             this.startMenuPnl.TabIndex = 19;
+            // 
+            // staffCodeTextBox
+            // 
+            this.staffCodeTextBox.Location = new System.Drawing.Point(78, 612);
+            this.staffCodeTextBox.Name = "staffCodeTextBox";
+            this.staffCodeTextBox.Size = new System.Drawing.Size(214, 27);
+            this.staffCodeTextBox.TabIndex = 6;
             // 
             // inlogBtn
             // 
@@ -97,13 +105,6 @@ namespace ChapeauUI
             this.topBarLabel.Size = new System.Drawing.Size(700, 51);
             this.topBarLabel.TabIndex = 20;
             this.topBarLabel.Text = "emptyString";
-            // 
-            // staffCodeTextBox
-            // 
-            this.staffCodeTextBox.Location = new System.Drawing.Point(78, 612);
-            this.staffCodeTextBox.Name = "staffCodeTextBox";
-            this.staffCodeTextBox.Size = new System.Drawing.Size(214, 27);
-            this.staffCodeTextBox.TabIndex = 6;
             // 
             // InlogForm
             // 
