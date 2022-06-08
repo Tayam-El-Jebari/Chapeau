@@ -14,8 +14,10 @@ namespace ChapeauUI
 {
     public partial class KitchenAndBarOverview : Form
     {
+        StaffJob StaffJob = new StaffJob();
         public KitchenAndBarOverview(StaffJob staffJob)
         {
+            this.StaffJob = staffJob;
             InitializeComponent();
             if (staffJob == StaffJob.Chef)
             {
@@ -43,14 +45,15 @@ namespace ChapeauUI
                 BarListView();
             }
 
-        }        
+        }
         private void KitchenOverview_Load(object sender, EventArgs e)
         {
 
-                System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
-                timer1.Interval = 30000;//30 seconds
-                timer1.Tick += new System.EventHandler(timer1_Tick);
-                timer1.Start();   
+            System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
+            timer1.Interval = 30000;//30 seconds
+            progressBarUpdate.Show();
+            timer1.Tick += new System.EventHandler(timer1_Tick);
+            timer1.Start();
         }
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
@@ -59,7 +62,17 @@ namespace ChapeauUI
 
         private void barListView_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            listViewComments.Show();
+            listViewComments.Clear();
+            listViewComments.View = View.Details;
+            listViewComments.FullRowSelect = true;
+            listViewComments.Columns.Add("Order ID", 100);
+            listViewComments.Columns.Add("Menuitem ID", 100);
+            listViewComments.Columns.Add("Comments", 500);
+            ListViewItem li = new ListViewItem(barListView.SelectedItems[0].SubItems[0].Text);
+            li.SubItems.Add(barListView.SelectedItems[0].SubItems[1].Text);
+            li.SubItems.Add(barListView.SelectedItems[0].SubItems[5].Text);
+            listViewComments.Items.Add(li);
         }
         public void KitchenListView()
         {
@@ -74,12 +87,10 @@ namespace ChapeauUI
             barListView.Hide();
             labelBar.Hide();
             finishedDrinkButton.Hide();
-            drinkButtonOrder.Hide();
-            drinkButtonAmount.Hide();
-            drinkButtonComments.Hide();
-            drinkButtonTable.Hide();
-            drinkButtonDuration.Hide();
 
+
+            listViewComments.Hide();
+            progressBarUpdate.Hide();
             OrderService orderService = new OrderService();
             OrderItem orderItem = new OrderItem();
             List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -102,29 +113,29 @@ namespace ChapeauUI
                 TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
 
                 for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.Items.Add(li);
-                    }
+                {
+                    ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                    li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
+                    li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
+                    li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                    li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
+                    li.SubItems.Add(order.Comments);
+                    li.SubItems.Add(order.TableId.ToString());
+                    li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                    li.SubItems.Add(order.TimePlaced.ToString());
+                    kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    kitchenListView.Items.Add(li);
                 }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
+            }
+            kitchenListView.Show();
+            ColorListView(kitchenListView);
             //}
         }
         private void BarListView()
@@ -145,6 +156,9 @@ namespace ChapeauUI
             drinkButtonComments.Show();
             drinkButtonTable.Show();
             drinkButtonDuration.Show();
+
+            listViewComments.Hide();
+            progressBarUpdate.Hide();
             OrderService orderService = new OrderService();
             OrderItem orderItem = new OrderItem();
             List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -162,33 +176,62 @@ namespace ChapeauUI
             barListView.Columns.Add("Time of ordering", 200);
             foreach (Order order in ordersDrinkList)
             {
-                if (order.TimePlaced == DateTime.Today)
+                //if (order.TimePlaced == DateTime.Today)
+                //{
+                TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
+                for (int i = 0; i < order.OrderItems.Count; i++)
                 {
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString());
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                    li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
+                    li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
+                    li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                    li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
+                    li.SubItems.Add(order.Comments);
+                    li.SubItems.Add(order.TableId.ToString());
+                    li.SubItems.Add(timeOfOrder.ToString());
+                    li.SubItems.Add(order.TimePlaced.ToString());
+                    barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
 
-                        barListView.Items.Add(li);
-                    }
+                    barListView.Items.Add(li);
+                    //}
                 }
                 ColorListView(barListView);
+            }
+            for (int j = 0; j < barListView.SelectedItems.Count; j++)
+            {
+                if (barListView.SelectedItems.Count > 0)
+                {
+
+                    listViewComments.Show();
+                    listViewComments.Clear();
+                    listViewComments.View = View.Details;
+                    listViewComments.FullRowSelect = true;
+                    listViewComments.Columns.Add("Order ID", 100);
+                    listViewComments.Columns.Add("Menuitem ID", 100);
+                    listViewComments.Columns.Add("Comments", 500);
+
+
+                    foreach (Order order in barListView.SelectedItems)
+
+                    {
+
+                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                        li.SubItems.Add(order.OrderItems[j].MenuItem.MenuItemId.ToString());
+                        li.SubItems.Add(order.Comments);
+                        listViewComments.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        listViewComments.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        listViewComments.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+
+                        listViewComments.Items.Add(li);
+                    }
+                }
             }
         }
         private void kitchenListView_SelectedIndexChanged(object sender, EventArgs e)
@@ -244,6 +287,7 @@ namespace ChapeauUI
                     MessageBox.Show($"Order {order.OrderId}: {order.OrderItems[0].MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
                 }
                 timer1_Tick(sender, e);
+                progressBarUpdate.Show();
             }
             catch
             {
@@ -280,7 +324,7 @@ namespace ChapeauUI
                     OrderService orderService = new OrderService();
                     orderService.GetUpdateStateIsFinished(order);
                     MessageBox.Show($"Order {order.OrderId}: {order.OrderItems[0].MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
-                } 
+                }
             }
             catch
             {
@@ -300,8 +344,9 @@ namespace ChapeauUI
 
         private void foodButtonOrder_Click(object sender, EventArgs e)
         {
-            if (radioButtonSortForwards.Checked)
+            if (StaffJob == StaffJob.Chef)
             {
+
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -312,16 +357,25 @@ namespace ChapeauUI
                 kitchenListView.Columns.Add("MenuItem ID", 100);
                 kitchenListView.Columns.Add("Order", 500); //productname
                 kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
                 kitchenListView.Columns.Add("Table", 200);
                 kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 kitchenListView.Columns.Add("Time of ordering", 200);
-                foreach (Order order in ordersFoodList)
+                if (radioButtonSortForwards.Checked)
                 {
-                    order.OrderItems = order.OrderItems.OrderBy(x => x.MenuItem.ProductName).ToList();
+                    foreach (Order order in ordersFoodList)
+                    {
+                        order.OrderItems = order.OrderItems.OrderBy(x => x.MenuItem.ProductName).ToList();
+                    }
+                    ordersFoodList = ordersFoodList.OrderBy(x => x.OrderItems[0].MenuItem.ProductName).ToList();
                 }
-                ordersFoodList = ordersFoodList.OrderBy(x => x.OrderItems[0].MenuItem.ProductName).ToList();
+                if (radioButtonSortBackwards.Checked)
+                {
+                    foreach (Order order in ordersFoodList)
+                    {
+                        order.OrderItems = order.OrderItems.OrderByDescending(x => x.MenuItem.ProductName).ToList();
+                    }
+                    ordersFoodList = ordersFoodList.OrderByDescending(x => x.OrderItems[0].MenuItem.ProductName).ToList();
+                }
                 foreach (Order order in ordersFoodList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -333,8 +387,6 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
@@ -344,39 +396,48 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                         kitchenListView.Items.Add(li);
                     }
+
+                    kitchenListView.Show();
+                    ColorListView(kitchenListView);
+                    //}
+
                 }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
-                //}
             }
-            else if (radioButtonSortBackwards.Checked)
+            else if (StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
-                List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
-                kitchenListView.Clear();
-                kitchenListView.View = View.Details;
-                kitchenListView.FullRowSelect = true;
-                kitchenListView.Columns.Add("Order ID", 100);
-                kitchenListView.Columns.Add("MenuItem ID", 100);
-                kitchenListView.Columns.Add("Order", 500); //productname
-                kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
-                kitchenListView.Columns.Add("Table", 200);
-                kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                kitchenListView.Columns.Add("Time of ordering", 200);
-                foreach (Order order in ordersFoodList)
+                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
+                barListView.Clear();
+                barListView.View = View.Details;
+                barListView.FullRowSelect = true;
+                barListView.Columns.Add("Order ID", 100);
+                barListView.Columns.Add("MenuItem ID", 100);
+                barListView.Columns.Add("Order", 500); //productname
+                barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Table", 200);
+                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
+                barListView.Columns.Add("Time of ordering", 200);
+                if (radioButtonSortForwards.Checked)
                 {
-                    order.OrderItems = order.OrderItems.OrderByDescending(x => x.MenuItem.ProductName).ToList();
+                    foreach (Order order in ordersDrinkList)
+                    {
+                        order.OrderItems = order.OrderItems.OrderBy(x => x.MenuItem.ProductName).ToList();
+                    }
+                    ordersDrinkList = ordersDrinkList.OrderBy(x => x.OrderItems[0].MenuItem.ProductName).ToList();
                 }
-                ordersFoodList = ordersFoodList.OrderByDescending(x => x.OrderItems[0].MenuItem.ProductName).ToList();
-                foreach (Order order in ordersFoodList)
+                if (radioButtonSortBackwards.Checked)
+                {
+                    foreach (Order order in ordersDrinkList)
+                    {
+                        order.OrderItems = order.OrderItems.OrderByDescending(x => x.MenuItem.ProductName).ToList();
+                    }
+                    ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.OrderItems[0].MenuItem.ProductName).ToList();
+                }
+                foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
                     //{
@@ -387,53 +448,128 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
-                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
 
-                        kitchenListView.Items.Add(li);
+                        barListView.Items.Add(li);
                     }
+
+                    barListView.Show();
+                    ColorListView(barListView);
+                    //}
+
+
                 }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
-                //}
+
+
             }
         }
+
         private void foodButtonAmount_Click(object sender, EventArgs e)
         {
-            if (radioButtonSortForwards.Checked)
+            if (StaffJob == StaffJob.Chef)
+            {
+                    OrderService orderService = new OrderService();
+                    OrderItem orderItem = new OrderItem();
+                    List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
+                    kitchenListView.Clear();
+                    kitchenListView.View = View.Details;
+                    kitchenListView.FullRowSelect = true;
+                    kitchenListView.Columns.Add("Order ID", 100);
+                    kitchenListView.Columns.Add("MenuItem ID", 100);
+                    kitchenListView.Columns.Add("Order", 500); //productname
+                    kitchenListView.Columns.Add("Amount of order", 100);
+                    kitchenListView.Columns.Add("Table", 200);
+                    kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
+                    kitchenListView.Columns.Add("Time of ordering", 200);
+                    if (radioButtonSortForwards.Checked)
+                    {
+                        foreach (Order order in ordersFoodList)
+                        {
+                            order.OrderItems = order.OrderItems.OrderBy(x => x.Amount).ToList();
+                        }
+                        ordersFoodList = ordersFoodList.OrderBy(x => x.OrderItems[0].Amount).ToList();
+
+                    }
+                    else if (radioButtonSortBackwards.Checked)
+                    {
+                        foreach (Order order in ordersFoodList)
+                        {
+                            order.OrderItems = order.OrderItems.OrderByDescending(x => x.Amount).ToList();
+                        }
+                        ordersFoodList = ordersFoodList.OrderByDescending(x => x.OrderItems[0].Amount).ToList();
+
+                    }
+                    foreach (Order order in ordersFoodList)
+                    {
+                        //if (order.TimePlaced == DateTime.Today)
+                        //{
+                        TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
+                        for (int i = 0; i < order.OrderItems.Count; i++)
+                        {
+                            ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                            li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
+                            li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
+                            li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                            li.SubItems.Add(order.TableId.ToString());
+                            li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                            li.SubItems.Add(order.TimePlaced.ToString());
+                            kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                            kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                            kitchenListView.Items.Add(li);
+                        }
+                    }
+                    kitchenListView.Show();
+                    ColorListView(kitchenListView);
+                    //}
+                
+            }
+            else if (StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
-                List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
-                kitchenListView.Clear();
-                kitchenListView.View = View.Details;
-                kitchenListView.FullRowSelect = true;
-                kitchenListView.Columns.Add("Order ID", 100);
-                kitchenListView.Columns.Add("MenuItem ID", 100);
-                kitchenListView.Columns.Add("Order", 500); //productname
-                kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
-                kitchenListView.Columns.Add("Table", 200);
-                kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                kitchenListView.Columns.Add("Time of ordering", 200);
-                foreach (Order order in ordersFoodList)
+                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
+                barListView.Clear();
+                barListView.View = View.Details;
+                barListView.FullRowSelect = true;
+                barListView.Columns.Add("Order ID", 100);
+                barListView.Columns.Add("MenuItem ID", 100);
+                barListView.Columns.Add("Order", 500); //productname
+                barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Table", 200);
+                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
+                barListView.Columns.Add("Time of ordering", 200);
+                if (radioButtonSortForwards.Checked)
                 {
-                    order.OrderItems = order.OrderItems.OrderBy(x => x.Amount).ToList();
+                    foreach (Order order in ordersDrinkList)
+                    {
+                        order.OrderItems = order.OrderItems.OrderBy(x => x.Amount).ToList();
+                    }
+                    ordersDrinkList = ordersDrinkList.OrderBy(x => x.OrderItems[0].Amount).ToList();
+
                 }
-                ordersFoodList = ordersFoodList.OrderBy(x => x.OrderItems[0].Amount).ToList();
-                foreach (Order order in ordersFoodList)
+                else if (radioButtonSortBackwards.Checked)
+                {
+                    foreach (Order order in ordersDrinkList)
+                    {
+                        order.OrderItems = order.OrderItems.OrderByDescending(x => x.Amount).ToList();
+                    }
+                    ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.OrderItems[0].Amount).ToList();
+
+                }
+                foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
                     //{
@@ -444,86 +580,32 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
-                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
 
-                        kitchenListView.Items.Add(li);
+                        barListView.Items.Add(li);
                     }
                 }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
-                //}
-            }else if (radioButtonSortBackwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
-                kitchenListView.Clear();
-                kitchenListView.View = View.Details;
-                kitchenListView.FullRowSelect = true;
-                kitchenListView.Columns.Add("Order ID", 100);
-                kitchenListView.Columns.Add("MenuItem ID", 100);
-                kitchenListView.Columns.Add("Order", 500); //productname
-                kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
-                kitchenListView.Columns.Add("Table", 200);
-                kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                kitchenListView.Columns.Add("Time of ordering", 200);
-                foreach (Order order in ordersFoodList)
-                {
-                    order.OrderItems = order.OrderItems.OrderByDescending(x => x.Amount).ToList();
-                }
-                ordersFoodList = ordersFoodList.OrderByDescending(x => x.OrderItems[0].Amount).ToList();
-                foreach (Order order in ordersFoodList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        kitchenListView.Items.Add(li);
-                    }
-                }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
+                barListView.Show();
+                ColorListView(barListView);
                 //}
             }
         }
+
 
         private void foodButtonComments_Click(object sender, EventArgs e)
         {
-            if (radioButtonSortForwards.Checked)
+            if (StaffJob == StaffJob.Chef)
             {
+
+
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -534,12 +616,17 @@ namespace ChapeauUI
                 kitchenListView.Columns.Add("MenuItem ID", 100);
                 kitchenListView.Columns.Add("Order", 500); //productname
                 kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
                 kitchenListView.Columns.Add("Table", 200);
                 kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 kitchenListView.Columns.Add("Time of ordering", 200);
-                ordersFoodList = ordersFoodList.OrderBy(x => x.Comments).ToList();
+                if (radioButtonSortForwards.Checked)
+                {
+                    ordersFoodList = ordersFoodList.OrderBy(x => x.Comments).ToList();
+                }
+                else if (radioButtonSortBackwards.Checked)
+                {
+                    ordersFoodList = ordersFoodList.OrderByDescending(x => x.Comments).ToList();
+                }
                 foreach (Order order in ordersFoodList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -551,8 +638,6 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
@@ -562,8 +647,6 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                         kitchenListView.Items.Add(li);
                     }
@@ -572,25 +655,32 @@ namespace ChapeauUI
                 ColorListView(kitchenListView);
                 //}
             }
-            else if (radioButtonSortBackwards.Checked)
+
+            if (StaffJob == StaffJob.Bartender)
             {
+
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
-                List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
-                kitchenListView.Clear();
-                kitchenListView.View = View.Details;
-                kitchenListView.FullRowSelect = true;
-                kitchenListView.Columns.Add("Order ID", 100);
-                kitchenListView.Columns.Add("MenuItem ID", 100);
-                kitchenListView.Columns.Add("Order", 500); //productname
-                kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
-                kitchenListView.Columns.Add("Table", 200);
-                kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                kitchenListView.Columns.Add("Time of ordering", 200);
-                ordersFoodList = ordersFoodList.OrderByDescending(x => x.Comments).ToList();
-                foreach (Order order in ordersFoodList)
+                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
+                barListView.Clear();
+                barListView.View = View.Details;
+                barListView.FullRowSelect = true;
+                barListView.Columns.Add("Order ID", 100);
+                barListView.Columns.Add("MenuItem ID", 100);
+                barListView.Columns.Add("Order", 500); //productname
+                barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Table", 200);
+                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
+                barListView.Columns.Add("Time of ordering", 200);
+                if (radioButtonSortForwards.Checked)
+                {
+                    ordersDrinkList = ordersDrinkList.OrderBy(x => x.Comments).ToList();
+                }
+                else if (radioButtonSortBackwards.Checked)
+                {
+                    ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.Comments).ToList();
+                }
+                foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
                     //{
@@ -601,32 +691,30 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
-                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
 
-                        kitchenListView.Items.Add(li);
+                        barListView.Items.Add(li);
                     }
                 }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
+                barListView.Show();
+                ColorListView(barListView);
                 //}
             }
         }
+
         private void foodButtonTable_Click(object sender, EventArgs e)
         {
-            if (radioButtonSortForwards.Checked)
+            if (StaffJob == StaffJob.Chef)
             {
+
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -637,13 +725,18 @@ namespace ChapeauUI
                 kitchenListView.Columns.Add("MenuItem ID", 100);
                 kitchenListView.Columns.Add("Order", 500); //productname
                 kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
                 kitchenListView.Columns.Add("Table", 200);
                 kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 kitchenListView.Columns.Add("Time of ordering", 200);
+                if (radioButtonSortForwards.Checked)
+                {
+                    ordersFoodList = ordersFoodList.OrderBy(x => x.TableId).ToList();
+                }
+                else if (radioButtonSortForwards.Checked)
+                {
+                    ordersFoodList = ordersFoodList.OrderByDescending(x => x.TableId).ToList();
+                }
 
-                ordersFoodList = ordersFoodList.OrderBy(x => x.TableId).ToList();
                 foreach (Order order in ordersFoodList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -655,8 +748,6 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
@@ -666,8 +757,6 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                         kitchenListView.Items.Add(li);
                     }
@@ -675,26 +764,33 @@ namespace ChapeauUI
                 kitchenListView.Show();
                 ColorListView(kitchenListView);
                 //}
-            }else if (radioButtonSortForwards.Checked) 
+            }
+
+            else if (StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
-                List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
-                kitchenListView.Clear();
-                kitchenListView.View = View.Details;
-                kitchenListView.FullRowSelect = true;
-                kitchenListView.Columns.Add("Order ID", 100);
-                kitchenListView.Columns.Add("MenuItem ID", 100);
-                kitchenListView.Columns.Add("Order", 500); //productname
-                kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
-                kitchenListView.Columns.Add("Table", 200);
-                kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                kitchenListView.Columns.Add("Time of ordering", 200);
+                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
+                barListView.Clear();
+                barListView.View = View.Details;
+                barListView.FullRowSelect = true;
+                barListView.Columns.Add("Order ID", 100);
+                barListView.Columns.Add("MenuItem ID", 100);
+                barListView.Columns.Add("Order", 500); //productname
+                barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Table", 200);
+                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
+                barListView.Columns.Add("Time of ordering", 200);
+                if (radioButtonSortForwards.Checked)
+                {
+                    ordersDrinkList = ordersDrinkList.OrderBy(x => x.TableId).ToList();
+                }
+                else if (radioButtonSortForwards.Checked)
+                {
+                    ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.TableId).ToList();
+                }
 
-                ordersFoodList = ordersFoodList.OrderByDescending(x => x.TableId).ToList();
-                foreach (Order order in ordersFoodList)
+                foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
                     //{
@@ -705,32 +801,29 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
-                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
 
-                        kitchenListView.Items.Add(li);
+                        barListView.Items.Add(li);
                     }
                 }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
+                barListView.Show();
+                ColorListView(barListView);
                 //}
             }
         }
         private void foodButtonDuration_Click(object sender, EventArgs e)
         {
-            if (radioButtonSortForwards.Checked)
+            if (StaffJob == StaffJob.Chef)
             {
+
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -741,13 +834,18 @@ namespace ChapeauUI
                 kitchenListView.Columns.Add("MenuItem ID", 100);
                 kitchenListView.Columns.Add("Order", 500); //productname
                 kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
                 kitchenListView.Columns.Add("Table", 200);
                 kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 kitchenListView.Columns.Add("Time of ordering", 200);
+                if (radioButtonSortForwards.Checked)
+                {
+                    ordersFoodList = ordersFoodList.OrderBy(x => x.TimePlaced).ToList();
+                }
+                else if (radioButtonSortBackwards.Checked)
+                {
+                    ordersFoodList = ordersFoodList.OrderByDescending(x => x.TimePlaced).ToList();
 
-                ordersFoodList = ordersFoodList.OrderBy(x => x.TimePlaced).ToList();
+                }
                 foreach (Order order in ordersFoodList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -759,8 +857,6 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
@@ -770,58 +866,6 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        kitchenListView.Items.Add(li);
-                    }
-                }
-                kitchenListView.Show();
-                ColorListView(kitchenListView);
-                //}
-            } else if (radioButtonSortBackwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
-                kitchenListView.Clear();
-                kitchenListView.View = View.Details;
-                kitchenListView.FullRowSelect = true;
-                kitchenListView.Columns.Add("Order ID", 100);
-                kitchenListView.Columns.Add("MenuItem ID", 100);
-                kitchenListView.Columns.Add("Order", 500); //productname
-                kitchenListView.Columns.Add("Amount of order", 100);
-                kitchenListView.Columns.Add("Description", 200);
-                kitchenListView.Columns.Add("Comments", 500);
-                kitchenListView.Columns.Add("Table", 200);
-                kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                kitchenListView.Columns.Add("Time of ordering", 200);
-
-                ordersFoodList = ordersFoodList.OrderByDescending(x => x.TimePlaced).ToList();
-                foreach (Order order in ordersFoodList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                         kitchenListView.Items.Add(li);
                     }
@@ -830,11 +874,9 @@ namespace ChapeauUI
                 ColorListView(kitchenListView);
                 //}
             }
-        }
 
-        private void drinkButtonOrder_Click(object sender, EventArgs e)
-        {
-            if (radioButtonSortForwards.Checked)
+
+            else if (StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
@@ -846,17 +888,18 @@ namespace ChapeauUI
                 barListView.Columns.Add("MenuItem ID", 100);
                 barListView.Columns.Add("Order", 500); //productname
                 barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
                 barListView.Columns.Add("Table", 200);
                 barListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 barListView.Columns.Add("Time of ordering", 200);
-
-                foreach (Order order in ordersDrinkList)
+                if (radioButtonSortForwards.Checked)
                 {
-                    order.OrderItems = order.OrderItems.OrderBy(x => x.MenuItem.ProductName).ToList();
+                    ordersDrinkList = ordersDrinkList.OrderBy(x => x.TimePlaced).ToList();
                 }
-                ordersDrinkList = ordersDrinkList.OrderBy(x => x.OrderItems[0].MenuItem.ProductName).ToList();
+                else if (radioButtonSortBackwards.Checked)
+                {
+                    ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.TimePlaced).ToList();
+
+                }
                 foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -868,8 +911,6 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
                         li.SubItems.Add(order.TimePlaced.ToString());
@@ -878,501 +919,8 @@ namespace ChapeauUI
                         barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                         barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }else if (radioButtonSortBackwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    order.OrderItems = order.OrderItems.OrderByDescending(x => x.MenuItem.ProductName).ToList();
-                }
-                ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.OrderItems[0].MenuItem.ProductName).ToList();
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }
-        }
-
-        private void drinkButtonAmount_Click(object sender, EventArgs e)
-        {
-            if (radioButtonSortForwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    order.OrderItems = order.OrderItems.OrderBy(x => x.Amount).ToList();
-                }
-                ordersDrinkList = ordersDrinkList.OrderBy(x => x.OrderItems[0].Amount).ToList();
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced  DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }else if (radioButtonSortBackwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    order.OrderItems = order.OrderItems.OrderByDescending(x => x.Amount).ToList();
-                }
-                ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.OrderItems[0].Amount).ToList();
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced  DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }
-        }
-
-        private void drinkButtonTable_Click(object sender, EventArgs e)
-        {
-            if (radioButtonSortForwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                ordersDrinkList = ordersDrinkList.OrderBy(x => x.TableId).ToList();
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            
-            }else if (radioButtonSortBackwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.TableId).ToList();
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }
-        }
-
-        private void drinkButtonComments_Click(object sender, EventArgs e)
-        {
-            if (radioButtonSortForwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                ordersDrinkList = ordersDrinkList.OrderBy(x => x.Comments).ToList();
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }
-            else if (radioButtonSortBackwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.TableId).ToList();
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }
-        }
-
-
-
-        private void drinkButtonDuration_Click(object sender, EventArgs e)
-        {
-            if (radioButtonSortForwards.Checked)
-                {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                ordersDrinkList = ordersDrinkList.OrderBy(x => x.TimePlaced).ToList();
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                        barListView.Items.Add(li);
-                    }
-                }
-                barListView.Show();
-                ColorListView(barListView);
-                //}
-            }else if (radioButtonSortBackwards.Checked)
-            {
-                OrderService orderService = new OrderService();
-                OrderItem orderItem = new OrderItem();
-                List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
-                barListView.Clear();
-                barListView.View = View.Details;
-                barListView.FullRowSelect = true;
-                barListView.Columns.Add("Order ID", 100);
-                barListView.Columns.Add("MenuItem ID", 100);
-                barListView.Columns.Add("Order", 500); //productname
-                barListView.Columns.Add("Amount of order", 100);
-                barListView.Columns.Add("Description", 200);
-                barListView.Columns.Add("Comments", 500);
-                barListView.Columns.Add("Table", 200);
-                barListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                barListView.Columns.Add("Time of ordering", 200);
-
-                ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.TimePlaced).ToList();
-
-                foreach (Order order in ordersDrinkList)
-                {
-                    //if (order.TimePlaced == DateTime.Today)
-                    //{
-                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                    for (int i = 0; i < order.OrderItems.Count; i++)
-                    {
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                        li.SubItems.Add(order.OrderItems[i].MenuItem.Description);
-                        li.SubItems.Add(order.Comments);
-                        li.SubItems.Add(order.TableId.ToString());
-                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                        li.SubItems.Add(order.TimePlaced.ToString());
-                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                         barListView.Items.Add(li);
                     }
@@ -1383,9 +931,4 @@ namespace ChapeauUI
             }
         }
     }
-
-
-
-
-
 }
