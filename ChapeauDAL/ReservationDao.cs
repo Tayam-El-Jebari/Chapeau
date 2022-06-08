@@ -13,7 +13,7 @@ namespace ChapeauDAL
     {
         public List<Reservation> GetAllNonPresentReservationsOrderedByTable()
         {
-            string query = "SELECT * FROM [Reservation] WHERE isPresent = 0 ORDER BY table_ID";
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE isPresent = 0 ORDER BY table_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -33,7 +33,7 @@ namespace ChapeauDAL
 
         public Reservation GetPresentReservationByTable(int tableID)
         {
-            string query = "SELECT * FROM Reservation WHERE table_ID = @table_ID AND isPresent = 1";
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM Reservation WHERE table_ID = @table_ID AND isPresent = 1";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@table_ID", tableID);
             return ReadTable(ExecuteSelectQuery(query, sqlParameters));
@@ -49,7 +49,14 @@ namespace ChapeauDAL
 
         public List<Reservation> GetAllPresentReservationsOrderedByTable()
         {
-            string query = "SELECT * FROM [Reservation] WHERE isPresent = 1 ORDER BY table_ID";
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE isPresent = 1 ORDER BY table_ID";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Reservation> GetAllReservationsForToday()
+        {
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE CAST(reservationTime AS DATE) = CAST(GETDATE() AS DATE) ORDER BY table_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }

@@ -94,11 +94,16 @@ namespace ChapeauUI
         private void openTableOverviewPnl()
         {
             ReservationService reservationService = new ReservationService();
-            List<Reservation> reservations = reservationService.GetAllPresentReservationsOrderedByTable();
+            List<Reservation> presentReservations = reservationService.GetAllPresentReservationsOrderedByTable();
+            List<Reservation> reservations = reservationService.GetAllReservationsForToday();
             setAllTablesBackgroundFree();
             foreach(Reservation reservation in reservations)
             {
-                setTableImagePresent(reservation.TableId);
+                setTableImageReservation(reservation.TableId);
+            }
+            foreach(Reservation presentReservation in presentReservations)
+            {
+                setTableImagePresent(presentReservation.TableId);
             }
             TableOverviewPnl.Show();
         }
@@ -148,6 +153,43 @@ namespace ChapeauUI
                     break;
                 case 10:
                     tableOneButton.BackgroundImage = Properties.Resources.TableOccupied;
+                    break;
+            }
+        }
+
+        private void setTableImageReservation(int tableID)
+        {
+            switch (tableID)
+            {
+                case 1:
+                    tableOneButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 2:
+                    tableTwoButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 3:
+                    tableThreeButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 4:
+                    tableFourButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 5:
+                    tableFiveButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 6:
+                    tableSixButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 7:
+                    tableSevenButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 8:
+                    tableEightButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 9:
+                    tableNineButton.BackgroundImage = Properties.Resources.TableReserved;
+                    break;
+                case 10:
+                    tableOneButton.BackgroundImage = Properties.Resources.TableReserved;
                     break;
             }
         }

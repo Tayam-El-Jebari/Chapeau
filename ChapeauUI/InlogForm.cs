@@ -74,5 +74,15 @@ namespace ChapeauUI
                 staffCodeTextBox.Text = userListView.SelectedItems[0].SubItems[0].Text;
             }
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void staffCodeTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
