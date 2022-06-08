@@ -291,11 +291,23 @@ namespace ChapeauUI
         {
             ReservationService reservationService = new ReservationService();
             string customerName = reservationNameTextBox.Text;
-            DateTime reservationTime = reservationDateTimePicker.Value;
+            DateTime time = TimePicker.Value;
+            DateTime reservationTime = reservationDateTimePicker.Value.Date.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
+            reservationTime.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
             string comments = reservationCommentsTextBox.Text;
-            int phoneNumber = int.Parse(reservationPhonenumberTextBox.Text);
+            int phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
             string emailAdress = reservationEmailTextBox.Text;
             //maak object
+            Reservation newReservation = new Reservation()
+            {
+                CustomerFullName = customerName,
+                isPresent = false,
+                ReservationTime = reservationTime,
+                TableId = selectedTable,
+                Comments = comments,
+                Phonenumber = phoneNumber,
+                Emailaddres = emailAdress
+            };
             reservationService.AddNewReservation(customerName, false, reservationTime, selectedTable, comments, phoneNumber, emailAdress);
             HideAllPanels();
             startMenuPnl.Show();

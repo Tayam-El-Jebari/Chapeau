@@ -70,6 +70,8 @@ namespace ChapeauUI
             this.menuLabel = new System.Windows.Forms.Label();
             this.takeOrderBtn = new System.Windows.Forms.Button();
             this.makeReservationBtn = new System.Windows.Forms.Button();
+            this.reservationTimePicker = new System.Windows.Forms.Label();
+            this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersReadyGridView)).BeginInit();
@@ -240,6 +242,8 @@ namespace ChapeauUI
             // 
             // makeReservationPnl
             // 
+            this.makeReservationPnl.Controls.Add(this.TimePicker);
+            this.makeReservationPnl.Controls.Add(this.reservationTimePicker);
             this.makeReservationPnl.Controls.Add(this.reservationCommentsTextBox);
             this.makeReservationPnl.Controls.Add(this.reservationCommentsLbl);
             this.makeReservationPnl.Controls.Add(this.confirmReservationBtn);
@@ -253,12 +257,12 @@ namespace ChapeauUI
             this.makeReservationPnl.Controls.Add(this.reservationNameLbl);
             this.makeReservationPnl.Location = new System.Drawing.Point(740, 253);
             this.makeReservationPnl.Name = "makeReservationPnl";
-            this.makeReservationPnl.Size = new System.Drawing.Size(334, 332);
+            this.makeReservationPnl.Size = new System.Drawing.Size(390, 469);
             this.makeReservationPnl.TabIndex = 11;
             // 
             // reservationCommentsTextBox
             // 
-            this.reservationCommentsTextBox.Location = new System.Drawing.Point(4, 262);
+            this.reservationCommentsTextBox.Location = new System.Drawing.Point(4, 318);
             this.reservationCommentsTextBox.Name = "reservationCommentsTextBox";
             this.reservationCommentsTextBox.Size = new System.Drawing.Size(125, 25);
             this.reservationCommentsTextBox.TabIndex = 10;
@@ -266,7 +270,7 @@ namespace ChapeauUI
             // reservationCommentsLbl
             // 
             this.reservationCommentsLbl.AutoSize = true;
-            this.reservationCommentsLbl.Location = new System.Drawing.Point(4, 238);
+            this.reservationCommentsLbl.Location = new System.Drawing.Point(4, 295);
             this.reservationCommentsLbl.Name = "reservationCommentsLbl";
             this.reservationCommentsLbl.Size = new System.Drawing.Size(84, 20);
             this.reservationCommentsLbl.TabIndex = 9;
@@ -274,7 +278,7 @@ namespace ChapeauUI
             // 
             // confirmReservationBtn
             // 
-            this.confirmReservationBtn.Location = new System.Drawing.Point(4, 300);
+            this.confirmReservationBtn.Location = new System.Drawing.Point(4, 373);
             this.confirmReservationBtn.Name = "confirmReservationBtn";
             this.confirmReservationBtn.Size = new System.Drawing.Size(327, 29);
             this.confirmReservationBtn.TabIndex = 8;
@@ -285,6 +289,7 @@ namespace ChapeauUI
             // reservationDateTimePicker
             // 
             this.reservationDateTimePicker.Location = new System.Drawing.Point(4, 204);
+            this.reservationDateTimePicker.MinDate = new System.DateTime(2022, 6, 8, 0, 0, 0, 0);
             this.reservationDateTimePicker.Name = "reservationDateTimePicker";
             this.reservationDateTimePicker.Size = new System.Drawing.Size(250, 25);
             this.reservationDateTimePicker.TabIndex = 7;
@@ -588,6 +593,23 @@ namespace ChapeauUI
             this.makeReservationBtn.UseVisualStyleBackColor = false;
             this.makeReservationBtn.Click += new System.EventHandler(this.makeReservationBtn_Click);
             // 
+            // reservationTimePicker
+            // 
+            this.reservationTimePicker.AutoSize = true;
+            this.reservationTimePicker.Location = new System.Drawing.Point(4, 232);
+            this.reservationTimePicker.Name = "reservationTimePicker";
+            this.reservationTimePicker.Size = new System.Drawing.Size(134, 20);
+            this.reservationTimePicker.TabIndex = 11;
+            this.reservationTimePicker.Text = "RESERVATION TIME";
+            // 
+            // TimePicker
+            // 
+            this.TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.TimePicker.Location = new System.Drawing.Point(3, 255);
+            this.TimePicker.Name = "TimePicker";
+            this.TimePicker.Size = new System.Drawing.Size(250, 25);
+            this.TimePicker.TabIndex = 12;
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -597,7 +619,7 @@ namespace ChapeauUI
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1564, 1097);
+            this.ClientSize = new System.Drawing.Size(1564, 1055);
             this.Controls.Add(this.startMenuPnl);
             this.Controls.Add(this.notificationsPnl);
             this.Controls.Add(this.bottomBarLabel);
@@ -671,5 +693,7 @@ namespace ChapeauUI
         private System.Windows.Forms.Button markReservationPresentBtn;
         private System.Windows.Forms.Button notificationsBtn;
         private System.Windows.Forms.Button setReservationPresentBtn;
+        private System.Windows.Forms.DateTimePicker TimePicker;
+        private System.Windows.Forms.Label reservationTimePicker;
     }
 }

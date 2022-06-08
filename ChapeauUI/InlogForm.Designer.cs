@@ -67,6 +67,7 @@ namespace ChapeauUI
             // startMenuPnl
             // 
             this.startMenuPnl.BackColor = System.Drawing.Color.Transparent;
+            this.startMenuPnl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.startMenuPnl.Controls.Add(this.passwordLbl);
             this.startMenuPnl.Controls.Add(this.usernameLbl);
             this.startMenuPnl.Controls.Add(this.staffCodeTextBox);
@@ -155,9 +156,12 @@ namespace ChapeauUI
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(720, 1097);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.startMenuPnl);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "InlogForm";
