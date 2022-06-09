@@ -181,7 +181,6 @@ namespace ChapeauUI
                     kitchenListView.Items.Add(li);
                 }
             }
-            kitchenListView.Show();
             ColorListView(kitchenListView);
             //}
         }
