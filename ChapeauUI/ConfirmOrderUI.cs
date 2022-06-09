@@ -14,15 +14,12 @@ namespace ChapeauUI
 {
     public partial class ConfirmOrderUI : Form
     {
-        //DONT FORGET TO RENAME CLASS
-       
         public ConfirmOrderUI()
         {
             InitializeComponent();
             ReturnButton.DialogResult = DialogResult.Yes;
             DenyButton.DialogResult = DialogResult.No;
         }
-
         public ConfirmOrderUI(string question)
         {
             InitializeComponent();
@@ -31,7 +28,6 @@ namespace ChapeauUI
             labelQuestion.Visible = true;
             labelQuestion.Text = question.ToUpper();
         }
-
         public ConfirmOrderUI(string question, DialogResult dialogResult)
         {
             InitializeComponent();
@@ -58,13 +54,21 @@ namespace ChapeauUI
                     break;
             }
         }
+        public ConfirmOrderUI(string question, double priceInclVAT)
+        {
+            InitializeComponent();
+            ConfirmButton.DialogResult = DialogResult.Yes;
+            DenyButton.DialogResult = DialogResult.No;
+            labelQuestion.Visible = true;
+            labelQuestion.Text = question.ToUpper();
+        }
 
         public double InputDouble()
         {
             double input = 0;
-            if (denied)
+            if(denied)
             {
-                throw new Exception("No tip added");
+                throw new Exception("no tip added");
             }
             try
             {
@@ -74,18 +78,23 @@ namespace ChapeauUI
                     {
                         input = double.Parse(textBoxInput.Text);
                     }
+                    else if (double.Parse(textBoxInput.Text) <= 0)
+                    {
+                        throw new Exception("Please fill in a tip above 0");
+                    }
+                    else
+                    {
+                        throw new Exception("Please enter a number");
+                    }
                 }
                 catch
                 {
-                    throw new Exception("Please enter a number");
-                }
-                if (double.Parse(textBoxInput.Text) <= 0)
-                {
-                    throw new Exception("Please fill in a tip above 0");
+                    throw new Exception("Please only fill numbers");
                 }
             }
             catch (Exception ex)
             {
+
                 ConfirmOrderUI confirmOrder = new ConfirmOrderUI(ex.Message, DialogResult.OK);
                 confirmOrder.ShowDialog();
             }
@@ -113,4 +122,3 @@ namespace ChapeauUI
         }
     }
 }
-
