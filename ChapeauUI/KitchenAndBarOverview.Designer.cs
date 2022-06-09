@@ -164,7 +164,7 @@ namespace ChapeauUI
             this.foodButtonOrder.FlatAppearance.BorderSize = 4;
             this.foodButtonOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.foodButtonOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonOrder.Location = new System.Drawing.Point(1750, 243);
+            this.foodButtonOrder.Location = new System.Drawing.Point(1750, 245);
             this.foodButtonOrder.Name = "foodButtonOrder";
             this.foodButtonOrder.Size = new System.Drawing.Size(126, 63);
             this.foodButtonOrder.TabIndex = 15;
@@ -239,10 +239,10 @@ namespace ChapeauUI
             this.radioButtonSortForwards.AutoSize = true;
             this.radioButtonSortForwards.Location = new System.Drawing.Point(1558, 536);
             this.radioButtonSortForwards.Name = "radioButtonSortForwards";
-            this.radioButtonSortForwards.Size = new System.Drawing.Size(115, 44);
+            this.radioButtonSortForwards.Size = new System.Drawing.Size(121, 24);
             this.radioButtonSortForwards.TabIndex = 28;
             this.radioButtonSortForwards.TabStop = true;
-            this.radioButtonSortForwards.Text = "Sort forward\r\ns";
+            this.radioButtonSortForwards.Text = "Sort forwards";
             this.radioButtonSortForwards.UseVisualStyleBackColor = true;
             // 
             // radioButtonSortBackwards
