@@ -234,35 +234,7 @@ namespace ChapeauUI
                 }
                 ColorListView(barListView);
             }
-            for (int j = 0; j < barListView.SelectedItems.Count; j++)
-            {
-                if (barListView.SelectedItems.Count > 0)
-                {
 
-                    listViewComments.Show();
-                    listViewComments.Clear();
-                    listViewComments.View = View.Details;
-                    listViewComments.FullRowSelect = true;
-                    listViewComments.Columns.Add("Order ID", 100);
-                    listViewComments.Columns.Add("Menuitem ID", 100);
-                    listViewComments.Columns.Add("Comments", 500);
-
-
-                    foreach (Order order in barListView.SelectedItems)
-
-                    {
-
-                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                        li.SubItems.Add(order.OrderItems[j].MenuItem.MenuItemId.ToString());
-                        li.SubItems.Add(order.Comments);
-                        listViewComments.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        listViewComments.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        listViewComments.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-
-                        listViewComments.Items.Add(li);
-                    }
-                }
-            }
         }
         private void ColorListView(ListView listview)
         {
