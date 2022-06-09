@@ -38,15 +38,15 @@ namespace ChapeauUI
             this.barListView = new System.Windows.Forms.ListView();
             this.labelBar = new System.Windows.Forms.Label();
             this.finishedDrinkButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelBottomBar = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelTopBar = new System.Windows.Forms.Label();
             this.foodButtonOrder = new System.Windows.Forms.Button();
             this.foodButtonAmount = new System.Windows.Forms.Button();
             this.foodButtonComments = new System.Windows.Forms.Button();
             this.foodButtonTable = new System.Windows.Forms.Button();
             this.foodButtonDuration = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelLabelSortBy = new System.Windows.Forms.Label();
             this.radioButtonSortForwards = new System.Windows.Forms.RadioButton();
             this.radioButtonSortBackwards = new System.Windows.Forms.RadioButton();
             this.listViewComments = new System.Windows.Forms.ListView();
@@ -68,6 +68,7 @@ namespace ChapeauUI
             // kitchenListView
             // 
             this.kitchenListView.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.kitchenListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.kitchenListView.FullRowSelect = true;
             this.kitchenListView.HideSelection = false;
             this.kitchenListView.Location = new System.Drawing.Point(13, 79);
@@ -80,11 +81,14 @@ namespace ChapeauUI
             // 
             // finishedFoodButton
             // 
-            this.finishedFoodButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.finishedFoodButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.finishedFoodButton.BackColor = System.Drawing.SystemColors.Control;
+            this.finishedFoodButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.finishedFoodButton.FlatAppearance.BorderSize = 4;
+            this.finishedFoodButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.finishedFoodButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.finishedFoodButton.Location = new System.Drawing.Point(1313, 845);
             this.finishedFoodButton.Name = "finishedFoodButton";
-            this.finishedFoodButton.Size = new System.Drawing.Size(199, 49);
+            this.finishedFoodButton.Size = new System.Drawing.Size(206, 49);
             this.finishedFoodButton.TabIndex = 2;
             this.finishedFoodButton.Text = "Food is ready to be served\r\n";
             this.finishedFoodButton.UseVisualStyleBackColor = false;
@@ -93,7 +97,7 @@ namespace ChapeauUI
             // buttonLogOut
             // 
             this.buttonLogOut.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonLogOut.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonLogOut.Font = new System.Drawing.Font("Trebuchet MS", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonLogOut.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonLogOut.Location = new System.Drawing.Point(-13, 955);
             this.buttonLogOut.Name = "buttonLogOut";
@@ -106,6 +110,7 @@ namespace ChapeauUI
             // barListView
             // 
             this.barListView.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.barListView.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.barListView.HideSelection = false;
             this.barListView.Location = new System.Drawing.Point(13, 79);
             this.barListView.Name = "barListView";
@@ -129,38 +134,42 @@ namespace ChapeauUI
             // 
             // finishedDrinkButton
             // 
-            this.finishedDrinkButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.finishedDrinkButton.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.finishedDrinkButton.BackColor = System.Drawing.SystemColors.Control;
+            this.finishedDrinkButton.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.finishedDrinkButton.FlatAppearance.BorderSize = 4;
+            this.finishedDrinkButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.finishedDrinkButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.finishedDrinkButton.Location = new System.Drawing.Point(1313, 845);
             this.finishedDrinkButton.Name = "finishedDrinkButton";
-            this.finishedDrinkButton.Size = new System.Drawing.Size(199, 49);
+            this.finishedDrinkButton.Size = new System.Drawing.Size(206, 49);
             this.finishedDrinkButton.TabIndex = 6;
             this.finishedDrinkButton.Text = "Drink is ready to be served";
             this.finishedDrinkButton.UseVisualStyleBackColor = false;
             this.finishedDrinkButton.Click += new System.EventHandler(this.finishedDrinkButton_Click);
             // 
-            // label1
+            // labelBottomBar
             // 
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label1.Location = new System.Drawing.Point(124, 959);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(1806, 81);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "label1";
+            this.labelBottomBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.labelBottomBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.labelBottomBar.Location = new System.Drawing.Point(124, 959);
+            this.labelBottomBar.Name = "labelBottomBar";
+            this.labelBottomBar.Size = new System.Drawing.Size(1806, 81);
+            this.labelBottomBar.TabIndex = 9;
+            this.labelBottomBar.Text = "label1";
             // 
-            // label2
+            // labelTopBar
             // 
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.label2.Location = new System.Drawing.Point(-13, -5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(1931, 81);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "labelHeader";
+            this.labelTopBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.labelTopBar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.labelTopBar.Location = new System.Drawing.Point(-13, -5);
+            this.labelTopBar.Name = "labelTopBar";
+            this.labelTopBar.Size = new System.Drawing.Size(1931, 81);
+            this.labelTopBar.TabIndex = 12;
+            this.labelTopBar.Text = "labelHeader";
             // 
             // foodButtonOrder
             // 
+            this.foodButtonOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.foodButtonOrder.FlatAppearance.BorderSize = 4;
             this.foodButtonOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.foodButtonOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
@@ -175,6 +184,7 @@ namespace ChapeauUI
             // foodButtonAmount
             // 
             this.foodButtonAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.foodButtonAmount.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.foodButtonAmount.FlatAppearance.BorderSize = 4;
             this.foodButtonAmount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.foodButtonAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
@@ -188,8 +198,10 @@ namespace ChapeauUI
             // 
             // foodButtonComments
             // 
+            this.foodButtonComments.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.foodButtonComments.FlatAppearance.BorderSize = 4;
             this.foodButtonComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.foodButtonComments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.foodButtonComments.Location = new System.Drawing.Point(1558, 450);
             this.foodButtonComments.Name = "foodButtonComments";
             this.foodButtonComments.Size = new System.Drawing.Size(126, 63);
@@ -200,6 +212,7 @@ namespace ChapeauUI
             // 
             // foodButtonTable
             // 
+            this.foodButtonTable.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.foodButtonTable.FlatAppearance.BorderSize = 4;
             this.foodButtonTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.foodButtonTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
@@ -213,6 +226,7 @@ namespace ChapeauUI
             // 
             // foodButtonDuration
             // 
+            this.foodButtonDuration.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.foodButtonDuration.FlatAppearance.BorderSize = 4;
             this.foodButtonDuration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.foodButtonDuration.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
@@ -224,19 +238,21 @@ namespace ChapeauUI
             this.foodButtonDuration.UseVisualStyleBackColor = true;
             this.foodButtonDuration.Click += new System.EventHandler(this.foodButtonDuration_Click);
             // 
-            // label3
+            // labelLabelSortBy
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(1558, 153);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 38);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Sort by\r\n";
+            this.labelLabelSortBy.AutoSize = true;
+            this.labelLabelSortBy.Font = new System.Drawing.Font("Trebuchet MS", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelLabelSortBy.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.labelLabelSortBy.Location = new System.Drawing.Point(1558, 153);
+            this.labelLabelSortBy.Name = "labelLabelSortBy";
+            this.labelLabelSortBy.Size = new System.Drawing.Size(112, 38);
+            this.labelLabelSortBy.TabIndex = 22;
+            this.labelLabelSortBy.Text = "Sort by\r\n";
             // 
             // radioButtonSortForwards
             // 
             this.radioButtonSortForwards.AutoSize = true;
+            this.radioButtonSortForwards.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.radioButtonSortForwards.Location = new System.Drawing.Point(1558, 536);
             this.radioButtonSortForwards.Name = "radioButtonSortForwards";
             this.radioButtonSortForwards.Size = new System.Drawing.Size(121, 24);
@@ -248,6 +264,7 @@ namespace ChapeauUI
             // radioButtonSortBackwards
             // 
             this.radioButtonSortBackwards.AutoSize = true;
+            this.radioButtonSortBackwards.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.radioButtonSortBackwards.Location = new System.Drawing.Point(1750, 536);
             this.radioButtonSortBackwards.Name = "radioButtonSortBackwards";
             this.radioButtonSortBackwards.Size = new System.Drawing.Size(132, 24);
@@ -258,6 +275,7 @@ namespace ChapeauUI
             // 
             // listViewComments
             // 
+            this.listViewComments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.listViewComments.HideSelection = false;
             this.listViewComments.Location = new System.Drawing.Point(12, 835);
             this.listViewComments.Name = "listViewComments";
@@ -286,7 +304,7 @@ namespace ChapeauUI
             this.Controls.Add(this.listViewComments);
             this.Controls.Add(this.radioButtonSortBackwards);
             this.Controls.Add(this.radioButtonSortForwards);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.labelLabelSortBy);
             this.Controls.Add(this.foodButtonDuration);
             this.Controls.Add(this.foodButtonTable);
             this.Controls.Add(this.foodButtonComments);
@@ -294,13 +312,13 @@ namespace ChapeauUI
             this.Controls.Add(this.foodButtonOrder);
             this.Controls.Add(this.labelKitchen);
             this.Controls.Add(this.labelBar);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelBottomBar);
             this.Controls.Add(this.finishedDrinkButton);
             this.Controls.Add(this.barListView);
             this.Controls.Add(this.buttonLogOut);
             this.Controls.Add(this.finishedFoodButton);
             this.Controls.Add(this.kitchenListView);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelTopBar);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Name = "KitchenAndBarOverview";
@@ -321,15 +339,15 @@ namespace ChapeauUI
         private System.Windows.Forms.ListView barListView;
         private System.Windows.Forms.Label labelBar;
         private System.Windows.Forms.Button finishedDrinkButton;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelBottomBar;
         private System.Windows.Forms.Timer timer2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTopBar;
         private System.Windows.Forms.Button foodButtonOrder;
         private System.Windows.Forms.Button foodButtonAmount;
         private System.Windows.Forms.Button foodButtonComments;
         private System.Windows.Forms.Button foodButtonTable;
         private System.Windows.Forms.Button foodButtonDuration;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelLabelSortBy;
         private System.Windows.Forms.RadioButton radioButtonSortForwards;
         private System.Windows.Forms.RadioButton radioButtonSortBackwards;
         private System.Windows.Forms.ListView listViewComments;
