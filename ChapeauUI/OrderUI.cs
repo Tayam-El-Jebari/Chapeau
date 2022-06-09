@@ -56,7 +56,7 @@ namespace ChapeauUI
                     }
                     else
                     {
-                        menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
+                        menuItemButton.Click += new EventHandler(DynamicButtonClicked);
                         menuItemButton.BackColor = Color.Transparent;
                         menuItemButton.ForeColor = Color.FromArgb(39, 39, 39);
                     }
@@ -73,7 +73,7 @@ namespace ChapeauUI
                     };
                     menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
                     menuItemButton.FlatAppearance.BorderSize = 2;
-                    menuItemButton.Click += new EventHandler(BtnDescriptionShow);
+                    menuItemButton.Click += new EventHandler(DynamicButtonClicked);
                     menu.Controls.Add(menuItemButton);
                 }
             }
@@ -106,27 +106,42 @@ namespace ChapeauUI
                     Width = 70
                 });
         }
-        void BtnOrderAdd_Click(Object sender, EventArgs e)
+        void DynamicButtonClicked(Object sender, EventArgs e)
         {
-            Button menuItem = (sender as Button);
-            int itemIndex = menuList.FindIndex(x => x == menuItem.Tag);
-            --menuList[itemIndex].stock;
-            if (menuList[itemIndex].stock == 0)
+            Button buttonClicked = (sender as Button);
+            if (buttonClicked.Tag is MenuItem)
             {
-                menuItem.BackColor = Color.DarkGray;
-                menuItem.ForeColor = Color.LightGray;
-                menuItem.Text = "OUT OF STOCK";
-                menuItem.Click -= new EventHandler(BtnOrderAdd_Click);
-            }
-            foreach (DataGridViewRow row in itemGridView.Rows)
-            {
-                if (Convert.ToInt32(row.Cells[0].Value) == menuList[itemIndex].MenuItemId)
+                int itemIndex = menuList.FindIndex(x => x == buttonClicked.Tag);
+                --menuList[itemIndex].stock;
+                if (menuList[itemIndex].stock == 0)
                 {
-                    row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
-                    return;
+                    buttonClicked.BackColor = Color.DarkGray;
+                    buttonClicked.ForeColor = Color.LightGray;
+                    buttonClicked.Text = "OUT OF STOCK";
+                    buttonClicked.Click -= new EventHandler(DynamicButtonClicked);
+                }
+                foreach (DataGridViewRow row in itemGridView.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells[0].Value) == menuList[itemIndex].MenuItemId)
+                    {
+                        row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
+                        return;
+                    }
+                }
+                itemGridView.Rows.Add(new string[] { menuList[itemIndex].MenuItemId.ToString(), menuList[itemIndex].ProductName, "1" });
+            }
+            else
+            {
+                for (int i = 0; i < menu.Controls.Count; i++)
+                {
+                    if (menu.Controls[i] == sender)
+                    {
+                        MenuItem menuItem = (menu.Controls[i - 1].Tag as MenuItem);
+                        MessageBox.Show(menuItem.Description);
+                    }
                 }
             }
-            itemGridView.Rows.Add(new string[] { menuList[itemIndex].MenuItemId.ToString(), menuList[itemIndex].ProductName, "1" });
+            
         }
         public void BtnDescriptionShow(object sender, EventArgs e)
         {
@@ -191,7 +206,7 @@ namespace ChapeauUI
                             {
                                 menu.Controls[i].BackColor = Color.DarkGray;
                                 menu.Controls[i].ForeColor = Color.LightGray;
-                                menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
+                                menu.Controls[i].Click -= new EventHandler(DynamicButtonClicked);
                                 menu.Controls[i].Text = "OUT OF STOCK";
                             }
                         }
@@ -208,7 +223,7 @@ namespace ChapeauUI
                             {
                                 menu.Controls[i].BackColor = Color.Transparent;
                                 menu.Controls[i].ForeColor = Color.FromArgb(39, 39, 39);
-                                menu.Controls[i].Click += new EventHandler(BtnOrderAdd_Click);
+                                menu.Controls[i].Click += new EventHandler(DynamicButtonClicked);
                                 menu.Controls[i].Text = string.Empty;
                             }
                         }
