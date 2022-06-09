@@ -40,7 +40,7 @@ namespace ChapeauUI
             progressBarUpdate.ForeColor = Color.FromArgb(159, 56, 59);
             progressBarUpdate.Show();
             Timer timer = new Timer();
-            timer.Interval = 300;
+            timer.Interval = 296;
             timer.Tick += new System.EventHandler(timerProgress_Tick);
             timer.Start();
         }
@@ -80,6 +80,7 @@ namespace ChapeauUI
 
         private void barListView_SelectedIndexChanged(object sender, EventArgs e)
         {
+            listViewComments.BeginUpdate();
             listViewComments.Show();
             listViewComments.Clear();
             listViewComments.View = View.Details;
@@ -102,9 +103,12 @@ namespace ChapeauUI
 
                 listViewComments.Items.Add(li);
             }
+            ColorListView(listViewComments);
+            listViewComments.EndUpdate();
         }
         private void kitchenListview_SelectedIndexChanged(object sender, EventArgs e)
         {
+            listViewComments.BeginUpdate();
             listViewComments.Show();
             listViewComments.Clear();
             listViewComments.View = View.Details;
@@ -128,6 +132,8 @@ namespace ChapeauUI
 
                 listViewComments.Items.Add(li);
             }
+            ColorListView(listViewComments);
+            listViewComments.EndUpdate();
         }
         private List<Order> ordersFoodList;
         public void KitchenListView()
@@ -141,7 +147,8 @@ namespace ChapeauUI
 
 
             listViewComments.Hide();
-            progressBarUpdate.Show(); 
+            progressBarUpdate.Show();
+            kitchenListView.BeginUpdate();
             OrderService orderService = new OrderService();
             ordersFoodList = orderService.GetActiveFoodOrders();
             kitchenListView.Clear();
@@ -179,6 +186,7 @@ namespace ChapeauUI
                 }
             }
             ColorListView(kitchenListView);
+            kitchenListView.EndUpdate();
             //}
         }
         private void BarListView()
@@ -192,6 +200,8 @@ namespace ChapeauUI
             
             listViewComments.Hide();
             progressBarUpdate.Show();
+
+            barListView.BeginUpdate();
             OrderService orderService = new OrderService();
             List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
             barListView.Clear();
@@ -228,8 +238,9 @@ namespace ChapeauUI
                     barListView.Items.Add(li);
                     //}
                 }
-                ColorListView(barListView);
             }
+            ColorListView(barListView);
+            barListView.EndUpdate();
 
         }
         private void ColorListView(ListView listview)
@@ -334,7 +345,7 @@ namespace ChapeauUI
         {
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
-
+                kitchenListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -364,6 +375,10 @@ namespace ChapeauUI
                     }
                     ordersFoodList = ordersFoodList.OrderByDescending(x => x.OrderItems[0].MenuItem.ProductName).ToList();
                 }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
+                }
                 foreach (Order order in ordersFoodList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -387,15 +402,14 @@ namespace ChapeauUI
 
                         kitchenListView.Items.Add(li);
                     }
-
-                    kitchenListView.Show();
-                    ColorListView(kitchenListView);
-                    //}
-
                 }
+                ColorListView(kitchenListView);
+                kitchenListView.EndUpdate();
+                //}
             }
             else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
+                barListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -425,6 +439,10 @@ namespace ChapeauUI
                     }
                     ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.OrderItems[0].MenuItem.ProductName).ToList();
                 }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
+                }
                 foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -448,13 +466,10 @@ namespace ChapeauUI
 
                         barListView.Items.Add(li);
                     }
-
-                    barListView.Show();
-                    ColorListView(barListView);
-                    //}
-
-
                 }
+                ColorListView(barListView);
+                barListView.EndUpdate();
+                //}
 
 
             }
@@ -464,68 +479,74 @@ namespace ChapeauUI
         {
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
-                    OrderService orderService = new OrderService();
-                    OrderItem orderItem = new OrderItem();
-                    List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
-                    kitchenListView.Clear();
-                    kitchenListView.View = View.Details;
-                    kitchenListView.FullRowSelect = true;
-                    kitchenListView.Columns.Add("Order ID", 100);
-                    kitchenListView.Columns.Add("MenuItem ID", 100);
-                    kitchenListView.Columns.Add("Order", 500); //productname
-                    kitchenListView.Columns.Add("Amount of order", 100);
-                    kitchenListView.Columns.Add("Table", 200);
-                    kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
-                    kitchenListView.Columns.Add("Time of ordering", 200);
-                    if (radioButtonSortForwards.Checked)
-                    {
-                        foreach (Order order in ordersFoodList)
-                        {
-                            order.OrderItems = order.OrderItems.OrderBy(x => x.Amount).ToList();
-                        }
-                        ordersFoodList = ordersFoodList.OrderBy(x => x.OrderItems[0].Amount).ToList();
-
-                    }
-                    else if (radioButtonSortBackwards.Checked)
-                    {
-                        foreach (Order order in ordersFoodList)
-                        {
-                            order.OrderItems = order.OrderItems.OrderByDescending(x => x.Amount).ToList();
-                        }
-                        ordersFoodList = ordersFoodList.OrderByDescending(x => x.OrderItems[0].Amount).ToList();
-
-                    }
+                kitchenListView.BeginUpdate();
+                OrderService orderService = new OrderService();
+                OrderItem orderItem = new OrderItem();
+                List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
+                kitchenListView.Clear();
+                kitchenListView.View = View.Details;
+                kitchenListView.FullRowSelect = true;
+                kitchenListView.Columns.Add("Order ID", 100);
+                kitchenListView.Columns.Add("MenuItem ID", 100);
+                kitchenListView.Columns.Add("Order", 500); //productname
+                kitchenListView.Columns.Add("Amount of order", 100);
+                kitchenListView.Columns.Add("Table", 200);
+                kitchenListView.Columns.Add("Duration of Order (hh:mm)", 200);
+                kitchenListView.Columns.Add("Time of ordering", 200);
+                if (radioButtonSortForwards.Checked)
+                {
                     foreach (Order order in ordersFoodList)
                     {
-                        //if (order.TimePlaced == DateTime.Today)
-                        //{
-                        TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                        for (int i = 0; i < order.OrderItems.Count; i++)
-                        {
-                            ListViewItem li = new ListViewItem(order.OrderId.ToString());
-                            li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
-                            li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
-                            li.SubItems.Add(order.OrderItems[i].Amount.ToString());
-                            li.SubItems.Add(order.TableId.ToString());
-                            li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
-                            li.SubItems.Add(order.TimePlaced.ToString());
-                            kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
-                            kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                            kitchenListView.Items.Add(li);
-                        }
+                        order.OrderItems = order.OrderItems.OrderBy(x => x.Amount).ToList();
                     }
-                    kitchenListView.Show();
-                    ColorListView(kitchenListView);
-                    //}
-                
+                    ordersFoodList = ordersFoodList.OrderBy(x => x.OrderItems[0].Amount).ToList();
+
+                }
+                else if (radioButtonSortBackwards.Checked)
+                {
+                    foreach (Order order in ordersFoodList)
+                    {
+                        order.OrderItems = order.OrderItems.OrderByDescending(x => x.Amount).ToList();
+                    }
+                    ordersFoodList = ordersFoodList.OrderByDescending(x => x.OrderItems[0].Amount).ToList();
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
+                }
+                foreach (Order order in ordersFoodList)
+                {
+                    //if (order.TimePlaced == DateTime.Today)
+                    //{
+                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
+                    for (int i = 0; i < order.OrderItems.Count; i++)
+                    {
+                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
+                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
+                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                        li.SubItems.Add(order.TableId.ToString());
+                        li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                        li.SubItems.Add(order.TimePlaced.ToString());
+                        kitchenListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        kitchenListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                        kitchenListView.Items.Add(li);
+                    }
+                }
+                ColorListView(kitchenListView);
+                kitchenListView.EndUpdate();
+                //}
+
             }
             else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
+                barListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -557,6 +578,10 @@ namespace ChapeauUI
                     ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.OrderItems[0].Amount).ToList();
 
                 }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
+                }
                 foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -581,8 +606,8 @@ namespace ChapeauUI
                         barListView.Items.Add(li);
                     }
                 }
-                barListView.Show();
                 ColorListView(barListView);
+                barListView.EndUpdate();
                 //}
             }
         }
@@ -593,7 +618,7 @@ namespace ChapeauUI
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
 
-
+                kitchenListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -615,6 +640,10 @@ namespace ChapeauUI
                 {
                     ordersFoodList = ordersFoodList.OrderByDescending(x => x.Comments).ToList();
                 }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
+                }
                 foreach (Order order in ordersFoodList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -639,14 +668,14 @@ namespace ChapeauUI
                         kitchenListView.Items.Add(li);
                     }
                 }
-                kitchenListView.Show();
                 ColorListView(kitchenListView);
+                kitchenListView.EndUpdate();
                 //}
             }
 
             if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
-
+                barListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -668,6 +697,10 @@ namespace ChapeauUI
                 {
                     ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.Comments).ToList();
                 }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
+                }
                 foreach (Order order in ordersDrinkList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -692,8 +725,8 @@ namespace ChapeauUI
                         barListView.Items.Add(li);
                     }
                 }
-                barListView.Show();
                 ColorListView(barListView);
+                barListView.EndUpdate();
                 //}
             }
         }
@@ -702,7 +735,7 @@ namespace ChapeauUI
         {
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
-
+                kitchenListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -723,6 +756,10 @@ namespace ChapeauUI
                 else if (radioButtonSortForwards.Checked)
                 {
                     ordersFoodList = ordersFoodList.OrderByDescending(x => x.TableId).ToList();
+                }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
                 }
 
                 foreach (Order order in ordersFoodList)
@@ -749,13 +786,14 @@ namespace ChapeauUI
                         kitchenListView.Items.Add(li);
                     }
                 }
-                kitchenListView.Show();
                 ColorListView(kitchenListView);
+                kitchenListView.EndUpdate();
                 //}
             }
 
             else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
+                barListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -776,6 +814,10 @@ namespace ChapeauUI
                 else if (radioButtonSortForwards.Checked)
                 {
                     ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.TableId).ToList();
+                }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
                 }
 
                 foreach (Order order in ordersDrinkList)
@@ -802,8 +844,8 @@ namespace ChapeauUI
                         barListView.Items.Add(li);
                     }
                 }
-                barListView.Show();
                 ColorListView(barListView);
+                barListView.EndUpdate();
                 //}
             }
         }
@@ -811,7 +853,7 @@ namespace ChapeauUI
         {
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
-
+                kitchenListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersFoodList = orderService.GetActiveFoodOrders();
@@ -834,6 +876,10 @@ namespace ChapeauUI
                     ordersFoodList = ordersFoodList.OrderByDescending(x => x.TimePlaced).ToList();
 
                 }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
+                }
                 foreach (Order order in ordersFoodList)
                 {
                     //if (order.TimePlaced == DateTime.Today)
@@ -858,14 +904,15 @@ namespace ChapeauUI
                         kitchenListView.Items.Add(li);
                     }
                 }
-                kitchenListView.Show();
                 ColorListView(kitchenListView);
+                kitchenListView.EndUpdate();
                 //}
             }
 
 
             else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
+                barListView.BeginUpdate();
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
                 List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
@@ -887,6 +934,10 @@ namespace ChapeauUI
                 {
                     ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.TimePlaced).ToList();
 
+                }
+                else
+                {
+                    MessageBox.Show("Please select first if you want to sort forwards or backwards");
                 }
                 foreach (Order order in ordersDrinkList)
                 {
@@ -913,8 +964,8 @@ namespace ChapeauUI
                         barListView.Items.Add(li);
                     }
                 }
-                barListView.Show();
                 ColorListView(barListView);
+                barListView.EndUpdate();
                 //}
             }
         }
