@@ -51,6 +51,7 @@ namespace ChapeauUI
             this.radioButtonSortBackwards = new System.Windows.Forms.RadioButton();
             this.listViewComments = new System.Windows.Forms.ListView();
             this.progressBarUpdate = new System.Windows.Forms.ProgressBar();
+            this.buttonSortByAlcoholic = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelKitchen
@@ -173,7 +174,7 @@ namespace ChapeauUI
             this.foodButtonOrder.FlatAppearance.BorderSize = 4;
             this.foodButtonOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.foodButtonOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonOrder.Location = new System.Drawing.Point(1750, 245);
+            this.foodButtonOrder.Location = new System.Drawing.Point(1558, 243);
             this.foodButtonOrder.Name = "foodButtonOrder";
             this.foodButtonOrder.Size = new System.Drawing.Size(126, 63);
             this.foodButtonOrder.TabIndex = 15;
@@ -292,6 +293,20 @@ namespace ChapeauUI
             this.progressBarUpdate.Size = new System.Drawing.Size(1500, 10);
             this.progressBarUpdate.TabIndex = 31;
             // 
+            // buttonSortByAlcoholic
+            // 
+            this.buttonSortByAlcoholic.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonSortByAlcoholic.FlatAppearance.BorderSize = 4;
+            this.buttonSortByAlcoholic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSortByAlcoholic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonSortByAlcoholic.Location = new System.Drawing.Point(1750, 243);
+            this.buttonSortByAlcoholic.Name = "buttonSortByAlcoholic";
+            this.buttonSortByAlcoholic.Size = new System.Drawing.Size(126, 63);
+            this.buttonSortByAlcoholic.TabIndex = 32;
+            this.buttonSortByAlcoholic.Text = "Alcoholic";
+            this.buttonSortByAlcoholic.UseVisualStyleBackColor = true;
+            this.buttonSortByAlcoholic.Click += new System.EventHandler(this.buttonSortByAlcoholic_Click);
+            // 
             // KitchenAndBarOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -300,6 +315,7 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebgdesktop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.Controls.Add(this.buttonSortByAlcoholic);
             this.Controls.Add(this.progressBarUpdate);
             this.Controls.Add(this.listViewComments);
             this.Controls.Add(this.radioButtonSortBackwards);
@@ -352,5 +368,6 @@ namespace ChapeauUI
         private System.Windows.Forms.RadioButton radioButtonSortBackwards;
         private System.Windows.Forms.ListView listViewComments;
         private System.Windows.Forms.ProgressBar progressBarUpdate;
+        private System.Windows.Forms.Button buttonSortByAlcoholic;
     }
 }

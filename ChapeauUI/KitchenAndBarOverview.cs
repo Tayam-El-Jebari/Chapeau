@@ -145,7 +145,7 @@ namespace ChapeauUI
             barListView.Hide();
             labelBar.Hide();
             finishedDrinkButton.Hide();
-
+            buttonSortByAlcoholic.Hide();
 
             listViewComments.Hide();
             progressBarUpdate.Show();
@@ -182,7 +182,8 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                         kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
                         kitchenListView.Items.Add(li);
                     }
                 }
@@ -197,8 +198,8 @@ namespace ChapeauUI
             barListView.Show();
             labelBar.Show();
             finishedDrinkButton.Show();
- 
-            
+
+            buttonSortByAlcoholic.Show();
             listViewComments.Hide();
             progressBarUpdate.Show();
 
@@ -212,6 +213,7 @@ namespace ChapeauUI
             barListView.Columns.Add("Menuitem ID", 100);
             barListView.Columns.Add("Order", 500); //productname
             barListView.Columns.Add("Amount of order", 100);
+            barListView.Columns.Add("Alcoholic", 100);
             barListView.Columns.Add("Table", 200);
             barListView.Columns.Add("Duration of Order (hh:mm)", 200);
             barListView.Columns.Add("Time of ordering", 200);
@@ -226,6 +228,7 @@ namespace ChapeauUI
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                         li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                        li.SubItems.Add(order.OrderItems[i].IsAlcoholic.ToString());
                         li.SubItems.Add(order.TableId.ToString());
                         li.SubItems.Add(timeOfOrder.ToString());
                         li.SubItems.Add(order.TimePlaced.ToString());
@@ -234,7 +237,9 @@ namespace ChapeauUI
                         barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                         barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                         barListView.Items.Add(li);
                     }
@@ -399,7 +404,8 @@ namespace ChapeauUI
                             kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                             kitchenListView.Items.Add(li);
                         }
@@ -421,6 +427,7 @@ namespace ChapeauUI
                 barListView.Columns.Add("MenuItem ID", 100);
                 barListView.Columns.Add("Order", 500); //productname
                 barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Alcoholic", 100);
                 barListView.Columns.Add("Table", 200);
                 barListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 barListView.Columns.Add("Time of ordering", 200);
@@ -455,15 +462,18 @@ namespace ChapeauUI
                             li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                             li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                             li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                            li.SubItems.Add(order.OrderItems[i].IsAlcoholic.ToString());
                             li.SubItems.Add(order.TableId.ToString());
-                            li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                            li.SubItems.Add(timeOfOrder.ToString());
                             li.SubItems.Add(order.TimePlaced.ToString());
                             barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                             barListView.Items.Add(li);
                         }
@@ -534,7 +544,8 @@ namespace ChapeauUI
                             kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                             kitchenListView.Items.Add(li);
                         }
@@ -556,6 +567,7 @@ namespace ChapeauUI
                 barListView.Columns.Add("MenuItem ID", 100);
                 barListView.Columns.Add("Order", 500); //productname
                 barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Alcoholic", 100);
                 barListView.Columns.Add("Table", 200);
                 barListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 barListView.Columns.Add("Time of ordering", 200);
@@ -592,15 +604,18 @@ namespace ChapeauUI
                             li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                             li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                             li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                            li.SubItems.Add(order.OrderItems[i].IsAlcoholic.ToString());
                             li.SubItems.Add(order.TableId.ToString());
-                            li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                            li.SubItems.Add(timeOfOrder.ToString());
                             li.SubItems.Add(order.TimePlaced.ToString());
                             barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                             barListView.Items.Add(li);
                         }
@@ -662,7 +677,8 @@ namespace ChapeauUI
                             kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                             kitchenListView.Items.Add(li);
                         }
@@ -685,6 +701,7 @@ namespace ChapeauUI
                 barListView.Columns.Add("MenuItem ID", 100);
                 barListView.Columns.Add("Order", 500); //productname
                 barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Alcoholic", 100);
                 barListView.Columns.Add("Table", 200);
                 barListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 barListView.Columns.Add("Time of ordering", 200);
@@ -711,15 +728,18 @@ namespace ChapeauUI
                             li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                             li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                             li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                            li.SubItems.Add(order.OrderItems[i].IsAlcoholic.ToString());
                             li.SubItems.Add(order.TableId.ToString());
-                            li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                            li.SubItems.Add(timeOfOrder.ToString());
                             li.SubItems.Add(order.TimePlaced.ToString());
                             barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                             barListView.Items.Add(li);
                         }
@@ -780,7 +800,8 @@ namespace ChapeauUI
                             kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                             kitchenListView.Items.Add(li);
                         }
@@ -803,6 +824,7 @@ namespace ChapeauUI
                 barListView.Columns.Add("MenuItem ID", 100);
                 barListView.Columns.Add("Order", 500); //productname
                 barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Alcoholic", 100);
                 barListView.Columns.Add("Table", 200);
                 barListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 barListView.Columns.Add("Time of ordering", 200);
@@ -830,15 +852,18 @@ namespace ChapeauUI
                             li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                             li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                             li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                            li.SubItems.Add(order.OrderItems[i].IsAlcoholic.ToString());
                             li.SubItems.Add(order.TableId.ToString());
-                            li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                            li.SubItems.Add(timeOfOrder.ToString());
                             li.SubItems.Add(order.TimePlaced.ToString());
                             barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                             barListView.Items.Add(li);
                         }
@@ -898,7 +923,8 @@ namespace ChapeauUI
                             kitchenListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
                             kitchenListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
                             kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
-                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                             kitchenListView.Items.Add(li);
                         }
@@ -922,6 +948,7 @@ namespace ChapeauUI
                 barListView.Columns.Add("MenuItem ID", 100);
                 barListView.Columns.Add("Order", 500); //productname
                 barListView.Columns.Add("Amount of order", 100);
+                barListView.Columns.Add("Alcoholic", 100);
                 barListView.Columns.Add("Table", 200);
                 barListView.Columns.Add("Duration of Order (hh:mm)", 200);
                 barListView.Columns.Add("Time of ordering", 200);
@@ -949,8 +976,9 @@ namespace ChapeauUI
                             li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
                             li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
                             li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                            li.SubItems.Add(order.OrderItems[i].IsAlcoholic.ToString());
                             li.SubItems.Add(order.TableId.ToString());
-                            li.SubItems.Add(timeOfOrder.ToString(@"hh\:mm"));
+                            li.SubItems.Add(timeOfOrder.ToString());
                             li.SubItems.Add(order.TimePlaced.ToString());
                             barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -959,6 +987,7 @@ namespace ChapeauUI
                             barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                             barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                            barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                             barListView.Items.Add(li);
                         }
@@ -973,5 +1002,79 @@ namespace ChapeauUI
         {
 
         }
+
+        private void buttonSortByAlcoholic_Click(object sender, EventArgs e)
+        {
+
+            barListView.BeginUpdate();
+            OrderService orderService = new OrderService();
+            OrderItem orderItem = new OrderItem();
+            List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
+            barListView.Clear();
+            barListView.View = View.Details;
+            barListView.FullRowSelect = true;
+            barListView.Columns.Add("Order ID", 100);
+            barListView.Columns.Add("MenuItem ID", 100);
+            barListView.Columns.Add("Order", 500); //productname
+            barListView.Columns.Add("Amount of order", 100);
+            barListView.Columns.Add("Alcoholic", 100);
+            barListView.Columns.Add("Table", 200);
+            barListView.Columns.Add("Duration of Order (hh:mm)", 200);
+            barListView.Columns.Add("Time of ordering", 200);
+            if (radioButtonSortForwards.Checked)
+            {
+                foreach (Order order in ordersDrinkList)
+                {
+                    order.OrderItems = order.OrderItems.OrderBy(x => x.IsAlcoholic).ToList();
+                }
+                ordersDrinkList = ordersDrinkList.OrderBy(x => x.OrderItems[0].IsAlcoholic).ToList();
+
+            }
+            else if (radioButtonSortBackwards.Checked)
+            {
+                foreach (Order order in ordersDrinkList)
+                {
+                    order.OrderItems = order.OrderItems.OrderByDescending(x => x.IsAlcoholic).ToList();
+                }
+                ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.OrderItems[0].IsAlcoholic).ToList();
+
+            }
+            else
+            {
+                MessageBox.Show("Please select first if you want to sort forwards or backwards");
+            }
+            foreach (Order order in ordersDrinkList)
+            {
+                if (order.TimePlaced == DateTime.Today)
+                {
+                    TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
+                    for (int i = 0; i < order.OrderItems.Count; i++)
+                    {
+                        ListViewItem li = new ListViewItem(order.OrderId.ToString());
+                        li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
+                        li.SubItems.Add(order.OrderItems[i].MenuItem.ProductName);
+                        li.SubItems.Add(order.OrderItems[i].Amount.ToString());
+                        li.SubItems.Add(order.OrderItems[i].IsAlcoholic.ToString());
+                        li.SubItems.Add(order.TableId.ToString());
+                        li.SubItems.Add(timeOfOrder.ToString());
+                        li.SubItems.Add(order.TimePlaced.ToString());
+                        barListView.AutoResizeColumn(0, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(1, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(2, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        barListView.AutoResizeColumn(3, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                        barListView.Items.Add(li);
+                    }
+                }
+                ColorListView(barListView);
+                barListView.EndUpdate();
+            }
+        }
     }
+
 }
+
