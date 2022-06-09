@@ -14,16 +14,16 @@ namespace ChapeauUI
 {
     public partial class KitchenAndBarOverview : Form
     {
-        StaffJob StaffJob;
+        Staff BartenderOrChef = new Staff();
         public KitchenAndBarOverview(StaffJob staffJob)
         {
-            this.StaffJob = staffJob;
             InitializeComponent();
-            if (staffJob == StaffJob.Chef)
+            this.BartenderOrChef.StaffJob = staffJob;
+            if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
                 KitchenListView();
             }
-            else if (staffJob == StaffJob.Bartender)
+            else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
                 BarListView();
             }
@@ -55,13 +55,11 @@ namespace ChapeauUI
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            StaffJob staffJob = new StaffJob();
-            Staff staff = new Staff();
-            if (staffJob == StaffJob.Chef)
+            if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
                 KitchenListView();
             }
-            else if (staffJob == StaffJob.Bartender)
+            else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
                 BarListView();
             }
@@ -71,7 +69,7 @@ namespace ChapeauUI
         {
 
             Timer timer1 = new Timer();
-            timer1.Interval = 3000;//30 seconds
+            timer1.Interval = 30000;//30 seconds
             timer1.Tick += new System.EventHandler(timer1_Tick);
             timer1.Start();
         }
@@ -145,7 +143,6 @@ namespace ChapeauUI
             listViewComments.Hide();
             progressBarUpdate.Show(); 
             OrderService orderService = new OrderService();
-            OrderItem orderItem = new OrderItem();
             ordersFoodList = orderService.GetActiveFoodOrders();
             kitchenListView.Clear();
             kitchenListView.View = View.Details;
@@ -196,7 +193,6 @@ namespace ChapeauUI
             listViewComments.Hide();
             progressBarUpdate.Show();
             OrderService orderService = new OrderService();
-            OrderItem orderItem = new OrderItem();
             List<Order> ordersDrinkList = orderService.GetActiveDrinkOrders();
             barListView.Clear();
             barListView.View = View.Details;
@@ -336,7 +332,7 @@ namespace ChapeauUI
 
         private void foodButtonOrder_Click(object sender, EventArgs e)
         {
-            if (StaffJob == StaffJob.Chef)
+            if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
 
                 OrderService orderService = new OrderService();
@@ -398,7 +394,7 @@ namespace ChapeauUI
 
                 }
             }
-            else if (StaffJob == StaffJob.Bartender)
+            else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
@@ -466,7 +462,7 @@ namespace ChapeauUI
 
         private void foodButtonAmount_Click(object sender, EventArgs e)
         {
-            if (StaffJob == StaffJob.Chef)
+            if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
                     OrderService orderService = new OrderService();
                     OrderItem orderItem = new OrderItem();
@@ -528,7 +524,7 @@ namespace ChapeauUI
                     //}
                 
             }
-            else if (StaffJob == StaffJob.Bartender)
+            else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
@@ -594,7 +590,7 @@ namespace ChapeauUI
 
         private void foodButtonComments_Click(object sender, EventArgs e)
         {
-            if (StaffJob == StaffJob.Chef)
+            if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
 
 
@@ -648,7 +644,7 @@ namespace ChapeauUI
                 //}
             }
 
-            if (StaffJob == StaffJob.Bartender)
+            if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
 
                 OrderService orderService = new OrderService();
@@ -704,7 +700,7 @@ namespace ChapeauUI
 
         private void foodButtonTable_Click(object sender, EventArgs e)
         {
-            if (StaffJob == StaffJob.Chef)
+            if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
 
                 OrderService orderService = new OrderService();
@@ -758,7 +754,7 @@ namespace ChapeauUI
                 //}
             }
 
-            else if (StaffJob == StaffJob.Bartender)
+            else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
@@ -813,7 +809,7 @@ namespace ChapeauUI
         }
         private void foodButtonDuration_Click(object sender, EventArgs e)
         {
-            if (StaffJob == StaffJob.Chef)
+            if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
 
                 OrderService orderService = new OrderService();
@@ -868,7 +864,7 @@ namespace ChapeauUI
             }
 
 
-            else if (StaffJob == StaffJob.Bartender)
+            else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
             {
                 OrderService orderService = new OrderService();
                 OrderItem orderItem = new OrderItem();
