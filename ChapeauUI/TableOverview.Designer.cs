@@ -41,9 +41,11 @@ namespace ChapeauUI
             this.tableTenButton = new System.Windows.Forms.Button();
             this.TableOverviewPnl = new System.Windows.Forms.Panel();
             this.makeReservationPnl = new System.Windows.Forms.Panel();
+            this.confirmReservationBtn = new System.Windows.Forms.Button();
+            this.TimePicker = new System.Windows.Forms.DateTimePicker();
+            this.reservationTimePicker = new System.Windows.Forms.Label();
             this.reservationCommentsTextBox = new System.Windows.Forms.TextBox();
             this.reservationCommentsLbl = new System.Windows.Forms.Label();
-            this.confirmReservationBtn = new System.Windows.Forms.Button();
             this.reservationDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.reservationTimeLbl = new System.Windows.Forms.Label();
             this.reservationEmailTextBox = new System.Windows.Forms.TextBox();
@@ -70,8 +72,6 @@ namespace ChapeauUI
             this.menuLabel = new System.Windows.Forms.Label();
             this.takeOrderBtn = new System.Windows.Forms.Button();
             this.makeReservationBtn = new System.Windows.Forms.Button();
-            this.reservationTimePicker = new System.Windows.Forms.Label();
-            this.TimePicker = new System.Windows.Forms.DateTimePicker();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersReadyGridView)).BeginInit();
@@ -242,11 +242,12 @@ namespace ChapeauUI
             // 
             // makeReservationPnl
             // 
+            this.makeReservationPnl.BackColor = System.Drawing.Color.Transparent;
+            this.makeReservationPnl.Controls.Add(this.confirmReservationBtn);
             this.makeReservationPnl.Controls.Add(this.TimePicker);
             this.makeReservationPnl.Controls.Add(this.reservationTimePicker);
             this.makeReservationPnl.Controls.Add(this.reservationCommentsTextBox);
             this.makeReservationPnl.Controls.Add(this.reservationCommentsLbl);
-            this.makeReservationPnl.Controls.Add(this.confirmReservationBtn);
             this.makeReservationPnl.Controls.Add(this.reservationDateTimePicker);
             this.makeReservationPnl.Controls.Add(this.reservationTimeLbl);
             this.makeReservationPnl.Controls.Add(this.reservationEmailTextBox);
@@ -255,99 +256,136 @@ namespace ChapeauUI
             this.makeReservationPnl.Controls.Add(this.reservationPhonenumberLbl);
             this.makeReservationPnl.Controls.Add(this.reservationNameTextBox);
             this.makeReservationPnl.Controls.Add(this.reservationNameLbl);
-            this.makeReservationPnl.Location = new System.Drawing.Point(740, 253);
+            this.makeReservationPnl.Location = new System.Drawing.Point(706, 55);
             this.makeReservationPnl.Name = "makeReservationPnl";
-            this.makeReservationPnl.Size = new System.Drawing.Size(390, 469);
+            this.makeReservationPnl.Size = new System.Drawing.Size(700, 1390);
             this.makeReservationPnl.TabIndex = 11;
+            // 
+            // confirmReservationBtn
+            // 
+            this.confirmReservationBtn.BackColor = System.Drawing.Color.Transparent;
+            this.confirmReservationBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.confirmReservationBtn.FlatAppearance.BorderSize = 10;
+            this.confirmReservationBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.confirmReservationBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.confirmReservationBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.confirmReservationBtn.Location = new System.Drawing.Point(46, 1054);
+            this.confirmReservationBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.confirmReservationBtn.Name = "confirmReservationBtn";
+            this.confirmReservationBtn.Size = new System.Drawing.Size(616, 126);
+            this.confirmReservationBtn.TabIndex = 7;
+            this.confirmReservationBtn.Text = "RESERVE NOW";
+            this.confirmReservationBtn.UseVisualStyleBackColor = true;
+            this.confirmReservationBtn.Click += new System.EventHandler(this.confirmReservationBtn_Click);
+            // 
+            // TimePicker
+            // 
+            this.TimePicker.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.TimePicker.Location = new System.Drawing.Point(46, 715);
+            this.TimePicker.Name = "TimePicker";
+            this.TimePicker.Size = new System.Drawing.Size(615, 66);
+            this.TimePicker.TabIndex = 12;
+            // 
+            // reservationTimePicker
+            // 
+            this.reservationTimePicker.AutoSize = true;
+            this.reservationTimePicker.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationTimePicker.Location = new System.Drawing.Point(46, 628);
+            this.reservationTimePicker.Name = "reservationTimePicker";
+            this.reservationTimePicker.Size = new System.Drawing.Size(437, 63);
+            this.reservationTimePicker.TabIndex = 11;
+            this.reservationTimePicker.Text = "RESERVATION TIME";
             // 
             // reservationCommentsTextBox
             // 
-            this.reservationCommentsTextBox.Location = new System.Drawing.Point(4, 318);
+            this.reservationCommentsTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationCommentsTextBox.Location = new System.Drawing.Point(46, 895);
             this.reservationCommentsTextBox.Name = "reservationCommentsTextBox";
-            this.reservationCommentsTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationCommentsTextBox.Size = new System.Drawing.Size(615, 66);
             this.reservationCommentsTextBox.TabIndex = 10;
             // 
             // reservationCommentsLbl
             // 
             this.reservationCommentsLbl.AutoSize = true;
-            this.reservationCommentsLbl.Location = new System.Drawing.Point(4, 295);
+            this.reservationCommentsLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationCommentsLbl.Location = new System.Drawing.Point(46, 819);
             this.reservationCommentsLbl.Name = "reservationCommentsLbl";
-            this.reservationCommentsLbl.Size = new System.Drawing.Size(84, 20);
+            this.reservationCommentsLbl.Size = new System.Drawing.Size(273, 63);
             this.reservationCommentsLbl.TabIndex = 9;
             this.reservationCommentsLbl.Text = "COMMENTS";
             // 
-            // confirmReservationBtn
-            // 
-            this.confirmReservationBtn.Location = new System.Drawing.Point(4, 373);
-            this.confirmReservationBtn.Name = "confirmReservationBtn";
-            this.confirmReservationBtn.Size = new System.Drawing.Size(327, 29);
-            this.confirmReservationBtn.TabIndex = 8;
-            this.confirmReservationBtn.Text = "CONFIRM RESERVATION";
-            this.confirmReservationBtn.UseVisualStyleBackColor = true;
-            this.confirmReservationBtn.Click += new System.EventHandler(this.confirmReservationBtn_Click);
-            // 
             // reservationDateTimePicker
             // 
-            this.reservationDateTimePicker.Location = new System.Drawing.Point(4, 204);
+            this.reservationDateTimePicker.CalendarFont = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationDateTimePicker.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationDateTimePicker.Location = new System.Drawing.Point(46, 556);
             this.reservationDateTimePicker.MinDate = new System.DateTime(2022, 6, 8, 0, 0, 0, 0);
             this.reservationDateTimePicker.Name = "reservationDateTimePicker";
-            this.reservationDateTimePicker.Size = new System.Drawing.Size(250, 25);
+            this.reservationDateTimePicker.Size = new System.Drawing.Size(615, 66);
             this.reservationDateTimePicker.TabIndex = 7;
             // 
             // reservationTimeLbl
             // 
             this.reservationTimeLbl.AutoSize = true;
-            this.reservationTimeLbl.Location = new System.Drawing.Point(4, 180);
+            this.reservationTimeLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationTimeLbl.Location = new System.Drawing.Point(46, 463);
             this.reservationTimeLbl.Name = "reservationTimeLbl";
-            this.reservationTimeLbl.Size = new System.Drawing.Size(134, 20);
+            this.reservationTimeLbl.Size = new System.Drawing.Size(444, 63);
             this.reservationTimeLbl.TabIndex = 6;
-            this.reservationTimeLbl.Text = "RESERVATION TIME";
+            this.reservationTimeLbl.Text = "RESERVATION DATE";
             // 
             // reservationEmailTextBox
             // 
-            this.reservationEmailTextBox.Location = new System.Drawing.Point(4, 146);
+            this.reservationEmailTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationEmailTextBox.Location = new System.Drawing.Point(46, 380);
             this.reservationEmailTextBox.Name = "reservationEmailTextBox";
-            this.reservationEmailTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationEmailTextBox.Size = new System.Drawing.Size(615, 66);
             this.reservationEmailTextBox.TabIndex = 5;
             // 
             // reservationEmailLbl
             // 
             this.reservationEmailLbl.AutoSize = true;
-            this.reservationEmailLbl.Location = new System.Drawing.Point(4, 122);
+            this.reservationEmailLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationEmailLbl.Location = new System.Drawing.Point(46, 305);
             this.reservationEmailLbl.Name = "reservationEmailLbl";
-            this.reservationEmailLbl.Size = new System.Drawing.Size(55, 20);
+            this.reservationEmailLbl.Size = new System.Drawing.Size(175, 63);
             this.reservationEmailLbl.TabIndex = 4;
             this.reservationEmailLbl.Text = "E-MAIL";
             // 
             // reservationPhonenumberTextBox
             // 
-            this.reservationPhonenumberTextBox.Location = new System.Drawing.Point(4, 88);
+            this.reservationPhonenumberTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationPhonenumberTextBox.Location = new System.Drawing.Point(46, 236);
             this.reservationPhonenumberTextBox.Name = "reservationPhonenumberTextBox";
-            this.reservationPhonenumberTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationPhonenumberTextBox.Size = new System.Drawing.Size(615, 66);
             this.reservationPhonenumberTextBox.TabIndex = 3;
             // 
             // reservationPhonenumberLbl
             // 
             this.reservationPhonenumberLbl.AutoSize = true;
-            this.reservationPhonenumberLbl.Location = new System.Drawing.Point(4, 64);
+            this.reservationPhonenumberLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationPhonenumberLbl.Location = new System.Drawing.Point(46, 170);
             this.reservationPhonenumberLbl.Name = "reservationPhonenumberLbl";
-            this.reservationPhonenumberLbl.Size = new System.Drawing.Size(116, 20);
+            this.reservationPhonenumberLbl.Size = new System.Drawing.Size(379, 63);
             this.reservationPhonenumberLbl.TabIndex = 2;
             this.reservationPhonenumberLbl.Text = "PHONE NUMBER";
             // 
             // reservationNameTextBox
             // 
-            this.reservationNameTextBox.Location = new System.Drawing.Point(4, 30);
+            this.reservationNameTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationNameTextBox.Location = new System.Drawing.Point(46, 101);
             this.reservationNameTextBox.Name = "reservationNameTextBox";
-            this.reservationNameTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationNameTextBox.Size = new System.Drawing.Size(615, 66);
             this.reservationNameTextBox.TabIndex = 1;
             // 
             // reservationNameLbl
             // 
             this.reservationNameLbl.AutoSize = true;
-            this.reservationNameLbl.Location = new System.Drawing.Point(4, 6);
+            this.reservationNameLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationNameLbl.Location = new System.Drawing.Point(46, 25);
             this.reservationNameLbl.Name = "reservationNameLbl";
-            this.reservationNameLbl.Size = new System.Drawing.Size(53, 20);
+            this.reservationNameLbl.Size = new System.Drawing.Size(168, 63);
             this.reservationNameLbl.TabIndex = 0;
             this.reservationNameLbl.Text = "NAME*";
             // 
@@ -425,7 +463,7 @@ namespace ChapeauUI
             // 
             this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.bottomBarLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1441);
+            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1445);
             this.bottomBarLabel.Name = "bottomBarLabel";
             this.bottomBarLabel.Size = new System.Drawing.Size(1543, 74);
             this.bottomBarLabel.TabIndex = 16;
@@ -593,23 +631,6 @@ namespace ChapeauUI
             this.makeReservationBtn.UseVisualStyleBackColor = false;
             this.makeReservationBtn.Click += new System.EventHandler(this.makeReservationBtn_Click);
             // 
-            // reservationTimePicker
-            // 
-            this.reservationTimePicker.AutoSize = true;
-            this.reservationTimePicker.Location = new System.Drawing.Point(4, 232);
-            this.reservationTimePicker.Name = "reservationTimePicker";
-            this.reservationTimePicker.Size = new System.Drawing.Size(134, 20);
-            this.reservationTimePicker.TabIndex = 11;
-            this.reservationTimePicker.Text = "RESERVATION TIME";
-            // 
-            // TimePicker
-            // 
-            this.TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.TimePicker.Location = new System.Drawing.Point(3, 255);
-            this.TimePicker.Name = "TimePicker";
-            this.TimePicker.Size = new System.Drawing.Size(250, 25);
-            this.TimePicker.TabIndex = 12;
-            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -672,7 +693,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Label reservationNameLbl;
         private System.Windows.Forms.DateTimePicker reservationDateTimePicker;
         private System.Windows.Forms.Label reservationTimeLbl;
-        private System.Windows.Forms.Button confirmReservationBtn;
         private System.Windows.Forms.TextBox reservationCommentsTextBox;
         private System.Windows.Forms.Label reservationCommentsLbl;
         private System.Windows.Forms.DataGridView ordersReadyGridView;
@@ -695,5 +715,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button setReservationPresentBtn;
         private System.Windows.Forms.DateTimePicker TimePicker;
         private System.Windows.Forms.Label reservationTimePicker;
+        private System.Windows.Forms.Button confirmReservationBtn;
     }
 }

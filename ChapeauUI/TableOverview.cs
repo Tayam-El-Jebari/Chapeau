@@ -308,7 +308,7 @@ namespace ChapeauUI
                 Phonenumber = phoneNumber,
                 Emailaddres = emailAdress
             };
-            reservationService.AddNewReservation(customerName, false, reservationTime, selectedTable, comments, phoneNumber, emailAdress);
+            reservationService.AddNewReservation(newReservation);
             HideAllPanels();
             startMenuPnl.Show();
         }

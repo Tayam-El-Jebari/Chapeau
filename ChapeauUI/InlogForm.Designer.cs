@@ -157,7 +157,7 @@ namespace ChapeauUI
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(720, 1097);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.startMenuPnl);
