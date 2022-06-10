@@ -174,7 +174,7 @@ namespace ChapeauUI
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Are you sure you wish to clear all?");
+            PopUpUI confirmBackButton = new PopUpUI("Are you sure you wish to clear all?");
             confirmBackButton.ShowDialog();
             if (confirmBackButton.DialogResult == DialogResult.Yes)
             {
@@ -249,7 +249,7 @@ namespace ChapeauUI
                 MessageBox.Show("No items added!");
                 return;
             }
-            ConfirmOrderUI confirm = new ConfirmOrderUI();
+            PopUpUI confirm = new PopUpUI();
             confirm.ShowDialog();
             if (confirm.DialogResult == DialogResult.Yes)
             {
