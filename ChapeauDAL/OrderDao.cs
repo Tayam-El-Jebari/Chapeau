@@ -169,7 +169,7 @@ namespace ChapeauDAL
                             },
                         Amount = (int)dr["amount"],
                         Status = (Status)dr["status"],
-                        IsAlcoholic = (bool)dr["IsAlcoholic"],
+                        IsAlcoholic = (bool?)dr["IsAlcoholic"],
                         }
 
                     }

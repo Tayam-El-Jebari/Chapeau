@@ -52,6 +52,7 @@ namespace ChapeauUI
             this.listViewComments = new System.Windows.Forms.ListView();
             this.progressBarUpdate = new System.Windows.Forms.ProgressBar();
             this.buttonSortByAlcoholic = new System.Windows.Forms.Button();
+            this.buttonOrderID = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelKitchen
@@ -253,6 +254,7 @@ namespace ChapeauUI
             // radioButtonSortForwards
             // 
             this.radioButtonSortForwards.AutoSize = true;
+            this.radioButtonSortForwards.Checked = true;
             this.radioButtonSortForwards.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
             this.radioButtonSortForwards.Location = new System.Drawing.Point(1558, 536);
             this.radioButtonSortForwards.Name = "radioButtonSortForwards";
@@ -270,7 +272,6 @@ namespace ChapeauUI
             this.radioButtonSortBackwards.Name = "radioButtonSortBackwards";
             this.radioButtonSortBackwards.Size = new System.Drawing.Size(132, 24);
             this.radioButtonSortBackwards.TabIndex = 29;
-            this.radioButtonSortBackwards.TabStop = true;
             this.radioButtonSortBackwards.Text = "Sort backwards\r\n";
             this.radioButtonSortBackwards.UseVisualStyleBackColor = true;
             // 
@@ -299,13 +300,27 @@ namespace ChapeauUI
             this.buttonSortByAlcoholic.FlatAppearance.BorderSize = 4;
             this.buttonSortByAlcoholic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonSortByAlcoholic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonSortByAlcoholic.Location = new System.Drawing.Point(1750, 243);
+            this.buttonSortByAlcoholic.Location = new System.Drawing.Point(1750, 153);
             this.buttonSortByAlcoholic.Name = "buttonSortByAlcoholic";
             this.buttonSortByAlcoholic.Size = new System.Drawing.Size(126, 63);
             this.buttonSortByAlcoholic.TabIndex = 32;
             this.buttonSortByAlcoholic.Text = "Alcoholic";
             this.buttonSortByAlcoholic.UseVisualStyleBackColor = true;
             this.buttonSortByAlcoholic.Click += new System.EventHandler(this.buttonSortByAlcoholic_Click);
+            // 
+            // buttonOrderID
+            // 
+            this.buttonOrderID.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonOrderID.FlatAppearance.BorderSize = 4;
+            this.buttonOrderID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonOrderID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.buttonOrderID.Location = new System.Drawing.Point(1750, 243);
+            this.buttonOrderID.Name = "buttonOrderID";
+            this.buttonOrderID.Size = new System.Drawing.Size(126, 63);
+            this.buttonOrderID.TabIndex = 33;
+            this.buttonOrderID.Text = "Order ID";
+            this.buttonOrderID.UseVisualStyleBackColor = true;
+            this.buttonOrderID.Click += new System.EventHandler(this.buttonOrderID_Click);
             // 
             // KitchenAndBarOverview
             // 
@@ -315,6 +330,7 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebgdesktop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.Controls.Add(this.buttonOrderID);
             this.Controls.Add(this.buttonSortByAlcoholic);
             this.Controls.Add(this.progressBarUpdate);
             this.Controls.Add(this.listViewComments);
@@ -369,5 +385,6 @@ namespace ChapeauUI
         private System.Windows.Forms.ListView listViewComments;
         private System.Windows.Forms.ProgressBar progressBarUpdate;
         private System.Windows.Forms.Button buttonSortByAlcoholic;
+        private System.Windows.Forms.Button buttonOrderID;
     }
 }
