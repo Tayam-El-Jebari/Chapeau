@@ -81,6 +81,7 @@ namespace ChapeauUI
             HideAllPanels();
             menuChoice = MenuChoice.MakeReservation;
             openTableOverviewPnl();
+            reservationDateTimePicker.MinDate = DateTime.Today;
         }
 
         private void notificationsBtn_Click(object sender, EventArgs e)
@@ -333,7 +334,7 @@ namespace ChapeauUI
             ReservationService reservationService = new ReservationService();
             for(int i = 0; i < reservationOverviewDataGrid.SelectedCells.Count; i++)
             {
-                reservationService.MarkReservationPresent(Convert.ToInt32(reservationOverviewDataGrid.SelectedCells[i].Value));
+                reservationService.MarkReservationPresent(Convert.ToInt32(reservationOverviewDataGrid.SelectedCells[0].Value));
             }
             fillnonPresentReservationOverviewDataGrid();
         }

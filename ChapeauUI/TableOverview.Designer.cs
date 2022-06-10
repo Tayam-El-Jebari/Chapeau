@@ -320,10 +320,11 @@ namespace ChapeauUI
             this.reservationDateTimePicker.CalendarFont = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.reservationDateTimePicker.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.reservationDateTimePicker.Location = new System.Drawing.Point(46, 556);
-            this.reservationDateTimePicker.MinDate = new System.DateTime(2022, 6, 8, 0, 0, 0, 0);
+            this.reservationDateTimePicker.MinDate = new System.DateTime(2022, 6, 10, 12, 9, 27, 0);
             this.reservationDateTimePicker.Name = "reservationDateTimePicker";
             this.reservationDateTimePicker.Size = new System.Drawing.Size(615, 66);
             this.reservationDateTimePicker.TabIndex = 7;
+            this.reservationDateTimePicker.Value = new System.DateTime(2022, 6, 10, 12, 9, 27, 0);
             // 
             // reservationTimeLbl
             // 
