@@ -42,10 +42,10 @@ namespace ChapeauUI
             this.ReturnButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ReturnButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ReturnButton.ForeColor = System.Drawing.Color.White;
-            this.ReturnButton.Location = new System.Drawing.Point(71, 209);
+            this.ReturnButton.Location = new System.Drawing.Point(71, 201);
             this.ReturnButton.Name = "ReturnButton";
             this.ReturnButton.Padding = new System.Windows.Forms.Padding(5);
-            this.ReturnButton.Size = new System.Drawing.Size(511, 82);
+            this.ReturnButton.Size = new System.Drawing.Size(511, 95);
             this.ReturnButton.TabIndex = 2;
             this.ReturnButton.Text = "RETURN";
             this.ReturnButton.UseVisualStyleBackColor = false;
@@ -110,7 +110,7 @@ namespace ChapeauUI
             this.textBoxInput.TabIndex = 5;
             this.textBoxInput.Visible = false;
             // 
-            // ConfirmOrderUI
+            // PopUpUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -128,7 +128,7 @@ namespace ChapeauUI
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "ConfirmOrderUI";
+            this.Name = "PopUpUI";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ConfirmOrderUI";
             this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));

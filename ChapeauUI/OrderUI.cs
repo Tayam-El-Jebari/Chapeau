@@ -30,6 +30,7 @@ namespace ChapeauUI
         private void CreateButtons()
         {
             menu.Hide();
+            RemoveAllControlsMenu();
             foreach (MenuItem menuItem in menuList)
             {
                 if ((menuItem.MenuItemType == menuItemType && menuItem.MenuType == menuType) || (menuType == MenuType.Drink && menuItem.MenuType == menuType))
@@ -137,22 +138,12 @@ namespace ChapeauUI
                     if (menu.Controls[i] == sender)
                     {
                         MenuItem menuItem = (menu.Controls[i - 1].Tag as MenuItem);
-                        MessageBox.Show(menuItem.Description);
+                        PopUpUI popup = new PopUpUI(menuItem.Description, DialogResult.OK);
+                        popup.ShowDialog();
                     }
                 }
             }
             
-        }
-        public void BtnDescriptionShow(object sender, EventArgs e)
-        {
-            for (int i = 0; i < menu.Controls.Count; i++)
-            {
-                if (menu.Controls[i] == sender)
-                {
-                    MenuItem menuItem = (menu.Controls[i - 1].Tag as MenuItem);
-                    MessageBox.Show(menuItem.Description);
-                }
-            }
         }
 
         private void viewOrder_Click(object sender, EventArgs e)
@@ -249,12 +240,12 @@ namespace ChapeauUI
                 MessageBox.Show("No items added!");
                 return;
             }
-            PopUpUI confirm = new PopUpUI();
-            confirm.ShowDialog();
-            if (confirm.DialogResult == DialogResult.Yes)
+            PopUpUI ConfirmUI = new PopUpUI();
+            ConfirmUI.ShowDialog();
+            if (ConfirmUI.DialogResult == DialogResult.Yes)
             {
                 Order orderToSend = new Order() 
-                { 
+                {
                     Comments = commentsTextBox.Text, 
                     OrderItems = new List<OrderItem>(), 
                     Reservation = this.reservation,
@@ -274,6 +265,7 @@ namespace ChapeauUI
                 itemGridView.Rows.Clear();
                 viewOrder_Click(sender, e);
                 PanelChooseMenu.Visible = true;
+                commentsTextBox.Text = string.Empty;
             }
         }
 
@@ -319,7 +311,6 @@ namespace ChapeauUI
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            RemoveAllControlsMenu();
             if(menuType == MenuType.Drink)
             {
                 PanelChooseMenu.Visible = true;
