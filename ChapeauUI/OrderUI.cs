@@ -145,7 +145,6 @@ namespace ChapeauUI
             }
             
         }
-
         private void viewOrder_Click(object sender, EventArgs e)
         {
             if (itemAddedOrderPnl.Visible)
@@ -327,13 +326,6 @@ namespace ChapeauUI
             {
                 this.Close();
             }
-        }
-        private void RemoveAllControlsMenu()
-        {
-           // hide and show in order to prevent visual bugs from .controls.Clear() that is caused from there being too many controls.
-           menu.Hide();
-           menu.Controls.Clear();
-           menu.Show();
         }
     }
 }

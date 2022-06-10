@@ -83,7 +83,7 @@ namespace ChapeauUI
             this.panelItems.Controls.Add(this.labelBorder);
             this.panelItems.Location = new System.Drawing.Point(-2, 50);
             this.panelItems.Name = "panelItems";
-            this.panelItems.Size = new System.Drawing.Size(700, 1440);
+            this.panelItems.Size = new System.Drawing.Size(720, 1440);
             this.panelItems.TabIndex = 1;
             // 
             // buttonBack
@@ -108,7 +108,7 @@ namespace ChapeauUI
             this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.bottomBarLabel.Location = new System.Drawing.Point(0, 1367);
             this.bottomBarLabel.Name = "bottomBarLabel";
-            this.bottomBarLabel.Size = new System.Drawing.Size(699, 74);
+            this.bottomBarLabel.Size = new System.Drawing.Size(1133, 74);
             this.bottomBarLabel.TabIndex = 3;
             this.bottomBarLabel.Text = "emptyString";
             // 
@@ -464,7 +464,7 @@ namespace ChapeauUI
             this.topBarLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBarLabel.Location = new System.Drawing.Point(0, 0);
             this.topBarLabel.Name = "topBarLabel";
-            this.topBarLabel.Size = new System.Drawing.Size(699, 51);
+            this.topBarLabel.Size = new System.Drawing.Size(718, 51);
             this.topBarLabel.TabIndex = 2;
             this.topBarLabel.Text = "emptyString";
             // 
