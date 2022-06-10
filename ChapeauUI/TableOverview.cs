@@ -109,16 +109,10 @@ namespace ChapeauUI
         }
         private void setAllTablesBackgroundFree()
         {
-            tableOneButton.BackgroundImage = Properties.Resources.TableFree;
-            tableTwoButton.BackgroundImage = Properties.Resources.TableFree;
-            tableThreeButton.BackgroundImage = Properties.Resources.TableFree;
-            tableFourButton.BackgroundImage = Properties.Resources.TableFree;
-            tableFiveButton.BackgroundImage = Properties.Resources.TableFree;
-            tableSixButton.BackgroundImage = Properties.Resources.TableFree;
-            tableSevenButton.BackgroundImage = Properties.Resources.TableFree;
-            tableEightButton.BackgroundImage = Properties.Resources.TableFree;
-            tableNineButton.BackgroundImage = Properties.Resources.TableFree;
-            tableTenButton.BackgroundImage = Properties.Resources.TableFree;
+            foreach(Control control in TableOverviewPnl.Controls)
+            {
+                control.BackgroundImage = Properties.Resources.TableFree;
+            }
         }
         private void setTableImagePresent(int tableID)
         {
