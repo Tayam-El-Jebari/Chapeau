@@ -30,14 +30,14 @@ namespace ChapeauUI
         private void CreateButtons()
         {
             menu.Hide();
-            RemoveAllControlsMenu();
+            menu.Controls.Clear();
             foreach (MenuItem menuItem in menuList)
             {
                 if ((menuItem.MenuItemType == menuItemType && menuItem.MenuType == menuType) || (menuType == MenuType.Drink && menuItem.MenuType == menuType))
                 {
                     LeftAndRightTextButton menuItemButton = new LeftAndRightTextButton()
                     {
-                        Width = menu.Width - 70,
+                        Width = menu.Width - 100,
                         Height = 62,
                         LeftText = $"{menuItem.ProductName}",
                         RightText = $"€{menuItem.Price.ToString("0.00")}",
