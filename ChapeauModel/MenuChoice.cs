@@ -8,8 +8,11 @@ namespace ChapeauModel
 {
     public enum MenuChoice
     {
+        Undifined,
         TakeOrder,
         ShowBill,
-        MakeReservation
+        MakeReservation,
+        Notifications,
+        MarkPresent
     }
 }

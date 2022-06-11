@@ -36,7 +36,14 @@ namespace ChapeauDAL
             string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM Reservation WHERE table_ID = @table_ID AND isPresent = 1";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@table_ID", tableID);
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+            try
+            {
+                return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+            }
+            catch
+            {
+                throw new Exception("There is no one present at this table.");
+            }
         }
 
         public void MarkReservationPresent(int reservationID)

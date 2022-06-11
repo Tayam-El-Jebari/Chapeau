@@ -40,12 +40,19 @@ namespace ChapeauUI
         {
             if (menuChoice == MenuChoice.TakeOrder)
             {
-                ReservationService reservationService = new ReservationService();
-
-                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember);
-                this.Hide();
-                orderUI.ShowDialog();
-                this.Show();
+                try
+                {
+                    ReservationService reservationService = new ReservationService();
+                    OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember);
+                    this.Hide();
+                    orderUI.ShowDialog();
+                    this.Show();
+                }
+                catch (Exception e)
+                {
+                    ConfirmOrderUI errorBox = new ConfirmOrderUI(e.Message, DialogResult.OK);
+                    errorBox.ShowDialog();
+                }
             }
             else if (menuChoice == MenuChoice.ShowBill)
             {
@@ -87,6 +94,7 @@ namespace ChapeauUI
         private void notificationsBtn_Click(object sender, EventArgs e)
         {
             HideAllPanels();
+            menuChoice = MenuChoice.Notifications;
             notificationsPnl.Show();
             fillReadyOrderDataGrid();
             fillOngoingOrderDataGrid();
@@ -311,6 +319,7 @@ namespace ChapeauUI
         private void markReservationPresentBtn_Click(object sender, EventArgs e)
         {
             HideAllPanels();
+            menuChoice = MenuChoice.MarkPresent;
             markReservationPresentPnl.Show();
             fillnonPresentReservationOverviewDataGrid();
         }
@@ -354,6 +363,20 @@ namespace ChapeauUI
             }
             orderService.UpdateStateIsFinished(orderID);
             fillReadyOrderDataGrid();
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            if (menuChoice != 0)
+            {
+                menuChoice = 0;
+                HideAllPanels();
+                startMenuPnl.Show();
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }
