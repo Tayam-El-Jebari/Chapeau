@@ -133,21 +133,11 @@ namespace ChapeauUI
 
         private void buttonCash_Click(object sender, EventArgs e)
         {
-            if (paymentMethod == PaymentMethod.CARD || paymentMethod == PaymentMethod.CASHANDCARD)
-                paymentMethod = PaymentMethod.CASHANDCARD;
-
-            else paymentMethod = PaymentMethod.CASH;
-
             Pay(PaymentMethod.CASH);
         }
 
         private void buttonPin_Click(object sender, EventArgs e)
         {
-            if(paymentMethod == PaymentMethod.CASH || paymentMethod == PaymentMethod.CASHANDCARD)
-                paymentMethod = PaymentMethod.CASHANDCARD;
-
-            else paymentMethod = PaymentMethod.CASH;
-
             Pay(PaymentMethod.CARD);
         }
 
@@ -165,6 +155,11 @@ namespace ChapeauUI
                 if (confirmBox.DialogResult == DialogResult.Yes)
                 {
                     remainingAmount -= amount;
+
+                    if (paymentMethod == PaymentMethod.NotSelected)
+                        paymentMethod = method;
+
+                    else paymentMethod = PaymentMethod.CASHANDCARD;
 
                     if (remainingAmount == 0)
                     {
