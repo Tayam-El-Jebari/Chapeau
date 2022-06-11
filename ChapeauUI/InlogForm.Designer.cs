@@ -44,10 +44,10 @@ namespace ChapeauUI
             // passwordTextBox
             // 
             this.passwordTextBox.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.passwordTextBox.Location = new System.Drawing.Point(186, 667);
+            this.passwordTextBox.Location = new System.Drawing.Point(150, 925);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(290, 52);
+            this.passwordTextBox.Size = new System.Drawing.Size(400, 52);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
@@ -56,10 +56,10 @@ namespace ChapeauUI
             this.userListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.userListView.FullRowSelect = true;
             this.userListView.HideSelection = false;
-            this.userListView.Location = new System.Drawing.Point(78, 130);
+            this.userListView.Location = new System.Drawing.Point(80, 405);
             this.userListView.MultiSelect = false;
             this.userListView.Name = "userListView";
-            this.userListView.Size = new System.Drawing.Size(543, 331);
+            this.userListView.Size = new System.Drawing.Size(540, 330);
             this.userListView.TabIndex = 4;
             this.userListView.UseCompatibleStateImageBehavior = false;
             this.userListView.SelectedIndexChanged += new System.EventHandler(this.userListView_SelectedIndexChanged);
@@ -86,7 +86,7 @@ namespace ChapeauUI
             this.passwordLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.passwordLbl.Font = new System.Drawing.Font("Trebuchet MS", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.passwordLbl.ForeColor = System.Drawing.Color.White;
-            this.passwordLbl.Location = new System.Drawing.Point(221, 603);
+            this.passwordLbl.Location = new System.Drawing.Point(240, 865);
             this.passwordLbl.Name = "passwordLbl";
             this.passwordLbl.Size = new System.Drawing.Size(219, 52);
             this.passwordLbl.TabIndex = 23;
@@ -98,7 +98,7 @@ namespace ChapeauUI
             this.usernameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.usernameLbl.Font = new System.Drawing.Font("Trebuchet MS", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.usernameLbl.ForeColor = System.Drawing.Color.White;
-            this.usernameLbl.Location = new System.Drawing.Point(221, 481);
+            this.usernameLbl.Location = new System.Drawing.Point(240, 745);
             this.usernameLbl.Name = "usernameLbl";
             this.usernameLbl.Size = new System.Drawing.Size(221, 52);
             this.usernameLbl.TabIndex = 22;
@@ -107,9 +107,9 @@ namespace ChapeauUI
             // staffCodeTextBox
             // 
             this.staffCodeTextBox.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.staffCodeTextBox.Location = new System.Drawing.Point(186, 536);
+            this.staffCodeTextBox.Location = new System.Drawing.Point(150, 805);
             this.staffCodeTextBox.Name = "staffCodeTextBox";
-            this.staffCodeTextBox.Size = new System.Drawing.Size(290, 52);
+            this.staffCodeTextBox.Size = new System.Drawing.Size(400, 52);
             this.staffCodeTextBox.TabIndex = 6;
             this.staffCodeTextBox.TextChanged += new System.EventHandler(this.staffCodeTextBox_TextChanged);
             // 
@@ -121,10 +121,10 @@ namespace ChapeauUI
             this.inlogBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.inlogBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.inlogBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.inlogBtn.Location = new System.Drawing.Point(78, 752);
+            this.inlogBtn.Location = new System.Drawing.Point(80, 1035);
             this.inlogBtn.Margin = new System.Windows.Forms.Padding(60);
             this.inlogBtn.Name = "inlogBtn";
-            this.inlogBtn.Size = new System.Drawing.Size(543, 106);
+            this.inlogBtn.Size = new System.Drawing.Size(540, 106);
             this.inlogBtn.TabIndex = 5;
             this.inlogBtn.Text = "LOG IN";
             this.inlogBtn.UseVisualStyleBackColor = false;
@@ -133,9 +133,9 @@ namespace ChapeauUI
             // loginBackgroundLbl
             // 
             this.loginBackgroundLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.loginBackgroundLbl.Location = new System.Drawing.Point(62, 119);
+            this.loginBackgroundLbl.Location = new System.Drawing.Point(60, 385);
             this.loginBackgroundLbl.Name = "loginBackgroundLbl";
-            this.loginBackgroundLbl.Size = new System.Drawing.Size(575, 622);
+            this.loginBackgroundLbl.Size = new System.Drawing.Size(580, 620);
             this.loginBackgroundLbl.TabIndex = 21;
             this.loginBackgroundLbl.Text = "emptyString";
             // 
@@ -157,7 +157,7 @@ namespace ChapeauUI
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(720, 1097);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.startMenuPnl);
