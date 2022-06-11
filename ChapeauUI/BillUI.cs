@@ -148,7 +148,7 @@ namespace ChapeauUI
             {
                 if (amountInput.Text != "")
                 {
-                    amount = double.Parse(amountInput.Text);
+                    amount = double.Parse(amountInput.Text.Replace('.', ','));
                 }
                 confirmBox = new ConfirmOrderUI($"Do you want to pay €{amount:0.00} with {method}?");
                 confirmBox.ShowDialog();
@@ -156,10 +156,7 @@ namespace ChapeauUI
                 {
                     remainingAmount -= amount;
 
-                    if (paymentMethod == PaymentMethod.NotSelected)
-                        paymentMethod = method;
-
-                    else paymentMethod = PaymentMethod.CASHANDCARD;
+                    SetPayment(method);
 
                     if (remainingAmount == 0)
                     {
@@ -189,6 +186,13 @@ namespace ChapeauUI
                 confirmBox = new ConfirmOrderUI("Please enter a number", DialogResult.OK);
                 confirmBox.ShowDialog();
             }
+        }
+        private void SetPayment(PaymentMethod method)
+        {
+            if (paymentMethod == PaymentMethod.NotSelected)
+                paymentMethod = method;
+
+            else paymentMethod = PaymentMethod.CASHANDCARD;
         }
 
         private void LogBill()

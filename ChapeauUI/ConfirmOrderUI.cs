@@ -74,7 +74,7 @@ namespace ChapeauUI
                     {
                         if (double.Parse(textBoxInput.Text) > 0)
                         {
-                            input = double.Parse(textBoxInput.Text);
+                            input = double.Parse(textBoxInput.Text.Replace('.', ','));
                         }
                     }
                     catch
