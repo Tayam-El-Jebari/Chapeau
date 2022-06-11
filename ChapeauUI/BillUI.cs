@@ -52,7 +52,6 @@ namespace ChapeauUI
             labelExVAT.Text = totalPrice.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
-            remainingAmount = totalPrice;
             FillGrid(billGrid);
         }
 
@@ -129,7 +128,8 @@ namespace ChapeauUI
         {
             billPanel.Hide();
             payPanel.Show();
-            labelRemaining.Text = totalPrice.ToString("€ 0.00");
+            remainingAmount = totalPrice;
+            labelRemaining.Text = remainingAmount.ToString("€ 0.00");
         }
 
         private void buttonCash_Click(object sender, EventArgs e)
@@ -154,6 +154,7 @@ namespace ChapeauUI
 
         private void Pay(PaymentMethod method)
         {
+            remainingAmount = totalPrice;
             double amount = remainingAmount;
             try
             {
