@@ -32,7 +32,6 @@ namespace ChapeauUI
         public BillUI(Reservation reservation, Staff staff)
         {
             InitializeComponent();
-            bill = new Bill();
             this.reservation = reservation;
             this.staff = staff;
             ShowHeader();
@@ -156,8 +155,8 @@ namespace ChapeauUI
         private void Pay(PaymentMethod method)
         {
             double amount = remainingAmount;
-            try
-            {
+            //try
+            //{
                 if (amountInput.Text != "")
                 {
                     amount = double.Parse(amountInput.Text);
@@ -190,22 +189,28 @@ namespace ChapeauUI
 
                     labelRemaining.Text = remainingAmount.ToString("€ 0.00");
                 }
-            }
-            catch
-            {
-                throw new Exception("Please enter a number");
-            }
+            //}
+            //catch
+            //{
+            //    throw new Exception("Please enter a number");
+            //}
         }
 
         private void LogBill()
         {
-            bill.Table.TableID = reservation.TableId;
-            bill.Table.WaiterID = staff.Staff_ID;
-            bill.Tip = tip;
-            bill.IsPaid = true;
-            bill.Date = DateTime.Now;
-            bill.Comments = comment;
-            bill.PaymentMethod = paymentMethod;
+            bill = new Bill()
+            {
+                Table = new Table()
+                {
+                    TableID = reservation.TableId,
+                    WaiterID = staff.Staff_ID,
+                },
+                Tip = tip,
+                IsPaid = true,
+                Date = DateTime.Now,
+                Comments = comment,
+                PaymentMethod = paymentMethod,
+            };
             billService.AddBill(bill);
             billService.FinishReservarion(reservation.ReservationId);
         }
