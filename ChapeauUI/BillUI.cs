@@ -27,7 +27,6 @@ namespace ChapeauUI
         private double tip;
         private double remainingAmount;
         private double change;
-        private string comment;
 
         public BillUI(Reservation reservation, Staff staff)
         {
@@ -208,7 +207,7 @@ namespace ChapeauUI
                 Tip = tip,
                 IsPaid = true,
                 Date = DateTime.Now,
-                Comments = comment,
+                Comments = commentBox.Text,
                 PaymentMethod = paymentMethod,
             };
             billService.AddBill(bill);
