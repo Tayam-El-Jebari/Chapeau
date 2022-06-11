@@ -48,7 +48,7 @@ namespace ChapeauUI
             billService = new BillService();
             bill = billService.MakeBill(reservation.ReservationId);
             totalPrice = bill.TotalPriceInclVAT;
-            labelExVAT.Text = totalPrice.ToString("€ 0.00");
+            labelExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
             FillGrid(billGrid);
