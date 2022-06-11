@@ -401,6 +401,7 @@ namespace ChapeauUI
             this.billGrid.RowTemplate.Height = 29;
             this.billGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.billGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.billGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.billGrid.Size = new System.Drawing.Size(666, 655);
             this.billGrid.TabIndex = 17;
             // 
