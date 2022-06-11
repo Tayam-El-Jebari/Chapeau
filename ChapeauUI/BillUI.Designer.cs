@@ -997,6 +997,7 @@ namespace ChapeauUI
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "BillUI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BillUI";
             this.billPanel.ResumeLayout(false);
             this.billPanel.PerformLayout();
