@@ -32,6 +32,7 @@ namespace ChapeauUI
         public BillUI(Reservation reservation, Staff staff)
         {
             InitializeComponent();
+            bill = new Bill();
             this.reservation = reservation;
             this.staff = staff;
             ShowHeader();
