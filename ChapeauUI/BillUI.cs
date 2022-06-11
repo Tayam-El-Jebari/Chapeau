@@ -19,7 +19,7 @@ namespace ChapeauUI
     {
         private BillService billService;
         private Bill bill;
-        private ConfirmOrderUI confirmBox;
+        private PopUpUI confirmBox;
         private Reservation reservation;
         private Staff staff;
         private PaymentMethod paymentMethod;
@@ -57,7 +57,7 @@ namespace ChapeauUI
         private void buttonTip_Click(object sender, EventArgs e)
         {
           
-            confirmBox = new ConfirmOrderUI("Do you want to add a tip?", DialogResult.None);
+            confirmBox = new PopUpUI("Do you want to add a tip?", DialogResult.None);
             confirmBox.ShowDialog();
             tip = confirmBox.InputDouble();
             labelTip.Text = tip.ToString("€ 0.00");
@@ -150,7 +150,7 @@ namespace ChapeauUI
                 {
                     amount = double.Parse(amountInput.Text.Replace('.', ','));
                 }
-                confirmBox = new ConfirmOrderUI($"Do you want to pay €{amount:0.00} with {method}?");
+                confirmBox = new PopUpUI($"Do you want to pay €{amount:0.00} with {method}?");
                 confirmBox.ShowDialog();
                 if (confirmBox.DialogResult == DialogResult.Yes)
                 {
@@ -160,20 +160,20 @@ namespace ChapeauUI
 
                     if (remainingAmount == 0)
                     {
-                        confirmBox = new ConfirmOrderUI($"Payment completed!", DialogResult.OK);
+                        confirmBox = new PopUpUI($"Payment completed!", DialogResult.OK);
                         confirmBox.ShowDialog();
                         ShowBill();
                     }
                     else if (remainingAmount < 0 && method == PaymentMethod.CASH)
                     {
                         change = remainingAmount * -1;
-                        confirmBox = new ConfirmOrderUI($"Payment completed!\nChange:\n€{change:0.00}", DialogResult.OK);
+                        confirmBox = new PopUpUI($"Payment completed!\nChange:\n€{change:0.00}", DialogResult.OK);
                         confirmBox.ShowDialog();
                         ShowBill();
                     }
                     else if(remainingAmount < 0 && method == PaymentMethod.CARD)
                     {
-                        confirmBox = new ConfirmOrderUI($"Payment too high", DialogResult.OK);
+                        confirmBox = new PopUpUI($"Payment too high", DialogResult.OK);
                         confirmBox.ShowDialog();
                         remainingAmount += amount;
                     }
@@ -183,7 +183,7 @@ namespace ChapeauUI
             }
             catch
             {
-                confirmBox = new ConfirmOrderUI("Please enter a number", DialogResult.OK);
+                confirmBox = new PopUpUI("Please enter a number", DialogResult.OK);
                 confirmBox.ShowDialog();
             }
         }
