@@ -53,7 +53,6 @@ namespace ChapeauUI
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
             FillGrid(billGrid);
         }
-
         private void buttonTip_Click(object sender, EventArgs e)
         {
           
@@ -64,12 +63,10 @@ namespace ChapeauUI
             totalPrice = totalPrice + tip;
             labelInVAT.Text = totalPrice.ToString("€ 0.00");   
         }
-
         private void buttonBack_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void ShowBill()
         {
             payPanel.Hide();
@@ -135,7 +132,6 @@ namespace ChapeauUI
         {
             Pay(PaymentMethod.CASH);
         }
-
         private void buttonPin_Click(object sender, EventArgs e)
         {
             Pay(PaymentMethod.CARD);
@@ -217,6 +213,5 @@ namespace ChapeauUI
         {
             this.Close();
         }
-
     }
 }
