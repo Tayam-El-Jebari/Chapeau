@@ -154,8 +154,8 @@ namespace ChapeauUI
         private void Pay(PaymentMethod method)
         {
             double amount = remainingAmount;
-            //try
-            //{
+            try
+            {
                 if (amountInput.Text != "")
                 {
                     amount = double.Parse(amountInput.Text);
@@ -188,11 +188,12 @@ namespace ChapeauUI
 
                     labelRemaining.Text = remainingAmount.ToString("€ 0.00");
                 }
-            //}
-            //catch
-            //{
-            //    throw new Exception("Please enter a number");
-            //}
+            }
+            catch
+            {
+                confirmBox = new ConfirmOrderUI("Please enter a number", DialogResult.OK);
+                confirmBox.ShowDialog();
+            }
         }
 
         private void LogBill()
