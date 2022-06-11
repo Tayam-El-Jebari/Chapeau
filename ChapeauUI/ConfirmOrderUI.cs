@@ -64,30 +64,33 @@ namespace ChapeauUI
             double input = 0;
             if (denied)
             {
-                throw new Exception("No tip added");
+                this.Close();
             }
-            try
+            else
             {
                 try
                 {
-                    if (double.Parse(textBoxInput.Text) > 0)
+                    try
                     {
-                        input = double.Parse(textBoxInput.Text);
+                        if (double.Parse(textBoxInput.Text) > 0)
+                        {
+                            input = double.Parse(textBoxInput.Text);
+                        }
+                    }
+                    catch
+                    {
+                        throw new Exception("Please enter a number");
+                    }
+                    if (double.Parse(textBoxInput.Text) <= 0)
+                    {
+                        throw new Exception("Please fill in a tip above 0");
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    throw new Exception("Please enter a number");
+                    ConfirmOrderUI confirmOrder = new ConfirmOrderUI(ex.Message, DialogResult.OK);
+                    confirmOrder.ShowDialog();
                 }
-                if (double.Parse(textBoxInput.Text) <= 0)
-                {
-                    throw new Exception("Please fill in a tip above 0");
-                }
-            }
-            catch (Exception ex)
-            {
-                ConfirmOrderUI confirmOrder = new ConfirmOrderUI(ex.Message, DialogResult.OK);
-                confirmOrder.ShowDialog();
             }
             return input;
         }

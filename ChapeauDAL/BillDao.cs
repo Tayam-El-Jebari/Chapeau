@@ -16,18 +16,22 @@ namespace ChapeauDAL
         }
         public void AddBill(Bill bill)
         {   //betaalwijze toevoegen
-            string query = "INSERT INTO [Bill] VALUES (@bill_Id, @table_Id, @staff_ID, @totalPriceInclVAT, @totalPriceExclVAT, @totalVAT, @tip, @isPaid, @discount, @currentDate, @comments);";
-            SqlParameter[] sqlParameters = new SqlParameter[10];
+            string query = "INSERT INTO [Bill] VALUES " +
+            "(@bill_Id, @table_Id, @staff_ID, @totalPriceInclVAT, @totalPriceExclVAT, @totalVAT, " +
+            "@tip, @isPaid, @discount, @currentDate, @comments, @paymentMethod);";
+            SqlParameter[] sqlParameters = new SqlParameter[12];
             sqlParameters[0] = new SqlParameter("@bill_Id", bill.BillID);
             sqlParameters[1] = new SqlParameter("@table_Id", bill.Table.TableID);
             sqlParameters[2] = new SqlParameter("@staff_ID", bill.Table.WaiterID);
             sqlParameters[3] = new SqlParameter("@totalPriceInclVAT", bill.TotalPriceInclVAT);
             sqlParameters[4] = new SqlParameter("@totalPriceExclVAT", bill.TotalPriceExclVAT);
-            sqlParameters[5] = new SqlParameter("@tip", bill.Tip);
-            sqlParameters[6] = new SqlParameter("@isPaid", bill.IsPaid);
-            sqlParameters[7] = new SqlParameter("@discount", bill.Discount);
-            sqlParameters[8] = new SqlParameter("@currentDate", bill.Date);
-            sqlParameters[9] = new SqlParameter("@comments", bill.Comments);
+            sqlParameters[5] = new SqlParameter("@totalVAT", bill.TotalVAT);
+            sqlParameters[6] = new SqlParameter("@tip", bill.Tip);
+            sqlParameters[7] = new SqlParameter("@isPaid", bill.IsPaid);
+            sqlParameters[8] = new SqlParameter("@discount", bill.Discount);
+            sqlParameters[9] = new SqlParameter("@currentDate", bill.Date);
+            sqlParameters[10] = new SqlParameter("@comments", bill.Comments);
+            sqlParameters[11] = new SqlParameter("@paymentMethod", (int)bill.PaymentMethod);
             ExecuteEditQuery(query, sqlParameters);
         }
         //finish reservation

@@ -17,22 +17,25 @@ namespace ChapeauUI
 {
     public partial class BillUI : Form
     {
-
-        private double totalPrice;
         private BillService billService;
         private Bill bill;
-        private ConfirmOrderUI confirmOrder;
+        private ConfirmOrderUI confirmBox;
         private Reservation reservation;
+        private Staff staff;
+        private PaymentMethod paymentMethod;
+        private double totalPrice;
         private double tip;
-        private double priceAfterTip;
+        private double remainingAmount;
         private string comment;
 
-        public BillUI(Reservation choosenReservation)
+        public BillUI(Reservation reservation, Staff staff)
         {
             InitializeComponent();
-            this.reservation = choosenReservation;
+            this.reservation = reservation;
+            this.staff = staff;
             ShowHeader();
             MakeBill();
+            FillCompleteBill();
         }
 
         public void ShowHeader()
@@ -44,30 +47,23 @@ namespace ChapeauUI
         {
             billService = new BillService();
             bill = billService.MakeBill(reservation.ReservationId);
-            totalPrice = bill.TotalPriceExclVAT;
+            totalPrice = bill.TotalPriceInclVAT;
             labelExVAT.Text = totalPrice.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
+            remainingAmount = totalPrice;
             FillGrid(billGrid);
         }
 
         private void buttonTip_Click(object sender, EventArgs e)
         {
           
-            confirmOrder = new ConfirmOrderUI("Do you want to add a tip?", DialogResult.None);
-            confirmOrder.ShowDialog();
-            tip = confirmOrder.InputDouble();
+            confirmBox = new ConfirmOrderUI("Do you want to add a tip?", DialogResult.None);
+            confirmBox.ShowDialog();
+            tip = confirmBox.InputDouble();
             labelTip.Text = tip.ToString("€ 0.00");
-            priceAfterTip = totalPrice + tip;
-            labelInVAT.Text = priceAfterTip.ToString("€ 0.00");   
-        }
-        private void ReadComment()
-        {
-            comment = commentBox.Text;
-            if (comment == "Add comment here...")
-            {
-                comment = "No Comment";
-            }
+            totalPrice = totalPrice + tip;
+            labelInVAT.Text = totalPrice.ToString("€ 0.00");   
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -77,20 +73,23 @@ namespace ChapeauUI
 
         private void ShowBill()
         {
-            ReadComment();
-            billPanel.Hide();
+            payPanel.Hide();
             completeBill.Show();
 
         }
         private void FillCompleteBill()
         {
             labelBillExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
-            labelBillTotal.Text = totalPrice.ToString("€ 0.00");
+            labelBillTotal.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
             labelTip.Text = tip.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
-            //labelPaymentMethod.Text = paymentMethod;
-            labelSplitBill.Text = "3";
-            
+            labelTabelNr.Text = reservation.TableId.ToString();
+            labelWaiterName.Text = staff.firstName.ToString();
+            labelDate.Text = DateTime.Now.ToString("dd/MM/yy HH:mm");
+            labelPaymentMethod.Text = paymentMethod.ToString();
+            labelReservation.Text = $"#{reservation.ReservationId}";
+            labelBillVAT.Text = bill.TotalVAT.ToString("€ 0.00");
+            labelBillTip.Text = tip.ToString("€ 0.00");
 
             FillGrid(gridCompleteBill);
         }
@@ -110,6 +109,62 @@ namespace ChapeauUI
                     bill.MenuItems[i].Amount,
                     bill.MenuItems[i].MenuItem.Price.ToString("€ 0.00"));
             };
+        }
+
+        private void buttonBackToBill_Click(object sender, EventArgs e)
+        {
+            payPanel.Hide();
+            billPanel.Show();
+        }
+
+        private void buttonPay_Click(object sender, EventArgs e)
+        {
+            billPanel.Hide();
+            payPanel.Show();
+            labelRemaining.Text = totalPrice.ToString("€ 0.00");
+        }
+
+        private void buttonCash_Click(object sender, EventArgs e)
+        {
+            paymentMethod = PaymentMethod.Cash;
+            Pay();
+        }
+
+        private void Pay()
+        {
+            double amount = remainingAmount;
+            try
+            {
+                if (amountInput.Text != "")
+                {
+                    amount = double.Parse(amountInput.Text);
+                }
+                confirmBox = new ConfirmOrderUI($"Do you want to pay €{amount:0.00} with cash?");
+                confirmBox.ShowDialog();
+                remainingAmount -= amount;
+
+                if (remainingAmount == 0)
+                {
+                    ShowBill();
+                }
+                else if (remainingAmount < 0)
+                {
+                    double change = remainingAmount * -1;
+                    confirmBox = new ConfirmOrderUI($"Change: €{change:0.00}", DialogResult.OK);
+                    confirmBox.ShowDialog();
+                    ShowBill();
+                }
+
+                labelRemaining.Text = remainingAmount.ToString("€ 0.00");
+            }
+            catch
+            {
+                throw new Exception("Please enter a number");
+            }
+        }
+        private void backToMenu_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

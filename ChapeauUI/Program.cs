@@ -25,7 +25,8 @@ namespace ChapeauUI
                 ReservationId = 202,
                 TableId = 4
             };
-            Application.Run(new BillUI(reservation));
+            Staff staff = new Staff { firstName = "Jannet" };
+            Application.Run(new BillUI(reservation, staff));
         }
     }
 }
