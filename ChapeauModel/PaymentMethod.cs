@@ -8,6 +8,6 @@ namespace ChapeauModel
 {
     public enum PaymentMethod
     {
-        Cash, Card, CashAndCard
+        CASH, CARD, CASHANDCARD
     }
 }

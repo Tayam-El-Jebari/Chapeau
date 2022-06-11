@@ -15,7 +15,7 @@ namespace ChapeauDAL
             return ReadBillsTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public void AddBill(Bill bill)
-        {   //betaalwijze toevoegen
+        {   
             string query = "INSERT INTO [Bill] VALUES " +
             "(@bill_Id, @table_Id, @staff_ID, @totalPriceInclVAT, @totalPriceExclVAT, @totalVAT, " +
             "@tip, @isPaid, @discount, @currentDate, @comments, @paymentMethod);";
@@ -34,7 +34,7 @@ namespace ChapeauDAL
             sqlParameters[11] = new SqlParameter("@paymentMethod", (int)bill.PaymentMethod);
             ExecuteEditQuery(query, sqlParameters);
         }
-        //finish reservation
+       
         public List<Bill> ReadBillsTables(DataTable dataTable)
         {
             List<Bill> bills = new List<Bill>();

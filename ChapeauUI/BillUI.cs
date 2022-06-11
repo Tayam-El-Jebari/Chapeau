@@ -26,6 +26,7 @@ namespace ChapeauUI
         private double totalPrice;
         private double tip;
         private double remainingAmount;
+        private double change;
         private string comment;
 
         public BillUI(Reservation reservation, Staff staff)
@@ -35,7 +36,7 @@ namespace ChapeauUI
             this.staff = staff;
             ShowHeader();
             MakeBill();
-            FillCompleteBill();
+            
         }
 
         public void ShowHeader()
@@ -74,8 +75,9 @@ namespace ChapeauUI
         private void ShowBill()
         {
             payPanel.Hide();
+            FillCompleteBill();
+            LogBill();
             completeBill.Show();
-
         }
         private void FillCompleteBill()
         {
@@ -86,10 +88,16 @@ namespace ChapeauUI
             labelTabelNr.Text = reservation.TableId.ToString();
             labelWaiterName.Text = staff.firstName.ToString();
             labelDate.Text = DateTime.Now.ToString("dd/MM/yy HH:mm");
-            labelPaymentMethod.Text = paymentMethod.ToString();
+            
             labelReservation.Text = $"#{reservation.ReservationId}";
             labelBillVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelBillTip.Text = tip.ToString("€ 0.00");
+            labelChange.Text = change.ToString("€ 0.00");
+
+            if (paymentMethod == PaymentMethod.CASHANDCARD)
+                labelPaymentMethod.Text = "CASH AND CARD";
+            else labelPaymentMethod.Text = paymentMethod.ToString();
+
 
             FillGrid(gridCompleteBill);
         }
@@ -126,11 +134,25 @@ namespace ChapeauUI
 
         private void buttonCash_Click(object sender, EventArgs e)
         {
-            paymentMethod = PaymentMethod.Cash;
-            Pay();
+            if (paymentMethod == PaymentMethod.CARD || paymentMethod == PaymentMethod.CASHANDCARD)
+                paymentMethod = PaymentMethod.CASHANDCARD;
+
+            else paymentMethod = PaymentMethod.CASH;
+
+            Pay(PaymentMethod.CASH);
         }
 
-        private void Pay()
+        private void buttonPin_Click(object sender, EventArgs e)
+        {
+            if(paymentMethod == PaymentMethod.CASH || paymentMethod == PaymentMethod.CASHANDCARD)
+                paymentMethod = PaymentMethod.CASHANDCARD;
+
+            else paymentMethod = PaymentMethod.CASH;
+
+            Pay(PaymentMethod.CARD);
+        }
+
+        private void Pay(PaymentMethod method)
         {
             double amount = remainingAmount;
             try
@@ -139,32 +161,57 @@ namespace ChapeauUI
                 {
                     amount = double.Parse(amountInput.Text);
                 }
-                confirmBox = new ConfirmOrderUI($"Do you want to pay €{amount:0.00} with cash?");
+                confirmBox = new ConfirmOrderUI($"Do you want to pay €{amount:0.00} with {method}?");
                 confirmBox.ShowDialog();
-                remainingAmount -= amount;
-
-                if (remainingAmount == 0)
+                if (confirmBox.DialogResult == DialogResult.Yes)
                 {
-                    ShowBill();
-                }
-                else if (remainingAmount < 0)
-                {
-                    double change = remainingAmount * -1;
-                    confirmBox = new ConfirmOrderUI($"Change: €{change:0.00}", DialogResult.OK);
-                    confirmBox.ShowDialog();
-                    ShowBill();
-                }
+                    remainingAmount -= amount;
 
-                labelRemaining.Text = remainingAmount.ToString("€ 0.00");
+                    if (remainingAmount == 0)
+                    {
+                        confirmBox = new ConfirmOrderUI($"Payment completed!", DialogResult.OK);
+                        confirmBox.ShowDialog();
+                        ShowBill();
+                    }
+                    else if (remainingAmount < 0 && method == PaymentMethod.CASH)
+                    {
+                        change = remainingAmount * -1;
+                        confirmBox = new ConfirmOrderUI($"Payment completed!\nChange:\n€{change:0.00}", DialogResult.OK);
+                        confirmBox.ShowDialog();
+                        ShowBill();
+                    }
+                    else if(remainingAmount < 0 && method == PaymentMethod.CARD)
+                    {
+                        confirmBox = new ConfirmOrderUI($"Payment too high", DialogResult.OK);
+                        confirmBox.ShowDialog();
+                        remainingAmount += amount;
+                    }
+
+                    labelRemaining.Text = remainingAmount.ToString("€ 0.00");
+                }
             }
             catch
             {
                 throw new Exception("Please enter a number");
             }
         }
+
+        private void LogBill()
+        {
+            bill.Table.TableID = reservation.TableId;
+            bill.Table.WaiterID = staff.Staff_ID;
+            bill.Tip = tip;
+            bill.IsPaid = true;
+            bill.Date = DateTime.Now;
+            bill.Comments = comment;
+            bill.PaymentMethod = paymentMethod;
+            billService.AddBill(bill);
+            billService.FinishReservarion(reservation.ReservationId);
+        }
         private void backToMenu_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
+
     }
 }
