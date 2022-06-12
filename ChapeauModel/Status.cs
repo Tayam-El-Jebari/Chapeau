@@ -11,4 +11,3 @@ namespace ChapeauModel
         NotReady, Ready, Delivered
     }
 }
-

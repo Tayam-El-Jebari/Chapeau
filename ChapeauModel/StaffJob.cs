@@ -9,7 +9,7 @@ namespace ChapeauModel
     public enum StaffJob
     {
         Waiter,
-        Chef,
+        Chef, 
         Bartender,
         Owner
     }
