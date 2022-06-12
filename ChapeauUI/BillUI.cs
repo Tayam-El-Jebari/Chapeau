@@ -60,7 +60,7 @@ namespace ChapeauUI
             confirmBox.ShowDialog();
             tip = confirmBox.InputDouble();
             labelTip.Text = tip.ToString("€ 0.00");
-            totalPrice = totalPrice + tip;
+            totalPrice = bill.TotalPriceInclVAT + tip;
             labelInVAT.Text = totalPrice.ToString("€ 0.00");   
         }
         private void buttonBack_Click(object sender, EventArgs e)
