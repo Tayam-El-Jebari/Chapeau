@@ -29,6 +29,9 @@ namespace ChapeauUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableOneButton = new System.Windows.Forms.Button();
             this.tableThreeButton = new System.Windows.Forms.Button();
             this.tableFiveButton = new System.Windows.Forms.Button();
@@ -87,7 +90,6 @@ namespace ChapeauUI
             // tableOneButton
             // 
             this.tableOneButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableOneButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableOneButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableOneButton.ForeColor = System.Drawing.Color.White;
             this.tableOneButton.Location = new System.Drawing.Point(100, 50);
@@ -101,7 +103,6 @@ namespace ChapeauUI
             // tableThreeButton
             // 
             this.tableThreeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableThreeButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableThreeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableThreeButton.ForeColor = System.Drawing.Color.White;
             this.tableThreeButton.Location = new System.Drawing.Point(100, 300);
@@ -115,7 +116,6 @@ namespace ChapeauUI
             // tableFiveButton
             // 
             this.tableFiveButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableFiveButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableFiveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableFiveButton.ForeColor = System.Drawing.Color.White;
             this.tableFiveButton.Location = new System.Drawing.Point(100, 550);
@@ -129,7 +129,6 @@ namespace ChapeauUI
             // tableSevenButton
             // 
             this.tableSevenButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableSevenButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableSevenButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableSevenButton.ForeColor = System.Drawing.Color.White;
             this.tableSevenButton.Location = new System.Drawing.Point(100, 800);
@@ -143,7 +142,6 @@ namespace ChapeauUI
             // tableNineButton
             // 
             this.tableNineButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableNineButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableNineButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableNineButton.ForeColor = System.Drawing.Color.White;
             this.tableNineButton.Location = new System.Drawing.Point(100, 1050);
@@ -157,7 +155,6 @@ namespace ChapeauUI
             // tableTwoButton
             // 
             this.tableTwoButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableTwoButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableTwoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableTwoButton.ForeColor = System.Drawing.Color.White;
             this.tableTwoButton.Location = new System.Drawing.Point(400, 50);
@@ -171,7 +168,6 @@ namespace ChapeauUI
             // tableFourButton
             // 
             this.tableFourButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableFourButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableFourButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableFourButton.ForeColor = System.Drawing.Color.White;
             this.tableFourButton.Location = new System.Drawing.Point(400, 300);
@@ -185,7 +181,6 @@ namespace ChapeauUI
             // tableSixButton
             // 
             this.tableSixButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableSixButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableSixButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableSixButton.ForeColor = System.Drawing.Color.White;
             this.tableSixButton.Location = new System.Drawing.Point(400, 550);
@@ -199,7 +194,6 @@ namespace ChapeauUI
             // tableEightButton
             // 
             this.tableEightButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableEightButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableEightButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableEightButton.ForeColor = System.Drawing.Color.White;
             this.tableEightButton.Location = new System.Drawing.Point(400, 800);
@@ -213,7 +207,6 @@ namespace ChapeauUI
             // tableTenButton
             // 
             this.tableTenButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.tableTenButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableTenButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableTenButton.ForeColor = System.Drawing.Color.White;
             this.tableTenButton.Location = new System.Drawing.Point(400, 1050);
@@ -396,6 +389,14 @@ namespace ChapeauUI
             // 
             this.ordersReadyGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ordersReadyGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(188)))), ((int)(((byte)(188)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ordersReadyGridView.DefaultCellStyle = dataGridViewCellStyle1;
             this.ordersReadyGridView.Location = new System.Drawing.Point(40, 100);
             this.ordersReadyGridView.MultiSelect = false;
             this.ordersReadyGridView.Name = "ordersReadyGridView";
@@ -447,6 +448,14 @@ namespace ChapeauUI
             // 
             this.reservationOverviewDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.reservationOverviewDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(188)))), ((int)(((byte)(188)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.reservationOverviewDataGrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.reservationOverviewDataGrid.Location = new System.Drawing.Point(40, 100);
             this.reservationOverviewDataGrid.MultiSelect = false;
             this.reservationOverviewDataGrid.Name = "reservationOverviewDataGrid";
@@ -503,6 +512,14 @@ namespace ChapeauUI
             // 
             this.ongoingOrdersDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ongoingOrdersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(188)))), ((int)(((byte)(188)))));
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.ongoingOrdersDataGridView.DefaultCellStyle = dataGridViewCellStyle3;
             this.ongoingOrdersDataGridView.Location = new System.Drawing.Point(40, 850);
             this.ongoingOrdersDataGridView.MultiSelect = false;
             this.ongoingOrdersDataGridView.Name = "ongoingOrdersDataGridView";
