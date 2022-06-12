@@ -68,6 +68,7 @@ namespace ChapeauUI
         }
         private void ShowBill()
         {
+            //Show Printable bill
             billPanel.Hide();
             payPanel.Hide();
             FillCompleteBill();
@@ -76,6 +77,7 @@ namespace ChapeauUI
         }
         private void FillCompleteBill()
         {
+            //Fill the prinatable bill
             labelBillExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
             labelBillTotal.Text = $"€ {totalPrice:0.00}";
             labelTip.Text = tip.ToString("€ 0.00");
@@ -151,40 +153,45 @@ namespace ChapeauUI
                 if (confirmBox.DialogResult == DialogResult.Yes)
                 {
                     remainingAmount -= amount;
-
                     SetPayment(method);
-
+                    //check if all is payed
                     if (remainingAmount == 0)
                     {
-                        confirmBox = new PopUpUI($"Payment completed!", DialogResult.OK);
-                        confirmBox.ShowDialog();
+                        PopUpReturn("Payment completed!");
                         ShowBill();
                     }
+                    //calculate change
                     else if (remainingAmount < 0 && method == PaymentMethod.CASH)
                     {
                         change = remainingAmount * -1;
-                        confirmBox = new PopUpUI($"Payment completed!\nChange:\n€{change:0.00}", DialogResult.OK);
-                        confirmBox.ShowDialog();
+                        PopUpReturn($"Payment completed!\nChange:\n€{change:0.00}");
                         ShowBill();
                     }
+                    //Send error if too much is payed with card
                     else if(remainingAmount < 0 && method == PaymentMethod.CARD)
                     {
-                        confirmBox = new PopUpUI($"Payment too high", DialogResult.OK);
-                        confirmBox.ShowDialog();
+                        PopUpReturn("Payment too high");
                         remainingAmount += amount;
                     }
-
                     labelRemaining.Text = remainingAmount.ToString("€ 0.00");
                 }
             }
             catch
             {
-                confirmBox = new PopUpUI("Please enter a number", DialogResult.OK);
-                confirmBox.ShowDialog();
+                PopUpReturn("Please enter a number");
             }
         }
+
+        private void PopUpReturn(string message)
+        {
+            //PopUpUI with only a return button
+            confirmBox = new PopUpUI(message, DialogResult.OK);
+            confirmBox.ShowDialog();
+        }
+
         private void SetPayment(PaymentMethod method)
         {
+            //Check if multiple paymentmethods are used
             if (paymentMethod == PaymentMethod.NotSelected)
                 paymentMethod = method;
 
@@ -193,6 +200,7 @@ namespace ChapeauUI
 
         private void LogBill()
         {
+            //Send the bill to the database
             bill = new Bill()
             {
                 Table = new Table()

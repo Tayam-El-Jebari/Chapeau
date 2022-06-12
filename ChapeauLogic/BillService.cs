@@ -40,7 +40,7 @@ namespace ChapeauLogic
             Bill bill = new Bill();
           
                 List<OrderItem> items = SortList(billdb.GetBillItems(reservationId));
-            
+                //Calculate VAT for each item
                 foreach (OrderItem item in items)
                 {
                     calculateVAT.Price = (item.Amount * item.MenuItem.Price);
@@ -67,6 +67,7 @@ namespace ChapeauLogic
 
         public List<OrderItem> SortList(List<OrderItem> orderItems)
         {
+            //Sort out duplicate items and add them to the same item in amount
             for (int i = 0; i < orderItems.Count - 1; i++)
             {
                 if (orderItems[i].MenuItem.MenuItemId == orderItems[i + 1].MenuItem.MenuItemId)
