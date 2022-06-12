@@ -33,6 +33,10 @@ namespace ChapeauUI
             makeReservationPnl.Hide();
             markReservationPresentPnl.Hide();
             notificationsPnl.Hide();
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = 30000;//30 seconds
+            timer.Tick += new System.EventHandler(timer_Tick);
+            timer.Start();
         }
 
         //Based on the choice made in the startmenu make the open the right window for the table that was selected.
@@ -69,17 +73,27 @@ namespace ChapeauUI
             }
         }
 
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            openTableOverviewPnl();
+            fillnonPresentReservationOverviewDataGrid();
+            fillOngoingOrderDataGrid();
+            fillReadyOrderDataGrid();
+        }
+
         private void takeOrderBtn_Click(object sender, EventArgs e)
         {
             HideAllPanels();
             menuChoice = MenuChoice.TakeOrder;
             openTableOverviewPnl();
+            TableOverviewPnl.Show();
         }
         private void showBillBtn_Click(object sender, EventArgs e)
         {
             HideAllPanels();
             menuChoice = MenuChoice.ShowBill;
             openTableOverviewPnl();
+            TableOverviewPnl.Show();
         }
 
         private void makeReservationBtn_Click(object sender, EventArgs e)
@@ -87,6 +101,7 @@ namespace ChapeauUI
             HideAllPanels();
             menuChoice = MenuChoice.MakeReservation;
             openTableOverviewPnl();
+            TableOverviewPnl.Show();
             reservationDateTimePicker.MinDate = DateTime.Today;
         }
 
@@ -124,7 +139,6 @@ namespace ChapeauUI
                 setTableBackground(control, tableStatus[i]);
                 //setTableBackground(control, TableStatus.Occupied);
             }
-            TableOverviewPnl.Show();
         }
 
         //Set the background image of a table to the right picture based on if a table is occupied or reserved.
