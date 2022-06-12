@@ -13,13 +13,13 @@ namespace ChapeauDAL
     {
         public List<Reservation> GetAllNonPresentReservationsOrderedByTable()
         {
-            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE isPresent = 0 ORDER BY table_ID";
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE isPresent = 0 AND CAST(reservationTime AS DATE) >= CAST(GETDATE() AS DATE) ORDER BY table_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public void AddNewReservation(Reservation reservation)
         {
-            string query = "INSERT INTO [Reservation] (customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress) VALUES (@customerFullName, @isPresent, @reservationTime, 4, @comments, @phoneNumber, @emailAdress);";
+            string query = "INSERT INTO [Reservation] (customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress) VALUES (@customerFullName, @isPresent, @reservationTime, @table_ID, @comments, @phoneNumber, @emailAdress);";
             SqlParameter[] sqlParameters = new SqlParameter[7];
             sqlParameters[0] = new SqlParameter("@customerFullName", reservation.CustomerFullName);
             sqlParameters[1] = new SqlParameter("@isPresent", reservation.isPresent);

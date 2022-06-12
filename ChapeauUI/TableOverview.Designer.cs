@@ -228,15 +228,15 @@ namespace ChapeauUI
             // 
             this.TableOverviewPnl.BackColor = System.Drawing.Color.Transparent;
             this.TableOverviewPnl.Controls.Add(this.tableOneButton);
-            this.TableOverviewPnl.Controls.Add(this.tableTenButton);
+            this.TableOverviewPnl.Controls.Add(this.tableTwoButton);
             this.TableOverviewPnl.Controls.Add(this.tableThreeButton);
-            this.TableOverviewPnl.Controls.Add(this.tableEightButton);
+            this.TableOverviewPnl.Controls.Add(this.tableFourButton);
             this.TableOverviewPnl.Controls.Add(this.tableFiveButton);
             this.TableOverviewPnl.Controls.Add(this.tableSixButton);
             this.TableOverviewPnl.Controls.Add(this.tableSevenButton);
-            this.TableOverviewPnl.Controls.Add(this.tableFourButton);
+            this.TableOverviewPnl.Controls.Add(this.tableEightButton);
             this.TableOverviewPnl.Controls.Add(this.tableNineButton);
-            this.TableOverviewPnl.Controls.Add(this.tableTwoButton);
+            this.TableOverviewPnl.Controls.Add(this.tableTenButton);
             this.TableOverviewPnl.Location = new System.Drawing.Point(0, 51);
             this.TableOverviewPnl.Name = "TableOverviewPnl";
             this.TableOverviewPnl.Size = new System.Drawing.Size(700, 1390);
@@ -448,9 +448,11 @@ namespace ChapeauUI
             this.reservationOverviewDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.reservationOverviewDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.reservationOverviewDataGrid.Location = new System.Drawing.Point(40, 100);
+            this.reservationOverviewDataGrid.MultiSelect = false;
             this.reservationOverviewDataGrid.Name = "reservationOverviewDataGrid";
             this.reservationOverviewDataGrid.RowHeadersWidth = 51;
             this.reservationOverviewDataGrid.RowTemplate.Height = 29;
+            this.reservationOverviewDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.reservationOverviewDataGrid.Size = new System.Drawing.Size(620, 950);
             this.reservationOverviewDataGrid.TabIndex = 13;
             // 

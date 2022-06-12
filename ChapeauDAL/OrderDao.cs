@@ -36,7 +36,7 @@ namespace ChapeauDAL
         }
         public List<Order> GetOngoingFoodOrdersForWaiter(int staffID)
         {
-            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) != (select COUNT(*)) AND[order_Item].menuItem_ID NOT in (SELECT menuItem_ID FROM Drink_Item) ORDER BY [order].table_Id";
+            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) != (select COUNT(*)) AND[order_Item].menuItem_ID NOT in (SELECT menuItem_ID FROM Drink_Item) ORDER BY [order].timePlaced";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
@@ -44,7 +44,7 @@ namespace ChapeauDAL
 
         public List<Order> GetOngoingDrinkOrdersForWaiter(int staffID)
         {
-            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Drink_Item] AS d ON d.menuItem_Id = [MenuItem].menuItem_ID JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) != (select COUNT(*)) ORDER BY [order].table_Id";
+            string query = "SELECT DISTINCT [Order].order_id, [Order].table_Id, CAST([Order].comments AS VARCHAR(MAX)) AS comments, [Order].isFinished, [Order].timePlaced FROM[order_Item] JOIN MenuItem ON MenuItem.menuItem_ID = [Order_Item].menuItem_ID JOIN[Order] ON[Order].order_id = [Order_Item].order_id JOIN[Drink_Item] AS d ON d.menuItem_Id = [MenuItem].menuItem_ID JOIN[Table] AS t ON t.table_ID = [Order].table_Id WHERE t.Waiter_ID = @staffID AND isFinished != 1 AND(select count(*) where[Status] = 1) != (select COUNT(*)) ORDER BY [order].timePlaced";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
