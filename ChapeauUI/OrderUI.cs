@@ -325,7 +325,7 @@ namespace ChapeauUI
             {
                 PanelChooseMenu.Visible = true;
             }
-            else
+            else if (PanelChooseMenu.Visible)
             {
                 this.Close();
             }
