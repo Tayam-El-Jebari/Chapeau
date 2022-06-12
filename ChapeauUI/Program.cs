@@ -18,12 +18,6 @@ namespace ChapeauUI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Reservation reservation = new Reservation
-            {
-                ReservationId = 202,
-                TableId = 4
-            };
-            Staff staff = new Staff() { Staff_ID = 4 };
             Application.Run(new StartScreen());
         }
     }

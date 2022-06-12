@@ -66,7 +66,7 @@ namespace ChapeauUI
         public double InputDouble()
         {
             double input = 0;
-            if(denied)
+            if (denied)
             {
                 this.Close();
             }
@@ -88,14 +88,6 @@ namespace ChapeauUI
                     if (double.Parse(textBoxInput.Text) <= 0)
                     {
                         throw new Exception("Please fill in a tip above 0");
-                    }
-                    else if (double.Parse(textBoxInput.Text) <= 0)
-                    {
-                        throw new Exception("Please fill in a tip above 0");
-                    }
-                    else
-                    {
-                        throw new Exception("Please enter a number");
                     }
                 }
                 catch (Exception ex)

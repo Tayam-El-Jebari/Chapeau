@@ -39,8 +39,8 @@ namespace ChapeauUI
         }
         private void inlogBtn_Click(object sender, EventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                 StaffService staffService = new StaffService();
                 int staffID = int.Parse(staffCodeTextBox.Text);
@@ -72,11 +72,17 @@ namespace ChapeauUI
                     this.Show();
 
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Something went wrong while logging in: " + ex.Message);
-            //}
+                else
+                {
+                    PopUpUI popup = new PopUpUI("You can't log in on this device please change to the handheld.", DialogResult.OK);
+                    popup.ShowDialog();
+                }
+            }
+            catch (Exception ex)
+            {
+                PopUpUI popup = new PopUpUI(ex.Message, DialogResult.OK);
+                popup.ShowDialog();
+            }
         }
 
         private void userListView_SelectedIndexChanged(object sender, EventArgs e)

@@ -58,12 +58,14 @@ namespace ChapeauUI
                 }
                 else
                 {
-                    MessageBox.Show("You can't log in on this device please change to the desktop.");
+                    PopUpUI popup = new PopUpUI("You can't log in on this device please change to the desktop.", DialogResult.OK);
+                    popup.ShowDialog();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong while logging in: " + ex.Message);
+                PopUpUI popup = new PopUpUI(ex.Message, DialogResult.OK);
+                popup.ShowDialog();
             }
         }
 
