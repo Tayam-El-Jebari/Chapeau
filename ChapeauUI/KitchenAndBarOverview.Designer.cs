@@ -108,9 +108,9 @@ namespace ChapeauUI
             this.buttonLogOut.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.buttonLogOut.Location = new System.Drawing.Point(-13, 955);
             this.buttonLogOut.Name = "buttonLogOut";
-            this.buttonLogOut.Size = new System.Drawing.Size(141, 85);
+            this.buttonLogOut.Size = new System.Drawing.Size(165, 85);
             this.buttonLogOut.TabIndex = 3;
-            this.buttonLogOut.Text = "<";
+            this.buttonLogOut.Text = "<BACK";
             this.buttonLogOut.UseVisualStyleBackColor = false;
             this.buttonLogOut.Click += new System.EventHandler(this.buttonLogOut_Click);
             // 
