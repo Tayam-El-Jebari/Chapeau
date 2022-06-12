@@ -19,5 +19,6 @@ namespace ChapeauModel
         public double Discount { get; set; }
         public DateTime Date { get; set; }
         public string Comments { get; set; }
+        public PaymentMethod PaymentMethod { get; set; }
     }
 }

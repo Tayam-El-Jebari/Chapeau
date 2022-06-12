@@ -17,22 +17,25 @@ namespace ChapeauUI
 {
     public partial class BillUI : Form
     {
-
-        private double totalPrice;
         private BillService billService;
         private Bill bill;
-        private ConfirmOrderUI confirmOrder;
+        private PopUpUI confirmBox;
         private Reservation reservation;
+        private Staff staff;
+        private PaymentMethod paymentMethod;
+        private double totalPrice;
         private double tip;
-        private double priceAfterTip;
-        private string comment;
+        private double remainingAmount;
+        private double change;
 
-        public BillUI(Reservation choosenReservation)
+        public BillUI(Reservation reservation, Staff staff)
         {
             InitializeComponent();
-            this.reservation = choosenReservation;
+            this.reservation = reservation;
+            this.staff = staff;
             ShowHeader();
             MakeBill();
+            
         }
 
         public void ShowHeader()
@@ -43,66 +46,53 @@ namespace ChapeauUI
         private void MakeBill()
         {
             billService = new BillService();
-            bill = billService.MakeBill(reservation.TableId);
-            totalPrice = bill.TotalPriceExclVAT;
-            labelExVAT.Text = totalPrice.ToString("€ 0.00");
+            bill = billService.MakeBill(reservation.ReservationId);
+            totalPrice = bill.TotalPriceInclVAT;
+            labelExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
             labelInVAT.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
             FillGrid(billGrid);
         }
-
         private void buttonTip_Click(object sender, EventArgs e)
         {
           
-            confirmOrder = new ConfirmOrderUI("Do you want to add a tip?", DialogResult.None);
-            confirmOrder.ShowDialog();
-            tip = confirmOrder.InputDouble();
+            confirmBox = new PopUpUI("Do you want to add a tip?", DialogResult.None);
+            confirmBox.ShowDialog();
+            tip = confirmBox.InputDouble();
             labelTip.Text = tip.ToString("€ 0.00");
-            priceAfterTip = totalPrice + tip;
-            labelInVAT.Text = priceAfterTip.ToString("€ 0.00");   
+            totalPrice = totalPrice + tip;
+            labelInVAT.Text = totalPrice.ToString("€ 0.00");   
         }
-        private void ReadComment()
-        {
-            comment = commentBox.Text;
-            if (comment == "Add comment here...")
-            {
-                comment = "No Comment";
-            }
-        }
-
         private void buttonBack_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
-        private void buttonCash_Click(object sender, EventArgs e)
-        {
-            ReadComment();
-            FillCompleteBill("CASH");
-
-            ShowBill();
-        }
-
-        private void buttonCard_Click(object sender, EventArgs e)
-        {
-
-        }
         private void ShowBill()
         {
-            ReadComment();
-            billPanel.Hide();
+            payPanel.Hide();
+            FillCompleteBill();
+            LogBill();
             completeBill.Show();
-
         }
-        private void FillCompleteBill(string paymentMethod)
+        private void FillCompleteBill()
         {
             labelBillExVAT.Text = bill.TotalPriceExclVAT.ToString("€ 0.00");
-            labelBillTotal.Text = totalPrice.ToString("€ 0.00");
+            labelBillTotal.Text = bill.TotalPriceInclVAT.ToString("€ 0.00");
             labelTip.Text = tip.ToString("€ 0.00");
             labelVAT.Text = bill.TotalVAT.ToString("€ 0.00");
-            labelPaymentMethod.Text = paymentMethod;
-            labelSplitBill.Text = "3";
+            labelTabelNr.Text = reservation.TableId.ToString();
+            labelWaiterName.Text = staff.firstName.ToString();
+            labelDate.Text = DateTime.Now.ToString("dd/MM/yy HH:mm");
             
+            labelReservation.Text = $"#{reservation.ReservationId}";
+            labelBillVAT.Text = bill.TotalVAT.ToString("€ 0.00");
+            labelBillTip.Text = tip.ToString("€ 0.00");
+            labelChange.Text = change.ToString("€ 0.00");
+
+            if (paymentMethod == PaymentMethod.CASHANDCARD)
+                labelPaymentMethod.Text = "CASH AND CARD";
+            else labelPaymentMethod.Text = paymentMethod.ToString();
+
 
             FillGrid(gridCompleteBill);
         }
@@ -122,6 +112,106 @@ namespace ChapeauUI
                     bill.MenuItems[i].Amount,
                     bill.MenuItems[i].MenuItem.Price.ToString("€ 0.00"));
             };
+        }
+
+        private void buttonBackToBill_Click(object sender, EventArgs e)
+        {
+            payPanel.Hide();
+            billPanel.Show();
+        }
+
+        private void buttonPay_Click(object sender, EventArgs e)
+        {
+            billPanel.Hide();
+            payPanel.Show();
+            remainingAmount = totalPrice;
+            labelRemaining.Text = remainingAmount.ToString("€ 0.00");
+        }
+
+        private void buttonCash_Click(object sender, EventArgs e)
+        {
+            Pay(PaymentMethod.CASH);
+        }
+        private void buttonPin_Click(object sender, EventArgs e)
+        {
+            Pay(PaymentMethod.CARD);
+        }
+
+        private void Pay(PaymentMethod method)
+        {
+            double amount = remainingAmount;
+            try
+            {
+                if (amountInput.Text != "")
+                {
+                    amount = double.Parse(amountInput.Text.Replace('.', ','));
+                }
+                confirmBox = new PopUpUI($"Do you want to pay €{amount:0.00} with {method}?");
+                confirmBox.ShowDialog();
+                if (confirmBox.DialogResult == DialogResult.Yes)
+                {
+                    remainingAmount -= amount;
+
+                    SetPayment(method);
+
+                    if (remainingAmount == 0)
+                    {
+                        confirmBox = new PopUpUI($"Payment completed!", DialogResult.OK);
+                        confirmBox.ShowDialog();
+                        ShowBill();
+                    }
+                    else if (remainingAmount < 0 && method == PaymentMethod.CASH)
+                    {
+                        change = remainingAmount * -1;
+                        confirmBox = new PopUpUI($"Payment completed!\nChange:\n€{change:0.00}", DialogResult.OK);
+                        confirmBox.ShowDialog();
+                        ShowBill();
+                    }
+                    else if(remainingAmount < 0 && method == PaymentMethod.CARD)
+                    {
+                        confirmBox = new PopUpUI($"Payment too high", DialogResult.OK);
+                        confirmBox.ShowDialog();
+                        remainingAmount += amount;
+                    }
+
+                    labelRemaining.Text = remainingAmount.ToString("€ 0.00");
+                }
+            }
+            catch
+            {
+                confirmBox = new PopUpUI("Please enter a number", DialogResult.OK);
+                confirmBox.ShowDialog();
+            }
+        }
+        private void SetPayment(PaymentMethod method)
+        {
+            if (paymentMethod == PaymentMethod.NotSelected)
+                paymentMethod = method;
+
+            else paymentMethod = PaymentMethod.CASHANDCARD;
+        }
+
+        private void LogBill()
+        {
+            bill = new Bill()
+            {
+                Table = new Table()
+                {
+                    TableID = reservation.TableId,
+                    WaiterID = staff.Staff_ID,
+                },
+                Tip = tip,
+                IsPaid = true,
+                Date = DateTime.Now,
+                Comments = commentBox.Text,
+                PaymentMethod = paymentMethod,
+            };
+            billService.AddBill(bill);
+            billService.FinishReservarion(reservation.ReservationId);
+        }
+        private void backToMenu_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

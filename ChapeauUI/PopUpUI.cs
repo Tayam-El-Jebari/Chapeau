@@ -54,7 +54,7 @@ namespace ChapeauUI
                     break;
             }
         }
-        public ConfirmOrderUI(string question, double priceInclVAT)
+        public PopUpUI(string question, double priceInclVAT)
         {
             InitializeComponent();
             ConfirmButton.DialogResult = DialogResult.Yes;
@@ -68,15 +68,26 @@ namespace ChapeauUI
             double input = 0;
             if(denied)
             {
-                throw new Exception("no tip added");
+                this.Close();
             }
-            try
+            else
             {
                 try
                 {
-                    if (double.Parse(textBoxInput.Text) > 0)
+                    try
                     {
-                        input = double.Parse(textBoxInput.Text);
+                        if (double.Parse(textBoxInput.Text) > 0)
+                        {
+                            input = double.Parse(textBoxInput.Text.Replace('.', ','));
+                        }
+                    }
+                    catch
+                    {
+                        throw new Exception("Please enter a number");
+                    }
+                    if (double.Parse(textBoxInput.Text) <= 0)
+                    {
+                        throw new Exception("Please fill in a tip above 0");
                     }
                     else if (double.Parse(textBoxInput.Text) <= 0)
                     {
@@ -87,16 +98,11 @@ namespace ChapeauUI
                         throw new Exception("Please enter a number");
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    throw new Exception("Please only fill numbers");
+                    PopUpUI confirmOrder = new PopUpUI(ex.Message, DialogResult.OK);
+                    confirmOrder.ShowDialog();
                 }
-            }
-            catch (Exception ex)
-            {
-
-                PopUpUI confirmOrder = new PopUpUI(ex.Message, DialogResult.OK);
-                confirmOrder.ShowDialog();
             }
             return input;
         }

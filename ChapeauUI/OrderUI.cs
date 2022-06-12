@@ -239,9 +239,9 @@ namespace ChapeauUI
                 MessageBox.Show("No items added!");
                 return;
             }
-            PopUpUI ConfirmUI = new PopUpUI();
-            ConfirmUI.ShowDialog();
-            if (ConfirmUI.DialogResult == DialogResult.Yes)
+            PopUpUI popUp = new PopUpUI();
+            popUp.ShowDialog();
+            if (popUp.DialogResult == DialogResult.Yes)
             {
                 Order orderToSend = new Order() 
                 {

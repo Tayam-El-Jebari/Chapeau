@@ -12,26 +12,29 @@ namespace ChapeauDAL
         {
             string query = "SELECT bill_Id, table_Id, staff_ID, totalPriceInclVAT, totalPriceExclVAT, tip, isPaid, discount, currentDate, comments FROM [Bill]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
-            return ReadBillTables(ExecuteSelectQuery(query, sqlParameters));
+            return ReadBillsTables(ExecuteSelectQuery(query, sqlParameters));
         }
         public void AddBill(Bill bill)
-        {   //betaalwijze toevoegen
-            string query = "INSERT INTO [Bill] VALUES (@bill_Id, @table_Id, @staff_ID, @totalPriceInclVAT, @totalPriceExclVAT, @totalVAT, @tip, @isPaid, @discount, @currentDate, @comments);";
+        {   
+            string query = "INSERT INTO [Bill] (table_Id, staff_ID, totalPriceInclVAT, totalPriceExclVAT, " +
+            "tip, isPaid, discount, currentDate, comments, paymentMethod) " +
+            "VALUES (@table_Id, @staff_ID, @totalPriceInclVAT, @totalPriceExclVAT, " +
+            "@tip, @isPaid, @discount, @currentDate, @comments, @paymentMethod);";
             SqlParameter[] sqlParameters = new SqlParameter[10];
-            sqlParameters[0] = new SqlParameter("@bill_Id", bill.BillID);
-            sqlParameters[1] = new SqlParameter("@table_Id", bill.Table.TableID);
-            sqlParameters[2] = new SqlParameter("@staff_ID", bill.Table.WaiterID);
-            sqlParameters[3] = new SqlParameter("@totalPriceInclVAT", bill.TotalPriceInclVAT);
-            sqlParameters[4] = new SqlParameter("@totalPriceExclVAT", bill.TotalPriceExclVAT);
-            sqlParameters[5] = new SqlParameter("@tip", bill.Tip);
-            sqlParameters[6] = new SqlParameter("@isPaid", bill.IsPaid);
-            sqlParameters[7] = new SqlParameter("@discount", bill.Discount);
-            sqlParameters[8] = new SqlParameter("@currentDate", bill.Date);
-            sqlParameters[9] = new SqlParameter("@comments", bill.Comments);
+            sqlParameters[0] = new SqlParameter("@table_Id", bill.Table.TableID);
+            sqlParameters[1] = new SqlParameter("@staff_ID", bill.Table.WaiterID);
+            sqlParameters[2] = new SqlParameter("@totalPriceInclVAT", bill.TotalPriceInclVAT);
+            sqlParameters[3] = new SqlParameter("@totalPriceExclVAT", bill.TotalPriceExclVAT);
+            sqlParameters[4] = new SqlParameter("@tip", bill.Tip);
+            sqlParameters[5] = new SqlParameter("@isPaid", bill.IsPaid);
+            sqlParameters[6] = new SqlParameter("@discount", bill.Discount);
+            sqlParameters[7] = new SqlParameter("@currentDate", bill.Date);
+            sqlParameters[8] = new SqlParameter("@comments", bill.Comments);
+            sqlParameters[9] = new SqlParameter("@paymentMethod", (int)bill.PaymentMethod);
             ExecuteEditQuery(query, sqlParameters);
         }
-        //finish reservation
-        public List<Bill> ReadBillTables(DataTable dataTable)
+       
+        public List<Bill> ReadBillsTables(DataTable dataTable)
         {
             List<Bill> bills = new List<Bill>();
 
@@ -58,8 +61,8 @@ namespace ChapeauDAL
             //change reservation isPresent to false
             string query = "UPDATE [Reservation] SET isPresent = 0 " +
             "WHERE reservation_id = @reservationId";
-            SqlParameter[] sqlParameters = new SqlParameter[10];
-            sqlParameters[0] = new SqlParameter("@bill_Id", reservationId);
+            SqlParameter[] sqlParameters = new SqlParameter[1];
+            sqlParameters[0] = new SqlParameter("@reservationId", reservationId);
 
             ExecuteEditQuery(query, sqlParameters);
         }
