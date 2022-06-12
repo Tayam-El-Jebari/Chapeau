@@ -42,7 +42,7 @@ namespace ChapeauUI
             // passwordTextBox
             // 
             this.passwordTextBox.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.passwordTextBox.Location = new System.Drawing.Point(721, 800);
+            this.passwordTextBox.Location = new System.Drawing.Point(721, 720);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(500, 52);
             this.passwordTextBox.TabIndex = 1;
@@ -53,7 +53,7 @@ namespace ChapeauUI
             this.userListView.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.userListView.FullRowSelect = true;
             this.userListView.HideSelection = false;
-            this.userListView.Location = new System.Drawing.Point(421, 200);
+            this.userListView.Location = new System.Drawing.Point(421, 120);
             this.userListView.MultiSelect = false;
             this.userListView.Name = "userListView";
             this.userListView.Size = new System.Drawing.Size(1100, 366);
@@ -69,10 +69,10 @@ namespace ChapeauUI
             this.inlogBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.inlogBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.inlogBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.inlogBtn.Location = new System.Drawing.Point(719, 886);
+            this.inlogBtn.Location = new System.Drawing.Point(696, 886);
             this.inlogBtn.Margin = new System.Windows.Forms.Padding(60);
             this.inlogBtn.Name = "inlogBtn";
-            this.inlogBtn.Size = new System.Drawing.Size(543, 106);
+            this.inlogBtn.Size = new System.Drawing.Size(550, 100);
             this.inlogBtn.TabIndex = 6;
             this.inlogBtn.Text = "LOG IN";
             this.inlogBtn.UseVisualStyleBackColor = false;
@@ -81,7 +81,7 @@ namespace ChapeauUI
             // staffCodeTextBox
             // 
             this.staffCodeTextBox.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.staffCodeTextBox.Location = new System.Drawing.Point(721, 650);
+            this.staffCodeTextBox.Location = new System.Drawing.Point(721, 570);
             this.staffCodeTextBox.Name = "staffCodeTextBox";
             this.staffCodeTextBox.Size = new System.Drawing.Size(500, 52);
             this.staffCodeTextBox.TabIndex = 7;
@@ -101,9 +101,9 @@ namespace ChapeauUI
             // 
             this.loginBackgroundLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.loginBackgroundLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.loginBackgroundLbl.Location = new System.Drawing.Point(371, 180);
+            this.loginBackgroundLbl.Location = new System.Drawing.Point(371, 100);
             this.loginBackgroundLbl.Name = "loginBackgroundLbl";
-            this.loginBackgroundLbl.Size = new System.Drawing.Size(1200, 700);
+            this.loginBackgroundLbl.Size = new System.Drawing.Size(1200, 750);
             this.loginBackgroundLbl.TabIndex = 22;
             this.loginBackgroundLbl.Text = "emptyString";
             // 
@@ -113,7 +113,7 @@ namespace ChapeauUI
             this.usernameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.usernameLbl.Font = new System.Drawing.Font("Trebuchet MS", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.usernameLbl.ForeColor = System.Drawing.Color.White;
-            this.usernameLbl.Location = new System.Drawing.Point(860, 575);
+            this.usernameLbl.Location = new System.Drawing.Point(860, 495);
             this.usernameLbl.Name = "usernameLbl";
             this.usernameLbl.Size = new System.Drawing.Size(221, 52);
             this.usernameLbl.TabIndex = 23;
@@ -125,7 +125,7 @@ namespace ChapeauUI
             this.passwordLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.passwordLbl.Font = new System.Drawing.Font("Trebuchet MS", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.passwordLbl.ForeColor = System.Drawing.Color.White;
-            this.passwordLbl.Location = new System.Drawing.Point(859, 725);
+            this.passwordLbl.Location = new System.Drawing.Point(859, 645);
             this.passwordLbl.Name = "passwordLbl";
             this.passwordLbl.Size = new System.Drawing.Size(219, 52);
             this.passwordLbl.TabIndex = 24;
@@ -136,7 +136,7 @@ namespace ChapeauUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
-            this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebg2;
+            this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebgdesktop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
             this.Controls.Add(this.passwordLbl);
