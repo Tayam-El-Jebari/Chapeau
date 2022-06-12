@@ -40,7 +40,7 @@ namespace ChapeauUI
             {
                 this.Close();
             }
-            ProgressBar();
+            //ProgressBar();
             listViewComments.Show();
             comboBoxThreeCourseMeal.Text = "--Select--";
             comboBoxThreeCourseMeal.Items.Add(MenuItemType.Starter);
@@ -49,7 +49,7 @@ namespace ChapeauUI
             orderService = new OrderService();
             sortingType = new SortingType();
         }
-        private void ProgressBar()
+        /*private void ProgressBar()
         {
             progressBarUpdate.ForeColor = Color.FromArgb(159, 56, 59);
             progressBarUpdate.Show();
@@ -57,17 +57,42 @@ namespace ChapeauUI
             timer.Interval = 300;
             timer.Tick += new System.EventHandler(timerProgress_Tick);
             timer.Start();
-        }
+        }*/
         private void timerProgress_Tick(object sender, EventArgs e)
         {
-            if(progressBarUpdate.Value < 100)
-            progressBarUpdate.Value += 1;
-            else  
+            if (progressBarUpdate.Value < 100)
+                progressBarUpdate.Value += 1;
+            else
+            {
                 progressBarUpdate.Value = 0;
+                if (sortingType == SortingType.duration)
+                    sortButtonDuration_Click(sender, e);
+                else if (sortingType == SortingType.orderName)
+                    sortButtonOrder_Click(sender, e);
+                else if (sortingType == SortingType.amount)
+                    sortButtonAmount_Click(sender, e);
+                else if (sortingType == SortingType.table)
+                    sortButtonTable_Click(sender, e);
+                else if (sortingType == SortingType.alcoholic)
+                    sortButtonByAlcoholic_Click(sender, e);
+                else if (sortingType == SortingType.orderID)
+                    sortButtonOrderID_Click(sender, e);
+                else
+                {
+                    if (BartenderOrChef.StaffJob == StaffJob.Chef)
+                    {
+                        KitchenListView();
+                    }
+                    else if (BartenderOrChef.StaffJob == StaffJob.Bartender)
+                    {
+                        BarListView();
+                    }
+                }
+            }
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (sortingType == SortingType.duration)
+            /*if (sortingType == SortingType.duration)
                 sortButtonDuration_Click(sender, e);
             else if (sortingType == SortingType.orderName)
                 sortButtonOrder_Click(sender, e);
@@ -85,18 +110,24 @@ namespace ChapeauUI
                 {
                     KitchenListView();
                 }
-                else
+                else if(BartenderOrChef.StaffJob == StaffJob.Bartender)
                 {
                     BarListView();
                 }
-            }
+            }*/
         }
         private void KitchenOverview_Load(object sender, EventArgs e)
         {
-            Timer timer1 = new Timer();
+            /*Timer timer1 = new Timer();
             timer1.Interval = 30000;
-            timer1.Tick += new System.EventHandler(timerProgress_Tick);
-            timer1.Start();
+            timer1.Tick += new System.EventHandler(timer1_Tick);
+            timer1.Start();*/
+            progressBarUpdate.ForeColor = Color.FromArgb(159, 56, 59);
+            progressBarUpdate.Show();
+            Timer timer = new Timer();
+            timer.Interval = 300;
+            timer.Tick += new System.EventHandler(timerProgress_Tick);
+            timer.Start();
         }
         private void buttonLogOut_Click(object sender, EventArgs e)
         {
@@ -215,8 +246,7 @@ namespace ChapeauUI
                     kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                     kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                     kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.ColumnContent);
-                    kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
+                    kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
                     kitchenListView.Items.Add(li);
                 }
             }
@@ -272,7 +302,6 @@ namespace ChapeauUI
                     barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                     barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
                     barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                    barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                     barListView.Items.Add(li);
                 }
@@ -319,8 +348,7 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(4, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.ColumnContent);
-                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
 
                         kitchenListView.Items.Add(li);
 
@@ -367,7 +395,6 @@ namespace ChapeauUI
                         barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
-                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                         barListView.Items.Add(li);
                     }
