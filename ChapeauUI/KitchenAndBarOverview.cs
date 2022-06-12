@@ -49,15 +49,7 @@ namespace ChapeauUI
             orderService = new OrderService();
             sortingType = new SortingType();
         }
-        /*private void ProgressBar()
-        {
-            progressBarUpdate.ForeColor = Color.FromArgb(159, 56, 59);
-            progressBarUpdate.Show();
-            Timer timer = new Timer();
-            timer.Interval = 300;
-            timer.Tick += new System.EventHandler(timerProgress_Tick);
-            timer.Start();
-        }*/
+
         private void timerProgress_Tick(object sender, EventArgs e)
         {
             if (progressBarUpdate.Value < 100)
@@ -90,38 +82,10 @@ namespace ChapeauUI
                 }
             }
         }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            /*if (sortingType == SortingType.duration)
-                sortButtonDuration_Click(sender, e);
-            else if (sortingType == SortingType.orderName)
-                sortButtonOrder_Click(sender, e);
-            else if (sortingType == SortingType.amount)
-                sortButtonAmount_Click(sender, e);
-            else if (sortingType == SortingType.table)
-                sortButtonTable_Click(sender, e);
-            else if (sortingType == SortingType.alcoholic)
-                sortButtonByAlcoholic_Click(sender, e);
-            else if (sortingType == SortingType.orderID)
-                sortButtonOrderID_Click(sender, e);
-            else
-            {
-                if (BartenderOrChef.StaffJob == StaffJob.Chef)
-                {
-                    KitchenListView();
-                }
-                else if(BartenderOrChef.StaffJob == StaffJob.Bartender)
-                {
-                    BarListView();
-                }
-            }*/
-        }
+ 
         private void KitchenOverview_Load(object sender, EventArgs e)
         {
-            /*Timer timer1 = new Timer();
-            timer1.Interval = 30000;
-            timer1.Tick += new System.EventHandler(timer1_Tick);
-            timer1.Start();*/
+
             progressBarUpdate.ForeColor = Color.FromArgb(159, 56, 59);
             progressBarUpdate.Show();
             Timer timer = new Timer();
@@ -452,7 +416,7 @@ namespace ChapeauUI
                     orderService.GetUpdateStateIsFinished(order);
                     MessageBox.Show($"Order {order.OrderId}: {order.OrderItems[0].MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
                 }
-                timer1_Tick(sender, e);
+                timerProgress_Tick(sender, e);
                 progressBarUpdate.Show();
                 KitchenListView();
             }
@@ -493,7 +457,7 @@ namespace ChapeauUI
                     orderService.GetUpdateStateIsFinished(order);
                     MessageBox.Show($"Order {order.OrderId}: {order.OrderItems[0].MenuItem.ProductName} has been succesfully finished\n" + "Notice has been sent to the waiter");
                 }
-                timer1_Tick(sender, e);
+                timerProgress_Tick(sender, e);
                 progressBarUpdate.Show();
                 BarListView();
             }
