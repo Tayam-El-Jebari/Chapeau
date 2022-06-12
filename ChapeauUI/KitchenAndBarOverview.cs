@@ -272,6 +272,7 @@ namespace ChapeauUI
                     barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                     barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
                     barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
+                    barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                     barListView.Items.Add(li);
                 }
@@ -318,6 +319,7 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                         kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
                         kitchenListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.ColumnContent);
+                        kitchenListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                         kitchenListView.Items.Add(li);
 
@@ -364,6 +366,7 @@ namespace ChapeauUI
                         barListView.AutoResizeColumn(5, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.HeaderSize);
                         barListView.AutoResizeColumn(7, ColumnHeaderAutoResizeStyle.HeaderSize);
+                        barListView.AutoResizeColumn(8, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                         barListView.Items.Add(li);
                     }
