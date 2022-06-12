@@ -41,18 +41,17 @@ namespace ChapeauUI
             this.labelBottomBar = new System.Windows.Forms.Label();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.labelTopBar = new System.Windows.Forms.Label();
-            this.foodButtonOrder = new System.Windows.Forms.Button();
-            this.foodButtonAmount = new System.Windows.Forms.Button();
-            this.foodButtonComments = new System.Windows.Forms.Button();
-            this.foodButtonTable = new System.Windows.Forms.Button();
-            this.foodButtonDuration = new System.Windows.Forms.Button();
+            this.sortButtonOrder = new System.Windows.Forms.Button();
+            this.sortButtonAmount = new System.Windows.Forms.Button();
+            this.sortButtonTable = new System.Windows.Forms.Button();
+            this.sortButtonDuration = new System.Windows.Forms.Button();
             this.labelLabelSortBy = new System.Windows.Forms.Label();
             this.radioButtonSortForwards = new System.Windows.Forms.RadioButton();
             this.radioButtonSortBackwards = new System.Windows.Forms.RadioButton();
             this.listViewComments = new System.Windows.Forms.ListView();
             this.progressBarUpdate = new System.Windows.Forms.ProgressBar();
-            this.buttonSortByAlcoholic = new System.Windows.Forms.Button();
-            this.buttonOrderID = new System.Windows.Forms.Button();
+            this.sortButtonByAlcoholic = new System.Windows.Forms.Button();
+            this.sortButtonOrderID = new System.Windows.Forms.Button();
             this.textBoxOrderId = new System.Windows.Forms.TextBox();
             this.SelectAllOnOrderID = new System.Windows.Forms.Button();
             this.titleOrderIdEnter = new System.Windows.Forms.Label();
@@ -175,76 +174,62 @@ namespace ChapeauUI
             this.labelTopBar.TabIndex = 12;
             this.labelTopBar.Text = "labelHeader";
             // 
-            // foodButtonOrder
+            // sortButtonOrder
             // 
-            this.foodButtonOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonOrder.FlatAppearance.BorderSize = 4;
-            this.foodButtonOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.foodButtonOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonOrder.Location = new System.Drawing.Point(1558, 243);
-            this.foodButtonOrder.Name = "foodButtonOrder";
-            this.foodButtonOrder.Size = new System.Drawing.Size(126, 63);
-            this.foodButtonOrder.TabIndex = 15;
-            this.foodButtonOrder.Text = "Order";
-            this.foodButtonOrder.UseVisualStyleBackColor = true;
-            this.foodButtonOrder.Click += new System.EventHandler(this.foodButtonOrder_Click);
+            this.sortButtonOrder.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonOrder.FlatAppearance.BorderSize = 4;
+            this.sortButtonOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sortButtonOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonOrder.Location = new System.Drawing.Point(1558, 243);
+            this.sortButtonOrder.Name = "sortButtonOrder";
+            this.sortButtonOrder.Size = new System.Drawing.Size(126, 63);
+            this.sortButtonOrder.TabIndex = 15;
+            this.sortButtonOrder.Text = "Order";
+            this.sortButtonOrder.UseVisualStyleBackColor = true;
+            this.sortButtonOrder.Click += new System.EventHandler(this.sortButtonOrder_Click);
             // 
-            // foodButtonAmount
+            // sortButtonAmount
             // 
-            this.foodButtonAmount.BackColor = System.Drawing.SystemColors.Control;
-            this.foodButtonAmount.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonAmount.FlatAppearance.BorderSize = 4;
-            this.foodButtonAmount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.foodButtonAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonAmount.Location = new System.Drawing.Point(1558, 347);
-            this.foodButtonAmount.Name = "foodButtonAmount";
-            this.foodButtonAmount.Size = new System.Drawing.Size(126, 63);
-            this.foodButtonAmount.TabIndex = 16;
-            this.foodButtonAmount.Text = "Amount of order";
-            this.foodButtonAmount.UseVisualStyleBackColor = false;
-            this.foodButtonAmount.Click += new System.EventHandler(this.foodButtonAmount_Click);
+            this.sortButtonAmount.BackColor = System.Drawing.SystemColors.Control;
+            this.sortButtonAmount.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonAmount.FlatAppearance.BorderSize = 4;
+            this.sortButtonAmount.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sortButtonAmount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonAmount.Location = new System.Drawing.Point(1558, 347);
+            this.sortButtonAmount.Name = "sortButtonAmount";
+            this.sortButtonAmount.Size = new System.Drawing.Size(126, 63);
+            this.sortButtonAmount.TabIndex = 16;
+            this.sortButtonAmount.Text = "Amount of order";
+            this.sortButtonAmount.UseVisualStyleBackColor = false;
+            this.sortButtonAmount.Click += new System.EventHandler(this.sortButtonAmount_Click);
             // 
-            // foodButtonComments
+            // sortButtonTable
             // 
-            this.foodButtonComments.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonComments.FlatAppearance.BorderSize = 4;
-            this.foodButtonComments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.foodButtonComments.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonComments.Location = new System.Drawing.Point(1558, 450);
-            this.foodButtonComments.Name = "foodButtonComments";
-            this.foodButtonComments.Size = new System.Drawing.Size(126, 63);
-            this.foodButtonComments.TabIndex = 18;
-            this.foodButtonComments.Text = "Comments";
-            this.foodButtonComments.UseVisualStyleBackColor = true;
-            this.foodButtonComments.Click += new System.EventHandler(this.foodButtonComments_Click);
+            this.sortButtonTable.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonTable.FlatAppearance.BorderSize = 4;
+            this.sortButtonTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sortButtonTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonTable.Location = new System.Drawing.Point(1750, 347);
+            this.sortButtonTable.Name = "sortButtonTable";
+            this.sortButtonTable.Size = new System.Drawing.Size(126, 63);
+            this.sortButtonTable.TabIndex = 19;
+            this.sortButtonTable.Text = "Table";
+            this.sortButtonTable.UseVisualStyleBackColor = true;
+            this.sortButtonTable.Click += new System.EventHandler(this.sortButtonTable_Click);
             // 
-            // foodButtonTable
+            // sortButtonDuration
             // 
-            this.foodButtonTable.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonTable.FlatAppearance.BorderSize = 4;
-            this.foodButtonTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.foodButtonTable.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonTable.Location = new System.Drawing.Point(1750, 347);
-            this.foodButtonTable.Name = "foodButtonTable";
-            this.foodButtonTable.Size = new System.Drawing.Size(126, 63);
-            this.foodButtonTable.TabIndex = 19;
-            this.foodButtonTable.Text = "Table";
-            this.foodButtonTable.UseVisualStyleBackColor = true;
-            this.foodButtonTable.Click += new System.EventHandler(this.foodButtonTable_Click);
-            // 
-            // foodButtonDuration
-            // 
-            this.foodButtonDuration.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonDuration.FlatAppearance.BorderSize = 4;
-            this.foodButtonDuration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.foodButtonDuration.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.foodButtonDuration.Location = new System.Drawing.Point(1750, 450);
-            this.foodButtonDuration.Name = "foodButtonDuration";
-            this.foodButtonDuration.Size = new System.Drawing.Size(126, 63);
-            this.foodButtonDuration.TabIndex = 20;
-            this.foodButtonDuration.Text = "Duration of Order";
-            this.foodButtonDuration.UseVisualStyleBackColor = true;
-            this.foodButtonDuration.Click += new System.EventHandler(this.foodButtonDuration_Click);
+            this.sortButtonDuration.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonDuration.FlatAppearance.BorderSize = 4;
+            this.sortButtonDuration.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sortButtonDuration.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonDuration.Location = new System.Drawing.Point(1750, 450);
+            this.sortButtonDuration.Name = "sortButtonDuration";
+            this.sortButtonDuration.Size = new System.Drawing.Size(126, 63);
+            this.sortButtonDuration.TabIndex = 20;
+            this.sortButtonDuration.Text = "Duration of Order";
+            this.sortButtonDuration.UseVisualStyleBackColor = true;
+            this.sortButtonDuration.Click += new System.EventHandler(this.sortButtonDuration_Click);
             // 
             // labelLabelSortBy
             // 
@@ -300,33 +285,33 @@ namespace ChapeauUI
             this.progressBarUpdate.Size = new System.Drawing.Size(1500, 10);
             this.progressBarUpdate.TabIndex = 31;
             // 
-            // buttonSortByAlcoholic
+            // sortButtonByAlcoholic
             // 
-            this.buttonSortByAlcoholic.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonSortByAlcoholic.FlatAppearance.BorderSize = 4;
-            this.buttonSortByAlcoholic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSortByAlcoholic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonSortByAlcoholic.Location = new System.Drawing.Point(1750, 153);
-            this.buttonSortByAlcoholic.Name = "buttonSortByAlcoholic";
-            this.buttonSortByAlcoholic.Size = new System.Drawing.Size(126, 63);
-            this.buttonSortByAlcoholic.TabIndex = 32;
-            this.buttonSortByAlcoholic.Text = "Alcoholic";
-            this.buttonSortByAlcoholic.UseVisualStyleBackColor = true;
-            this.buttonSortByAlcoholic.Click += new System.EventHandler(this.buttonSortByAlcoholic_Click);
+            this.sortButtonByAlcoholic.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonByAlcoholic.FlatAppearance.BorderSize = 4;
+            this.sortButtonByAlcoholic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sortButtonByAlcoholic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonByAlcoholic.Location = new System.Drawing.Point(1558, 450);
+            this.sortButtonByAlcoholic.Name = "sortButtonByAlcoholic";
+            this.sortButtonByAlcoholic.Size = new System.Drawing.Size(126, 63);
+            this.sortButtonByAlcoholic.TabIndex = 32;
+            this.sortButtonByAlcoholic.Text = "Alcoholic";
+            this.sortButtonByAlcoholic.UseVisualStyleBackColor = true;
+            this.sortButtonByAlcoholic.Click += new System.EventHandler(this.sortButtonByAlcoholic_Click);
             // 
-            // buttonOrderID
+            // sortButtonOrderID
             // 
-            this.buttonOrderID.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonOrderID.FlatAppearance.BorderSize = 4;
-            this.buttonOrderID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonOrderID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
-            this.buttonOrderID.Location = new System.Drawing.Point(1750, 243);
-            this.buttonOrderID.Name = "buttonOrderID";
-            this.buttonOrderID.Size = new System.Drawing.Size(126, 63);
-            this.buttonOrderID.TabIndex = 33;
-            this.buttonOrderID.Text = "Order ID";
-            this.buttonOrderID.UseVisualStyleBackColor = true;
-            this.buttonOrderID.Click += new System.EventHandler(this.buttonOrderID_Click);
+            this.sortButtonOrderID.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonOrderID.FlatAppearance.BorderSize = 4;
+            this.sortButtonOrderID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.sortButtonOrderID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.sortButtonOrderID.Location = new System.Drawing.Point(1750, 243);
+            this.sortButtonOrderID.Name = "sortButtonOrderID";
+            this.sortButtonOrderID.Size = new System.Drawing.Size(126, 63);
+            this.sortButtonOrderID.TabIndex = 33;
+            this.sortButtonOrderID.Text = "Order ID";
+            this.sortButtonOrderID.UseVisualStyleBackColor = true;
+            this.sortButtonOrderID.Click += new System.EventHandler(this.sortButtonOrderID_Click);
             // 
             // textBoxOrderId
             // 
@@ -407,18 +392,17 @@ namespace ChapeauUI
             this.Controls.Add(this.titleOrderIdEnter);
             this.Controls.Add(this.SelectAllOnOrderID);
             this.Controls.Add(this.textBoxOrderId);
-            this.Controls.Add(this.buttonOrderID);
-            this.Controls.Add(this.buttonSortByAlcoholic);
+            this.Controls.Add(this.sortButtonOrderID);
+            this.Controls.Add(this.sortButtonByAlcoholic);
             this.Controls.Add(this.progressBarUpdate);
             this.Controls.Add(this.listViewComments);
             this.Controls.Add(this.radioButtonSortBackwards);
             this.Controls.Add(this.radioButtonSortForwards);
             this.Controls.Add(this.labelLabelSortBy);
-            this.Controls.Add(this.foodButtonDuration);
-            this.Controls.Add(this.foodButtonTable);
-            this.Controls.Add(this.foodButtonComments);
-            this.Controls.Add(this.foodButtonAmount);
-            this.Controls.Add(this.foodButtonOrder);
+            this.Controls.Add(this.sortButtonDuration);
+            this.Controls.Add(this.sortButtonTable);
+            this.Controls.Add(this.sortButtonAmount);
+            this.Controls.Add(this.sortButtonOrder);
             this.Controls.Add(this.labelKitchen);
             this.Controls.Add(this.labelBar);
             this.Controls.Add(this.labelBottomBar);
@@ -451,18 +435,17 @@ namespace ChapeauUI
         private System.Windows.Forms.Label labelBottomBar;
         private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Label labelTopBar;
-        private System.Windows.Forms.Button foodButtonOrder;
-        private System.Windows.Forms.Button foodButtonAmount;
-        private System.Windows.Forms.Button foodButtonComments;
-        private System.Windows.Forms.Button foodButtonTable;
-        private System.Windows.Forms.Button foodButtonDuration;
+        private System.Windows.Forms.Button sortButtonOrder;
+        private System.Windows.Forms.Button sortButtonAmount;
+        private System.Windows.Forms.Button sortButtonTable;
+        private System.Windows.Forms.Button sortButtonDuration;
         private System.Windows.Forms.Label labelLabelSortBy;
         private System.Windows.Forms.RadioButton radioButtonSortForwards;
         private System.Windows.Forms.RadioButton radioButtonSortBackwards;
         private System.Windows.Forms.ListView listViewComments;
         private System.Windows.Forms.ProgressBar progressBarUpdate;
-        private System.Windows.Forms.Button buttonSortByAlcoholic;
-        private System.Windows.Forms.Button buttonOrderID;
+        private System.Windows.Forms.Button sortButtonByAlcoholic;
+        private System.Windows.Forms.Button sortButtonOrderID;
         private System.Windows.Forms.TextBox textBoxOrderId;
         private System.Windows.Forms.Button SelectAllOnOrderID;
         private System.Windows.Forms.Label titleOrderIdEnter;

@@ -62,29 +62,40 @@ namespace ChapeauUI
         {
             if(progressBarUpdate.Value < 100)
             progressBarUpdate.Value += 1;
+            else  
+                progressBarUpdate.Value = 0;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (sortingType == SortingType.duration)
-                foodButtonDuration_Click(sender, e);
+                sortButtonDuration_Click(sender, e);
             else if (sortingType == SortingType.orderName)
-                foodButtonOrder_Click(sender, e);
+                sortButtonOrder_Click(sender, e);
             else if (sortingType == SortingType.amount)
-                foodButtonAmount_Click(sender, e);
+                sortButtonAmount_Click(sender, e);
             else if (sortingType == SortingType.table)
-                foodButtonTable_Click(sender, e);
-            else if (sortingType == SortingType.comments)
-                foodButtonComments_Click(sender, e);
+                sortButtonTable_Click(sender, e);
             else if (sortingType == SortingType.alcoholic)
-                buttonSortByAlcoholic_Click(sender, e);
+                sortButtonByAlcoholic_Click(sender, e);
             else if (sortingType == SortingType.orderID)
-                buttonOrderID_Click(sender, e);
+                sortButtonOrderID_Click(sender, e);
+            else
+            {
+                if (BartenderOrChef.StaffJob == StaffJob.Chef)
+                {
+                    KitchenListView();
+                }
+                else
+                {
+                    BarListView();
+                }
+            }
         }
         private void KitchenOverview_Load(object sender, EventArgs e)
         {
             Timer timer1 = new Timer();
-            timer1.Interval = 30000;//30 seconds
-            timer1.Tick += new System.EventHandler(timer1_Tick);
+            timer1.Interval = 30000;
+            timer1.Tick += new System.EventHandler(timerProgress_Tick);
             timer1.Start();
         }
         private void buttonLogOut_Click(object sender, EventArgs e)
@@ -165,7 +176,7 @@ namespace ChapeauUI
             barListView.Hide();
             labelBar.Hide();
             finishedDrinkButton.Hide();
-            buttonSortByAlcoholic.Hide();
+            sortButtonByAlcoholic.Hide();
 
             listViewComments.Hide();
             progressBarUpdate.Show();
@@ -219,7 +230,7 @@ namespace ChapeauUI
             labelBar.Show();
             finishedDrinkButton.Show();
 
-            buttonSortByAlcoholic.Show();
+            sortButtonByAlcoholic.Show();
             listViewComments.Hide();
             progressBarUpdate.Show();
             barListView.BeginUpdate();
@@ -470,7 +481,7 @@ namespace ChapeauUI
 
 
 
-        private void foodButtonOrder_Click(object sender, EventArgs e)
+        private void sortButtonOrder_Click(object sender, EventArgs e)
         {
             sortingType = SortingType.orderName;
 
@@ -523,7 +534,7 @@ namespace ChapeauUI
             }
         }
 
-        private void foodButtonAmount_Click(object sender, EventArgs e)
+        private void sortButtonAmount_Click(object sender, EventArgs e)
         {
             sortingType = SortingType.amount;
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
@@ -583,40 +594,8 @@ namespace ChapeauUI
         }
 
 
-        private void foodButtonComments_Click(object sender, EventArgs e)
-        {
-            sortingType = SortingType.comments;
-            if (BartenderOrChef.StaffJob == StaffJob.Chef)
-            {
-                if (radioButtonSortForwards.Checked)
-                {
-                    ordersFoodList = ordersFoodList.OrderBy(x => x.Comments).ToList();
-                }
-                else if (radioButtonSortBackwards.Checked)
-                {
-                    ordersFoodList = ordersFoodList.OrderByDescending(x => x.Comments).ToList();
-                }
 
-                ButtonSort(ordersFoodList);
-            }
-
-            if (BartenderOrChef.StaffJob == StaffJob.Bartender)
-            {
-
-                if (radioButtonSortForwards.Checked)
-                {
-                    ordersDrinkList = ordersDrinkList.OrderBy(x => x.Comments).ToList();
-                }
-                else if (radioButtonSortBackwards.Checked)
-                {
-                    ordersDrinkList = ordersDrinkList.OrderByDescending(x => x.Comments).ToList();
-                }
-
-                ButtonSort(ordersDrinkList);
-            }
-        }
-
-        private void foodButtonTable_Click(object sender, EventArgs e)
+        private void sortButtonTable_Click(object sender, EventArgs e)
         {
             sortingType = SortingType.table;
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
@@ -655,7 +634,7 @@ namespace ChapeauUI
                 
             }
         }
-        private void foodButtonDuration_Click(object sender, EventArgs e)
+        private void sortButtonDuration_Click(object sender, EventArgs e)
         {
             sortingType = SortingType.duration;
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
@@ -696,7 +675,7 @@ namespace ChapeauUI
 
         }
 
-        private void buttonSortByAlcoholic_Click(object sender, EventArgs e)
+        private void sortButtonByAlcoholic_Click(object sender, EventArgs e)
         {
             sortingType = SortingType.alcoholic;
             if (radioButtonSortForwards.Checked)
@@ -714,7 +693,7 @@ namespace ChapeauUI
 
         }
 
-        private void buttonOrderID_Click(object sender, EventArgs e)
+        private void sortButtonOrderID_Click(object sender, EventArgs e)
         {
             sortingType = SortingType.orderID;
 
