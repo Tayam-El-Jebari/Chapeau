@@ -329,7 +329,7 @@ namespace ChapeauUI
             {
                 if (reservationService.GetPresentReservationByTable(Convert.ToInt32(reservationOverviewDataGrid.SelectedRows[0].Cells[1].Value)) != null)
                 {
-                    PopUpUI tableOccupiedBox = new PopUpUI("The reservation has been made.", DialogResult.OK);
+                    PopUpUI tableOccupiedBox = new PopUpUI("There is already someone present at this table.", DialogResult.OK);
                     tableOccupiedBox.ShowDialog();
                 }
             }
