@@ -53,6 +53,12 @@ namespace ChapeauUI
             this.progressBarUpdate = new System.Windows.Forms.ProgressBar();
             this.buttonSortByAlcoholic = new System.Windows.Forms.Button();
             this.buttonOrderID = new System.Windows.Forms.Button();
+            this.textBoxOrderId = new System.Windows.Forms.TextBox();
+            this.SelectAllOnOrderID = new System.Windows.Forms.Button();
+            this.titleOrderIdEnter = new System.Windows.Forms.Label();
+            this.titleSelectThreeCourseMeal = new System.Windows.Forms.Label();
+            this.comboBoxThreeCourseMeal = new System.Windows.Forms.ComboBox();
+            this.SelectAllMenuItemType = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelKitchen
@@ -322,6 +328,71 @@ namespace ChapeauUI
             this.buttonOrderID.UseVisualStyleBackColor = true;
             this.buttonOrderID.Click += new System.EventHandler(this.buttonOrderID_Click);
             // 
+            // textBoxOrderId
+            // 
+            this.textBoxOrderId.Location = new System.Drawing.Point(1558, 610);
+            this.textBoxOrderId.Name = "textBoxOrderId";
+            this.textBoxOrderId.Size = new System.Drawing.Size(318, 25);
+            this.textBoxOrderId.TabIndex = 34;
+            // 
+            // SelectAllOnOrderID
+            // 
+            this.SelectAllOnOrderID.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.SelectAllOnOrderID.FlatAppearance.BorderSize = 4;
+            this.SelectAllOnOrderID.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SelectAllOnOrderID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.SelectAllOnOrderID.Location = new System.Drawing.Point(1558, 639);
+            this.SelectAllOnOrderID.Name = "SelectAllOnOrderID";
+            this.SelectAllOnOrderID.Size = new System.Drawing.Size(318, 49);
+            this.SelectAllOnOrderID.TabIndex = 35;
+            this.SelectAllOnOrderID.Text = "Select all on basis of order ID";
+            this.SelectAllOnOrderID.UseVisualStyleBackColor = true;
+            this.SelectAllOnOrderID.Click += new System.EventHandler(this.SelectAllOnOrderID_Click);
+            // 
+            // titleOrderIdEnter
+            // 
+            this.titleOrderIdEnter.AutoSize = true;
+            this.titleOrderIdEnter.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.titleOrderIdEnter.Location = new System.Drawing.Point(1558, 587);
+            this.titleOrderIdEnter.Name = "titleOrderIdEnter";
+            this.titleOrderIdEnter.Size = new System.Drawing.Size(107, 20);
+            this.titleOrderIdEnter.TabIndex = 36;
+            this.titleOrderIdEnter.Text = "Enter OrderID:";
+            // 
+            // titleSelectThreeCourseMeal
+            // 
+            this.titleSelectThreeCourseMeal.AutoSize = true;
+            this.titleSelectThreeCourseMeal.BackColor = System.Drawing.Color.Transparent;
+            this.titleSelectThreeCourseMeal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.titleSelectThreeCourseMeal.Location = new System.Drawing.Point(1558, 703);
+            this.titleSelectThreeCourseMeal.Name = "titleSelectThreeCourseMeal";
+            this.titleSelectThreeCourseMeal.Size = new System.Drawing.Size(88, 20);
+            this.titleSelectThreeCourseMeal.TabIndex = 37;
+            this.titleSelectThreeCourseMeal.Text = "Select TCM:";
+            // 
+            // comboBoxThreeCourseMeal
+            // 
+            this.comboBoxThreeCourseMeal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxThreeCourseMeal.FormattingEnabled = true;
+            this.comboBoxThreeCourseMeal.Location = new System.Drawing.Point(1558, 726);
+            this.comboBoxThreeCourseMeal.Name = "comboBoxThreeCourseMeal";
+            this.comboBoxThreeCourseMeal.Size = new System.Drawing.Size(318, 28);
+            this.comboBoxThreeCourseMeal.TabIndex = 38;
+            // 
+            // SelectAllMenuItemType
+            // 
+            this.SelectAllMenuItemType.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.SelectAllMenuItemType.FlatAppearance.BorderSize = 4;
+            this.SelectAllMenuItemType.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SelectAllMenuItemType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(24)))), ((int)(((byte)(24)))));
+            this.SelectAllMenuItemType.Location = new System.Drawing.Point(1558, 760);
+            this.SelectAllMenuItemType.Name = "SelectAllMenuItemType";
+            this.SelectAllMenuItemType.Size = new System.Drawing.Size(318, 49);
+            this.SelectAllMenuItemType.TabIndex = 39;
+            this.SelectAllMenuItemType.Text = "Select all with specified type of meal";
+            this.SelectAllMenuItemType.UseVisualStyleBackColor = true;
+            this.SelectAllMenuItemType.Click += new System.EventHandler(this.button1_Click);
+            // 
             // KitchenAndBarOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -330,6 +401,12 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebgdesktop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1924, 1033);
+            this.Controls.Add(this.SelectAllMenuItemType);
+            this.Controls.Add(this.comboBoxThreeCourseMeal);
+            this.Controls.Add(this.titleSelectThreeCourseMeal);
+            this.Controls.Add(this.titleOrderIdEnter);
+            this.Controls.Add(this.SelectAllOnOrderID);
+            this.Controls.Add(this.textBoxOrderId);
             this.Controls.Add(this.buttonOrderID);
             this.Controls.Add(this.buttonSortByAlcoholic);
             this.Controls.Add(this.progressBarUpdate);
@@ -386,5 +463,11 @@ namespace ChapeauUI
         private System.Windows.Forms.ProgressBar progressBarUpdate;
         private System.Windows.Forms.Button buttonSortByAlcoholic;
         private System.Windows.Forms.Button buttonOrderID;
+        private System.Windows.Forms.TextBox textBoxOrderId;
+        private System.Windows.Forms.Button SelectAllOnOrderID;
+        private System.Windows.Forms.Label titleOrderIdEnter;
+        private System.Windows.Forms.Label titleSelectThreeCourseMeal;
+        private System.Windows.Forms.ComboBox comboBoxThreeCourseMeal;
+        private System.Windows.Forms.Button SelectAllMenuItemType;
     }
 }
