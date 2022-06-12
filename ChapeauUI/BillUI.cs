@@ -35,7 +35,6 @@ namespace ChapeauUI
             this.staff = staff;
             ShowHeader();
             MakeBill();
-            
         }
 
         public void ShowHeader()
@@ -69,6 +68,7 @@ namespace ChapeauUI
         }
         private void ShowBill()
         {
+            billPanel.Hide();
             payPanel.Hide();
             FillCompleteBill();
             LogBill();
