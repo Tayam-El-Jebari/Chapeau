@@ -67,13 +67,13 @@ namespace ChapeauUI
             this.markOrderReadyBtn = new System.Windows.Forms.Button();
             this.readyOrdersLbl = new System.Windows.Forms.Label();
             this.startMenuPnl = new System.Windows.Forms.Panel();
-            this.buttonBack = new System.Windows.Forms.Button();
             this.showBillBtn = new System.Windows.Forms.Button();
             this.markReservationPresentBtn = new System.Windows.Forms.Button();
             this.notificationsBtn = new System.Windows.Forms.Button();
             this.menuLabel = new System.Windows.Forms.Label();
             this.takeOrderBtn = new System.Windows.Forms.Button();
             this.makeReservationBtn = new System.Windows.Forms.Button();
+            this.buttonBack = new System.Windows.Forms.Button();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersReadyGridView)).BeginInit();
@@ -407,6 +407,7 @@ namespace ChapeauUI
             // 
             // markReservationPresentPnl
             // 
+            this.markReservationPresentPnl.BackColor = System.Drawing.Color.Transparent;
             this.markReservationPresentPnl.Controls.Add(this.setReservationPresentBtn);
             this.markReservationPresentPnl.Controls.Add(this.label1);
             this.markReservationPresentPnl.Controls.Add(this.reservationOverviewDataGrid);
@@ -423,7 +424,7 @@ namespace ChapeauUI
             this.setReservationPresentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.setReservationPresentBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.setReservationPresentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.setReservationPresentBtn.Location = new System.Drawing.Point(40, 1150);
+            this.setReservationPresentBtn.Location = new System.Drawing.Point(40, 1100);
             this.setReservationPresentBtn.Margin = new System.Windows.Forms.Padding(60);
             this.setReservationPresentBtn.Name = "setReservationPresentBtn";
             this.setReservationPresentBtn.Size = new System.Drawing.Size(620, 200);
@@ -450,7 +451,7 @@ namespace ChapeauUI
             this.reservationOverviewDataGrid.Name = "reservationOverviewDataGrid";
             this.reservationOverviewDataGrid.RowHeadersWidth = 51;
             this.reservationOverviewDataGrid.RowTemplate.Height = 29;
-            this.reservationOverviewDataGrid.Size = new System.Drawing.Size(620, 1000);
+            this.reservationOverviewDataGrid.Size = new System.Drawing.Size(620, 950);
             this.reservationOverviewDataGrid.TabIndex = 13;
             // 
             // topBarLabel
@@ -506,7 +507,7 @@ namespace ChapeauUI
             this.ongoingOrdersDataGridView.RowHeadersWidth = 51;
             this.ongoingOrdersDataGridView.RowTemplate.Height = 29;
             this.ongoingOrdersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ongoingOrdersDataGridView.Size = new System.Drawing.Size(620, 500);
+            this.ongoingOrdersDataGridView.Size = new System.Drawing.Size(620, 450);
             this.ongoingOrdersDataGridView.TabIndex = 16;
             // 
             // markOrderReadyBtn
@@ -550,23 +551,6 @@ namespace ChapeauUI
             this.startMenuPnl.Name = "startMenuPnl";
             this.startMenuPnl.Size = new System.Drawing.Size(700, 1390);
             this.startMenuPnl.TabIndex = 18;
-            // 
-            // buttonBack
-            // 
-            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.buttonBack.FlatAppearance.BorderSize = 0;
-            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonBack.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.buttonBack.ForeColor = System.Drawing.Color.White;
-            this.buttonBack.Location = new System.Drawing.Point(0, 1420);
-            this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
-            this.buttonBack.Name = "buttonBack";
-            this.buttonBack.Size = new System.Drawing.Size(163, 66);
-            this.buttonBack.TabIndex = 7;
-            this.buttonBack.Text = "<BACK";
-            this.buttonBack.TextAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.buttonBack.UseVisualStyleBackColor = false;
-            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // showBillBtn
             // 
@@ -664,6 +648,23 @@ namespace ChapeauUI
             this.makeReservationBtn.UseVisualStyleBackColor = false;
             this.makeReservationBtn.Click += new System.EventHandler(this.makeReservationBtn_Click);
             // 
+            // buttonBack
+            // 
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonBack.FlatAppearance.BorderSize = 0;
+            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBack.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBack.ForeColor = System.Drawing.Color.White;
+            this.buttonBack.Location = new System.Drawing.Point(0, 1420);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(163, 66);
+            this.buttonBack.TabIndex = 7;
+            this.buttonBack.Text = "<BACK";
+            this.buttonBack.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
             // TableOverview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -677,10 +678,10 @@ namespace ChapeauUI
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.bottomBarLabel);
             this.Controls.Add(this.startMenuPnl);
+            this.Controls.Add(this.notificationsPnl);
+            this.Controls.Add(this.markReservationPresentPnl);
             this.Controls.Add(this.TableOverviewPnl);
             this.Controls.Add(this.makeReservationPnl);
-            this.Controls.Add(this.markReservationPresentPnl);
-            this.Controls.Add(this.notificationsPnl);
             this.Controls.Add(this.topBarLabel);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);

@@ -300,7 +300,6 @@ namespace ChapeauUI
             string comments = reservationCommentsTextBox.Text;
             int phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
             string emailAdress = reservationEmailTextBox.Text;
-            //maak object
             Reservation newReservation = new Reservation()
             {
                 CustomerFullName = customerName,
@@ -312,6 +311,7 @@ namespace ChapeauUI
                 Emailaddres = emailAdress
             };
             reservationService.AddNewReservation(newReservation);
+            ConfirmOrderUI reservationMadeBox = new ConfirmOrderUI("The reservation has been made.", DialogResult.OK);
             HideAllPanels();
             startMenuPnl.Show();
         }
@@ -353,16 +353,21 @@ namespace ChapeauUI
             OrderService orderService = new OrderService();
             OrderItemService orderItemService = new OrderItemService();
             int orderID = Convert.ToInt32(ordersReadyGridView.SelectedRows[0].Cells[0].Value);
-            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Drink")
+            ConfirmOrderUI confirmDelivery = new ConfirmOrderUI($"Are you sure you want to deliver order {orderID}");
+            confirmDelivery.ShowDialog();
+            if(confirmDelivery.DialogResult == DialogResult.Yes)
             {
-                orderItemService.UpdateDrinkOrderStatusToDeliverd(orderID);
+                if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Drink")
+                {
+                    orderItemService.UpdateDrinkOrderStatusToDeliverd(orderID);
+                }
+                if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Food")
+                {
+                    orderItemService.UpdateFoodOrderStatusToDeliverd(orderID);
+                }
+                orderService.UpdateStateIsFinished(orderID);
+                fillReadyOrderDataGrid();
             }
-            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Food")
-            {
-                orderItemService.UpdateFoodOrderStatusToDeliverd(orderID);
-            }
-            orderService.UpdateStateIsFinished(orderID);
-            fillReadyOrderDataGrid();
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
