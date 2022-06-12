@@ -19,14 +19,7 @@ namespace ChapeauUI
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            Reservation reservation = new Reservation
-            {
-                ReservationId = 202,
-                TableId = 4
-            };
-            Staff staff = new Staff { firstName = "Jannet", Staff_ID = 1001 };
-            Application.Run(new BillUI(reservation, staff));
+            Application.Run(new StartScreen());
         }
     }
 }
