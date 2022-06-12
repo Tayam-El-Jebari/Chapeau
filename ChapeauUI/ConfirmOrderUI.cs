@@ -12,15 +12,15 @@ using Microsoft.VisualBasic;
 
 namespace ChapeauUI
 {
-    public partial class ConfirmOrderUI : Form
+    public partial class PopUpUI : Form
     {
-        public ConfirmOrderUI()
+        public PopUpUI()
         {
             InitializeComponent();
             ReturnButton.DialogResult = DialogResult.Yes;
             DenyButton.DialogResult = DialogResult.No;
         }
-        public ConfirmOrderUI(string question)
+        public PopUpUI(string question)
         {
             InitializeComponent();
             ConfirmButton.DialogResult = DialogResult.Yes;
@@ -28,7 +28,7 @@ namespace ChapeauUI
             labelQuestion.Visible = true;
             labelQuestion.Text = question.ToUpper();
         }
-        public ConfirmOrderUI(string question, DialogResult dialogResult)
+        public PopUpUI(string question, DialogResult dialogResult)
         {
             InitializeComponent();
             switch (dialogResult){
@@ -95,7 +95,7 @@ namespace ChapeauUI
             catch (Exception ex)
             {
 
-                ConfirmOrderUI confirmOrder = new ConfirmOrderUI(ex.Message, DialogResult.OK);
+                PopUpUI confirmOrder = new PopUpUI(ex.Message, DialogResult.OK);
                 confirmOrder.ShowDialog();
             }
             return input;

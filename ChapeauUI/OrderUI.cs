@@ -30,13 +30,14 @@ namespace ChapeauUI
         private void CreateButtons()
         {
             menu.Hide();
+            menu.Controls.Clear();
             foreach (MenuItem menuItem in menuList)
             {
                 if ((menuItem.MenuItemType == menuItemType && menuItem.MenuType == menuType) || (menuType == MenuType.Drink && menuItem.MenuType == menuType))
                 {
                     LeftAndRightTextButton menuItemButton = new LeftAndRightTextButton()
                     {
-                        Width = menu.Width - 70,
+                        Width = menu.Width - 100,
                         Height = 62,
                         LeftText = $"{menuItem.ProductName}",
                         RightText = $"€{menuItem.Price.ToString("0.00")}",
@@ -56,7 +57,7 @@ namespace ChapeauUI
                     }
                     else
                     {
-                        menuItemButton.Click += new EventHandler(BtnOrderAdd_Click);
+                        menuItemButton.Click += new EventHandler(DynamicButtonClicked);
                         menuItemButton.BackColor = Color.Transparent;
                         menuItemButton.ForeColor = Color.FromArgb(39, 39, 39);
                     }
@@ -73,7 +74,7 @@ namespace ChapeauUI
                     };
                     menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
                     menuItemButton.FlatAppearance.BorderSize = 2;
-                    menuItemButton.Click += new EventHandler(BtnDescriptionShow);
+                    menuItemButton.Click += new EventHandler(DynamicButtonClicked);
                     menu.Controls.Add(menuItemButton);
                 }
             }
@@ -106,40 +107,44 @@ namespace ChapeauUI
                     Width = 70
                 });
         }
-        void BtnOrderAdd_Click(Object sender, EventArgs e)
+        void DynamicButtonClicked(Object sender, EventArgs e)
         {
-            Button menuItem = (sender as Button);
-            int itemIndex = menuList.FindIndex(x => x == menuItem.Tag);
-            --menuList[itemIndex].stock;
-            if (menuList[itemIndex].stock == 0)
+            Button buttonClicked = (sender as Button);
+            if (buttonClicked.Tag is MenuItem)
             {
-                menuItem.BackColor = Color.DarkGray;
-                menuItem.ForeColor = Color.LightGray;
-                menuItem.Text = "OUT OF STOCK";
-                menuItem.Click -= new EventHandler(BtnOrderAdd_Click);
-            }
-            foreach (DataGridViewRow row in itemGridView.Rows)
-            {
-                if (Convert.ToInt32(row.Cells[0].Value) == menuList[itemIndex].MenuItemId)
+                int itemIndex = menuList.FindIndex(x => x == buttonClicked.Tag);
+                --menuList[itemIndex].stock;
+                if (menuList[itemIndex].stock == 0)
                 {
-                    row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
-                    return;
+                    buttonClicked.BackColor = Color.DarkGray;
+                    buttonClicked.ForeColor = Color.LightGray;
+                    buttonClicked.Text = "OUT OF STOCK";
+                    buttonClicked.Click -= new EventHandler(DynamicButtonClicked);
+                }
+                foreach (DataGridViewRow row in itemGridView.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells[0].Value) == menuList[itemIndex].MenuItemId)
+                    {
+                        row.Cells[2].Value = Convert.ToInt32(row.Cells[2].Value) + 1;
+                        return;
+                    }
+                }
+                itemGridView.Rows.Add(new string[] { menuList[itemIndex].MenuItemId.ToString(), menuList[itemIndex].ProductName, "1" });
+            }
+            else
+            {
+                for (int i = 0; i < menu.Controls.Count; i++)
+                {
+                    if (menu.Controls[i] == sender)
+                    {
+                        MenuItem menuItem = (menu.Controls[i - 1].Tag as MenuItem);
+                        PopUpUI popup = new PopUpUI(menuItem.Description, DialogResult.OK);
+                        popup.ShowDialog();
+                    }
                 }
             }
-            itemGridView.Rows.Add(new string[] { menuList[itemIndex].MenuItemId.ToString(), menuList[itemIndex].ProductName, "1" });
+            
         }
-        public void BtnDescriptionShow(object sender, EventArgs e)
-        {
-            for (int i = 0; i < menu.Controls.Count; i++)
-            {
-                if (menu.Controls[i] == sender)
-                {
-                    MenuItem menuItem = (menu.Controls[i - 1].Tag as MenuItem);
-                    MessageBox.Show(menuItem.Description);
-                }
-            }
-        }
-
         private void viewOrder_Click(object sender, EventArgs e)
         {
             if (itemAddedOrderPnl.Visible)
@@ -159,7 +164,7 @@ namespace ChapeauUI
 
         private void clearAllButton_Click(object sender, EventArgs e)
         {
-            ConfirmOrderUI confirmBackButton = new ConfirmOrderUI("Are you sure you wish to clear all?");
+            PopUpUI confirmBackButton = new PopUpUI("Are you sure you wish to clear all?");
             confirmBackButton.ShowDialog();
             if (confirmBackButton.DialogResult == DialogResult.Yes)
             {
@@ -191,7 +196,7 @@ namespace ChapeauUI
                             {
                                 menu.Controls[i].BackColor = Color.DarkGray;
                                 menu.Controls[i].ForeColor = Color.LightGray;
-                                menu.Controls[i].Click -= new EventHandler(BtnOrderAdd_Click);
+                                menu.Controls[i].Click -= new EventHandler(DynamicButtonClicked);
                                 menu.Controls[i].Text = "OUT OF STOCK";
                             }
                         }
@@ -208,7 +213,7 @@ namespace ChapeauUI
                             {
                                 menu.Controls[i].BackColor = Color.Transparent;
                                 menu.Controls[i].ForeColor = Color.FromArgb(39, 39, 39);
-                                menu.Controls[i].Click += new EventHandler(BtnOrderAdd_Click);
+                                menu.Controls[i].Click += new EventHandler(DynamicButtonClicked);
                                 menu.Controls[i].Text = string.Empty;
                             }
                         }
@@ -234,12 +239,12 @@ namespace ChapeauUI
                 MessageBox.Show("No items added!");
                 return;
             }
-            ConfirmOrderUI confirm = new ConfirmOrderUI();
-            confirm.ShowDialog();
-            if (confirm.DialogResult == DialogResult.Yes)
+            PopUpUI ConfirmUI = new PopUpUI();
+            ConfirmUI.ShowDialog();
+            if (ConfirmUI.DialogResult == DialogResult.Yes)
             {
                 Order orderToSend = new Order() 
-                { 
+                {
                     Comments = commentsTextBox.Text, 
                     OrderItems = new List<OrderItem>(), 
                     Reservation = this.reservation,
@@ -259,6 +264,7 @@ namespace ChapeauUI
                 itemGridView.Rows.Clear();
                 viewOrder_Click(sender, e);
                 PanelChooseMenu.Visible = true;
+                commentsTextBox.Text = string.Empty;
             }
         }
 
@@ -304,7 +310,6 @@ namespace ChapeauUI
         }
         private void buttonBack_Click(object sender, EventArgs e)
         {
-            RemoveAllControlsMenu();
             if(menuType == MenuType.Drink)
             {
                 PanelChooseMenu.Visible = true;
@@ -321,13 +326,6 @@ namespace ChapeauUI
             {
                 this.Close();
             }
-        }
-        private void RemoveAllControlsMenu()
-        {
-           // hide and show in order to prevent visual bugs from .controls.Clear() that is caused from there being too many controls.
-           menu.Hide();
-           menu.Controls.Clear();
-           menu.Show();
         }
     }
 }
