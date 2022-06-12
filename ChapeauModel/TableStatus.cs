@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChapeauModel
 {
-    public enum MenuChoice
+    public enum TableStatus
     {
-        Undifined,
-        TakeOrder,
-        ShowBill,
-        MakeReservation,
-        Notifications,
-        MarkPresent
+        Free,
+        Occupied,
+        Reserved
     }
 }

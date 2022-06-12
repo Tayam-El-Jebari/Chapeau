@@ -36,7 +36,7 @@ namespace ChapeauDAL
 
         public Staff CheckPassword(int staffID, string hashedPassword)
         {
-            string query = "SELECT * FROM [staff] WHERE staff_ID = @staffID AND [password] = @password";
+            string query = "SELECT staff_ID, firstName FROM [staff] WHERE staff_ID = @staffID AND [password] = @password";
             SqlParameter[] sqlParameters = new SqlParameter[2];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             sqlParameters[1] = new SqlParameter("@password", hashedPassword);
@@ -65,7 +65,7 @@ namespace ChapeauDAL
 
         public bool CheckIfBartender(int staffID)
         {
-            string query = "SELECT * FROM staff JOIN Bartender ON staff.staff_ID = Bartender.bartender_ID WHERE staff_ID = @staffID";
+            string query = "SELECT staff_ID FROM staff JOIN Bartender ON staff.staff_ID = Bartender.bartender_ID WHERE staff_ID = @staffID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);
@@ -73,7 +73,7 @@ namespace ChapeauDAL
         }
         public bool CheckIfChef(int staffID)
         {
-            string query = "SELECT * FROM staff JOIN Chef ON staff.staff_ID = Chef.chef_ID WHERE staff_ID = @staffID";
+            string query = "SELECT staff_ID FROM staff JOIN Chef ON staff.staff_ID = Chef.chef_ID WHERE staff_ID = @staffID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);
@@ -81,7 +81,7 @@ namespace ChapeauDAL
         }
         public bool CheckIfOwner(int staffID)
         {
-            string query = "SELECT * FROM staff JOIN Owner ON staff.staff_ID = Owner.owner_ID WHERE staff_ID = @staffID";
+            string query = "SELECT staff_ID FROM staff JOIN Owner ON staff.staff_ID = Owner.owner_ID WHERE staff_ID = @staffID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);
@@ -89,7 +89,7 @@ namespace ChapeauDAL
         }
         public bool CheckIfWaiter(int staffID)
         {
-            string query = "SELECT * FROM staff JOIN Waiter ON staff.staff_ID = Waiter.waiter_ID WHERE staff_ID = @staffID";
+            string query = "SELECT staff_ID FROM staff JOIN Waiter ON staff.staff_ID = Waiter.waiter_ID WHERE staff_ID = @staffID";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@staffID", staffID);
             DataTable dataTable = ExecuteSelectQuery(query, sqlParameters);

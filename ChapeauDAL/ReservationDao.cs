@@ -13,30 +13,37 @@ namespace ChapeauDAL
     {
         public List<Reservation> GetAllNonPresentReservationsOrderedByTable()
         {
-            string query = "SELECT * FROM [Reservation] WHERE isPresent = 0 ORDER BY table_ID";
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE isPresent = 0 AND CAST(reservationTime AS DATE) >= CAST(GETDATE() AS DATE) ORDER BY table_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
-        public void AddNewReservation(string customerFullName, bool isPresent, DateTime reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
+        public void AddNewReservation(Reservation reservation)
         {
-            string query = "INSERT INTO [Reservation] (customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress) VALUES (@customerFullName, @isPresent, @reservationTime, 4, @comments, @phoneNumber, @emailAdress);";
+            string query = "INSERT INTO [Reservation] (customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress) VALUES (@customerFullName, @isPresent, @reservationTime, @table_ID, @comments, @phoneNumber, @emailAdress);";
             SqlParameter[] sqlParameters = new SqlParameter[7];
-            sqlParameters[0] = new SqlParameter("@customerFullName", customerFullName);
-            sqlParameters[1] = new SqlParameter("@isPresent", isPresent);
-            sqlParameters[2] = new SqlParameter("@reservationTime", reservationTime);
-            sqlParameters[3] = new SqlParameter("@table_ID", table_ID);
-            sqlParameters[4] = new SqlParameter("@comments", comments);
-            sqlParameters[5] = new SqlParameter("@phoneNumber", phoneNumber);
-            sqlParameters[6] = new SqlParameter("@emailAdress", emailAdress);
+            sqlParameters[0] = new SqlParameter("@customerFullName", reservation.CustomerFullName);
+            sqlParameters[1] = new SqlParameter("@isPresent", reservation.isPresent);
+            sqlParameters[2] = new SqlParameter("@reservationTime", reservation.ReservationTime);
+            sqlParameters[3] = new SqlParameter("@table_ID", reservation.TableId);
+            sqlParameters[4] = new SqlParameter("@comments", reservation.Comments);
+            sqlParameters[5] = new SqlParameter("@phoneNumber", reservation.Phonenumber);
+            sqlParameters[6] = new SqlParameter("@emailAdress", reservation.Emailaddres);
             ExecuteEditQuery(query, sqlParameters);
         }
 
         public Reservation GetPresentReservationByTable(int tableID)
         {
-            string query = "SELECT * FROM Reservation WHERE table_ID = @table_ID AND isPresent = 1";
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM Reservation WHERE table_ID = @table_ID AND isPresent = 1";
             SqlParameter[] sqlParameters = new SqlParameter[1];
             sqlParameters[0] = new SqlParameter("@table_ID", tableID);
-            return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+            try
+            {
+                return ReadTable(ExecuteSelectQuery(query, sqlParameters));
+            }
+            catch
+            {
+                throw new Exception("There is no one present at this table.");
+            }
         }
 
         public void MarkReservationPresent(int reservationID)
@@ -49,7 +56,14 @@ namespace ChapeauDAL
 
         public List<Reservation> GetAllPresentReservationsOrderedByTable()
         {
-            string query = "SELECT * FROM [Reservation] WHERE isPresent = 1 ORDER BY table_ID";
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE isPresent = 1 ORDER BY table_ID";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            return ReadTables(ExecuteSelectQuery(query, sqlParameters));
+        }
+
+        public List<Reservation> GetAllReservationsForToday()
+        {
+            string query = "SELECT reservation_id, customerFullName, isPresent, reservationTime, table_ID, comments FROM [Reservation] WHERE CAST(reservationTime AS DATE) = CAST(GETDATE() AS DATE) ORDER BY table_ID";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }

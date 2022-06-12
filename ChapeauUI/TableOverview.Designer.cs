@@ -41,9 +41,11 @@ namespace ChapeauUI
             this.tableTenButton = new System.Windows.Forms.Button();
             this.TableOverviewPnl = new System.Windows.Forms.Panel();
             this.makeReservationPnl = new System.Windows.Forms.Panel();
+            this.confirmReservationBtn = new System.Windows.Forms.Button();
+            this.TimePicker = new System.Windows.Forms.DateTimePicker();
+            this.reservationTimePicker = new System.Windows.Forms.Label();
             this.reservationCommentsTextBox = new System.Windows.Forms.TextBox();
             this.reservationCommentsLbl = new System.Windows.Forms.Label();
-            this.confirmReservationBtn = new System.Windows.Forms.Button();
             this.reservationDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.reservationTimeLbl = new System.Windows.Forms.Label();
             this.reservationEmailTextBox = new System.Windows.Forms.TextBox();
@@ -60,6 +62,7 @@ namespace ChapeauUI
             this.topBarLabel = new System.Windows.Forms.Label();
             this.bottomBarLabel = new System.Windows.Forms.Label();
             this.notificationsPnl = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
             this.ongoingOrdersDataGridView = new System.Windows.Forms.DataGridView();
             this.markOrderReadyBtn = new System.Windows.Forms.Button();
             this.readyOrdersLbl = new System.Windows.Forms.Label();
@@ -70,6 +73,7 @@ namespace ChapeauUI
             this.menuLabel = new System.Windows.Forms.Label();
             this.takeOrderBtn = new System.Windows.Forms.Button();
             this.makeReservationBtn = new System.Windows.Forms.Button();
+            this.buttonBack = new System.Windows.Forms.Button();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersReadyGridView)).BeginInit();
@@ -86,7 +90,7 @@ namespace ChapeauUI
             this.tableOneButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableOneButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableOneButton.ForeColor = System.Drawing.Color.White;
-            this.tableOneButton.Location = new System.Drawing.Point(95, 59);
+            this.tableOneButton.Location = new System.Drawing.Point(100, 50);
             this.tableOneButton.Name = "tableOneButton";
             this.tableOneButton.Size = new System.Drawing.Size(200, 200);
             this.tableOneButton.TabIndex = 0;
@@ -100,7 +104,7 @@ namespace ChapeauUI
             this.tableThreeButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableThreeButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableThreeButton.ForeColor = System.Drawing.Color.White;
-            this.tableThreeButton.Location = new System.Drawing.Point(95, 278);
+            this.tableThreeButton.Location = new System.Drawing.Point(100, 300);
             this.tableThreeButton.Name = "tableThreeButton";
             this.tableThreeButton.Size = new System.Drawing.Size(200, 200);
             this.tableThreeButton.TabIndex = 1;
@@ -114,7 +118,7 @@ namespace ChapeauUI
             this.tableFiveButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableFiveButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableFiveButton.ForeColor = System.Drawing.Color.White;
-            this.tableFiveButton.Location = new System.Drawing.Point(95, 502);
+            this.tableFiveButton.Location = new System.Drawing.Point(100, 550);
             this.tableFiveButton.Name = "tableFiveButton";
             this.tableFiveButton.Size = new System.Drawing.Size(200, 200);
             this.tableFiveButton.TabIndex = 2;
@@ -128,7 +132,7 @@ namespace ChapeauUI
             this.tableSevenButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableSevenButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableSevenButton.ForeColor = System.Drawing.Color.White;
-            this.tableSevenButton.Location = new System.Drawing.Point(95, 719);
+            this.tableSevenButton.Location = new System.Drawing.Point(100, 800);
             this.tableSevenButton.Name = "tableSevenButton";
             this.tableSevenButton.Size = new System.Drawing.Size(200, 200);
             this.tableSevenButton.TabIndex = 3;
@@ -142,7 +146,7 @@ namespace ChapeauUI
             this.tableNineButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableNineButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableNineButton.ForeColor = System.Drawing.Color.White;
-            this.tableNineButton.Location = new System.Drawing.Point(95, 939);
+            this.tableNineButton.Location = new System.Drawing.Point(100, 1050);
             this.tableNineButton.Name = "tableNineButton";
             this.tableNineButton.Size = new System.Drawing.Size(200, 200);
             this.tableNineButton.TabIndex = 4;
@@ -156,7 +160,7 @@ namespace ChapeauUI
             this.tableTwoButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableTwoButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableTwoButton.ForeColor = System.Drawing.Color.White;
-            this.tableTwoButton.Location = new System.Drawing.Point(402, 59);
+            this.tableTwoButton.Location = new System.Drawing.Point(400, 50);
             this.tableTwoButton.Name = "tableTwoButton";
             this.tableTwoButton.Size = new System.Drawing.Size(200, 200);
             this.tableTwoButton.TabIndex = 5;
@@ -170,7 +174,7 @@ namespace ChapeauUI
             this.tableFourButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableFourButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableFourButton.ForeColor = System.Drawing.Color.White;
-            this.tableFourButton.Location = new System.Drawing.Point(402, 278);
+            this.tableFourButton.Location = new System.Drawing.Point(400, 300);
             this.tableFourButton.Name = "tableFourButton";
             this.tableFourButton.Size = new System.Drawing.Size(200, 200);
             this.tableFourButton.TabIndex = 6;
@@ -184,7 +188,7 @@ namespace ChapeauUI
             this.tableSixButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableSixButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableSixButton.ForeColor = System.Drawing.Color.White;
-            this.tableSixButton.Location = new System.Drawing.Point(402, 502);
+            this.tableSixButton.Location = new System.Drawing.Point(400, 550);
             this.tableSixButton.Name = "tableSixButton";
             this.tableSixButton.Size = new System.Drawing.Size(200, 200);
             this.tableSixButton.TabIndex = 7;
@@ -198,7 +202,7 @@ namespace ChapeauUI
             this.tableEightButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableEightButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableEightButton.ForeColor = System.Drawing.Color.White;
-            this.tableEightButton.Location = new System.Drawing.Point(402, 719);
+            this.tableEightButton.Location = new System.Drawing.Point(400, 800);
             this.tableEightButton.Name = "tableEightButton";
             this.tableEightButton.Size = new System.Drawing.Size(200, 200);
             this.tableEightButton.TabIndex = 8;
@@ -212,7 +216,7 @@ namespace ChapeauUI
             this.tableTenButton.BackgroundImage = global::ChapeauUI.Properties.Resources.TableFree;
             this.tableTenButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tableTenButton.ForeColor = System.Drawing.Color.White;
-            this.tableTenButton.Location = new System.Drawing.Point(402, 939);
+            this.tableTenButton.Location = new System.Drawing.Point(400, 1050);
             this.tableTenButton.Name = "tableTenButton";
             this.tableTenButton.Size = new System.Drawing.Size(200, 200);
             this.tableTenButton.TabIndex = 9;
@@ -224,15 +228,15 @@ namespace ChapeauUI
             // 
             this.TableOverviewPnl.BackColor = System.Drawing.Color.Transparent;
             this.TableOverviewPnl.Controls.Add(this.tableOneButton);
-            this.TableOverviewPnl.Controls.Add(this.tableTenButton);
+            this.TableOverviewPnl.Controls.Add(this.tableTwoButton);
             this.TableOverviewPnl.Controls.Add(this.tableThreeButton);
-            this.TableOverviewPnl.Controls.Add(this.tableEightButton);
+            this.TableOverviewPnl.Controls.Add(this.tableFourButton);
             this.TableOverviewPnl.Controls.Add(this.tableFiveButton);
             this.TableOverviewPnl.Controls.Add(this.tableSixButton);
             this.TableOverviewPnl.Controls.Add(this.tableSevenButton);
-            this.TableOverviewPnl.Controls.Add(this.tableFourButton);
+            this.TableOverviewPnl.Controls.Add(this.tableEightButton);
             this.TableOverviewPnl.Controls.Add(this.tableNineButton);
-            this.TableOverviewPnl.Controls.Add(this.tableTwoButton);
+            this.TableOverviewPnl.Controls.Add(this.tableTenButton);
             this.TableOverviewPnl.Location = new System.Drawing.Point(0, 51);
             this.TableOverviewPnl.Name = "TableOverviewPnl";
             this.TableOverviewPnl.Size = new System.Drawing.Size(700, 1390);
@@ -240,9 +244,12 @@ namespace ChapeauUI
             // 
             // makeReservationPnl
             // 
+            this.makeReservationPnl.BackColor = System.Drawing.Color.Transparent;
+            this.makeReservationPnl.Controls.Add(this.confirmReservationBtn);
+            this.makeReservationPnl.Controls.Add(this.TimePicker);
+            this.makeReservationPnl.Controls.Add(this.reservationTimePicker);
             this.makeReservationPnl.Controls.Add(this.reservationCommentsTextBox);
             this.makeReservationPnl.Controls.Add(this.reservationCommentsLbl);
-            this.makeReservationPnl.Controls.Add(this.confirmReservationBtn);
             this.makeReservationPnl.Controls.Add(this.reservationDateTimePicker);
             this.makeReservationPnl.Controls.Add(this.reservationTimeLbl);
             this.makeReservationPnl.Controls.Add(this.reservationEmailTextBox);
@@ -251,115 +258,156 @@ namespace ChapeauUI
             this.makeReservationPnl.Controls.Add(this.reservationPhonenumberLbl);
             this.makeReservationPnl.Controls.Add(this.reservationNameTextBox);
             this.makeReservationPnl.Controls.Add(this.reservationNameLbl);
-            this.makeReservationPnl.Location = new System.Drawing.Point(740, 253);
+            this.makeReservationPnl.Location = new System.Drawing.Point(0, 51);
             this.makeReservationPnl.Name = "makeReservationPnl";
-            this.makeReservationPnl.Size = new System.Drawing.Size(334, 332);
+            this.makeReservationPnl.Size = new System.Drawing.Size(700, 1390);
             this.makeReservationPnl.TabIndex = 11;
+            // 
+            // confirmReservationBtn
+            // 
+            this.confirmReservationBtn.BackColor = System.Drawing.Color.Transparent;
+            this.confirmReservationBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.confirmReservationBtn.FlatAppearance.BorderSize = 10;
+            this.confirmReservationBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.confirmReservationBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.confirmReservationBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.confirmReservationBtn.Location = new System.Drawing.Point(50, 1000);
+            this.confirmReservationBtn.Margin = new System.Windows.Forms.Padding(0);
+            this.confirmReservationBtn.Name = "confirmReservationBtn";
+            this.confirmReservationBtn.Size = new System.Drawing.Size(600, 126);
+            this.confirmReservationBtn.TabIndex = 7;
+            this.confirmReservationBtn.Text = "RESERVE NOW";
+            this.confirmReservationBtn.UseVisualStyleBackColor = true;
+            this.confirmReservationBtn.Click += new System.EventHandler(this.confirmReservationBtn_Click);
+            // 
+            // TimePicker
+            // 
+            this.TimePicker.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.TimePicker.Location = new System.Drawing.Point(50, 700);
+            this.TimePicker.Name = "TimePicker";
+            this.TimePicker.Size = new System.Drawing.Size(600, 66);
+            this.TimePicker.TabIndex = 12;
+            // 
+            // reservationTimePicker
+            // 
+            this.reservationTimePicker.AutoSize = true;
+            this.reservationTimePicker.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationTimePicker.Location = new System.Drawing.Point(50, 625);
+            this.reservationTimePicker.Name = "reservationTimePicker";
+            this.reservationTimePicker.Size = new System.Drawing.Size(437, 63);
+            this.reservationTimePicker.TabIndex = 11;
+            this.reservationTimePicker.Text = "RESERVATION TIME";
             // 
             // reservationCommentsTextBox
             // 
-            this.reservationCommentsTextBox.Location = new System.Drawing.Point(4, 262);
+            this.reservationCommentsTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationCommentsTextBox.Location = new System.Drawing.Point(50, 850);
             this.reservationCommentsTextBox.Name = "reservationCommentsTextBox";
-            this.reservationCommentsTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationCommentsTextBox.Size = new System.Drawing.Size(600, 66);
             this.reservationCommentsTextBox.TabIndex = 10;
             // 
             // reservationCommentsLbl
             // 
             this.reservationCommentsLbl.AutoSize = true;
-            this.reservationCommentsLbl.Location = new System.Drawing.Point(4, 238);
+            this.reservationCommentsLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationCommentsLbl.Location = new System.Drawing.Point(50, 775);
             this.reservationCommentsLbl.Name = "reservationCommentsLbl";
-            this.reservationCommentsLbl.Size = new System.Drawing.Size(84, 20);
+            this.reservationCommentsLbl.Size = new System.Drawing.Size(273, 63);
             this.reservationCommentsLbl.TabIndex = 9;
             this.reservationCommentsLbl.Text = "COMMENTS";
             // 
-            // confirmReservationBtn
-            // 
-            this.confirmReservationBtn.Location = new System.Drawing.Point(4, 300);
-            this.confirmReservationBtn.Name = "confirmReservationBtn";
-            this.confirmReservationBtn.Size = new System.Drawing.Size(327, 29);
-            this.confirmReservationBtn.TabIndex = 8;
-            this.confirmReservationBtn.Text = "CONFIRM RESERVATION";
-            this.confirmReservationBtn.UseVisualStyleBackColor = true;
-            this.confirmReservationBtn.Click += new System.EventHandler(this.confirmReservationBtn_Click);
-            // 
             // reservationDateTimePicker
             // 
-            this.reservationDateTimePicker.Location = new System.Drawing.Point(4, 204);
+            this.reservationDateTimePicker.CalendarFont = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationDateTimePicker.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationDateTimePicker.Location = new System.Drawing.Point(50, 550);
+            this.reservationDateTimePicker.MinDate = new System.DateTime(2022, 6, 10, 12, 9, 27, 0);
             this.reservationDateTimePicker.Name = "reservationDateTimePicker";
-            this.reservationDateTimePicker.Size = new System.Drawing.Size(250, 25);
+            this.reservationDateTimePicker.Size = new System.Drawing.Size(600, 66);
             this.reservationDateTimePicker.TabIndex = 7;
+            this.reservationDateTimePicker.Value = new System.DateTime(2022, 6, 10, 12, 9, 27, 0);
             // 
             // reservationTimeLbl
             // 
             this.reservationTimeLbl.AutoSize = true;
-            this.reservationTimeLbl.Location = new System.Drawing.Point(4, 180);
+            this.reservationTimeLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationTimeLbl.Location = new System.Drawing.Point(50, 475);
             this.reservationTimeLbl.Name = "reservationTimeLbl";
-            this.reservationTimeLbl.Size = new System.Drawing.Size(134, 20);
+            this.reservationTimeLbl.Size = new System.Drawing.Size(444, 63);
             this.reservationTimeLbl.TabIndex = 6;
-            this.reservationTimeLbl.Text = "RESERVATION TIME";
+            this.reservationTimeLbl.Text = "RESERVATION DATE";
             // 
             // reservationEmailTextBox
             // 
-            this.reservationEmailTextBox.Location = new System.Drawing.Point(4, 146);
+            this.reservationEmailTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationEmailTextBox.Location = new System.Drawing.Point(50, 400);
             this.reservationEmailTextBox.Name = "reservationEmailTextBox";
-            this.reservationEmailTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationEmailTextBox.Size = new System.Drawing.Size(600, 66);
             this.reservationEmailTextBox.TabIndex = 5;
             // 
             // reservationEmailLbl
             // 
             this.reservationEmailLbl.AutoSize = true;
-            this.reservationEmailLbl.Location = new System.Drawing.Point(4, 122);
+            this.reservationEmailLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationEmailLbl.Location = new System.Drawing.Point(50, 325);
             this.reservationEmailLbl.Name = "reservationEmailLbl";
-            this.reservationEmailLbl.Size = new System.Drawing.Size(55, 20);
+            this.reservationEmailLbl.Size = new System.Drawing.Size(175, 63);
             this.reservationEmailLbl.TabIndex = 4;
             this.reservationEmailLbl.Text = "E-MAIL";
             // 
             // reservationPhonenumberTextBox
             // 
-            this.reservationPhonenumberTextBox.Location = new System.Drawing.Point(4, 88);
+            this.reservationPhonenumberTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationPhonenumberTextBox.Location = new System.Drawing.Point(50, 250);
             this.reservationPhonenumberTextBox.Name = "reservationPhonenumberTextBox";
-            this.reservationPhonenumberTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationPhonenumberTextBox.Size = new System.Drawing.Size(600, 66);
             this.reservationPhonenumberTextBox.TabIndex = 3;
             // 
             // reservationPhonenumberLbl
             // 
             this.reservationPhonenumberLbl.AutoSize = true;
-            this.reservationPhonenumberLbl.Location = new System.Drawing.Point(4, 64);
+            this.reservationPhonenumberLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationPhonenumberLbl.Location = new System.Drawing.Point(50, 175);
             this.reservationPhonenumberLbl.Name = "reservationPhonenumberLbl";
-            this.reservationPhonenumberLbl.Size = new System.Drawing.Size(116, 20);
+            this.reservationPhonenumberLbl.Size = new System.Drawing.Size(379, 63);
             this.reservationPhonenumberLbl.TabIndex = 2;
             this.reservationPhonenumberLbl.Text = "PHONE NUMBER";
             // 
             // reservationNameTextBox
             // 
-            this.reservationNameTextBox.Location = new System.Drawing.Point(4, 30);
+            this.reservationNameTextBox.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationNameTextBox.Location = new System.Drawing.Point(50, 100);
             this.reservationNameTextBox.Name = "reservationNameTextBox";
-            this.reservationNameTextBox.Size = new System.Drawing.Size(125, 25);
+            this.reservationNameTextBox.Size = new System.Drawing.Size(600, 66);
             this.reservationNameTextBox.TabIndex = 1;
             // 
             // reservationNameLbl
             // 
             this.reservationNameLbl.AutoSize = true;
-            this.reservationNameLbl.Location = new System.Drawing.Point(4, 6);
+            this.reservationNameLbl.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.reservationNameLbl.Location = new System.Drawing.Point(50, 25);
             this.reservationNameLbl.Name = "reservationNameLbl";
-            this.reservationNameLbl.Size = new System.Drawing.Size(53, 20);
+            this.reservationNameLbl.Size = new System.Drawing.Size(168, 63);
             this.reservationNameLbl.TabIndex = 0;
             this.reservationNameLbl.Text = "NAME*";
             // 
             // ordersReadyGridView
             // 
+            this.ordersReadyGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ordersReadyGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ordersReadyGridView.Location = new System.Drawing.Point(32, 109);
+            this.ordersReadyGridView.Location = new System.Drawing.Point(40, 100);
             this.ordersReadyGridView.MultiSelect = false;
             this.ordersReadyGridView.Name = "ordersReadyGridView";
             this.ordersReadyGridView.RowHeadersWidth = 51;
             this.ordersReadyGridView.RowTemplate.Height = 29;
             this.ordersReadyGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ordersReadyGridView.Size = new System.Drawing.Size(638, 574);
+            this.ordersReadyGridView.Size = new System.Drawing.Size(620, 500);
             this.ordersReadyGridView.TabIndex = 13;
             // 
             // markReservationPresentPnl
             // 
+            this.markReservationPresentPnl.BackColor = System.Drawing.Color.Transparent;
             this.markReservationPresentPnl.Controls.Add(this.setReservationPresentBtn);
             this.markReservationPresentPnl.Controls.Add(this.label1);
             this.markReservationPresentPnl.Controls.Add(this.reservationOverviewDataGrid);
@@ -376,10 +424,10 @@ namespace ChapeauUI
             this.setReservationPresentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.setReservationPresentBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.setReservationPresentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.setReservationPresentBtn.Location = new System.Drawing.Point(36, 646);
+            this.setReservationPresentBtn.Location = new System.Drawing.Point(40, 1100);
             this.setReservationPresentBtn.Margin = new System.Windows.Forms.Padding(60);
             this.setReservationPresentBtn.Name = "setReservationPresentBtn";
-            this.setReservationPresentBtn.Size = new System.Drawing.Size(616, 200);
+            this.setReservationPresentBtn.Size = new System.Drawing.Size(620, 200);
             this.setReservationPresentBtn.TabIndex = 7;
             this.setReservationPresentBtn.Text = "MARK RESERVATION PRESENT";
             this.setReservationPresentBtn.UseVisualStyleBackColor = false;
@@ -389,7 +437,7 @@ namespace ChapeauUI
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(4, 4);
+            this.label1.Location = new System.Drawing.Point(40, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(294, 54);
             this.label1.TabIndex = 0;
@@ -399,11 +447,13 @@ namespace ChapeauUI
             // 
             this.reservationOverviewDataGrid.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.reservationOverviewDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.reservationOverviewDataGrid.Location = new System.Drawing.Point(4, 58);
+            this.reservationOverviewDataGrid.Location = new System.Drawing.Point(40, 100);
+            this.reservationOverviewDataGrid.MultiSelect = false;
             this.reservationOverviewDataGrid.Name = "reservationOverviewDataGrid";
             this.reservationOverviewDataGrid.RowHeadersWidth = 51;
             this.reservationOverviewDataGrid.RowTemplate.Height = 29;
-            this.reservationOverviewDataGrid.Size = new System.Drawing.Size(693, 576);
+            this.reservationOverviewDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.reservationOverviewDataGrid.Size = new System.Drawing.Size(620, 950);
             this.reservationOverviewDataGrid.TabIndex = 13;
             // 
             // topBarLabel
@@ -412,23 +462,23 @@ namespace ChapeauUI
             this.topBarLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBarLabel.Location = new System.Drawing.Point(0, 0);
             this.topBarLabel.Name = "topBarLabel";
-            this.topBarLabel.Size = new System.Drawing.Size(1543, 51);
+            this.topBarLabel.Size = new System.Drawing.Size(700, 51);
             this.topBarLabel.TabIndex = 15;
             this.topBarLabel.Text = "emptyString";
             // 
             // bottomBarLabel
             // 
             this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.bottomBarLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1441);
+            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1417);
             this.bottomBarLabel.Name = "bottomBarLabel";
-            this.bottomBarLabel.Size = new System.Drawing.Size(1543, 74);
+            this.bottomBarLabel.Size = new System.Drawing.Size(700, 74);
             this.bottomBarLabel.TabIndex = 16;
             this.bottomBarLabel.Text = "emptyString";
             // 
             // notificationsPnl
             // 
             this.notificationsPnl.BackColor = System.Drawing.Color.Transparent;
+            this.notificationsPnl.Controls.Add(this.label2);
             this.notificationsPnl.Controls.Add(this.ongoingOrdersDataGridView);
             this.notificationsPnl.Controls.Add(this.markOrderReadyBtn);
             this.notificationsPnl.Controls.Add(this.readyOrdersLbl);
@@ -438,16 +488,28 @@ namespace ChapeauUI
             this.notificationsPnl.Size = new System.Drawing.Size(700, 1390);
             this.notificationsPnl.TabIndex = 17;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.label2.Location = new System.Drawing.Point(40, 780);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(308, 54);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "READY ORDERS";
+            // 
             // ongoingOrdersDataGridView
             // 
+            this.ongoingOrdersDataGridView.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.ongoingOrdersDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ongoingOrdersDataGridView.Location = new System.Drawing.Point(32, 810);
+            this.ongoingOrdersDataGridView.Location = new System.Drawing.Point(40, 850);
             this.ongoingOrdersDataGridView.MultiSelect = false;
             this.ongoingOrdersDataGridView.Name = "ongoingOrdersDataGridView";
             this.ongoingOrdersDataGridView.RowHeadersWidth = 51;
             this.ongoingOrdersDataGridView.RowTemplate.Height = 29;
             this.ongoingOrdersDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.ongoingOrdersDataGridView.Size = new System.Drawing.Size(638, 574);
+            this.ongoingOrdersDataGridView.Size = new System.Drawing.Size(620, 450);
             this.ongoingOrdersDataGridView.TabIndex = 16;
             // 
             // markOrderReadyBtn
@@ -458,10 +520,10 @@ namespace ChapeauUI
             this.markOrderReadyBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.markOrderReadyBtn.Font = new System.Drawing.Font("Trebuchet MS", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.markOrderReadyBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.markOrderReadyBtn.Location = new System.Drawing.Point(32, 686);
+            this.markOrderReadyBtn.Location = new System.Drawing.Point(40, 610);
             this.markOrderReadyBtn.Margin = new System.Windows.Forms.Padding(0);
             this.markOrderReadyBtn.Name = "markOrderReadyBtn";
-            this.markOrderReadyBtn.Size = new System.Drawing.Size(638, 121);
+            this.markOrderReadyBtn.Size = new System.Drawing.Size(620, 121);
             this.markOrderReadyBtn.TabIndex = 15;
             this.markOrderReadyBtn.Text = "ORDER DELIVERED";
             this.markOrderReadyBtn.UseVisualStyleBackColor = true;
@@ -472,7 +534,7 @@ namespace ChapeauUI
             this.readyOrdersLbl.AutoSize = true;
             this.readyOrdersLbl.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.readyOrdersLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.readyOrdersLbl.Location = new System.Drawing.Point(32, 55);
+            this.readyOrdersLbl.Location = new System.Drawing.Point(40, 30);
             this.readyOrdersLbl.Name = "readyOrdersLbl";
             this.readyOrdersLbl.Size = new System.Drawing.Size(308, 54);
             this.readyOrdersLbl.TabIndex = 1;
@@ -500,7 +562,7 @@ namespace ChapeauUI
             this.showBillBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.showBillBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.showBillBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.showBillBtn.Location = new System.Drawing.Point(31, 575);
+            this.showBillBtn.Location = new System.Drawing.Point(40, 600);
             this.showBillBtn.Margin = new System.Windows.Forms.Padding(60);
             this.showBillBtn.Name = "showBillBtn";
             this.showBillBtn.Size = new System.Drawing.Size(616, 200);
@@ -517,10 +579,10 @@ namespace ChapeauUI
             this.markReservationPresentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.markReservationPresentBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.markReservationPresentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.markReservationPresentBtn.Location = new System.Drawing.Point(31, 1000);
+            this.markReservationPresentBtn.Location = new System.Drawing.Point(40, 1050);
             this.markReservationPresentBtn.Margin = new System.Windows.Forms.Padding(60);
             this.markReservationPresentBtn.Name = "markReservationPresentBtn";
-            this.markReservationPresentBtn.Size = new System.Drawing.Size(616, 200);
+            this.markReservationPresentBtn.Size = new System.Drawing.Size(620, 200);
             this.markReservationPresentBtn.TabIndex = 5;
             this.markReservationPresentBtn.Text = "MARK PRESENT";
             this.markReservationPresentBtn.UseVisualStyleBackColor = false;
@@ -534,7 +596,7 @@ namespace ChapeauUI
             this.notificationsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.notificationsBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.notificationsBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.notificationsBtn.Location = new System.Drawing.Point(32, 784);
+            this.notificationsBtn.Location = new System.Drawing.Point(40, 825);
             this.notificationsBtn.Margin = new System.Windows.Forms.Padding(60);
             this.notificationsBtn.Name = "notificationsBtn";
             this.notificationsBtn.Size = new System.Drawing.Size(616, 200);
@@ -548,7 +610,7 @@ namespace ChapeauUI
             this.menuLabel.AutoSize = true;
             this.menuLabel.Font = new System.Drawing.Font("Trebuchet MS", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.menuLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.menuLabel.Location = new System.Drawing.Point(32, 55);
+            this.menuLabel.Location = new System.Drawing.Point(40, 55);
             this.menuLabel.Name = "menuLabel";
             this.menuLabel.Size = new System.Drawing.Size(132, 54);
             this.menuLabel.TabIndex = 1;
@@ -562,7 +624,7 @@ namespace ChapeauUI
             this.takeOrderBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.takeOrderBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.takeOrderBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.takeOrderBtn.Location = new System.Drawing.Point(31, 151);
+            this.takeOrderBtn.Location = new System.Drawing.Point(40, 150);
             this.takeOrderBtn.Margin = new System.Windows.Forms.Padding(0);
             this.takeOrderBtn.Name = "takeOrderBtn";
             this.takeOrderBtn.Size = new System.Drawing.Size(616, 200);
@@ -579,7 +641,7 @@ namespace ChapeauUI
             this.makeReservationBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.makeReservationBtn.Font = new System.Drawing.Font("Trebuchet MS", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.makeReservationBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.makeReservationBtn.Location = new System.Drawing.Point(31, 364);
+            this.makeReservationBtn.Location = new System.Drawing.Point(40, 375);
             this.makeReservationBtn.Margin = new System.Windows.Forms.Padding(60);
             this.makeReservationBtn.Name = "makeReservationBtn";
             this.makeReservationBtn.Size = new System.Drawing.Size(616, 200);
@@ -587,6 +649,23 @@ namespace ChapeauUI
             this.makeReservationBtn.Text = "MAKE RESERVATION";
             this.makeReservationBtn.UseVisualStyleBackColor = false;
             this.makeReservationBtn.Click += new System.EventHandler(this.makeReservationBtn_Click);
+            // 
+            // buttonBack
+            // 
+            this.buttonBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.buttonBack.FlatAppearance.BorderSize = 0;
+            this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonBack.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonBack.ForeColor = System.Drawing.Color.White;
+            this.buttonBack.Location = new System.Drawing.Point(0, 1420);
+            this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
+            this.buttonBack.Name = "buttonBack";
+            this.buttonBack.Size = new System.Drawing.Size(163, 66);
+            this.buttonBack.TabIndex = 7;
+            this.buttonBack.Text = "<BACK";
+            this.buttonBack.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.buttonBack.UseVisualStyleBackColor = false;
+            this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
             // 
             // TableOverview
             // 
@@ -596,15 +675,16 @@ namespace ChapeauUI
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1564, 1097);
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(720, 1047);
+            this.Controls.Add(this.buttonBack);
+            this.Controls.Add(this.bottomBarLabel);
             this.Controls.Add(this.startMenuPnl);
             this.Controls.Add(this.notificationsPnl);
-            this.Controls.Add(this.bottomBarLabel);
-            this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.markReservationPresentPnl);
-            this.Controls.Add(this.makeReservationPnl);
             this.Controls.Add(this.TableOverviewPnl);
+            this.Controls.Add(this.makeReservationPnl);
+            this.Controls.Add(this.topBarLabel);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
@@ -650,7 +730,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Label reservationNameLbl;
         private System.Windows.Forms.DateTimePicker reservationDateTimePicker;
         private System.Windows.Forms.Label reservationTimeLbl;
-        private System.Windows.Forms.Button confirmReservationBtn;
         private System.Windows.Forms.TextBox reservationCommentsTextBox;
         private System.Windows.Forms.Label reservationCommentsLbl;
         private System.Windows.Forms.DataGridView ordersReadyGridView;
@@ -671,5 +750,10 @@ namespace ChapeauUI
         private System.Windows.Forms.Button markReservationPresentBtn;
         private System.Windows.Forms.Button notificationsBtn;
         private System.Windows.Forms.Button setReservationPresentBtn;
+        private System.Windows.Forms.DateTimePicker TimePicker;
+        private System.Windows.Forms.Label reservationTimePicker;
+        private System.Windows.Forms.Button confirmReservationBtn;
+        private System.Windows.Forms.Button buttonBack;
+        private System.Windows.Forms.Label label2;
     }
 }

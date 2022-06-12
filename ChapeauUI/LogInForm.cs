@@ -43,7 +43,7 @@ namespace ChapeauUI
             {
                 PasswordWithSaltHasher pwHasher = new PasswordWithSaltHasher();
                 StaffService staffService = new StaffService();
-                int staffID = int.Parse(userListView.SelectedItems[0].SubItems[0].Text);
+                int staffID = int.Parse(staffCodeTextBox.Text);
                 string salt = staffService.GetSaltByStaffID(staffID);
                 string passwordInput = passwordTextBox.Text;
                 string hashedPassword = pwHasher.StringHasher(passwordTextBox.Text, salt).Hash;
@@ -65,6 +65,24 @@ namespace ChapeauUI
             {
                 MessageBox.Show("Something went wrong while logging in: " + ex.Message);
             }
+        }
+
+        private void userListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(userListView.SelectedItems.Count != 0)
+            {
+                staffCodeTextBox.Text = userListView.SelectedItems[0].SubItems[0].Text;
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void staffCodeTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

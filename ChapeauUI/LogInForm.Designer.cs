@@ -32,18 +32,22 @@ namespace ChapeauUI
             this.passwordTextBox = new System.Windows.Forms.TextBox();
             this.userListView = new System.Windows.Forms.ListView();
             this.startMenuPnl = new System.Windows.Forms.Panel();
-            this.inlogBtn = new System.Windows.Forms.Button();
-            this.topBarLabel = new System.Windows.Forms.Label();
+            this.passwordLbl = new System.Windows.Forms.Label();
+            this.usernameLbl = new System.Windows.Forms.Label();
             this.staffCodeTextBox = new System.Windows.Forms.TextBox();
+            this.inlogBtn = new System.Windows.Forms.Button();
+            this.loginBackgroundLbl = new System.Windows.Forms.Label();
+            this.topBarLabel = new System.Windows.Forms.Label();
             this.startMenuPnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(78, 645);
+            this.passwordTextBox.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.passwordTextBox.Location = new System.Drawing.Point(150, 925);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(214, 27);
+            this.passwordTextBox.Size = new System.Drawing.Size(400, 52);
             this.passwordTextBox.TabIndex = 1;
             this.passwordTextBox.UseSystemPasswordChar = true;
             // 
@@ -52,24 +56,62 @@ namespace ChapeauUI
             this.userListView.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.userListView.FullRowSelect = true;
             this.userListView.HideSelection = false;
-            this.userListView.Location = new System.Drawing.Point(78, 259);
+            this.userListView.Location = new System.Drawing.Point(80, 405);
             this.userListView.MultiSelect = false;
             this.userListView.Name = "userListView";
-            this.userListView.Size = new System.Drawing.Size(543, 331);
+            this.userListView.Size = new System.Drawing.Size(540, 330);
             this.userListView.TabIndex = 4;
             this.userListView.UseCompatibleStateImageBehavior = false;
+            this.userListView.SelectedIndexChanged += new System.EventHandler(this.userListView_SelectedIndexChanged);
             // 
             // startMenuPnl
             // 
             this.startMenuPnl.BackColor = System.Drawing.Color.Transparent;
+            this.startMenuPnl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.startMenuPnl.Controls.Add(this.passwordLbl);
+            this.startMenuPnl.Controls.Add(this.usernameLbl);
             this.startMenuPnl.Controls.Add(this.staffCodeTextBox);
             this.startMenuPnl.Controls.Add(this.inlogBtn);
             this.startMenuPnl.Controls.Add(this.passwordTextBox);
             this.startMenuPnl.Controls.Add(this.userListView);
+            this.startMenuPnl.Controls.Add(this.loginBackgroundLbl);
             this.startMenuPnl.Location = new System.Drawing.Point(0, 51);
             this.startMenuPnl.Name = "startMenuPnl";
             this.startMenuPnl.Size = new System.Drawing.Size(700, 1390);
             this.startMenuPnl.TabIndex = 19;
+            // 
+            // passwordLbl
+            // 
+            this.passwordLbl.AutoSize = true;
+            this.passwordLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.passwordLbl.Font = new System.Drawing.Font("Trebuchet MS", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.passwordLbl.ForeColor = System.Drawing.Color.White;
+            this.passwordLbl.Location = new System.Drawing.Point(240, 865);
+            this.passwordLbl.Name = "passwordLbl";
+            this.passwordLbl.Size = new System.Drawing.Size(219, 52);
+            this.passwordLbl.TabIndex = 23;
+            this.passwordLbl.Text = "PASSWORD";
+            // 
+            // usernameLbl
+            // 
+            this.usernameLbl.AutoSize = true;
+            this.usernameLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.usernameLbl.Font = new System.Drawing.Font("Trebuchet MS", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.usernameLbl.ForeColor = System.Drawing.Color.White;
+            this.usernameLbl.Location = new System.Drawing.Point(240, 745);
+            this.usernameLbl.Name = "usernameLbl";
+            this.usernameLbl.Size = new System.Drawing.Size(221, 52);
+            this.usernameLbl.TabIndex = 22;
+            this.usernameLbl.Text = "USERNAME";
+            // 
+            // staffCodeTextBox
+            // 
+            this.staffCodeTextBox.Font = new System.Drawing.Font("Segoe UI", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.staffCodeTextBox.Location = new System.Drawing.Point(150, 805);
+            this.staffCodeTextBox.Name = "staffCodeTextBox";
+            this.staffCodeTextBox.Size = new System.Drawing.Size(400, 52);
+            this.staffCodeTextBox.TabIndex = 6;
+            this.staffCodeTextBox.TextChanged += new System.EventHandler(this.staffCodeTextBox_TextChanged);
             // 
             // inlogBtn
             // 
@@ -79,14 +121,23 @@ namespace ChapeauUI
             this.inlogBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.inlogBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 40F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.inlogBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.inlogBtn.Location = new System.Drawing.Point(78, 703);
+            this.inlogBtn.Location = new System.Drawing.Point(80, 1035);
             this.inlogBtn.Margin = new System.Windows.Forms.Padding(60);
             this.inlogBtn.Name = "inlogBtn";
-            this.inlogBtn.Size = new System.Drawing.Size(543, 106);
+            this.inlogBtn.Size = new System.Drawing.Size(540, 106);
             this.inlogBtn.TabIndex = 5;
             this.inlogBtn.Text = "LOG IN";
             this.inlogBtn.UseVisualStyleBackColor = false;
             this.inlogBtn.Click += new System.EventHandler(this.inlogBtn_Click);
+            // 
+            // loginBackgroundLbl
+            // 
+            this.loginBackgroundLbl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+            this.loginBackgroundLbl.Location = new System.Drawing.Point(60, 385);
+            this.loginBackgroundLbl.Name = "loginBackgroundLbl";
+            this.loginBackgroundLbl.Size = new System.Drawing.Size(580, 620);
+            this.loginBackgroundLbl.TabIndex = 21;
+            this.loginBackgroundLbl.Text = "emptyString";
             // 
             // topBarLabel
             // 
@@ -98,13 +149,6 @@ namespace ChapeauUI
             this.topBarLabel.TabIndex = 20;
             this.topBarLabel.Text = "emptyString";
             // 
-            // staffCodeTextBox
-            // 
-            this.staffCodeTextBox.Location = new System.Drawing.Point(78, 612);
-            this.staffCodeTextBox.Name = "staffCodeTextBox";
-            this.staffCodeTextBox.Size = new System.Drawing.Size(214, 27);
-            this.staffCodeTextBox.TabIndex = 6;
-            // 
             // InlogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -112,9 +156,12 @@ namespace ChapeauUI
             this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
+            this.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(720, 1097);
             this.Controls.Add(this.topBarLabel);
             this.Controls.Add(this.startMenuPnl);
+            this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "InlogForm";
@@ -133,5 +180,8 @@ namespace ChapeauUI
         private System.Windows.Forms.Button inlogBtn;
         private System.Windows.Forms.Label topBarLabel;
         private System.Windows.Forms.TextBox staffCodeTextBox;
+        private System.Windows.Forms.Label loginBackgroundLbl;
+        private System.Windows.Forms.Label usernameLbl;
+        private System.Windows.Forms.Label passwordLbl;
     }
 }

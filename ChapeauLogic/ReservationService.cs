@@ -16,9 +16,9 @@ namespace ChapeauLogic
         {
             reservationDb = new ReservationDao();
         }
-        public void AddNewReservation(string customerFullName, bool isPresent, DateTime reservationTime, int table_ID, string comments, int phoneNumber, string emailAdress)
+        public void AddNewReservation(Reservation reservation)
         {
-            reservationDb.AddNewReservation(customerFullName, isPresent, reservationTime, table_ID, comments, phoneNumber, emailAdress);
+            reservationDb.AddNewReservation(reservation);
         }
 
         public void MarkReservationPresent(int reservationID)
@@ -39,6 +39,11 @@ namespace ChapeauLogic
         public List<Reservation> GetAllPresentReservationsOrderedByTable()
         {
             return reservationDb.GetAllPresentReservationsOrderedByTable();
+        }
+
+        public List<Reservation> GetAllReservationsForToday()
+        {
+            return reservationDb.GetAllReservationsForToday();
         }
     }
 }

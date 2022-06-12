@@ -25,7 +25,7 @@ namespace ChapeauUI
             startMenuPnl.Show();
         }
 
-        
+        //Hide all the panels. 
         private void HideAllPanels()
         {
             startMenuPnl.Hide();
@@ -33,34 +33,53 @@ namespace ChapeauUI
             makeReservationPnl.Hide();
             markReservationPresentPnl.Hide();
             notificationsPnl.Hide();
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = 30000;//30 seconds
+            timer.Tick += new System.EventHandler(timer_Tick);
+            timer.Start();
         }
 
-        // make switch
+        //Based on the choice made in the startmenu make the open the right window for the table that was selected.
         private void TableWasSelected(int tableNr)
         {
-            if (menuChoice == MenuChoice.TakeOrder)
+            try
             {
                 ReservationService reservationService = new ReservationService();
-
-                OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember);
-                this.Hide();
-                orderUI.ShowDialog();
-                this.Show();
-            }
-            else if (menuChoice == MenuChoice.ShowBill)
-            {
-                ReservationService reservationService = new ReservationService();
-               // BillUI billUI = new BillUI();
-                this.Hide();
-                //billUI.ShowDialog();
-                this.Show();
-            }
-            else if (menuChoice == MenuChoice.MakeReservation)
-            {
-                HideAllPanels();
-                makeReservationPnl.Show();
+                Reservation currentReservation = reservationService.GetPresentReservationByTable(tableNr);
                 selectedTable = tableNr;
+                switch (menuChoice)
+                {
+                    case MenuChoice.TakeOrder:
+                        OrderUI orderUI = new OrderUI(currentReservation, loggedInStaffMember);
+                        this.Hide();
+                        orderUI.ShowDialog();
+                        this.Show();
+                        break;
+                    case MenuChoice.ShowBill:
+                        BillUI billUI = new BillUI(currentReservation, loggedInStaffMember);
+                        this.Hide();
+                        billUI.ShowDialog();
+                        this.Show();
+                        break;
+                    case MenuChoice.MakeReservation:
+                        HideAllPanels();
+                        makeReservationPnl.Show();
+                        break;
+                }
             }
+            catch (Exception e)
+            {
+                PopUpUI errorBox = new PopUpUI(e.Message, DialogResult.OK);
+                errorBox.ShowDialog();
+            }
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            openTableOverviewPnl();
+            fillnonPresentReservationOverviewDataGrid();
+            fillOngoingOrderDataGrid();
+            fillReadyOrderDataGrid();
         }
 
         private void takeOrderBtn_Click(object sender, EventArgs e)
@@ -68,12 +87,14 @@ namespace ChapeauUI
             HideAllPanels();
             menuChoice = MenuChoice.TakeOrder;
             openTableOverviewPnl();
+            TableOverviewPnl.Show();
         }
         private void showBillBtn_Click(object sender, EventArgs e)
         {
             HideAllPanels();
             menuChoice = MenuChoice.ShowBill;
             openTableOverviewPnl();
+            TableOverviewPnl.Show();
         }
 
         private void makeReservationBtn_Click(object sender, EventArgs e)
@@ -81,77 +102,67 @@ namespace ChapeauUI
             HideAllPanels();
             menuChoice = MenuChoice.MakeReservation;
             openTableOverviewPnl();
+            TableOverviewPnl.Show();
+            reservationDateTimePicker.MinDate = DateTime.Today;
         }
 
         private void notificationsBtn_Click(object sender, EventArgs e)
         {
             HideAllPanels();
+            menuChoice = MenuChoice.Notifications;
             notificationsPnl.Show();
             fillReadyOrderDataGrid();
             fillOngoingOrderDataGrid();
         }
 
+        //Set the background image of each table to the right picture based on if a table is occupied or reserved.
         private void openTableOverviewPnl()
         {
             ReservationService reservationService = new ReservationService();
-            List<Reservation> reservations = reservationService.GetAllPresentReservationsOrderedByTable();
-            setAllTablesBackgroundFree();
+            List<Reservation> presentReservations = reservationService.GetAllPresentReservationsOrderedByTable();
+            List<Reservation> reservations = reservationService.GetAllReservationsForToday();
+            Dictionary<int, TableStatus> tableStatus = new Dictionary<int, TableStatus>();
+            for(int i = 0; i < TableOverviewPnl.Controls.Count; i++)
+            {
+                tableStatus[i] = TableStatus.Free;
+            }
             foreach(Reservation reservation in reservations)
             {
-                setTableImagePresent(reservation.TableId);
+                tableStatus[reservation.TableId -1] = TableStatus.Reserved;
             }
-            TableOverviewPnl.Show();
-        }
-        private void setAllTablesBackgroundFree()
-        {
-            tableOneButton.BackgroundImage = Properties.Resources.TableFree;
-            tableTwoButton.BackgroundImage = Properties.Resources.TableFree;
-            tableThreeButton.BackgroundImage = Properties.Resources.TableFree;
-            tableFourButton.BackgroundImage = Properties.Resources.TableFree;
-            tableFiveButton.BackgroundImage = Properties.Resources.TableFree;
-            tableSixButton.BackgroundImage = Properties.Resources.TableFree;
-            tableSevenButton.BackgroundImage = Properties.Resources.TableFree;
-            tableEightButton.BackgroundImage = Properties.Resources.TableFree;
-            tableNineButton.BackgroundImage = Properties.Resources.TableFree;
-            tableTenButton.BackgroundImage = Properties.Resources.TableFree;
-        }
-        private void setTableImagePresent(int tableID)
-        {
-            switch (tableID)
+            foreach(Reservation presentReservation in presentReservations)
             {
-                case 1:
-                    tableOneButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 2:
-                    tableTwoButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 3:
-                    tableThreeButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 4:
-                    tableFourButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 5:
-                    tableFiveButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 6:
-                    tableSixButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 7:
-                    tableSevenButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 8:
-                    tableEightButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 9:
-                    tableNineButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
-                case 10:
-                    tableOneButton.BackgroundImage = Properties.Resources.TableOccupied;
-                    break;
+                tableStatus[presentReservation.TableId-1] = TableStatus.Occupied;
+            }
+            for(int i = 0; i < TableOverviewPnl.Controls.Count; i++)
+            {
+                Control control = TableOverviewPnl.Controls[i];
+                setTableBackground(control, tableStatus[i]);
+                //setTableBackground(control, TableStatus.Occupied);
             }
         }
 
+        //Set the background image of a table to the right picture based on if a table is occupied or reserved.
+        private void setTableBackground(Control control, TableStatus tableStatus)
+        {
+            switch (tableStatus)
+            {
+                case TableStatus.Free:
+                    control.BackgroundImage = Properties.Resources.TableFree;
+                    control.ForeColor = System.Drawing.Color.White;
+                    break;
+                case TableStatus.Reserved:
+                    control.BackgroundImage = Properties.Resources.TableReserved;
+                    control.ForeColor = System.Drawing.Color.Black;
+                    break;
+                case TableStatus.Occupied:
+                    control.BackgroundImage = Properties.Resources.TableOccupied;
+                    control.ForeColor = System.Drawing.Color.White;
+                    break;
+            }
+        }
+        
+        //Get the orders that are ready to deliver and put it in the datagridview.
         private void fillReadyOrderDataGrid()
         {
             OrderService orderService = new OrderService();
@@ -172,6 +183,7 @@ namespace ChapeauUI
             }
         }
 
+        //Get the orders that are still being prepared and put it in the datagridview.
         private void fillOngoingOrderDataGrid()
         {
             OrderService orderService = new OrderService();
@@ -187,11 +199,11 @@ namespace ChapeauUI
             ongoingOrdersDataGridView.Columns[3].Width = 250;
             foreach (Order foodOrder in ongoingFoodOrders)
             {
-                ongoingOrdersDataGridView.Rows.Add(foodOrder.OrderId, foodOrder.TableId, "Food", foodOrder.TimePlaced);
+                ongoingOrdersDataGridView.Rows.Add(foodOrder.OrderId, foodOrder.TableId, "Food", DateTime.Now.Subtract(foodOrder.TimePlaced).ToString(@"hh\:mm\:ss"));
             }
             foreach (Order drinkOrder in ongoingDrinkOrders)
             {
-                ongoingOrdersDataGridView.Rows.Add(drinkOrder.OrderId, drinkOrder.TableId, "Drink", drinkOrder.TimePlaced);
+                ongoingOrdersDataGridView.Rows.Add(drinkOrder.OrderId, drinkOrder.TableId, "Drink", DateTime.Now.Subtract(drinkOrder.TimePlaced).ToString(@"hh\:mm\:ss"));
             }
         }
 
@@ -245,16 +257,30 @@ namespace ChapeauUI
             TableWasSelected(10);
         }
 
+        //Get the information from the fields and make a new reservation and send it to the database.
         private void confirmReservationBtn_Click(object sender, EventArgs e)
         {
             ReservationService reservationService = new ReservationService();
             string customerName = reservationNameTextBox.Text;
-            DateTime reservationTime = reservationDateTimePicker.Value;
+            DateTime time = TimePicker.Value;
+            DateTime reservationTime = reservationDateTimePicker.Value.Date.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
+            reservationTime.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
             string comments = reservationCommentsTextBox.Text;
-            int phoneNumber = int.Parse(reservationPhonenumberTextBox.Text);
+            int phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
             string emailAdress = reservationEmailTextBox.Text;
-            //maak object
-            reservationService.AddNewReservation(customerName, false, reservationTime, selectedTable, comments, phoneNumber, emailAdress);
+            Reservation newReservation = new Reservation()
+            {
+                CustomerFullName = customerName,
+                isPresent = false,
+                ReservationTime = reservationTime,
+                TableId = selectedTable,
+                Comments = comments,
+                Phonenumber = phoneNumber,
+                Emailaddres = emailAdress
+            };
+            reservationService.AddNewReservation(newReservation);
+            PopUpUI reservationMadeBox = new PopUpUI("The reservation has been made.", DialogResult.OK);
+            reservationMadeBox.ShowDialog();
             HideAllPanels();
             startMenuPnl.Show();
         }
@@ -262,30 +288,41 @@ namespace ChapeauUI
         private void markReservationPresentBtn_Click(object sender, EventArgs e)
         {
             HideAllPanels();
+            menuChoice = MenuChoice.MarkPresent;
             markReservationPresentPnl.Show();
             fillnonPresentReservationOverviewDataGrid();
         }
 
+        //Get the reservations that are not present and put it in the datagridview.
         private void fillnonPresentReservationOverviewDataGrid()
         {
             reservationOverviewDataGrid.Rows.Clear();
             ReservationService reservationService = new ReservationService();
             List<Reservation> reservations = reservationService.GetAllNonPresentReservationsOrderedByTable();
-            reservationOverviewDataGrid.ColumnCount = 2;
+            reservationOverviewDataGrid.ColumnCount = 3;
             reservationOverviewDataGrid.Columns[0].Name = "Reservation ID";
-            reservationOverviewDataGrid.Columns[1].Name = "Reservation time";
+            reservationOverviewDataGrid.Columns[1].Name = "Table ID";
+            reservationOverviewDataGrid.Columns[2].Name = "Reservation time";
             foreach (Reservation reservation in reservations)
             {
-                reservationOverviewDataGrid.Rows.Add(reservation.ReservationId, reservation.ReservationTime);
+                reservationOverviewDataGrid.Rows.Add(reservation.ReservationId, reservation.TableId, reservation.ReservationTime);
             }
         }
 
         private void setReservationPresentBtn_Click(object sender, EventArgs e)
         {
             ReservationService reservationService = new ReservationService();
-            for(int i = 0; i < reservationOverviewDataGrid.SelectedCells.Count; i++)
+            try
             {
-                reservationService.MarkReservationPresent(Convert.ToInt32(reservationOverviewDataGrid.SelectedCells[i].Value));
+                if (reservationService.GetPresentReservationByTable(Convert.ToInt32(reservationOverviewDataGrid.SelectedRows[0].Cells[1].Value)) != null)
+                {
+                    PopUpUI tableOccupiedBox = new PopUpUI("The reservation has been made.", DialogResult.OK);
+                    tableOccupiedBox.ShowDialog();
+                }
+            }
+            catch
+            {
+                reservationService.MarkReservationPresent(Convert.ToInt32(reservationOverviewDataGrid.SelectedRows[0].Cells[0].Value));
             }
             fillnonPresentReservationOverviewDataGrid();
         }
@@ -295,16 +332,36 @@ namespace ChapeauUI
             OrderService orderService = new OrderService();
             OrderItemService orderItemService = new OrderItemService();
             int orderID = Convert.ToInt32(ordersReadyGridView.SelectedRows[0].Cells[0].Value);
-            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Drink")
+            PopUpUI confirmDelivery = new PopUpUI($"Are you sure you want to deliver order {orderID}");
+            confirmDelivery.ShowDialog();
+            if(confirmDelivery.DialogResult == DialogResult.Yes)
             {
-                orderItemService.UpdateDrinkOrderStatusToDeliverd(orderID);
+                if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Drink")
+                {
+                    orderItemService.UpdateDrinkOrderStatusToDeliverd(orderID);
+                }
+                if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Food")
+                {
+                    orderItemService.UpdateFoodOrderStatusToDeliverd(orderID);
+                }
+                orderService.UpdateStateIsFinished(orderID);
+                fillReadyOrderDataGrid();
             }
-            if (Convert.ToString(ordersReadyGridView.SelectedRows[0].Cells[2].Value) == "Food")
+        }
+
+        //Go back to menu or log out depending on where you are in the application.
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+            if (menuChoice != 0)
             {
-                orderItemService.UpdateFoodOrderStatusToDeliverd(orderID);
+                menuChoice = 0;
+                HideAllPanels();
+                startMenuPnl.Show();
             }
-            orderService.UpdateStateIsFinished(orderID);
-            fillReadyOrderDataGrid();
+            else
+            {
+                this.Close();
+            }
         }
     }
 }
