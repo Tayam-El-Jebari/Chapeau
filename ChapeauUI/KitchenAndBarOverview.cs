@@ -301,7 +301,8 @@ namespace ChapeauUI
                 {
 
                     TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
-                        for (int i = 0; i < order.OrderItems.Count; i++)
+                        
+                    for (int i = 0; i < order.OrderItems.Count; i++)
                         {
                         ListViewItem li = new ListViewItem(order.OrderId.ToString());
                         li.SubItems.Add(order.OrderItems[i].MenuItem.MenuItemId.ToString());
