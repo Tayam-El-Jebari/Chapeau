@@ -37,7 +37,7 @@ namespace ChapeauUI
             // 
             this.startAsDesktopbts.Location = new System.Drawing.Point(13, 13);
             this.startAsDesktopbts.Name = "startAsDesktopbts";
-            this.startAsDesktopbts.Size = new System.Drawing.Size(201, 29);
+            this.startAsDesktopbts.Size = new System.Drawing.Size(269, 174);
             this.startAsDesktopbts.TabIndex = 0;
             this.startAsDesktopbts.Text = "START FOR DESKTOP";
             this.startAsDesktopbts.UseVisualStyleBackColor = true;
@@ -45,9 +45,9 @@ namespace ChapeauUI
             // 
             // startForHandheldbtn
             // 
-            this.startForHandheldbtn.Location = new System.Drawing.Point(13, 49);
+            this.startForHandheldbtn.Location = new System.Drawing.Point(13, 205);
             this.startForHandheldbtn.Name = "startForHandheldbtn";
-            this.startForHandheldbtn.Size = new System.Drawing.Size(201, 29);
+            this.startForHandheldbtn.Size = new System.Drawing.Size(269, 175);
             this.startForHandheldbtn.TabIndex = 1;
             this.startForHandheldbtn.Text = "START FOR HANDHELD";
             this.startForHandheldbtn.UseVisualStyleBackColor = true;

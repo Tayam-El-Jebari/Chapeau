@@ -239,7 +239,7 @@ namespace ChapeauUI
             this.TableOverviewPnl.Controls.Add(this.tableTenButton);
             this.TableOverviewPnl.Location = new System.Drawing.Point(0, 51);
             this.TableOverviewPnl.Name = "TableOverviewPnl";
-            this.TableOverviewPnl.Size = new System.Drawing.Size(700, 1390);
+            this.TableOverviewPnl.Size = new System.Drawing.Size(720, 1389);
             this.TableOverviewPnl.TabIndex = 10;
             // 
             // makeReservationPnl
@@ -260,7 +260,7 @@ namespace ChapeauUI
             this.makeReservationPnl.Controls.Add(this.reservationNameLbl);
             this.makeReservationPnl.Location = new System.Drawing.Point(0, 51);
             this.makeReservationPnl.Name = "makeReservationPnl";
-            this.makeReservationPnl.Size = new System.Drawing.Size(700, 1390);
+            this.makeReservationPnl.Size = new System.Drawing.Size(720, 1389);
             this.makeReservationPnl.TabIndex = 11;
             // 
             // confirmReservationBtn
@@ -413,7 +413,7 @@ namespace ChapeauUI
             this.markReservationPresentPnl.Controls.Add(this.reservationOverviewDataGrid);
             this.markReservationPresentPnl.Location = new System.Drawing.Point(0, 51);
             this.markReservationPresentPnl.Name = "markReservationPresentPnl";
-            this.markReservationPresentPnl.Size = new System.Drawing.Size(700, 1390);
+            this.markReservationPresentPnl.Size = new System.Drawing.Size(720, 1389);
             this.markReservationPresentPnl.TabIndex = 14;
             // 
             // setReservationPresentBtn
@@ -462,7 +462,7 @@ namespace ChapeauUI
             this.topBarLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.topBarLabel.Location = new System.Drawing.Point(0, 0);
             this.topBarLabel.Name = "topBarLabel";
-            this.topBarLabel.Size = new System.Drawing.Size(700, 51);
+            this.topBarLabel.Size = new System.Drawing.Size(720, 51);
             this.topBarLabel.TabIndex = 15;
             this.topBarLabel.Text = "emptyString";
             // 
@@ -485,7 +485,7 @@ namespace ChapeauUI
             this.notificationsPnl.Controls.Add(this.ordersReadyGridView);
             this.notificationsPnl.Location = new System.Drawing.Point(0, 51);
             this.notificationsPnl.Name = "notificationsPnl";
-            this.notificationsPnl.Size = new System.Drawing.Size(700, 1390);
+            this.notificationsPnl.Size = new System.Drawing.Size(720, 1389);
             this.notificationsPnl.TabIndex = 17;
             // 
             // label2
@@ -551,7 +551,7 @@ namespace ChapeauUI
             this.startMenuPnl.Controls.Add(this.makeReservationBtn);
             this.startMenuPnl.Location = new System.Drawing.Point(0, 51);
             this.startMenuPnl.Name = "startMenuPnl";
-            this.startMenuPnl.Size = new System.Drawing.Size(700, 1390);
+            this.startMenuPnl.Size = new System.Drawing.Size(720, 1389);
             this.startMenuPnl.TabIndex = 18;
             // 
             // showBillBtn

@@ -45,18 +45,17 @@ namespace ChapeauUI
             try
             {
                 ReservationService reservationService = new ReservationService();
-                Reservation currentReservation = reservationService.GetPresentReservationByTable(tableNr);
                 selectedTable = tableNr;
                 switch (menuChoice)
                 {
                     case MenuChoice.TakeOrder:
-                        OrderUI orderUI = new OrderUI(currentReservation, loggedInStaffMember);
+                        OrderUI orderUI = new OrderUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember);
                         this.Hide();
                         orderUI.ShowDialog();
                         this.Show();
                         break;
                     case MenuChoice.ShowBill:
-                        BillUI billUI = new BillUI(currentReservation, loggedInStaffMember);
+                        BillUI billUI = new BillUI(reservationService.GetPresentReservationByTable(tableNr), loggedInStaffMember);
                         this.Hide();
                         billUI.ShowDialog();
                         this.Show();
@@ -266,7 +265,17 @@ namespace ChapeauUI
             DateTime reservationTime = reservationDateTimePicker.Value.Date.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
             reservationTime.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
             string comments = reservationCommentsTextBox.Text;
-            int phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
+            int phoneNumber;
+            try
+            {
+                phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
+            }
+            catch
+            {
+                PopUpUI crash = new PopUpUI("Please enter a correct phone number", DialogResult.OK);
+                crash.ShowDialog();
+                return;
+            }
             string emailAdress = reservationEmailTextBox.Text;
             Reservation newReservation = new Reservation()
             {
