@@ -17,7 +17,7 @@ namespace ChapeauUI
         Staff BartenderOrChef = new Staff();
         private List<Order> ordersFoodList;
         private List<Order> ordersDrinkList;
-        int buttonID;
+        public enum buttonID { orderID, duration, table, comments, orderName, alcoholic, amount}
         public KitchenAndBarOverview(StaffJob staffJob)
         {
             InitializeComponent();
@@ -59,27 +59,21 @@ namespace ChapeauUI
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-
-
-            if (buttonID == 0)
+     
+            if (buttonID.duration.Equals(true))
                 foodButtonDuration_Click(sender, e);
-            else if (buttonID == 1)
+            else if (buttonID.orderName.Equals(true))
                 foodButtonOrder_Click(sender, e);
-
-            else if (buttonID == 2)
+            else if (buttonID.amount.Equals(true))
                 foodButtonAmount_Click(sender, e);
-            else if (buttonID == 3)
+            else if (buttonID.table.Equals(true))
                 foodButtonTable_Click(sender, e);
-            else if (buttonID == 4)
+            else if (buttonID.comments.Equals(true))
                 foodButtonComments_Click(sender, e);
-            else if (buttonID == 5)
+            else if (buttonID.alcoholic.Equals(true))
                 buttonSortByAlcoholic_Click(sender, e);
-            else if (buttonID == 6)
+            else if (buttonID.orderID.Equals(true))
                 buttonOrderID_Click(sender, e);
-            else
-            {
-                MessageBox.Show("Please select first if you want to sort forwards or backwards");
-            }
 
 
 
@@ -184,8 +178,8 @@ namespace ChapeauUI
             kitchenListView.Columns.Add("Time of ordering", 200);
             foreach (Order order in ordersFoodList)
             {
-                if (order.TimePlaced.Date == DateTime.Today)
-                {
+                //if (order.TimePlaced.Date == DateTime.Today)
+                //{
                     TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
 
                     for (int i = 0; i < order.OrderItems.Count; i++)
@@ -206,7 +200,7 @@ namespace ChapeauUI
                         kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
                         kitchenListView.Items.Add(li);
                     }
-                }
+                //}
             }
             ColorListView(kitchenListView);
             kitchenListView.EndUpdate();
@@ -287,8 +281,8 @@ namespace ChapeauUI
                 kitchenListView.Columns.Add("Time of ordering", 200);
                 foreach (Order order in ordersFoodList)
                 {
-                    if (order.TimePlaced.Date == DateTime.Today)
-                    {
+                    //if (order.TimePlaced.Date == DateTime.Today)
+                    //{
 
 
                     TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
@@ -310,7 +304,7 @@ namespace ChapeauUI
                             kitchenListView.AutoResizeColumn(6, ColumnHeaderAutoResizeStyle.ColumnContent);
 
                             kitchenListView.Items.Add(li);
-                    }
+                    //}
  
 
                     }
@@ -478,7 +472,7 @@ namespace ChapeauUI
 
         private void foodButtonOrder_Click(object sender, EventArgs e)
         {
-                buttonID = 1;
+            buttonID.orderName.Equals(true);
 
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
@@ -531,7 +525,7 @@ namespace ChapeauUI
 
         private void foodButtonAmount_Click(object sender, EventArgs e)
         {
-            buttonID = 2;
+            buttonID.amount.Equals(true);
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
                 OrderService orderService = new OrderService();
@@ -591,7 +585,7 @@ namespace ChapeauUI
 
         private void foodButtonComments_Click(object sender, EventArgs e)
         {
-            buttonID = 4;
+            buttonID.comments.Equals(true);
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
 
@@ -626,7 +620,7 @@ namespace ChapeauUI
 
         private void foodButtonTable_Click(object sender, EventArgs e)
         {
-            buttonID = 3;
+            buttonID.table.Equals(true);
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
 
@@ -665,7 +659,7 @@ namespace ChapeauUI
         }
         private void foodButtonDuration_Click(object sender, EventArgs e)
         {
-            buttonID = 0;
+            buttonID.duration.Equals(true);
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
                 if (radioButtonSortForwards.Checked)
@@ -708,7 +702,7 @@ namespace ChapeauUI
 
         private void buttonSortByAlcoholic_Click(object sender, EventArgs e)
         {
-            buttonID = 5;
+            buttonID.alcoholic.Equals(true);
             if (radioButtonSortForwards.Checked)
             {
                 OrderService orderService = new OrderService();
@@ -726,12 +720,12 @@ namespace ChapeauUI
 
         private void buttonOrderID_Click(object sender, EventArgs e)
         {
-            buttonID = 6;
+            buttonID.orderID.Equals(true);
 
             if (BartenderOrChef.StaffJob == StaffJob.Chef)
             {
                 OrderService orderService = new OrderService();
-                ordersDrinkList = orderService.GetActiveDrinkOrders();
+                ordersDrinkList = orderService.GetActiveFoodOrders();
                 if (radioButtonSortForwards.Checked)
                 {
 
