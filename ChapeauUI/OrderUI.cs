@@ -46,6 +46,7 @@ namespace ChapeauUI
                         Margin = new Padding(6),
                         UseVisualStyleBackColor = true,
                         FlatStyle = FlatStyle.Flat,
+                        // save menuItem to tag in order to retrieve it later
                         Tag = menuItem
                     };
                     menuItemButton.FlatAppearance.BorderColor = Color.FromArgb(39, 39, 39);
@@ -113,10 +114,12 @@ namespace ChapeauUI
             Button buttonClicked = (sender as Button);
             if (buttonClicked.Tag is MenuItem)
             {
+                //check the corresponding menuItem in list, so information from list could be retrieved, e.g. stock
                 int itemIndex = menuList.FindIndex(x => x == buttonClicked.Tag);
                 --menuList[itemIndex].stock;
                 if (menuList[itemIndex].stock == 0)
                 {
+                    //make button unclickable
                     buttonClicked.BackColor = Color.DarkGray;
                     buttonClicked.ForeColor = Color.LightGray;
                     buttonClicked.Text = "OUT OF STOCK";
@@ -194,6 +197,7 @@ namespace ChapeauUI
                     {
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
+                            // check tag of all controls, if menuItem corresponds to control.tag and is not in stock, make control unclickable
                             if (menu.Controls[i].Tag == menuList[MenuListIndexOfItem])
                             {
                                 menu.Controls[i].BackColor = Color.DarkGray;
@@ -211,6 +215,7 @@ namespace ChapeauUI
                     {
                         for (int i = 0; i < menu.Controls.Count; i++)
                         {
+                            // check tag of all controls, if menuItem corresponds to control.tag and is in stock, make control clickable
                             if (menu.Controls[i].Tag == menuList[MenuListIndexOfItem])
                             {
                                 menu.Controls[i].BackColor = Color.Transparent;
