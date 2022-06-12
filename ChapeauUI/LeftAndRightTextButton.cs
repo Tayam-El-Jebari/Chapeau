@@ -25,12 +25,14 @@ namespace ChapeauUI
             }
             using (leftTextBrush)
             {
+                //painting left text with an allignment starting from left, going towards center
                 using (StringFormat sf = new StringFormat()
                 { Alignment = StringAlignment.Near, LineAlignment = StringAlignment.Center })
                 {
                     pevent.Graphics.DrawString(LeftText, this.Font, leftTextBrush, this.ClientRectangle, sf);
                 }
             }
+            //painting right text with an allignment starting from right, going at the right most upper corner
             using (StringFormat sf = new StringFormat()
             { Alignment = StringAlignment.Far, LineAlignment = StringAlignment.Near })
             {
