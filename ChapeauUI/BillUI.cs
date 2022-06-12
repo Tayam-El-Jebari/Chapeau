@@ -35,7 +35,6 @@ namespace ChapeauUI
             this.staff = staff;
             ShowHeader();
             MakeBill();
-            
         }
 
         public void ShowHeader()
@@ -60,7 +59,7 @@ namespace ChapeauUI
             confirmBox.ShowDialog();
             tip = confirmBox.InputDouble();
             labelTip.Text = tip.ToString("€ 0.00");
-            totalPrice = totalPrice + tip;
+            totalPrice = bill.TotalPriceInclVAT + tip;
             labelInVAT.Text = totalPrice.ToString("€ 0.00");   
         }
         private void buttonBack_Click(object sender, EventArgs e)
@@ -69,6 +68,7 @@ namespace ChapeauUI
         }
         private void ShowBill()
         {
+            billPanel.Hide();
             payPanel.Hide();
             FillCompleteBill();
             LogBill();

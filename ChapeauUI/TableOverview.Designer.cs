@@ -232,7 +232,7 @@ namespace ChapeauUI
             this.TableOverviewPnl.Controls.Add(this.tableTenButton);
             this.TableOverviewPnl.Location = new System.Drawing.Point(0, 51);
             this.TableOverviewPnl.Name = "TableOverviewPnl";
-            this.TableOverviewPnl.Size = new System.Drawing.Size(720, 1389);
+            this.TableOverviewPnl.Size = new System.Drawing.Size(720, 1366);
             this.TableOverviewPnl.TabIndex = 10;
             // 
             // makeReservationPnl
@@ -253,7 +253,7 @@ namespace ChapeauUI
             this.makeReservationPnl.Controls.Add(this.reservationNameLbl);
             this.makeReservationPnl.Location = new System.Drawing.Point(0, 51);
             this.makeReservationPnl.Name = "makeReservationPnl";
-            this.makeReservationPnl.Size = new System.Drawing.Size(720, 1389);
+            this.makeReservationPnl.Size = new System.Drawing.Size(720, 1366);
             this.makeReservationPnl.TabIndex = 11;
             // 
             // confirmReservationBtn
@@ -392,7 +392,7 @@ namespace ChapeauUI
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(188)))), ((int)(((byte)(188)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -414,7 +414,7 @@ namespace ChapeauUI
             this.markReservationPresentPnl.Controls.Add(this.reservationOverviewDataGrid);
             this.markReservationPresentPnl.Location = new System.Drawing.Point(0, 51);
             this.markReservationPresentPnl.Name = "markReservationPresentPnl";
-            this.markReservationPresentPnl.Size = new System.Drawing.Size(720, 1389);
+            this.markReservationPresentPnl.Size = new System.Drawing.Size(720, 1366);
             this.markReservationPresentPnl.TabIndex = 14;
             // 
             // setReservationPresentBtn
@@ -451,7 +451,7 @@ namespace ChapeauUI
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(188)))), ((int)(((byte)(188)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -494,7 +494,7 @@ namespace ChapeauUI
             this.notificationsPnl.Controls.Add(this.ordersReadyGridView);
             this.notificationsPnl.Location = new System.Drawing.Point(0, 51);
             this.notificationsPnl.Name = "notificationsPnl";
-            this.notificationsPnl.Size = new System.Drawing.Size(720, 1389);
+            this.notificationsPnl.Size = new System.Drawing.Size(720, 1366);
             this.notificationsPnl.TabIndex = 17;
             // 
             // label2
@@ -515,7 +515,7 @@ namespace ChapeauUI
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(188)))), ((int)(((byte)(188)))));
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(27)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
@@ -568,7 +568,7 @@ namespace ChapeauUI
             this.startMenuPnl.Controls.Add(this.makeReservationBtn);
             this.startMenuPnl.Location = new System.Drawing.Point(0, 51);
             this.startMenuPnl.Name = "startMenuPnl";
-            this.startMenuPnl.Size = new System.Drawing.Size(720, 1389);
+            this.startMenuPnl.Size = new System.Drawing.Size(720, 1366);
             this.startMenuPnl.TabIndex = 18;
             // 
             // showBillBtn

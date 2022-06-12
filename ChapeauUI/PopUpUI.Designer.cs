@@ -42,10 +42,10 @@ namespace ChapeauUI
             this.ReturnButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ReturnButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ReturnButton.ForeColor = System.Drawing.Color.White;
-            this.ReturnButton.Location = new System.Drawing.Point(71, 201);
+            this.ReturnButton.Location = new System.Drawing.Point(68, 195);
             this.ReturnButton.Name = "ReturnButton";
             this.ReturnButton.Padding = new System.Windows.Forms.Padding(5);
-            this.ReturnButton.Size = new System.Drawing.Size(511, 95);
+            this.ReturnButton.Size = new System.Drawing.Size(532, 110);
             this.ReturnButton.TabIndex = 2;
             this.ReturnButton.Text = "RETURN";
             this.ReturnButton.UseVisualStyleBackColor = false;
@@ -56,10 +56,10 @@ namespace ChapeauUI
             this.ConfirmButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.ConfirmButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ConfirmButton.ForeColor = System.Drawing.Color.White;
-            this.ConfirmButton.Location = new System.Drawing.Point(55, 201);
+            this.ConfirmButton.Location = new System.Drawing.Point(32, 195);
             this.ConfirmButton.Name = "ConfirmButton";
             this.ConfirmButton.Padding = new System.Windows.Forms.Padding(5);
-            this.ConfirmButton.Size = new System.Drawing.Size(232, 95);
+            this.ConfirmButton.Size = new System.Drawing.Size(265, 110);
             this.ConfirmButton.TabIndex = 0;
             this.ConfirmButton.Text = "YES";
             this.ConfirmButton.UseVisualStyleBackColor = false;
@@ -70,9 +70,9 @@ namespace ChapeauUI
             this.DenyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(27)))), ((int)(((byte)(27)))));
             this.DenyButton.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.DenyButton.ForeColor = System.Drawing.Color.White;
-            this.DenyButton.Location = new System.Drawing.Point(371, 201);
+            this.DenyButton.Location = new System.Drawing.Point(366, 195);
             this.DenyButton.Name = "DenyButton";
-            this.DenyButton.Size = new System.Drawing.Size(229, 95);
+            this.DenyButton.Size = new System.Drawing.Size(258, 110);
             this.DenyButton.TabIndex = 1;
             this.DenyButton.Text = "NO";
             this.DenyButton.UseVisualStyleBackColor = false;
@@ -104,9 +104,10 @@ namespace ChapeauUI
             // 
             // textBoxInput
             // 
-            this.textBoxInput.Location = new System.Drawing.Point(102, 176);
+            this.textBoxInput.Font = new System.Drawing.Font("Trebuchet MS", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxInput.Location = new System.Drawing.Point(94, 127);
             this.textBoxInput.Name = "textBoxInput";
-            this.textBoxInput.Size = new System.Drawing.Size(480, 27);
+            this.textBoxInput.Size = new System.Drawing.Size(480, 46);
             this.textBoxInput.TabIndex = 5;
             this.textBoxInput.Visible = false;
             // 

@@ -16,6 +16,7 @@ namespace ChapeauUI
         private MenuType menuType;
         private Reservation reservation;
         private Staff staff;
+        private PopUpUI popUpUI;
 
         public OrderUI(Reservation reservation, Staff staff)
         {
@@ -183,7 +184,8 @@ namespace ChapeauUI
                 {
                     if (menuList[MenuListIndexOfItem].stock == 0)
                     {
-                        MessageBox.Show("Item is out of stock.");
+                        popUpUI = new PopUpUI("Item is out of stock.", DialogResult.OK);
+                        popUpUI.ShowDialog();
                         return;
                     }
                     menuList[MenuListIndexOfItem].stock -= 1;
@@ -236,7 +238,8 @@ namespace ChapeauUI
         {
             if(itemGridView.Rows.Count == 1)
             {
-                MessageBox.Show("No items added!");
+                popUpUI = new PopUpUI("No items added!", DialogResult.OK);
+                popUpUI.ShowDialog();
                 return;
             }
             PopUpUI popUp = new PopUpUI();

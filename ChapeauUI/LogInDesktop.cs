@@ -51,7 +51,7 @@ namespace ChapeauUI
                 Staff loggedInStaffMemeber = staffService.CheckPassword(staffID, hashedPassword);
                 if (staffService.CheckIfBartender(staffID))
                 {
-                    KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview();
+                    KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview(StaffJob.Bartender);
                     this.Hide();
                     kitchenAndBarOverview.ShowDialog();
                     this.Show();
@@ -59,6 +59,10 @@ namespace ChapeauUI
                 else if (staffService.CheckIfChef(staffID))
                 {
 
+                    KitchenAndBarOverview kitchenAndBarOverview = new KitchenAndBarOverview(StaffJob.Chef);
+                    this.Hide();
+                    kitchenAndBarOverview.ShowDialog();
+                    this.Show();
                 }
                 else if (staffService.CheckIfOwner(staffID))
                 {
@@ -68,10 +72,16 @@ namespace ChapeauUI
                     this.Show();
 
                 }
+                else
+                {
+                    PopUpUI popup = new PopUpUI("You can't log in on this device please change to the handheld.", DialogResult.OK);
+                    popup.ShowDialog();
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong while logging in: " + ex.Message);
+                PopUpUI popup = new PopUpUI(ex.Message, DialogResult.OK);
+                popup.ShowDialog();
             }
         }
 

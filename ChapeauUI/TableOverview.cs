@@ -265,8 +265,10 @@ namespace ChapeauUI
             DateTime reservationTime = reservationDateTimePicker.Value.Date.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
             reservationTime.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
             string comments = reservationCommentsTextBox.Text;
-            int phoneNumber;
-            try
+            int phoneNumber = 0;
+            if(reservationPhonenumberTextBox.Text == null)
+            {
+                try
             {
                 phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
             }
@@ -276,6 +278,8 @@ namespace ChapeauUI
                 crash.ShowDialog();
                 return;
             }
+            }
+            
             string emailAdress = reservationEmailTextBox.Text;
             Reservation newReservation = new Reservation()
             {
