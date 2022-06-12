@@ -83,7 +83,7 @@ namespace ChapeauUI
         private void KitchenOverview_Load(object sender, EventArgs e)
         {
             Timer timer1 = new Timer();
-            timer1.Interval = 3000;//30 seconds
+            timer1.Interval = 30000;//30 seconds
             timer1.Tick += new System.EventHandler(timer1_Tick);
             timer1.Start();
         }
@@ -185,7 +185,6 @@ namespace ChapeauUI
             kitchenListView.Columns.Add("ThreeCourseMeal", 200);
             foreach (Order order in ordersFoodList)
             {
-
                     TimeSpan timeOfOrder = DateTime.Now - order.TimePlaced;
 
                     for (int i = 0; i < order.OrderItems.Count; i++)
