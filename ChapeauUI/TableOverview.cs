@@ -23,6 +23,10 @@ namespace ChapeauUI
             InitializeComponent();
             HideAllPanels();
             startMenuPnl.Show();
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = 30000;//30 seconds
+            timer.Tick += new System.EventHandler(timer_Tick);
+            timer.Start();
         }
 
         //Hide all the panels. 
@@ -33,10 +37,7 @@ namespace ChapeauUI
             makeReservationPnl.Hide();
             markReservationPresentPnl.Hide();
             notificationsPnl.Hide();
-            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-            timer.Interval = 30000;//30 seconds
-            timer.Tick += new System.EventHandler(timer_Tick);
-            timer.Start();
+            
         }
 
         //Based on the choice made in the startmenu make the open the right window for the table that was selected.
