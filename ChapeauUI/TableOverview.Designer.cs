@@ -77,6 +77,7 @@ namespace ChapeauUI
             this.takeOrderBtn = new System.Windows.Forms.Button();
             this.makeReservationBtn = new System.Windows.Forms.Button();
             this.buttonBack = new System.Windows.Forms.Button();
+            this.panelsPnl = new System.Windows.Forms.Panel();
             this.TableOverviewPnl.SuspendLayout();
             this.makeReservationPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ordersReadyGridView)).BeginInit();
@@ -85,6 +86,7 @@ namespace ChapeauUI
             this.notificationsPnl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ongoingOrdersDataGridView)).BeginInit();
             this.startMenuPnl.SuspendLayout();
+            this.panelsPnl.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableOneButton
@@ -230,7 +232,7 @@ namespace ChapeauUI
             this.TableOverviewPnl.Controls.Add(this.tableEightButton);
             this.TableOverviewPnl.Controls.Add(this.tableNineButton);
             this.TableOverviewPnl.Controls.Add(this.tableTenButton);
-            this.TableOverviewPnl.Location = new System.Drawing.Point(0, 51);
+            this.TableOverviewPnl.Location = new System.Drawing.Point(0, 0);
             this.TableOverviewPnl.Name = "TableOverviewPnl";
             this.TableOverviewPnl.Size = new System.Drawing.Size(720, 1366);
             this.TableOverviewPnl.TabIndex = 10;
@@ -251,7 +253,7 @@ namespace ChapeauUI
             this.makeReservationPnl.Controls.Add(this.reservationPhonenumberLbl);
             this.makeReservationPnl.Controls.Add(this.reservationNameTextBox);
             this.makeReservationPnl.Controls.Add(this.reservationNameLbl);
-            this.makeReservationPnl.Location = new System.Drawing.Point(0, 51);
+            this.makeReservationPnl.Location = new System.Drawing.Point(0, 0);
             this.makeReservationPnl.Name = "makeReservationPnl";
             this.makeReservationPnl.Size = new System.Drawing.Size(720, 1366);
             this.makeReservationPnl.TabIndex = 11;
@@ -412,9 +414,9 @@ namespace ChapeauUI
             this.markReservationPresentPnl.Controls.Add(this.setReservationPresentBtn);
             this.markReservationPresentPnl.Controls.Add(this.label1);
             this.markReservationPresentPnl.Controls.Add(this.reservationOverviewDataGrid);
-            this.markReservationPresentPnl.Location = new System.Drawing.Point(0, 51);
+            this.markReservationPresentPnl.Location = new System.Drawing.Point(0, 0);
             this.markReservationPresentPnl.Name = "markReservationPresentPnl";
-            this.markReservationPresentPnl.Size = new System.Drawing.Size(720, 1366);
+            this.markReservationPresentPnl.Size = new System.Drawing.Size(729, 1366);
             this.markReservationPresentPnl.TabIndex = 14;
             // 
             // setReservationPresentBtn
@@ -478,9 +480,10 @@ namespace ChapeauUI
             // bottomBarLabel
             // 
             this.bottomBarLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1417);
+            this.bottomBarLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomBarLabel.Location = new System.Drawing.Point(0, 1366);
             this.bottomBarLabel.Name = "bottomBarLabel";
-            this.bottomBarLabel.Size = new System.Drawing.Size(700, 74);
+            this.bottomBarLabel.Size = new System.Drawing.Size(720, 74);
             this.bottomBarLabel.TabIndex = 16;
             this.bottomBarLabel.Text = "emptyString";
             // 
@@ -492,7 +495,7 @@ namespace ChapeauUI
             this.notificationsPnl.Controls.Add(this.markOrderReadyBtn);
             this.notificationsPnl.Controls.Add(this.readyOrdersLbl);
             this.notificationsPnl.Controls.Add(this.ordersReadyGridView);
-            this.notificationsPnl.Location = new System.Drawing.Point(0, 51);
+            this.notificationsPnl.Location = new System.Drawing.Point(0, 0);
             this.notificationsPnl.Name = "notificationsPnl";
             this.notificationsPnl.Size = new System.Drawing.Size(720, 1366);
             this.notificationsPnl.TabIndex = 17;
@@ -566,7 +569,7 @@ namespace ChapeauUI
             this.startMenuPnl.Controls.Add(this.menuLabel);
             this.startMenuPnl.Controls.Add(this.takeOrderBtn);
             this.startMenuPnl.Controls.Add(this.makeReservationBtn);
-            this.startMenuPnl.Location = new System.Drawing.Point(0, 51);
+            this.startMenuPnl.Location = new System.Drawing.Point(0, 0);
             this.startMenuPnl.Name = "startMenuPnl";
             this.startMenuPnl.Size = new System.Drawing.Size(720, 1366);
             this.startMenuPnl.TabIndex = 18;
@@ -674,7 +677,7 @@ namespace ChapeauUI
             this.buttonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonBack.Font = new System.Drawing.Font("Trebuchet MS", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonBack.ForeColor = System.Drawing.Color.White;
-            this.buttonBack.Location = new System.Drawing.Point(0, 1420);
+            this.buttonBack.Location = new System.Drawing.Point(0, 1370);
             this.buttonBack.Margin = new System.Windows.Forms.Padding(0);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(163, 66);
@@ -683,6 +686,21 @@ namespace ChapeauUI
             this.buttonBack.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.buttonBack.UseVisualStyleBackColor = false;
             this.buttonBack.Click += new System.EventHandler(this.buttonBack_Click);
+            // 
+            // panelsPnl
+            // 
+            this.panelsPnl.BackColor = System.Drawing.Color.Transparent;
+            this.panelsPnl.Controls.Add(this.buttonBack);
+            this.panelsPnl.Controls.Add(this.bottomBarLabel);
+            this.panelsPnl.Controls.Add(this.TableOverviewPnl);
+            this.panelsPnl.Controls.Add(this.notificationsPnl);
+            this.panelsPnl.Controls.Add(this.makeReservationPnl);
+            this.panelsPnl.Controls.Add(this.startMenuPnl);
+            this.panelsPnl.Controls.Add(this.markReservationPresentPnl);
+            this.panelsPnl.Location = new System.Drawing.Point(0, 51);
+            this.panelsPnl.Name = "panelsPnl";
+            this.panelsPnl.Size = new System.Drawing.Size(720, 1440);
+            this.panelsPnl.TabIndex = 19;
             // 
             // TableOverview
             // 
@@ -694,14 +712,8 @@ namespace ChapeauUI
             this.BackgroundImage = global::ChapeauUI.Properties.Resources.achtergrond;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(720, 1047);
-            this.Controls.Add(this.buttonBack);
-            this.Controls.Add(this.bottomBarLabel);
-            this.Controls.Add(this.startMenuPnl);
-            this.Controls.Add(this.notificationsPnl);
-            this.Controls.Add(this.markReservationPresentPnl);
-            this.Controls.Add(this.TableOverviewPnl);
-            this.Controls.Add(this.makeReservationPnl);
             this.Controls.Add(this.topBarLabel);
+            this.Controls.Add(this.panelsPnl);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Trebuchet MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
@@ -721,6 +733,7 @@ namespace ChapeauUI
             ((System.ComponentModel.ISupportInitialize)(this.ongoingOrdersDataGridView)).EndInit();
             this.startMenuPnl.ResumeLayout(false);
             this.startMenuPnl.PerformLayout();
+            this.panelsPnl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -772,5 +785,6 @@ namespace ChapeauUI
         private System.Windows.Forms.Button confirmReservationBtn;
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panelsPnl;
     }
 }

@@ -35,6 +35,7 @@ namespace ChapeauUI
             // 
             // startAsDesktopbts
             // 
+            this.startAsDesktopbts.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.startAsDesktopbts.Location = new System.Drawing.Point(13, 13);
             this.startAsDesktopbts.Name = "startAsDesktopbts";
             this.startAsDesktopbts.Size = new System.Drawing.Size(269, 174);
@@ -45,6 +46,7 @@ namespace ChapeauUI
             // 
             // startForHandheldbtn
             // 
+            this.startForHandheldbtn.Font = new System.Drawing.Font("Trebuchet MS", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.startForHandheldbtn.Location = new System.Drawing.Point(13, 205);
             this.startForHandheldbtn.Name = "startForHandheldbtn";
             this.startForHandheldbtn.Size = new System.Drawing.Size(269, 175);
@@ -57,9 +59,12 @@ namespace ChapeauUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::ChapeauUI.Properties.Resources.winebgdesktop;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.startForHandheldbtn);
             this.Controls.Add(this.startAsDesktopbts);
+            this.DoubleBuffered = true;
             this.Name = "StartScreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StartScreen";
