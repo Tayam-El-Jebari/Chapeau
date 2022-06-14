@@ -175,6 +175,7 @@ namespace ChapeauUI
                 itemGridView.Rows.Clear();
                 UpdateMenuList();
                 PanelChooseMenu.Visible = true;
+                viewOrder_Click(sender, e);
             }
             
         }
