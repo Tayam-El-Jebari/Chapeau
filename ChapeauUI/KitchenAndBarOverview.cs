@@ -42,7 +42,6 @@ namespace ChapeauUI
             }
             //ProgressBar();
             listViewComments.Show();
-            comboBoxThreeCourseMeal.Text = "--Select--";
             comboBoxThreeCourseMeal.Items.Add(MenuItemType.Starter);
             comboBoxThreeCourseMeal.Items.Add(MenuItemType.MainCourse);
             comboBoxThreeCourseMeal.Items.Add(MenuItemType.Desserts);
