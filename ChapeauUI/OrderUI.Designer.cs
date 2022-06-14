@@ -348,6 +348,7 @@ namespace ChapeauUI
             // 
             this.commentsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(242)))), ((int)(((byte)(242)))));
             this.commentsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.commentsTextBox.Font = new System.Drawing.Font("Trebuchet MS", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.commentsTextBox.Location = new System.Drawing.Point(31, 583);
             this.commentsTextBox.Name = "commentsTextBox";
             this.commentsTextBox.Size = new System.Drawing.Size(627, 213);
