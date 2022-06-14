@@ -267,18 +267,18 @@ namespace ChapeauUI
             reservationTime.AddHours(time.Hour).AddMinutes(time.Minute).AddSeconds(0);
             string comments = reservationCommentsTextBox.Text;
             int phoneNumber = 0;
-            if(reservationPhonenumberTextBox.Text == null)
-            {
-                try
-            {
-                phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
-            }
-            catch
-            {
-                PopUpUI crash = new PopUpUI("Please enter a correct phone number", DialogResult.OK);
-                crash.ShowDialog();
-                return;
-            }
+            if(reservationPhonenumberTextBox.Text != null)
+                {
+                    try
+                {
+                    phoneNumber = Convert.ToInt32(reservationPhonenumberTextBox.Text);
+                }
+                catch
+                {
+                    PopUpUI crash = new PopUpUI("Please enter a correct phone number", DialogResult.OK);
+                    crash.ShowDialog();
+                    return;
+                }
             }
             
             string emailAdress = reservationEmailTextBox.Text;
