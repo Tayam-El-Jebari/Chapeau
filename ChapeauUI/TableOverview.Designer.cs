@@ -507,9 +507,9 @@ namespace ChapeauUI
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
             this.label2.Location = new System.Drawing.Point(40, 780);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(308, 54);
+            this.label2.Size = new System.Drawing.Size(367, 54);
             this.label2.TabIndex = 17;
-            this.label2.Text = "READY ORDERS";
+            this.label2.Text = "ONGOING ORDERS";
             // 
             // ongoingOrdersDataGridView
             // 
@@ -692,8 +692,8 @@ namespace ChapeauUI
             this.panelsPnl.BackColor = System.Drawing.Color.Transparent;
             this.panelsPnl.Controls.Add(this.buttonBack);
             this.panelsPnl.Controls.Add(this.bottomBarLabel);
-            this.panelsPnl.Controls.Add(this.TableOverviewPnl);
             this.panelsPnl.Controls.Add(this.notificationsPnl);
+            this.panelsPnl.Controls.Add(this.TableOverviewPnl);
             this.panelsPnl.Controls.Add(this.makeReservationPnl);
             this.panelsPnl.Controls.Add(this.startMenuPnl);
             this.panelsPnl.Controls.Add(this.markReservationPresentPnl);

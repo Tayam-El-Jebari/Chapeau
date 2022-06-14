@@ -37,8 +37,6 @@ namespace ChapeauUI
             this.loginBackgroundLbl = new System.Windows.Forms.Label();
             this.usernameLbl = new System.Windows.Forms.Label();
             this.passwordLbl = new System.Windows.Forms.Label();
-            this.pictureBoxChapeauLogo = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxChapeauLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // passwordTextBox
@@ -133,18 +131,6 @@ namespace ChapeauUI
             this.passwordLbl.TabIndex = 24;
             this.passwordLbl.Text = "PASSWORD";
             // 
-            // pictureBoxChapeauLogo
-            // 
-            this.pictureBoxChapeauLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBoxChapeauLogo.Image = global::ChapeauUI.Properties.Resources.bill_logo;
-            this.pictureBoxChapeauLogo.ImageLocation = "";
-            this.pictureBoxChapeauLogo.InitialImage = global::ChapeauUI.Properties.Resources.bill_logo;
-            this.pictureBoxChapeauLogo.Location = new System.Drawing.Point(1387, 54);
-            this.pictureBoxChapeauLogo.Name = "pictureBoxChapeauLogo";
-            this.pictureBoxChapeauLogo.Size = new System.Drawing.Size(557, 199);
-            this.pictureBoxChapeauLogo.TabIndex = 25;
-            this.pictureBoxChapeauLogo.TabStop = false;
-            // 
             // LogInDesktop
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -161,12 +147,10 @@ namespace ChapeauUI
             this.Controls.Add(this.userListView);
             this.Controls.Add(this.passwordTextBox);
             this.Controls.Add(this.loginBackgroundLbl);
-            this.Controls.Add(this.pictureBoxChapeauLogo);
             this.DoubleBuffered = true;
             this.Name = "LogInDesktop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LogInDesktop";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxChapeauLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -181,6 +165,5 @@ namespace ChapeauUI
         private System.Windows.Forms.Label loginBackgroundLbl;
         private System.Windows.Forms.Label usernameLbl;
         private System.Windows.Forms.Label passwordLbl;
-        private System.Windows.Forms.PictureBox pictureBoxChapeauLogo;
     }
 }
